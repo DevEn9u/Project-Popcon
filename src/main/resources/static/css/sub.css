@@ -84,6 +84,7 @@
 }
 .login_page .login_area .login_btn {
   display: block;
+  width: 100%;
   line-height: 60px;
   background: var(--point--color1);
   color: var(--txt-color-500);

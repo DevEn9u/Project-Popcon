@@ -2,15 +2,21 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>POPCON | 팝컨 - 팝업스토어 컨테이너</title>
-</head>
+<html lang="ko">
+<c:import url="./include/head.jsp" />
+<c:import url="./include/header.jsp" var="common_header" />
+<c:import url="./include/footer.jsp" var="common_footer" />
 <body>
-	<h2>테스트중입니다.</h2>
-	<div>
-		테스트
+	<div id="skip_navi">
+		<a href="#container">본문 바로가기</a>
 	</div>
+	<div id="wrap">
+	${common_header }
+		<h2>테스트중입니다.</h2>
+		<div>
+			테스트
+		</div>
+	</div>
+	${common_footer }
 </body>
 </html>

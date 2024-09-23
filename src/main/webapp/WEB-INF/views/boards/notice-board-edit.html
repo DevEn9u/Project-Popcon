@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popcon - 공지사항</title>
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/sub.css">
+  <script>
+    function checkReset() {
+      if (confirm("게시물을 다시 쓰시겠습니까?")) {
+        let form = document.writeFrm;
+        form.reset();
+      }
+      else {
+        return false;
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="skip_navi">
+    <a href="#container">본문 바로가기</a>
+  </div>
+  <div id="wrap">
+    <main id="container" class="board_page board_write sub_container">
+      <div class="sub_top">
+        <div class="inner">
+          <h2>공지사항 - 수정</h2>
+        </div>
+      </div>
+      <div class="contents">
+        <div class="inner">
+          <h3>게시글 수정</h3>
+          <div class="board_write">
+            <form name="writeFrm" method="post" action="../free-board/write.do"
+              onsubmit="return validateForm(this)">
+              <!-- 삭제시 idx를 이용해 삭제 -->
+              <input type="hidden" name="idx" value="${ dto.idx }" />       	 
+              <table>
+              <!-- thead가 없을 때 caption의 position이 absolute이면 th와 td의 width가 지정이 안되는 버그가 생기므로 common.css에서 caption.nohead에서 position을 statice으로 만들어 주었음 -->
+               <caption class="nohead">게시글 작성</caption>
+               <tr>
+                 <th>이름</th>
+                 <td><input type="text" name="name" readonly="readonly" value="${ UserName }"></td>
+               </tr>
+               <tr>
+                 <th>제목</th>
+                 <td><input type="text" name="title" placeholder="제목을 입력해주세요." value="${ dto.title }"></td>
+               </tr>
+               <tr>
+                 <th class="t_area">내용</th>
+                 <td>
+                   <textarea cols="30" rows="20" name="content"
+                     placeholder="필수 입력사항을 작성하고 입력해주세요.&#10;비방, 욕설, 도배글 등은 서비스 이용 제한의 사유가 됩니다.">${ dto.content }</textarea>
+                 </td>
+               </tr>
+              </table>
+              <div class="btn_wrap">
+                <button type="submit" class="btn board_btn">등록</button>
+                <button type="button" class="btn board_btn cancel_btn" onclick="checkReset();">다시쓰기</button>
+                <button type="button" onclick="location.href='./notice-board-list.html';" class="btn board_btn cancel_btn">목록으로</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

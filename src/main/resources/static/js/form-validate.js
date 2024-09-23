@@ -1,22 +1,34 @@
-function validateForm(form) {  // 폼 내용 검증
+function validateForm(form) {
+	// 로그인 폼 검증
+	if (!form.login_id.value) {
+		alert("아이디를 입력하세요.");
+		form.login_id.focus();
+		return false;
+	}
+	if (form.login_pw.value == "") {
+		alert("패스워드를 입력하세요.");
+		form.login_pw.focus();
+		return false;
+	}
+  	// 회원가입 폼 내용 검증
   if (form.id.value == "") {
-      alert("아이디를 입력하세요.");
-      form.id.focus();
-      return false;
+	alert("아이디를 입력하세요.");
+    form.id.focus();
+    return false;
   }
-if (form.idDuplication.value != "idChecked") {
-  alert("아이디 중복체크를 해주세요.");
-  return false;
-}
+  if (form.idDuplication.value != "idChecked") {
+  	alert("아이디 중복체크를 해주세요.");
+  	return false;
+  }
   if (form.pass.value == "") {
-      alert("비밀번호를 입력하세요.");
-      form.pass.focus();
-      return false;
+    alert("비밀번호를 입력하세요.");
+    form.pass.focus();
+    return false;
   }
   if (form.pass2.value == "") {
-      alert("비밀번호 확인을 위해 같은 비밀번호를 입력하세요.");
-      form.pass2.focus();
-      return false;
+    alert("비밀번호 확인을 위해 같은 비밀번호를 입력하세요.");
+    form.pass2.focus();
+    return false;
   }
   if (form.pass.value != form.pass2.value) {
     alert("비밀번호가 일치하지 않습니다.")
@@ -26,19 +38,19 @@ if (form.idDuplication.value != "idChecked") {
     return false;
   }
   if (form.name.value == "") {
-      alert("이름을 입력하세요.");
-      form.name.focus();
-      return false;
+    alert("이름을 입력하세요.");
+    form.name.focus();
+    return false;
   }
   if (form.email.value == "") {
-      alert("이메일을 입력하세요.");
-      form.email.focus();
-      return false;
+    alert("이메일을 입력하세요.");
+    form.email.focus();
+    return false;
   }
   if (form.phone.value == "") {
-      alert("전화번호를 입력하세요.");
-      form.phone.focus();
-      return false;
+    alert("전화번호를 입력하세요.");
+    form.phone.focus();
+    return false;
   }
 return true;
 }
