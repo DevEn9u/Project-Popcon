@@ -15,7 +15,7 @@
           <h2 class="popup_list_title">팝업안내</h2>
         </div>
         <div class="pl_main">
-          <button class="write">게시물 작성하기</button>
+          <button class="write" onclick="location.href='./write.do';">게시물 작성하기</button>
           <nav class="kategorie_wrap">
             <ul class="pl_kategorie">
               <p class="keyword">키워드</p>

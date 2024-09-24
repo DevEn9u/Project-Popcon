@@ -179,5 +179,10 @@ $(document).ready(function() {
           draggable: true,
         },
       });
+	  
+	  //팝업 글 보기 페이지에서 예약하기 클릭 시 이동
+	  $('.pv_booking_btn').on('click', function () {
+	    window.location.href = "./booking.do";
+	  });
 });
 
