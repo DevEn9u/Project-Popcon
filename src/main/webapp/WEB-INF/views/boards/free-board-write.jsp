@@ -1,15 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html lang="ko">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Popcon - 자유게시판</title>
-  <link rel="stylesheet" href="/css/common.css">
-  <link rel="stylesheet" href="/css/sub.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="../js/file-upload.js"></script>
-  <script>
+<c:import url="../include/head.jsp" />
+<c:import url="../include/header.jsp" var="common_header" />
+<c:import url="../include/footer.jsp" var="common_footer" />
+<link rel="stylesheet" href="/css/board.css">
+<script src="../js/file-upload.js"></script>
+<script>
     function checkReset() {
       if (confirm("게시물을 다시 쓰시겠습니까?")) {
         let form = document.writeFrm;
@@ -18,13 +17,13 @@
         return false;
       };
     };
-  </script>
-</head>
+</script>
 <body>
   <div id="skip_navi">
     <a href="#container">본문 바로가기</a>
   </div>
   <div id="wrap">
+  	${common_header}
     <main id="container" class="board_page board_write sub_container">
       <div class="sub_top">
         <div class="inner">
@@ -70,7 +69,7 @@
               <div class="btn_wrap">
                 <button type="submit" class="btn board_btn">등록</button>
                 <button type="button" class="btn board_btn cancel_btn" onclick="checkReset();">다시쓰기</button>
-                <button type="button" onclick="location.href='./free-board-list.html';"
+                <button type="button" onclick="location.href='./list.do';"
                   class="btn board_btn cancel_btn">목록</button>
               </div>
             </form>
@@ -78,6 +77,7 @@
         </div>
       </div>
     </main>
+    ${common_footer}
   </div>
 </body>
 

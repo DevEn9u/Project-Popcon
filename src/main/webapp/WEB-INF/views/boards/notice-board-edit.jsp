@@ -1,14 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Popcon - 자유게시판</title>
-  <link rel="stylesheet" href="/css/common.css">
-  <link rel="stylesheet" href="/css/sub.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="../js/file-upload.js"></script>
-  <script>
+<c:import url="../include/head.jsp" />
+<c:import url="../include/header.jsp" var="common_header" />
+<c:import url="../include/footer.jsp" var="common_footer" />
+<link rel="stylesheet" href="/css/board.css">
+<script src="../js/file-upload.js"></script>
+<script>
     function checkReset() {
       if (confirm("게시물을 다시 쓰시겠습니까?")) {
         let form = document.writeFrm;
@@ -18,24 +18,24 @@
         return false;
       }
     }
-  </script>
-</head>
+</script>
 <body>
   <div id="skip_navi">
     <a href="#container">본문 바로가기</a>
   </div>
   <div id="wrap">
+  	${common_header}
     <main id="container" class="board_page board_write sub_container">
       <div class="sub_top">
         <div class="inner">
-          <h2>자유게시판 - 수정</h2>
+          <h2>공지사항 - 수정</h2>
         </div>
       </div>
       <div class="contents">
         <div class="inner">
           <h3>게시글 수정</h3>
           <div class="board_write">
-            <form name="writeFrm" method="post" action="../free-board/write.do"
+            <form name="writeFrm" method="post" action="../noticeBoard/write.do"
               onsubmit="return validateForm(this)">
               <!-- 삭제시 idx를 이용해 삭제 -->
               <input type="hidden" name="idx" value="${ dto.idx }" />       	 
@@ -57,28 +57,18 @@
                      placeholder="필수 입력사항을 작성하고 입력해주세요.&#10;비방, 욕설, 도배글 등은 서비스 이용 제한의 사유가 됩니다.">${ dto.content }</textarea>
                  </td>
                </tr>
-               <tr>
-                <th>첨부파일</th>
-                <td class="td_flex">
-                  <div class="file_wrap">
-                    <input type="text" class="file_name" readonly>
-                    <input type="file" id="upload" class="blind">
-                    <label for="upload">파일선택</label>
-                  </div>
-                  <p class="file_note">이미지 파일은 10MB 이하 jpg, png, gif, webp 확장자 파일만 올릴 수 있습니다.</p>
-                </td>
-              </tr>
               </table>
               <div class="btn_wrap">
                 <button type="submit" class="btn board_btn">등록</button>
                 <button type="button" class="btn board_btn cancel_btn" onclick="checkReset();">다시쓰기</button>
-                <button type="button" onclick="location.href='./free-board-list.html';" class="btn board_btn cancel_btn">목록으로</button>
+                <button type="button" onclick="location.href='./list.do';" class="btn board_btn cancel_btn">목록으로</button>
               </div>
             </form>
           </div>
         </div>
       </div>
     </main>
+    ${common_footer}
   </div>
 </body>
 </html>

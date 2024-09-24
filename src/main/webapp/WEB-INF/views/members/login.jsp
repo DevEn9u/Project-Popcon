@@ -6,6 +6,7 @@
 <c:import url="../include/head.jsp" />
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
+<link rel="stylesheet" href="/css/member.css">
 <body>
   <div id="skip_navi">
     <a href="#container">본문 바로가기</a>
@@ -24,7 +25,7 @@
           </div>
           <div class="login_area">
             <form name="loginFrm" method="post" action="./login.do"
-            	onsubmit="return validateForm(this);">
+            	onsubmit="return validateLogin(this);">
               <fieldset>
                 <legend>로그인</legend>
                 <div class="row input_wrap1">

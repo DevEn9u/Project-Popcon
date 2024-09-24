@@ -6,6 +6,7 @@
 <c:import url="../include/head.jsp" />
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
+<link rel="stylesheet" href="/css/member.css">
 <body>
   <div id="skip_navi">
     <a href="#container">본문 바로가기</a>
@@ -23,7 +24,7 @@
           </div>
           <!-- 회원가입 폼 -->
           <div class="register_wrap">
-          	<form name="registerFrm" method="post" action="../member/register.do" onsubmit="return validateForm(this);">
+          	<form name="registerFrm" method="post" action="../register.do" onsubmit="return validateForm(this);">
               <div class="input_wrap">
                 <div class="item_id">아이디 :</div>
                 <input type="text" name="id" class="input_id" placeholder="6-12자 이내의 아이디를 입력해주세요.">

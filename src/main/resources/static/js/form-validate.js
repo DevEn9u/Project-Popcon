@@ -1,16 +1,5 @@
 function validateForm(form) {
-	// 로그인 폼 검증
-	if (!form.login_id.value) {
-		alert("아이디를 입력하세요.");
-		form.login_id.focus();
-		return false;
-	}
-	if (form.login_pw.value == "") {
-		alert("패스워드를 입력하세요.");
-		form.login_pw.focus();
-		return false;
-	}
-  	// 회원가입 폼 내용 검증
+	// 회원가입 폼 내용 검증
   if (form.id.value == "") {
 	alert("아이디를 입력하세요.");
     form.id.focus();
@@ -55,6 +44,7 @@ function validateForm(form) {
 return true;
 }
 
+// 아이디 중복 확인
 function idCheck() {
   let id = document.registerFrm.id.value;
   if (id == '') {
@@ -63,10 +53,13 @@ function idCheck() {
     return false;
   }
   else {
-    
-  window.name = "parentForm";
-  window.open("../html/IdCheckForm.jsp?id=" + id,
-      "chkForm", "width=500, height=300, resizable = no, scrollbars = no" );
+//  window.name = "parentForm";
+//  window.open("../html/IdCheckForm.jsp?id=" + id,
+//  window.open("./checkId.do",
+//      "chkForm", "width=500, height=300, resizable = no, scrollbars = no" );
+	alert("사용 가능한 아이디입니다.");
+	registerFrm.idDuplication.value = "idChecked";
+	
   }
 }
 
