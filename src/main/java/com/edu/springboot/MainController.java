@@ -109,4 +109,38 @@ public class MainController {
 	public String noticeBoardDelete() {
 		return "redirect:/noticeBoard/list.do";
 	}
+
+	//팝업안내 - 메인
+	@GetMapping("/popupBoard/list.do")
+	public String popuplist() {
+		return "/boards/popup-board-list";
+	}
+	
+	//팝업안내 - 글 보기
+	@GetMapping("/popupBoard/view.do")
+	public String popupview() {
+		return "/boards/popup-board-view";
+	}
+	
+	//팝업안내 - 글 쓰기
+	@GetMapping("/popupBoard/write.do")
+	public String popupwrite() {
+		return "/boards/popup-board-write";
+	}
+	//팝업안내 - 글 수정
+	@GetMapping("/popupBoard/edit.do")
+	public String popupedit() {
+		return "/boards/popup-board-edit";
+	}
+	
+	//팝업 예약 페이지
+	@GetMapping("/popupBoard/booking.do")
+	public String popupbooking() {
+		return "/booking/booking";
+	}
+	//인원,수량 선택 페이지
+	@GetMapping("/popupBoard/select.do")
+	public String popupselect() {
+		return "/booking/booking-select";
+	}
 }

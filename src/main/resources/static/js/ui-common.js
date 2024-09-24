@@ -56,7 +56,10 @@ $(function () {
         });
       }
 
-
+  // product slider
+  let productPopup = new Swiper('.product_slider .swiper', {
+    slidesPerView: 4,
+  });
       // popular slider
       if(w>=768) {
         let popularPopup = new Swiper('.popular_slider .swiper', {
@@ -71,7 +74,6 @@ $(function () {
           slidesPerView: 6,
         });
       }
-
       // season slider
       if(w>=768) {
         let seasonPopup = new Swiper('.season_slider .swiper', {
@@ -156,5 +158,26 @@ $(document).ready(function() {
       $weekdayDiv.text('TODAY');
     }
   }
+  
+  //popup-board-view 페이지 스와이퍼
+    const swiper = new Swiper('.swiper', {
+        direction: 'horizontal',
+        loop: true,
+
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+
+        scrollbar: {
+          el: '.swiper-scrollbar',
+          draggable: true,
+        },
+      });
 });
 
