@@ -187,8 +187,8 @@
 
 /* 메인 슬라이더 */
 .main_slider .swiper {
-  width: 1250px;
-  margin: 0 auto;
+  max-width: 1250px;
+  margin: 80px auto 0;
 }
 .main_slider .swiper-wrapper {
   display: flex;
@@ -264,7 +264,7 @@
 
 /* 담당자 픽 팝업 */
 .pick_slider .inner {
-  width: 1250px;
+  max-width: 1250px;
   margin: 0 auto;
 }
 .pick_slider .tit {
@@ -286,7 +286,7 @@
 
 /* 인기 팝업 */
 .popular_slider .inner {
-  width: 1250px;
+  max-width: 1250px;
   margin: 0 auto;
 }
 .popular_slider .tit {
@@ -306,9 +306,117 @@
   border-radius: 30px;
 }
 
+/* 날짜별 */
+.day_slider .inner {
+  max-width: 1250px;
+  height: 1300px;
+  padding-top: 70px;
+  background: #121212;
+  margin: 0 auto;
+}
+.day_slider .slider {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  border-radius: 30px;
+  width: 100%;
+}
+.day_slider .date-container {
+  display: block;
+  width: 52px;
+  height: 52px;
+  background-color: #555;
+  color: white;
+  border-radius: 50%;
+  padding: 17px;
+  text-align: center;
+}
+.day_slider .date-container.active {
+  width: 78px;
+  height: 78px;
+  color: var(--txt-color-500);
+  font-size: 18px;
+  font-weight: 700;
+  background-color: var(--point--color1);
+  padding: 20px 10px 20px 10px;
+}
+.day_slider .date {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 14px;
+  cursor: pointer; /* 클릭 가능하게 */
+}
+.day_slider .weekday {
+  color: #121212;
+  font-size: 15px;
+  text-align: center;
+
+}
+.day_slider .date-container:not(.today):hover {
+  background-color: var(--point--color1);
+  color: var(--txt-color-500);
+  font-weight: 700;
+}
+.day_slider .line {
+  display: block;
+  width: 1200px;
+  height: 1px;
+  background: var(--txt-color-400);
+  margin: 20px 0 50px 25px;
+}
+.day_slider .today_popup {
+  display: flex;
+  justify-content: center;
+  gap: 0 50px;
+}
+.day_slider .today_popup .col1{
+  display: flex;
+  flex-direction: column;
+}
+.day_slider .today_popup .item {
+  display: flex;
+  margin-bottom: 80px;
+}
+.day_slider .today_popup .item>img {
+  width: 200px;
+  height: 200px;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+.day_slider .today_popup .item .popup_name {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+.day_slider .today_popup .item .popup_location {
+  display: flex;
+}
+.day_slider .today_popup .item .popup_location>img {
+  width: 10px;
+  height: 14px;
+  filter: invert(50%);
+  justify-content: center;
+}
+.day_slider .today_popup .item .popup_location p {
+  color: var(--txt-color-400);
+  text-align: center;
+  font-weight: 700;
+}
+.day_slider .today_popup .item .txt_wrap .popup_date {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: end;
+  margin-top: 95px;
+}
+
+
+
+
 /* 시즌 팝업 */
 .season_slider .inner {
-  width: 1250px;
+  max-width: 1250px;
   margin: 0 auto;
 }
 .season_slider .tit {
@@ -366,7 +474,7 @@
 
 /* 굿즈 팝업 */
 .product_slider .inner {
-  width: 1250px;
+  max-width: 1250px;
   margin: 0 auto;
 }
 .product_slider .tit {
@@ -408,17 +516,11 @@
 .product_slider .swiper-slide .slide_title {
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 20px;
 }
 .product_slider .swiper-slide .slide_content {
   font-size: 12px;
   font-weight: 700;
   color: var(--txt-color-400);
-}
-.season_slider .swiper-slide .slide_content img {
-  height: 11px;
-  filter: invert(50%);
-  margin-right: 3px;
 }
 
 /* 푸터 */
@@ -490,6 +592,94 @@
   #header .inner .login {
     margin-left: 0;
   }
+  .main_slider .swiper-slide .txt_wrap .slide_title {
+    font-size: 25px;
+  }
+  .main_slider .swiper-slide .txt_wrap p {
+    font-size: 14px;
+  }
+  .main_slider .swiper-slide .txt_wrap img {
+    width: 10px;
+    height: 15px;
+    margin-right: 5px;
+  }
+
+  .pick_slider {
+    padding: 0 20px 0;
+  }
+  .pick_slider .tit {
+    font-size: 25px;
+  }
+  .pick_slider .swiper-slide {
+    width: 295px;
+    margin-right: 10px;
+  }
+
+  .popular_slider {
+    padding: 0 20px 0;
+  }
+  .popular_slider .tit {
+    font-size: 25px;
+  }
+  .popular_slider .swiper-slide {
+    width: 295px;
+    margin-right: 10px;
+  }
+  
+  .popular_slider {
+    padding: 0 20px 0;
+  }
+  .popular_slider .tit {
+    font-size: 25px;
+  }
+  .popular_slider .swiper-slide {
+    width: 295px;
+    margin-right: 10px;
+  }
+
+  .day_slider .inner {
+    width: 1200px;
+  }
+  .day_slider .line {
+    width: 1100px;
+    margin: 15px 0 40px 40px;
+  }
+  .day_slider .today_popup .item .popup_name {
+    font-size: 20px;
+  }
+  .day_slider .today_popup .item .txt_wrap .popup_date {
+    font-size: 18px;
+  }
+
+  .season_slider {
+    padding: 0 20px 0;
+  }
+  .season_slider .tit {
+    font-size: 25px;
+  }
+  .season_slider .swiper-slide {
+    width: 295px;
+    margin-right: 10px;
+  }
+  .season_slider .swiper-slide .slide_title {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .product_slider {
+    padding: 0 20px 0;
+  }
+  .product_slider .tit {
+    font-size: 25px;
+  }
+  .product_slider .swiper-slide {
+    width: 295px;
+    margin-right: 10px;
+  }
+  .product_slider .swiper-slide .slide_title {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
 }
 
 /* 모바일 분기점 */
@@ -503,6 +693,13 @@
     width: 30px;
     height: 30px;
     mask-size: 30px 30px;
+  }
+
+  .day_slider .today_popup .item .popup_name {
+    font-size: 18px;
+  }
+  .day_slider .today_popup .item .popup_location p {
+    font-size: 14px;
   }
 
   #footer .footer_bottom {

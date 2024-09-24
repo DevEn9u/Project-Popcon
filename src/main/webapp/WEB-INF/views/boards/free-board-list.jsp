@@ -6,6 +6,7 @@
 <c:import url="../include/head.jsp" />
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
+<link rel="stylesheet" href="/css/board.css">
 <body>
   <div id="skip_navi">
     <a href="#container">본문 바로가기</a>

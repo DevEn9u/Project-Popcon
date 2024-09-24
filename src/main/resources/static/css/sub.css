@@ -402,6 +402,89 @@
   font-size: 13px;
   margin-left: 30px;
 }
+/********* 아이디/비번 찾기 ***********/
+  .find .logo {
+    margin-top: 150px;
+    text-align: center;
+  }
+
+  .find .contents {
+    max-width: 580px;
+    min-height: 520px;
+    margin: 40px auto;
+    padding: 58px 69px 139px;
+    border: 1px solid #767676;
+    border-radius: 3px;
+    box-sizing: border-box;
+  }
+  .find .contents p {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .find .contents .title {
+    font-size: 30px;
+    font-weight: 700;
+  }
+  .find .contents .txt {
+    font-size: 14px;
+    color: var(--txt-color-400);
+  }
+  .find .contents .row1 input[type='text'] {
+    width: 100%;
+    height: 50px;
+    background: none;
+    margin: 5px 0 15px;
+    border: 1px solid #767676;
+  }
+  .find .contents input[type='email'] {
+    width: 100%;
+    height: 50px;
+    background: none;
+    border: 1px solid #767676;
+    margin: 5px 0 10px;
+    padding: 0 10px;
+  }
+  .find .contents .row2 input[type='text'] {
+    width: 70%;
+    height: 50px;
+    background: none;
+    margin: 5px 0 15px;
+    border: 1px solid #767676;
+  }
+  .find .contents .row2 .num_btn {
+    background: var(--point--color2);
+    height: 50px;
+    width: 110px;
+    border: none;
+    border-radius: 30px;
+    margin: 0px 0 10px 10px;
+  }
+
+  .find .contents .send_btn {
+    width: 100%;
+    height: 40px;
+    background: none;
+    border: 1px solid #767676;
+    border-radius: 30px;
+    margin-top: 40px;
+    font-weight: 600;
+  }
+  .find .contents .send_btn:hover {
+    background: var(--point--color1);
+    color: var(--txt-color-500);
+    font-weight: 600;
+  }
+  .find .contents .link_wrap {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-around;
+  }
+  .find .contents .link_wrap a {
+    color: var(--txt-color-400);
+  }
+  .find .contents .link_wrap a:hover {
+    color: var(--point--color2);
+  }
 
 /***************** 태블릿 분기점 *****************/
 @media (max-width: 1200px) {
@@ -427,6 +510,8 @@
   .register_wrap .check_btn {
     font-size: 14px;
   }
+  
+  
 
   /********* 게시판 공통  *********/
   .board_page .btn_wrap {
