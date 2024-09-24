@@ -6,6 +6,7 @@
 <c:import url="../include/head.jsp" />
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
+<link rel="stylesheet" href="/css/board.css">
 <script>
 	//게시물 삭제를 위해 정의한 함수
 	function deletePost() {

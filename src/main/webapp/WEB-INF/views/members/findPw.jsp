@@ -3,9 +3,10 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html lang="ko">
-	<c:import url="../include/head.jsp" />
-	<c:import url="../include/header.jsp" var="common_header" />
-	<c:import url="../include/footer.jsp" var="common_footer" />
+<c:import url="../include/head.jsp" />
+<c:import url="../include/header.jsp" var="common_header" />
+<c:import url="../include/footer.jsp" var="common_footer" />
+<link rel="stylesheet" href="/css/member.css">
   <body>
     <div id="wrap">
 	${common_header}

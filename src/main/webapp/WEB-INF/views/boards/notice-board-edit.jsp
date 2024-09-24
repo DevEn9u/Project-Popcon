@@ -6,6 +6,7 @@
 <c:import url="../include/head.jsp" />
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
+<link rel="stylesheet" href="/css/board.css">
 <script src="../js/file-upload.js"></script>
 <script>
     function checkReset() {

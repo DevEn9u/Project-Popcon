@@ -1,0 +1,330 @@
+:root {
+  --point--color1: #fce8c3;
+  --point--color2: #f0002e;
+  --txt-color-400: #767676;
+  --txt-color-500: #121212;
+  --txt-color-600: #fff;
+}
+
+/********* 로그인 *********/
+.login_page .inner {
+  max-width: 492px;
+  min-width: 360px;
+  padding: 0 16px;
+}
+.login_page .logo_wrap {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  display: flex;
+  gap: 10px 0;
+  flex-direction: column;
+  align-items: center;
+}
+.login_page .logo_wrap h2 {
+  display: inline-block;
+  width: 160px;
+  height: 60px;
+  margin-bottom: 20px;
+}
+.login_page .logo_wrap h2 a {
+  background: url(../images/logo_login.png) no-repeat 0 0;
+  background-size: cover;
+  display: block;
+  height: 50px;
+}
+
+.login_page .login_area {
+  margin-top: 80px;
+}
+.login_page .login_area .input_wrap1 {
+  margin-bottom: 12px;
+}
+.login_page .login_area .input_wrap2 {
+  margin-bottom: 3px;
+}
+.login_page .login_area input[type="text"],
+.login_page .login_area input[type="password"] {
+  width: 100%;
+  height: 56px;
+  background-color: var(--txt-color-500);
+  border: 1px solid #e5e8eb;
+  font-size: 16px;
+  font-weight: 700;
+}
+.login_page .login_area input[type="text"]:focus,
+.login_page .login_area input[type="password"]:focus {
+  border: 2px solid var(--point--color1);
+}
+.login_page .login_area input[type="text"]::placeholder,
+.login_page .login_area input[type="password"]::placeholder {
+  font-weight: 600;
+}
+
+.login_page .login_area .checkbox_wrap {
+  margin-top: 10px;
+}
+.login_page .login_area .checkbox_wrap label {
+  font-size: 12px;
+}
+.login_page .login_area .login_btn {
+  display: block;
+  width: 100%;
+  line-height: 60px;
+  background: var(--point--color1);
+  color: var(--txt-color-500);
+  font-weight: 700;
+  text-align: center;
+  margin-top: 24px;
+}
+
+.login_page .link_wrap {
+  display: flex;
+  gap: 0 10px;
+  padding-top: 12px;
+}
+.login_page .link_wrap > li > a {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: #737881;
+  font-family: "맑은 고딕", sans-serif;
+}
+
+/********* 회원가입 - 메인 *********/
+.register_page .choose_wrap p {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+.register_page .choose_type {
+  display: flex;
+  justify-content: space-between;
+}
+.register_page .choose_type > li > a {
+  border: 1px solid var(--point--color1);
+  border-radius: 4px;
+  font-size: 42px;
+  padding: 5px 10px;
+}
+.register_page .choose_type > li > a:hover {
+  background-color: var(--point--color1);
+  color: var(--txt-color-500);
+  transition: all 0.2s;
+}
+
+/********* 회원가입 - 일반회원 *********/
+.register_wrap .input_wrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px 10px;
+  margin-bottom: 10px;
+}
+/* 각 input 태그 앞 입력 사항을 알려줌, width조절 */
+.register_wrap .item_id,
+.register_wrap .item_email {
+  width: 50px;
+}
+.register_wrap .item_name {
+  width: 40px;
+}
+.register_wrap .item_pass,
+.register_wrap .item_phone {
+  width: 70px;
+}
+.register_wrap .item_pass2 {
+  width: 100px;
+}
+/* 각 항목 입력 칸(input 태그) width 조절 */
+.register_wrap .input_id,
+.register_wrap .input_email {
+  width: calc(100% - 60px);
+}
+.register_wrap .input_name {
+  width: calc(100% - 50px);
+}
+.register_wrap .input_pass,
+.register_wrap .input_phone {
+  width: calc(100% - 80px);
+}
+.register_wrap .input_pass2 {
+  width: calc(100% - 110px);
+}
+
+/* 아이디 중복 확인 버튼 */
+.register_wrap .check_btn {
+  border: 1px solid var(--txt-color-600);
+  background: var(--txt-color-500);
+  padding: 5px 15px;
+  margin-bottom: 10px;
+}
+
+.register_wrap .check_btn:hover {
+  background: var(--point--color1);
+  color: var(--txt-color-500);
+  transition: all 0.2s;
+}
+
+/* 회원가입, 취소 버튼 */
+.register_wrap .btn_wrap {
+  display: flex;
+  justify-content: center;
+  gap: 0 5px;
+}
+.register_wrap .btn_wrap .register_btn {
+  line-height: 22px;
+  background: var(--txt-color-400);
+  font-weight: 700;
+  margin-right: 4px;
+}
+.register_wrap .btn_wrap .register_btn:hover {
+  background-color: var(--point--color1);
+  color: var(--txt-color-500);
+  transition: all 0.2s;
+}
+
+/********* 회원가입 - 기업회원 *********/
+.register_wrap .item_com_name {
+  width: 50px;
+}
+.register_wrap .item_regi_num {
+  width: 80px;
+}
+
+.register_wrap .input_com_name {
+  width: calc(100% - 60px);
+}
+.register_wrap .input_regi_num {
+  width: calc(100% - 90px);
+}
+
+/********* 아이디/비번 찾기 ***********/
+ .find .logo {
+   margin-top: 150px;
+   text-align: center;
+ }
+
+ .find .contents {
+   max-width: 580px;
+   min-height: 520px;
+   margin: 40px auto;
+   padding: 58px 69px 139px;
+   border: 1px solid #767676;
+   border-radius: 3px;
+   box-sizing: border-box;
+ }
+ .find .contents p {
+   text-align: center;
+   margin-bottom: 30px;
+ }
+ .find .contents .title {
+   font-size: 30px;
+   font-weight: 700;
+ }
+ .find .contents .txt {
+   font-size: 14px;
+   color: var(--txt-color-400);
+ }
+ .find .contents .row1 input[type='text'] {
+   width: 100%;
+   height: 50px;
+   background: none;
+   margin: 5px 0 15px;
+   border: 1px solid #767676;
+ }
+ .find .contents input[type='email'] {
+   width: 100%;
+   height: 50px;
+   background: none;
+   border: 1px solid #767676;
+   margin: 5px 0 10px;
+   padding: 0 10px;
+ }
+ .find .contents .row2 input[type='text'] {
+   width: 70%;
+   height: 50px;
+   background: none;
+   margin: 5px 0 15px;
+   border: 1px solid #767676;
+ }
+ .find .contents .row2 .num_btn {
+   background: var(--point--color2);
+   height: 50px;
+   width: 110px;
+   border: none;
+   border-radius: 30px;
+   margin: 0px 0 10px 10px;
+ }
+
+ .find .contents .send_btn {
+   width: 100%;
+   height: 40px;
+   background: none;
+   border: 1px solid #767676;
+   border-radius: 30px;
+   margin-top: 40px;
+   font-weight: 600;
+ }
+ .find .contents .send_btn:hover {
+   background: var(--point--color1);
+   color: var(--txt-color-500);
+   font-weight: 600;
+ }
+ .find .contents .link_wrap {
+   margin-top: 15px;
+   display: flex;
+   justify-content: space-around;
+ }
+ .find .contents .link_wrap a {
+   color: var(--txt-color-400);
+ }
+ .find .contents .link_wrap a:hover {
+   color: var(--point--color2);
+ }
+
+/***************** 태블릿 분기점 *****************/
+@media (max-width: 1200px) {
+  /********* 로그인 페이지 *********/
+  .login_page .logo_wrap {
+    transform: translate(-50%, 0%);
+  }
+
+  /********* 회원가입 *********/
+  .register_page .choose_wrap p {
+    font-size: 24px;
+  }
+  .register_page .choose_type > li > a {
+    font-size: 36px;
+  }
+  .register_wrap .check_btn {
+    font-size: 14px;
+  }
+}
+
+/***************** 모바일 분기점 *****************/
+@media (max-width: 767px) {
+  /********* 로그인 페이지 *********/
+  .login_page .logo_wrap {
+    transform: translate(-50%, -50%);
+    margin-top: 30px;
+    align-items: center;
+    gap: 0;
+  }
+
+  /********* 회원가입 *********/
+  .register_page .choose_type {
+    justify-content: center;
+    gap: 0 20px;
+  }
+  .register_page .choose_type > li > a {
+    font-size: 28px;
+  }
+  .register_page .choose_wrap p {
+    font-size: 18px;
+  }
+}  
+  
