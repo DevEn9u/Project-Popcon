@@ -1,0 +1,105 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<!DOCTYPE html>
+<html lang="ko">
+<c:import url="../include/head.jsp" />
+<c:import url="../include/header.jsp" var="common_header" />
+<c:import url="../include/footer.jsp" var="common_footer" />
+<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
+<body>
+<body>
+	<div id="skip_navi">
+		<a href="#container">본문 바로가기</a>
+	</div>
+	<div id="wrap">
+	${common_header }
+	<main id="mp_container">
+        <h1>마이페이지</h1>
+        <section class="my_page">
+          <div class="my_list">
+            <ul class="depth1">
+              <li class="list_title on">
+                <a href="mypage_main.html">마이페이지</a>
+              </li>
+              <ul class="depth2">
+                <li><a href="mypage_booking.html">예약 확인</a></li>
+                <li><a href="mypage_point.html">포인트 내역</a></li>
+              </ul>
+            </ul>
+            <ul class="depth1">
+              <li class="list_title">
+                <a href="mypage_post.html">내가 작성한 글</a>
+              </li>
+              <ul class="depth2">
+                <li><a href="mypage_post.html">내가 작성한 게시글</a></li>
+                <li><a href="mypage_review.html">내가 작성한 리뷰</a></li>
+              </ul>
+            </ul>
+            <ul class="depth1">
+              <li class="list_title"><a href="mypage_likes.html">팝업</a></li>
+              <ul class="depth2">
+                <li><a href="mypage_likes.html">좋아요 누른 팝업</a></li>
+                <li><a href="mypage_coupon.html">구매한 쿠폰</a></li>
+              </ul>
+            </ul>
+          </div>
+          <div class="my_info_wrap">
+            <h2>000님, 환영합니다.</h2>
+            <div class="my_info">
+              <div class="my_mile box1">
+                <div class="top">
+                  <strong>나의 마일리지</strong>
+                  <a href="mypage_point.html"
+                    ><p>자세히 보기<span></span></p
+                  ></a>
+                </div>
+                <h3>20 포인트</h3>
+              </div>
+              <div class="my_recent box1">
+                <div class="top">
+                  <strong>최근 예약 내역</strong>
+                  <a href="mypage_booking.html"
+                    ><p>자세히 보기<span></span></p
+                  ></a>
+                </div>
+                <div class="booking_wrap">
+                  <ul class="booking_list">
+                    <li>
+                      <strong>예약한 팝업명</strong>
+                      <div class="txt_wrap">
+                        예약 날짜
+                        <span></span>예약 인원
+                      </div>
+                      <p>총 12,345원</p>
+                    </li>
+                  </ul>
+                  <ul class="booking_list">
+                    <li>
+                      <strong>예약한 팝업명</strong>
+                      <div class="txt_wrap">
+                        24.11.11
+                        <span></span>2인
+                      </div>
+                      <p>총 12,345원</p>
+                    </li>
+                  </ul>
+                  <ul class="booking_list">
+                    <li>
+                      <strong>예약한 팝업명</strong>
+                      <div class="txt_wrap">
+                        20.12.12
+                        <span></span>3인
+                      </div>
+                      <p>총 12,345원</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+	${common_footer }
+</body>
+</html>

@@ -49,6 +49,12 @@ dependencies {
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	// 수정 사항 생길시 자동 재빌드를 위한 의존성 추가
 	implementation 'org.springframework.boot:spring-boot-devtools'
+	
+	// 아이디 비밀번호 찾기를 위한 의존성 추가
+	implementation 'org.springframework.data:spring-data-redis'
+	implementation 'io.lettuce:lettuce-core:6.2.3.RELEASE'
+	
+	implementation 'org.springframework.boot:spring-boot-starter-mail:3.3.4'
 }
 
 tasks.named('test') {
