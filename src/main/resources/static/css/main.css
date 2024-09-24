@@ -14,11 +14,11 @@
   top: 0;
   width: 100%;
   z-index: 999;
+  background: var(--txt-color-500);
 }
 
 #header .inner {
   max-width: 1250px;
-  background: var(--txt-color-500);
   height: 80px;
   margin: 0 auto;
   display: flex;
