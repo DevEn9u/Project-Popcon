@@ -24,31 +24,31 @@
           <div class="my_list">
             <ul class="depth1">
               <li class="list_title">
-                <a href="mypage_main.html">마이페이지</a>
+                <a href="/mypage/mypage.do">마이페이지</a>
               </li>
               <ul class="depth2">
-                <li><a href="mypage_booking.html">예약 확인</a></li>
-                <li><a href="mypage_point.html">포인트 내역</a></li>
+                <li><a href="/mypage/myBooking.do">예약 확인</a></li>
+                <li><a href="/mypage/myPoint.do">포인트 내역</a></li>
               </ul>
             </ul>
             <ul class="depth1">
               <li class="list_title active">
-                <a href="mypage_post.html">내가 작성한 글</a>
+                <a href="/mypage/myPost.do">내가 작성한 글</a>
               </li>
               <ul class="depth2">
                 <li>
-                  <a href="mypage_post.html">내가 작성한 게시글</a>
+                  <a href="/mypage/myPost.do">내가 작성한 게시글</a>
                 </li>
                 <li class="on">
-                  <a href="mypage_review.html">내가 작성한 리뷰</a>
+                  <a href="/mypage/myReview.do">내가 작성한 리뷰</a>
                 </li>
               </ul>
             </ul>
             <ul class="depth1">
-              <li class="list_title"><a href="mypage_likes.html">팝업</a></li>
+              <li class="list_title"><a href="/mypage/likes.do">팝업</a></li>
               <ul class="depth2">
-                <li><a href="mypage_likes.html">좋아요 누른 팝업</a></li>
-                <li><a href="mypage_coupon.html">구매한 쿠폰</a></li>
+                <li><a href="/mypage/likes.do">좋아요 누른 팝업</a></li>
+                <li><a href="/mypage/myCoupon.do">구매한 쿠폰</a></li>
               </ul>
             </ul>
           </div>
