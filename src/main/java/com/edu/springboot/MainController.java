@@ -21,6 +21,17 @@ public class MainController {
 		return "redirect:/";
 	}
 	
+	// 아이디 비밀번호 찾기
+	@GetMapping("/findId.do")
+	public String findId() {
+		return "/members/findId";
+	}
+	
+	@GetMapping("/findPw.do")
+	public String findPw() {
+		return "/members/findPw";
+	}
+	
 	// 회원가입 - 메인
 	@GetMapping("/register.do")
 	public String registerMain() {
