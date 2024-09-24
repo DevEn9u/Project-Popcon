@@ -24,4 +24,5 @@
   <script src="/js/swiper-bundle.min.js"></script>
   <script src="/js/ui-common.js?v=<?php echo time(); ?>"></script>
   <script src="/js/form-validate.js"></script>
+  <script src="/js/login-validate.js"></script>
 </head>

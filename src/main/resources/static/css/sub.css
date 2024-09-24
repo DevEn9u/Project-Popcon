@@ -473,7 +473,7 @@
   }
 
   /********* 게시판 공통 *********/
-  input,
+  .board_page input,
   .board_page th,
   .board_page td,
   .board_page textarea {

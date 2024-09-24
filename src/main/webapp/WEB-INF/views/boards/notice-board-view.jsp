@@ -1,27 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Popcon - 자유게시판</title>
-  <link rel="stylesheet" href="/css/common.css">
-  <link rel="stylesheet" href="/css/sub.css">
-  <script>
-    //게시물 삭제를 위해 정의한 함수
-     function deletePost() {
-         let confirmed = confirm("게시물을 삭제하겠습니까?"); 
-         if (confirmed) {
-             let form = document.deleteFrm;
-             form.submit(); 
-         };
-     };
-  </script>
-</head>
+<c:import url="../include/head.jsp" />
+<c:import url="../include/header.jsp" var="common_header" />
+<c:import url="../include/footer.jsp" var="common_footer" />
+<script>
+	//게시물 삭제를 위해 정의한 함수
+	function deletePost() {
+		let confirmed = confirm("게시물을 삭제하겠습니까?");
+		if (confirmed) {
+			let form = document.deleteFrm;
+			form.submit(); 
+		};
+	};
+</script>
 <body>
   <div id="skip_navi">
     <a href="#container">본문 바로가기</a>
   </div>
   <div id="wrap">
+    ${common_header}
     <main id="container" class="board_page sub_container">
       <div class="sub_top">
         <div class="inner">
@@ -37,7 +37,7 @@
               <p class="date">작성자 : 관리자</p>
               <p class="date">조회수 : 999</p>
               <form name="deleteFrm" method="post"
-                 action="../notice-board/delete.do?idx=${ dto.idx }">
+                 action="./delete.do?idx=${ dto.idx }">
                 <input type="hidden" name="idx" value="${ dto.idx }" />
               </form>
             </div>
@@ -54,22 +54,23 @@
             </div>
             <div class="btn_wrap">
               <!-- session에 저장된 UserId와 게시물 작성자와 동일할때만 수정&삭제 버튼 출력 -->
-              <!-- <c:if test="${ UserId != null && UserId.toString().equals(dto.getId())}"> -->
-              <button type="button" class="btn board_btn" onclick="location.href='./notice-board-edit.html';">
+<%--               <c:if test="${ UserId != null && UserId.toString().equals(dto.getId())}"> --%>
+              <button type="button" class="btn board_btn" onclick="location.href='./edit.do';">
                 수정하기
               </button>
               <button type="button" class="btn del_btn board_btn" onclick="deletePost();">
                 삭제하기
               </button>
-              <!-- </c:if> -->
+<%--               </c:if> --%>
               <button type="button"
-                onclick="location.href='./notice-board-list.html';"
+                onclick="location.href='./list.do';"
                 class="btn list_btn board_btn">목록으로</button>
             </div>
           </div>
         </div>
       </div>
     </main>
+    ${common_footer }
   </div>
 </body>
 </html>

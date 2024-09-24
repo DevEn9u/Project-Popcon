@@ -24,7 +24,7 @@
           </div>
           <div class="login_area">
             <form name="loginFrm" method="post" action="./login.do"
-            	onsubmit="return validateForm(this);">
+            	onsubmit="return validateLogin(this);">
               <fieldset>
                 <legend>로그인</legend>
                 <div class="row input_wrap1">

@@ -12,10 +12,7 @@
 	</div>
 	<div id="wrap">
 	${common_header }
-		<h2>테스트중입니다.</h2>
-		<div>
-			테스트에요123213
-		</div>
+		<main></main>
 	</div>
 	${common_footer }
 </body>
