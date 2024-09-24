@@ -68,7 +68,8 @@
         </div>
       </div>
     </main>
+    <footer id="footer">
     ${common_footer}
-  </div>
+    </footer>
 </body>
 </html>

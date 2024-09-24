@@ -46,7 +46,9 @@
           </div>
         </div>
       </main>
+      <footer id="footer">
       ${common_footer } 
+      </footer>
     </div>
   </body>
 </html>
