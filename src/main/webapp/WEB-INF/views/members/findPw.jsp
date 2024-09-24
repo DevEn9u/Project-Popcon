@@ -10,7 +10,7 @@
     <div id="wrap">
 	${common_header}
       <main id="sub_container">
-        <div class="find">
+        <div class="find_page">
           <div class="logo">
             <h2>
               <a href="main.html">
