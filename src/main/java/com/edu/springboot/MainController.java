@@ -113,24 +113,24 @@ public class MainController {
 	//팝업안내 - 메인
 	@GetMapping("/popupBoard/list.do")
 	public String popuplist() {
-		return "/boards/popup-board-list";
+		return "/popup-boards/popup-board-list";
 	}
 	
 	//팝업안내 - 글 보기
 	@GetMapping("/popupBoard/view.do")
 	public String popupview() {
-		return "/boards/popup-board-view";
+		return "/popup-boards/popup-board-view";
 	}
 	
 	//팝업안내 - 글 쓰기
 	@GetMapping("/popupBoard/write.do")
 	public String popupwrite() {
-		return "/boards/popup-board-write";
+		return "/popup-boards/popup-board-write";
 	}
 	//팝업안내 - 글 수정
 	@GetMapping("/popupBoard/edit.do")
 	public String popupedit() {
-		return "/boards/popup-board-edit";
+		return "/popup-boards/popup-board-edit";
 	}
 	
 	//팝업 예약 페이지
@@ -142,5 +142,41 @@ public class MainController {
 	@GetMapping("/popupBoard/select.do")
 	public String popupselect() {
 		return "/booking/booking-select";
+	}
+	
+	//마이페이지 - 메인
+	@GetMapping("/mypage/mypage.do")
+	public String mypageMain() {
+		return "/mypages/mypage-main";
+	}
+	//마이페이지 - 예약 확인
+	@GetMapping("/mypage/myBooking.do")
+	public String mypageBooking() {
+		return "/mypages/mypage-booking";
+	}
+	//마이페이지 - 포인트 확인
+	@GetMapping("/mypage/myPoint.do")
+	public String mypagePoint() {
+		return "/mypages/mypage-point";
+	}
+	//마이페이지 - 내가 작성한 글 확인
+	@GetMapping("/mypage/myPost.do")
+	public String mypagePost() {
+		return "/mypages/mypage-post";
+	}
+	//마이페이지 - 내가쓴 리뷰 확인
+	@GetMapping("/mypage/myReview.do")
+	public String mypageReview() {
+		return "/mypages/mypage-review";
+	}
+	//마이페이지 - 좋아요한 팝업 확인
+	@GetMapping("/mypage/likes.do")
+	public String mypageLikes() {
+		return "/mypages/mypage-likes";
+	}
+	//마이페이지 - 보유한 쿠폰 확인
+	@GetMapping("/mypage/myCoupon.do")
+	public String mypageCoupon() {
+		return "/mypages/mypage-coupon";
 	}
 }

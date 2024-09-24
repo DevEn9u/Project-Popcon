@@ -123,7 +123,7 @@
 	          <div class="swiper">
 	            <div class="swiper-wrapper">
 	              <div class="swiper-slide">
-	                <a class="image" href="#"><img src="/images/main/mainslider1.png"></a>
+	                <a class="image" href="./popupBoard/view.do"><img src="/images/main/mainslider1.png"></a>
 	              </div>
 	              <div class="swiper-slide">
 	                <a class="image" href="#"><img src="/images/main/mainslider1.png"></a>

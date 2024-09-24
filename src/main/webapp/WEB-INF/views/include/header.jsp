@@ -21,10 +21,10 @@
           </ul>
         </li>
         <li class="depth1">
-          <a href="#">팝업 안내</a>
+          <a href="/popupBoard/list.do">팝업 안내</a>
           <ul class="depth2">
             <li>
-              <a href="#">전체 팝업</a>
+              <a href="/popupBoard/list.do">전체 팝업</a>
               <a href="#">담당자 PICK</a>
               <a href="#">이번달 인기</a>
               <a href="#">오늘의 팝업</a>
@@ -32,13 +32,13 @@
           </ul>
         </li>
         <li class="depth1">
-          <a href="/board/notice-board-list.do">공지사항</a>
+          <a href="/noticeBoard/list.do">공지사항</a>
         </li>
         <li class="depth1">
-          <a href="/board/free-board-list.do">커뮤니티</a>
+          <a href="/freeBoard/list.do">커뮤니티</a>
           <ul class="depth2">
             <li>
-              <a href="/board/free-board-list.do">자유 게시판</a>
+              <a href="/freeBoard/list.do">자유 게시판</a>
               <a href="#">POINT SHOP</a>
             </li>
           </ul>

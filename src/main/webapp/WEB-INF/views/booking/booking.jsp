@@ -17,6 +17,7 @@
             alt="booking_img"
             class="booking_img"
           />
+          <div class ="bm_img_tit">김주상 피아노 리사이틀 - 광주</div>
           <span class="bm_location">
             <img src="../images/imgMGJ/pin.svg" alt="pin" class="bm_pin" />서울특별시
             강남구 선릉로 807 K 현대미술관</span
@@ -33,7 +34,7 @@
               <span class="review1"> 3.94</span>
               <span class="review2"> / 리뷰 55</span>
             </div>
-            <button class="bm_booking_btn">예매하기</button>
+            <button class="bm_booking_btn" onclick="location.href='./select.do';">예매하기</button>
           </div>
           <div class="bm_qna_box">
             <h2 class="bm_qna_tit">문의하기</h2>
