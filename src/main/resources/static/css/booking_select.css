@@ -155,12 +155,16 @@ body {
     background-color: #efefef; 
     color: #121212;
     vertical-align: middle; /* 내용 가운데 정렬 */
+	cursor: pointer;
 }
-
 /* 오늘 날짜 강조*/
 .select_calendar .colToday {
+    background: var(--point--color1);
+	color: var(--txt-color-500);
+}
+.select_calendar .selectday {
     background: var(--point--color2);
-	color: #fff;
+	color: var(--txt-color-600);
 }
 
 

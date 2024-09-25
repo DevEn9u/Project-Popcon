@@ -178,8 +178,6 @@ $(function () {
 	    // 년.월 작성
 	    $(".year_month").text(nowYear + ". " + (nowMonth + 1));
 
-	    
-
 	    // 날짜 채우기
 	    $("#calendar tbody").empty(); // 이전에 있던 내용을 비워줌
 	    let row = $("<tr></tr>");
@@ -191,7 +189,16 @@ $(function () {
 
 	    // 날짜 채우기
 	    for (let i = 1; i <= lastDate; i++) {
-	        row.append("<td class='date'>" + i + "</td>");
+	        const dateCell = $("<td class='date'>" + i + "</td>");
+	        
+	        // 날짜 셀 클릭 이벤트 추가
+	        dateCell.on("click", function() {
+	            // 모든 날짜에서 colToday 클래스 제거하고 selectday 클래스 추가
+	            $(".date").removeClass("colToday").removeClass("selectday"); // 기존 클래스 제거
+	            $(this).addClass("selectday"); // 클릭한 날짜에 selectday 클래스 추가
+	        });
+
+	        row.append(dateCell);
 
 	        // 7일째 되면 새로운 줄을 추가
 	        if ((i + firstDay) % 7 === 0) {
@@ -208,13 +215,16 @@ $(function () {
 	    // 오늘 날짜 표시
 	    let todayDate = today.getDate();
 	    $(".date").each(function (index) {
-	        if (nowYear == date.getFullYear() && nowMonth == date.getMonth() && $(this).text() == todayDate) {
+	        if (nowYear == date.getFullYear() && nowMonth == date.getMonth() 
+				&& $(this).text() == todayDate) {
 	            $(this).addClass('colToday');
 	        }
 	    });
 	}
 
 	buildCalendar();
+
+
 
 
 });
