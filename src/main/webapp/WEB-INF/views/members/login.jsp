@@ -7,6 +7,7 @@
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
 <link rel="stylesheet" href="/css/member.css">
+<script src="/js/login-validate.js?v=<?php echo time(); ?"></script>
 <body>
   <div id="skip_navi">
     <a href="#container">본문 바로가기</a>
@@ -18,7 +19,7 @@
         <div class="inner">
           <div class="logo_wrap">
             <h2 class="logo">
-              <a href="/main.do"></a>
+              <a href="/"></a>
               <span class="blind">팝콘로고</span>
             </h2>
             <h3>POPCON 로그인하기</h3>
@@ -38,12 +39,16 @@
                   <input type="checkbox" id="check1" class="blind">
                   <label for="check1">로그인 상태 유지</label>
                 </div>
+                <!-- 로그인 실패시 실패 메세지 띄우기 -->
+                <c:if test="${param.error != null }">
+                	<p class="login_err_msg">아이디 또는 비밀번호가 잘못되었습니다.</p>
+                </c:if>
                 <button type="submit" class="login_btn">로그인</button>
               </fieldset>
             </form>
           </div>
           <ul class="link_wrap">
-            <li><a href="../register.do">회원가입</a></li>
+            <li><a href="/register.do">회원가입</a></li>
             <li><a href="/findId.do">ID 찾기</a></li>
             <li><a href="/findPw.do">비밀번호 찾기</a></li>
           </ul>
