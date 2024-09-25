@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="ko">
 <c:import url="../include/head.jsp" />
 <c:import url="../include/header.jsp" var="common_header" />
@@ -57,7 +57,11 @@
         </div>
       </div>
     </main>
-${common_footer }
+	<footer id="footer">
+	  <div class="inner">
+	      ${common_footer}
+	  </div>
+	</footer>
     
   </body>
 </html>

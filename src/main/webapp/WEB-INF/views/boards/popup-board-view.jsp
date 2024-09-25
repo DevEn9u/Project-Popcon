@@ -80,7 +80,7 @@
               <span class="pv_title_text"
                 >헤이딜러 X 아모레퍼시픽 &lt;내차조향소&gt; in 제주</span
               >
-              <button class="pv_booking_btn" onclick="location.href='./booking.do';">예약하기</button>
+              <button class="pv_booking_btn">예약하기</button>
               <img src="../images/imgMGJ/like_btn.svg" alt="좋아요" class="like_btn" />
             </h2>
             <div class="pv_title_date">2024. 09. 11 ~ 2024. 10. 01</div>
@@ -150,17 +150,17 @@
             </div>
           </div>
           <div class="pv_btn_wrap">
-            <button class="pv_booking_btn" onclick="location.href='./booking.do';">예약하기</button>
-            <button class="pv_list_btn" onclick="location.href='./list.do';">목록</button>
+            <button class="pv_booking_btn">예약하기</button>
+            <button class="pv_list_btn">목록</button>
           </div>
         </div>
       </div>
     </main>
-	<footer id="footer">
-	  <div class="inner">
-	      ${common_footer}
-	  </div>
-	</footer>
+    <footer id="footer">
+		<div class="inner">
+		    ${common_footer}
+		</div>
+    </footer>
   </body>
 </html>
     

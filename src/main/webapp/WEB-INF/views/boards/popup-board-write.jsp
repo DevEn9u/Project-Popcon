@@ -80,8 +80,8 @@
                   </div>
                 </div>
                 <div class="pw_btn_wrap">
-                  <button class="pw_upload_btn"onclick="location.href='./list.do';">작성 완료</button>
-                  <button class="pw_cancel_btn"onclick="location.href='./list.do';">작성 취소</button>
+                  <button class="pw_upload_btn">작성 완료</button>
+                  <button class="pw_cancel_btn">작성 취소</button>
                 </div>
               </td>
             </tr>
@@ -89,10 +89,10 @@
         </div>
       </div>
     </main>
-	<footer id="footer">
-	  <div class="inner">
-	      ${common_footer}
-	  </div>
-	</footer>
+    <<footer id="footer">
+		<div class="inner">
+		    ${common_footer}
+		</div>
+    </footer>
   </body>
 </html>
