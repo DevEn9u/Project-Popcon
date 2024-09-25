@@ -66,10 +66,10 @@ public class MainController {
 	}
 	
 	// 자유게시판 - 목록
-	@GetMapping("/freeBoard/list.do")
-	public String freeBoardList() {
-		return "/boards/free-board-list";
-	}
+//	@GetMapping("/freeBoard/list.do")
+//	public String freeBoardList() {
+//		return "/boards/free-board-list";
+//	}
 	// 자유게시판 - 보기
 	@GetMapping("/freeBoard/view.do")
 	public String freeBoardView() {
@@ -92,10 +92,10 @@ public class MainController {
 	}
 	
 	// 공지 - 목록
-	@GetMapping("/noticeBoard/list.do")
-	public String noticeBoardList() {
-		return "/boards/notice-board-list";
-	}
+//	@GetMapping("/noticeBoard/list.do")
+//	public String noticeBoardList() {
+//		return "/boards/notice-board-list";
+//	}
 	// 공지 - 보기
 	@GetMapping("/noticeBoard/view.do")
 	public String noticeBoardView() {
