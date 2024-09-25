@@ -24,7 +24,7 @@
             <h3>POPCON 로그인하기</h3>
           </div>
           <div class="login_area">
-            <form name="loginFrm" method="post" action="./login.do"
+            <form name="loginFrm" method="post" action="./loginProc.do"
             	onsubmit="return validateLogin(this);">
               <fieldset>
                 <legend>로그인</legend>
