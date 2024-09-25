@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.springboot.board.BoardMapper">
+    <select id="selectAllBoards" resultType="com.edu.springboot.board.BoardDTO">
+        SELECT * FROM BOARD
+    </select>
+    <select id="getFreeBoards" resultType="com.edu.springboot.board.BoardDTO">
+    	SELECT * FROM BOARD WHERE board_type = 'free'
+	</select>
+	<select id="getNoticeBoards" resultType="com.edu.springboot.board.BoardDTO">
+    	SELECT * FROM BOARD WHERE board_type = 'notice'
+	</select>
+	<insert id="insertBoard" parameterType="com.edu.springboot.board.BoardDTO">
+	    INSERT INTO BOARD (board_idx, board_title, postdate, contents, images, writer, visitcount, board_type, role)
+	    VALUES (#{boardIdx}, #{boardTitle}, SYSDATE, #{contents}, #{images}, #{writer}, 0, #{boardType}, 'user');
+	</insert>
+	
+</mapper>
