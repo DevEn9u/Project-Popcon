@@ -1,11 +1,22 @@
 package com.edu.springboot;
 
+import com.edu.springboot.popupboards.PopupBoardDTO;
+import com.edu.springboot.popupboards.PopupBoardMapper;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
 
 @Controller
 public class MainController {
+	
+    @Autowired
+    private PopupBoardMapper popupBoardMapper;
 
 	@GetMapping("/")
 	public String home() {
@@ -110,28 +121,46 @@ public class MainController {
 		return "redirect:/noticeBoard/list.do";
 	}
 
-	//팝업안내 - 메인
-	@GetMapping("/popupBoard/list.do")
-	public String popuplist() {
-		return "/popup-boards/popup-board-list";
-	}
 	
-	//팝업안내 - 글 보기
-	@GetMapping("/popupBoard/view.do")
-	public String popupview() {
-		return "/popup-boards/popup-board-view";
-	}
+//	//팝업안내 - 목록
+//	@GetMapping("/popupBoard/list.do")
+//	public String popuplist(Model model) {
+//	    List<PopupBoardDTO> popupList = popupBoardMapper.selectTop8(); 
+//	    model.addAttribute("popupList", popupList);
+//	    return "popup-boards/popup-board-list"; 
+//	}
 	
-	//팝업안내 - 글 쓰기
-	@GetMapping("/popupBoard/write.do")
-	public String popupwrite() {
-		return "/popup-boards/popup-board-write";
-	}
-	//팝업안내 - 글 수정
-	@GetMapping("/popupBoard/edit.do")
-	public String popupedit() {
-		return "/popup-boards/popup-board-edit";
-	}
+	
+//	@GetMapping("/popupBoard/list.do")
+//	public String popuplist(@RequestParam(name = "category", required = false) String category, Model model) {
+//	    List<PopupBoardDTO> popupList;
+//	    
+//	    if (category != null && !category.isEmpty()) {
+//	        popupList = popupBoardMapper.selectByCategory(category); // 선택한 카테고리 게시물 조회
+//	    } else {
+//	        popupList = popupBoardMapper.selectTop8(); // 기본적으로 상위 8개 게시물 조회
+//	    }
+//	    
+//	    model.addAttribute("popupList", popupList);
+//	    return "popup-boards/popup-board-list"; 
+//	}
+//
+//	//팝업안내 - 글 보기
+//	@GetMapping("/popupBoard/view.do")
+//	public String popupview() {
+//		return "/popup-boards/popup-board-view";
+//	}
+//	
+//	//팝업안내 - 글 쓰기
+//	@GetMapping("/popupBoard/write.do")
+//	public String popupwrite() {
+//		return "/popup-boards/popup-board-write";
+//	}
+//	//팝업안내 - 글 수정
+//	@GetMapping("/popupBoard/edit.do")
+//	public String popupedit() {
+//		return "/popup-boards/popup-board-edit";
+//	}
 	
 	//팝업 예약 페이지
 	@GetMapping("/popupBoard/booking.do")
