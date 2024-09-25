@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <c:import url="../include/head.jsp" />
@@ -33,14 +35,20 @@
                   <th class="col4">날짜</th>
                   <th class="col5">조회수</th>
                 </tr>
-                <tr>
-                  <td>1</td>
-                  <td><a href="./view.do"  class="board_title">게시물 제목입니당 벌써 9월인데 이게 날씨가 말이 되나요 글자 확인</a></td>
-                  <td>김현수</td>
-                  <td>2024.03.28</td>
-                  <td>999</td>
-                </tr>
               </thead>
+				<tbody>
+				    <c:forEach var="board" items="${boardList}" varStatus="status">
+				        <tr>
+				            <td>${fn:length(boardList) - status.index}</td>
+				            <td><a href="./view.do?board_idx=${board.board_idx}" class="board_title">${board.board_title}</a></td>
+				            <td>${board.writer}</td>
+				            <td>
+				                <fmt:formatDate value="${board.postdate}" pattern="yyyy.MM.dd" />
+				            </td>
+				            <td>${board.visitcount}</td>
+				        </tr>
+				    </c:forEach>
+				</tbody>
             </table>
             <table>
               <caption>페이징</caption>
