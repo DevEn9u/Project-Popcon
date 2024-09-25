@@ -396,6 +396,7 @@
           <a class="qna_btn top_btn" href="#"><span class="blind">질문</span></a>
         </section>
 	    </footer>
+		</div>
 	</div>
 </body>
 </html>

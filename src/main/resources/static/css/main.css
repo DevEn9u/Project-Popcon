@@ -585,6 +585,7 @@
   gap: 20px 0;
 }
 
+
 @keyframes moveButton {
   50% {
     transform: translateY(-10%);
@@ -823,5 +824,9 @@
   }
   #footer .footer_wrap .col2 .sns > li > a {
     font-size: 12px;
+  }
+  #footer .inner .btn_wrap {
+	right: 50px;
+	bottom: 100px;
   }
 } 

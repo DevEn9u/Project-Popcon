@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!-- <footer id="footer"> -->
-  <div class="inner">
     <section class="footer_wrap">
       <div class="footer_top">
         <div class="txt_wrap">
@@ -62,13 +61,4 @@
         <img src="../images/main/footer_awards.png" alt="">
       </div>
     </section>
-    <section class="btn_wrap">
-       <a class="scroll_btn top_btn" href="#"><span class="blind">아래로 이동</span></a>
-       <a class="qna_btn top_btn" href="#"><span class="blind">질문</span></a>
-    </section>
-    <section class="btn_wrap">
-	  <a class="scroll_btn top_btn" href="#"><span class="blind">아래로 이동</span></a>
-	  <a class="qna_btn top_btn" href="#"><span class="blind">질문</span></a>
-	</section>
-  </div>
 <!-- </footer> -->

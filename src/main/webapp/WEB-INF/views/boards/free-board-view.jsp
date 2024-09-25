@@ -126,7 +126,9 @@
       </div>
     </main>
     <footer id="footer">
-    ${common_footer}
+		<div class="inner">
+		    ${common_footer}
+		</div>
     </footer>
   </div>
 </body>
