@@ -13,7 +13,7 @@
       <div class="write_top">
         <div class="write_wrap">
           <h2 class="write_tit">팝업 안내</h2>
-          <h3 class="sub_tit">게시글 수정</h3>
+          <h3 class="sub_tit">게시글 작성</h3>
         </div>
       </div>
       <div class="pw_inner">
@@ -31,7 +31,7 @@
                 <span class="pw_content_tit">내용 <br /></span>
                 <textarea
                   class="inner_input"
-                  
+                  placeholder="내용을 입력해주세요"
                 ></textarea>
                 <div class="pw_pay_wrap">
                   <div class="pw_pay">
@@ -46,11 +46,11 @@
                     <input
                       type="text"
                       class="start_input"
-                      
+                      placeholder="시작:"
                     />
                   </div>
                   <div class="date_end">
-                    <input type="text" class="end_input"  />
+                    <input type="text" class="end_input" placeholder="종료:" />
                   </div>
                 </div>
                 <div class="pw_location">
@@ -58,7 +58,7 @@
                   <input
                     type="text"
                     class="location_input"
-                    
+                    placeholder="주소를 입력"
                   />
                 </div>
                 <div class="pw_category">
@@ -66,7 +66,7 @@
                   <input
                     type="text"
                     class="cate_input"
-                    
+                    placeholder="카테고리를 입력"
                   />
                 </div>
                 <div class="append_wrap">
@@ -80,8 +80,8 @@
                   </div>
                 </div>
                 <div class="pw_btn_wrap">
-                  <button class="pw_upload_btn">작성 완료</button>
-                  <button class="pw_cancel_btn">작성 취소</button>
+                  <button class="pw_upload_btn"onclick="location.href='./list.do';">작성 완료</button>
+                  <button class="pw_cancel_btn"onclick="location.href='./list.do';">작성 취소</button>
                 </div>
               </td>
             </tr>
@@ -89,10 +89,10 @@
         </div>
       </div>
     </main>
-    <footer id="footer">
-		<div class="inner">
-		    ${common_footer}
-		</div>
-    </footer>
+	<footer id="footer">
+	  <div class="inner">
+	      ${common_footer}
+	  </div>
+	</footer>
   </body>
 </html>

@@ -46,7 +46,11 @@
           </div>
         </div>
       </main>
-      ${common_footer } 
+      <footer id="footer">
+		<div class="inner">
+		    ${common_footer}
+		</div>
+      </footer>
     </div>
   </body>
 </html>

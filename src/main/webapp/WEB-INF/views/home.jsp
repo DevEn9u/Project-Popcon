@@ -123,7 +123,7 @@
 	          <div class="swiper">
 	            <div class="swiper-wrapper">
 	              <div class="swiper-slide">
-	                <a class="image" href="#"><img src="/images/main/mainslider1.png"></a>
+	                <a class="image" href="./popupBoard/view.do"><img src="/images/main/mainslider1.png"></a>
 	              </div>
 	              <div class="swiper-slide">
 	                <a class="image" href="#"><img src="/images/main/mainslider1.png"></a>
@@ -211,7 +211,6 @@
 	              <a class="item" href="#">
 	                <img src="/images/main/mainslider2.jpg">
 	                <ul class="txt_wrap">
-	                  <li class="popup_name"><p>롯데월드몰 Wonderful Wonderland</p></li>
 	                  <li class="popup_location">
 	                    <img src="/images/main/location.svg" alt="장소">
 	                    <p>서울특별시 송파구</p>
@@ -390,7 +389,14 @@
 	        </div>
 	      </section>
 	</main>
-	${common_footer }
+		<footer id="footer">
+	    ${common_footer }
+	    <section class="btn_wrap">
+          <a class="scroll_btn top_btn" href="#"><span class="blind">아래로 이동</span></a>
+          <a class="qna_btn top_btn" href="#"><span class="blind">질문</span></a>
+        </section>
+	    </footer>
+		</div>
 	</div>
 </body>
 </html>

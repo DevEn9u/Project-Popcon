@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
-<footer id="footer">
-  <div class="inner">
+<!-- <footer id="footer"> -->
     <section class="footer_wrap">
       <div class="footer_top">
-
         <div class="txt_wrap">
           <ul class="txt">
             <li><a href="#">서비스 이용약관</a></li>
@@ -63,5 +61,4 @@
         <img src="../images/main/footer_awards.png" alt="">
       </div>
     </section>
-  </div>
-</footer>
+<!-- </footer> -->

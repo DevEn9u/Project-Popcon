@@ -105,6 +105,48 @@ $(function () {
       }
     })
     .trigger('resize');
+	
+	//popup-board-view 페이지 스와이퍼
+	let popupBoard = new Swiper('.popup_view_inner .swiper', {
+	  direction: 'horizontal',
+	  loop: true,
+
+	  pagination: {
+	    el: '.swiper-pagination',
+	    clickable: true,
+	  },
+
+	  navigation: {
+	    nextEl: '.swiper-button-next',
+	    prevEl: '.swiper-button-prev',
+	  },
+
+	  scrollbar: {
+	    el: '.swiper-scrollbar',
+	    draggable: true,
+	  },
+	});
+	
+	// scroll_btn 클릭 시 이동
+	$('#footer .scroll_btn').on('click', function (e) {
+	  e.preventDefault();
+
+	  if ($(window).scrollTop() === 0) {
+	    let bottom = $(document).outerHeight() - $(window).outerHeight();
+	    $('html, body').animate({ scrollTop: bottom }, 1500);
+	  } else {
+	    $('html, body').animate({ scrollTop: 0 }, 1500);
+	  }
+	});
+
+	// 맨 위에서 화살표 방향 변경
+	$(window).on('scroll', function () {
+	  if ($(this).scrollTop() <= 100) {
+	    $('#footer .scroll_btn').addClass('down');
+	  } else {
+	    $('#footer .scroll_btn').removeClass('down');
+	  }
+	});
 });
 
 $(document).ready(function() {
@@ -158,26 +200,5 @@ $(document).ready(function() {
       $weekdayDiv.text('TODAY');
     }
   }
-  
-  //popup-board-view 페이지 스와이퍼
-    const swiper = new Swiper('.swiper', {
-        direction: 'horizontal',
-        loop: true,
-
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-
-        scrollbar: {
-          el: '.swiper-scrollbar',
-          draggable: true,
-        },
-      });
 });
 

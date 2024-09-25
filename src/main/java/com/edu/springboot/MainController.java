@@ -153,24 +153,24 @@ public class MainController {
 	//팝업안내 - 메인
 	@GetMapping("/popupBoard/list.do")
 	public String popuplist() {
-		return "/boards/popup-board-list";
+		return "/popup-boards/popup-board-list";
 	}
 	
 	//팝업안내 - 글 보기
 	@GetMapping("/popupBoard/view.do")
 	public String popupview() {
-		return "/boards/popup-board-view";
+		return "/popup-boards/popup-board-view";
 	}
 	
 	//팝업안내 - 글 쓰기
 	@GetMapping("/popupBoard/write.do")
 	public String popupwrite() {
-		return "/boards/popup-board-write";
+		return "/popup-boards/popup-board-write";
 	}
 	//팝업안내 - 글 수정
 	@GetMapping("/popupBoard/edit.do")
 	public String popupedit() {
-		return "/boards/popup-board-edit";
+		return "/popup-boards/popup-board-edit";
 	}
 	
 	//팝업 예약 페이지

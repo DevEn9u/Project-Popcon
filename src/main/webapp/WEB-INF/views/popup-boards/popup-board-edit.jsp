@@ -89,10 +89,10 @@
         </div>
       </div>
     </main>
-    <footer id="footer">
-		<div class="inner">
-		    ${common_footer}
-		</div>
-    </footer>
+	<footer id="footer">
+	  <div class="inner">
+	      ${common_footer}
+	  </div>
+	</footer>
   </body>
 </html>
