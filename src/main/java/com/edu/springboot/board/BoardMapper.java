@@ -9,5 +9,6 @@ public interface BoardMapper {
     List<BoardDTO> selectAllBoards();
     List<BoardDTO> getFreeBoards(); // 자유게시판 메소드
     List<BoardDTO> getNoticeBoards(); // 공지게시판 메소드
-    void insertBoard(BoardDTO board); // 게시글 작성 메소드 추가
+
+
 }

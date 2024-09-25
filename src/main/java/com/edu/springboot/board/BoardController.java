@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,19 +30,5 @@ public class BoardController {
         model.addAttribute("noticeList", noticeList);
         return "boards/notice-board-list"; // JSP 파일 경로
     }
-    
-    @PostMapping("/freeBoard/writing.do")
-    public String writeFreeBoard(@ModelAttribute BoardDTO board) {
-    	board.setBoard_type("free"); // 자유게시판 타입 설정
-        boardService.writeBoard(board); // 글 작성 호출
-        return "redirect:/free-board/list.do"; // 작성 후 목록으로 리디렉션
-    }
-    @PostMapping("/noticeBoard/writing.do")
-    public String writeNoticeBoard(@ModelAttribute BoardDTO board) {
-        board.setBoard_type("notice"); // 공지게시판 타입 설정
-        boardService.writeBoard(board); // 글 작성 호출
-        return "redirect:/notice-board/list.do"; // 작성 후 목록으로 리디렉션
-    }
-
 
 }
