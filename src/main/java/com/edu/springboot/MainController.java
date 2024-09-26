@@ -238,10 +238,10 @@ public class MainController {
 //		return "/boards/free-board-list";
 //	}
 	// 자유게시판 - 보기
-	@GetMapping("/freeBoard/view.do")
-	public String freeBoardView() {
-		return "/boards/free-board-view";
-	}
+//	@GetMapping("/freeBoard/view.do")
+//	public String freeBoardView() {
+//		return "/boards/free-board-view";
+//	}
 	// 자유게시판 - 쓰기
 	@GetMapping("/freeBoard/write.do")
 	public String freeBoardWrite() {
@@ -264,10 +264,10 @@ public class MainController {
 //		return "/boards/notice-board-list";
 //	}
 	// 공지 - 보기
-	@GetMapping("/noticeBoard/view.do")
-	public String noticeBoardView() {
-		return "/boards/notice-board-view";
-	}
+//	@GetMapping("/noticeBoard/view.do")
+//	public String noticeBoardView() {
+//		return "/boards/notice-board-view";
+//	}
 	// 공지 - 쓰기
 	@GetMapping("/noticeBoard/write.do")
 	public String noticeBoardWrite() {

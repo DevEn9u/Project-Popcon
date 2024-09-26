@@ -28,7 +28,21 @@ public class BoardController {
     public String getNoticeBoard(Model model) {
         List<BoardDTO> noticeList = boardService.getNoticeBoards();
         model.addAttribute("noticeList", noticeList);
-        return "boards/notice-board-list"; // JSP 파일 경로
+        return "boards/notice-board-list";
+    }
+    
+    @GetMapping("/freeBoard/view.do")
+    public String freeBoardView(@RequestParam("board_idx") String boardIdx, Model model) {
+        BoardDTO board = boardService.getBoardById(boardIdx);
+        model.addAttribute("dto", board);
+        return "boards/free-board-view";
+    }
+    // 공지게시판 상세보기 메서드
+    @GetMapping("/noticeBoard/view.do")
+    public String viewNoticeBoard(@RequestParam("board_idx") String boardIdx, Model model) {
+        BoardDTO boardDTO = boardService.getBoardById(boardIdx);
+        model.addAttribute("dto", boardDTO);
+        return "boards/notice-board-view";
     }
 
 }

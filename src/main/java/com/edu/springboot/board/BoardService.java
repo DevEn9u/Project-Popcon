@@ -22,6 +22,9 @@ public class BoardService {
     public List<BoardDTO> getNoticeBoards() {
         return boardMapper.getNoticeBoards(); // 공지게시판 데이터 가져오기
     }
-
+    
+    public BoardDTO getBoardById(String boardIdx) {
+        return boardMapper.selectBoardById(boardIdx);
+    }
 
 }
