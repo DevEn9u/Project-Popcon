@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html lang="ko">
+<head>
 <c:import url="./include/head.jsp" />
+</head>
 <c:import url="./include/header.jsp" var="common_header" />
 <c:import url="./include/footer.jsp" var="common_footer" />
 <body>

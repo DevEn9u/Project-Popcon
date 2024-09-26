@@ -11,7 +11,7 @@
     <nav class="gnb_wrap">
       <ul class="gnb">
         <li class="depth1">
-          <a href="#">팝콘 소식</a>
+          <a href="#">팝콘 소식</a>	
           <ul class="depth2">
             <li>
               <a href="#">플랫폼 소개</a>
@@ -51,16 +51,20 @@
         <span class="blind">검색버튼</span>
       </button>
     </div>
-    <div class="login_wrap">
-      <div class="login">
-        <button type="button" class="login_btn" onclick="location.href='/login.do'">
-          <span class="blind">로그인</span>
-        </button>
-      </div>
+    <c:if test="${empty user_id }">
+		<div class="login_wrap">
+	      <div class="login">
+	        <button type="button" class="login_btn" onclick="location.href='/login.do'">
+	          <span class="blind">로그인</span>
+	        </button>
+    	</div>
+    </c:if>
+    <c:if test="${not empty user_id}">
       <div class="logout">
-        <button type="button" class="logout_btn">로그아웃</button>
+        <button type="button" class="logout_btn" onclick="location.href='/logout.do'">로그아웃</button>
         <a class="mypage" href="#">마이페이지</a>
       </div>
+    </c:if>
     </div>
   </div>
 </header>

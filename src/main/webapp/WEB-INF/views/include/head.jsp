@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
-<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="format-detection" content="telephone=no">
@@ -14,15 +13,13 @@
   <link rel="icon" href="/images/main/favicon.ico">
   <link rel="apple-touch-icon-precomposed" href="/images/main/apple_logo.png">
 
-  <link rel="stylesheet" href="/css/jquery-ui.min.css">
-  <link rel="stylesheet" href="/css/swiper-bundle.min.css">
-  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/jquery-ui.min.css?v=<?php echo time(); ?">
+  <link rel="stylesheet" href="/css/swiper-bundle.min.css?v=<?php echo time(); ?">
+  <link rel="stylesheet" href="/css/common.css?v=<?php echo time(); ?">
   <link rel="stylesheet" href="/css/main.css?v=<?php echo time(); ?>">
-  <link rel="stylesheet" href="/css/sub.css">
-  <script src="/js/jquery-3.7.1.min.js"></script>
-  <script src="/js/jquery-ui.min.js"></script>
-  <script src="/js/swiper-bundle.min.js"></script>
+  <link rel="stylesheet" href="/css/sub.css?v=<?php echo time(); ?">
+  <script src="/js/jquery-3.7.1.min.js?v=<?php echo time(); ?"></script>
+  <script src="/js/jquery-ui.min.js?v=<?php echo time(); ?"></script>
+  <script src="/js/swiper-bundle.min.js?v=<?php echo time(); ?"></script>
   <script src="/js/ui-common.js?v=<?php echo time(); ?>"></script>
-  <script src="/js/form-validate.js"></script>
-  <script src="/js/login-validate.js"></script>
-</head>
+  <script src="/js/form-validate.js?v=<?php echo time(); ?"></script>
