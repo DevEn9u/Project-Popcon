@@ -15,8 +15,30 @@
         )
     </select>
     
-<select id="selectByCategory" parameterType="String" resultType="com.edu.springboot.popupboards.PopupBoardDTO">
-    SELECT * FROM POPUP_BOARD WHERE category = #{category} ORDER BY postdate DESC
-</select>
-    
+    <!-- 카테고리 검색 -->
+	<select id="selectByCategory" parameterType="String" resultType="com.edu.springboot.popupboards.PopupBoardDTO">
+    	SELECT * FROM POPUP_BOARD WHERE category = #{category} ORDER BY postdate DESC
+	</select>
+	
+	
+	<!-- 글 보기 -->
+	<select id="popupView" parameterType="String" resultType="com.edu.springboot.popupboards.PopupBoardDTO">
+    	SELECT * FROM POPUP_BOARD WHERE board_idx = #{board_idx}
+	</select>
+	
+
+	<!-- 글작성 임시 -->
+<!--	<insert id="write">
+		INSERT INTO POPUP_BOARD (board_title, contents, popup_fee, start_date, end_date,
+		popup_addr, category)
+		VALUES
+		(popup_board_idx_seq.NEXTVAL)
+	</insert> -->
+	
+<insert id="write" parameterType="com.edu.springboot.popupboards.PopupBoardDTO">
+    INSERT INTO POPUP_BOARD (board_idx, board_title, contents, popup_fee, start_date, end_date, popup_addr, category, writer, role)
+    VALUES (NULL, #{board_title}, #{contents}, #{popup_fee}, #{start_date}, #{end_date}, #{popup_addr}, #{category}, #{writer}, #{role})
+</insert>
+
+
 </mapper>

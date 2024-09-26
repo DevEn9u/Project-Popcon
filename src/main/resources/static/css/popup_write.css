@@ -332,7 +332,15 @@ body {
   font-size: 24px;
   resize: none;
 }
-input[type='text'] {
+#pw_container input[type='text'] {
+  border: none;
+  height: 100%;
+  padding: 0;
+  color: black;
+  background-color:white;
+  width:70%;
+}
+#pw_container input[type='number'] {
   border: none;
   height: 100%;
   padding: 0;
