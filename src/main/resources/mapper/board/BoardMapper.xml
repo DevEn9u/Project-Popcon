@@ -11,4 +11,5 @@
 	<select id="getNoticeBoards" resultType="com.edu.springboot.board.BoardDTO">
     	SELECT * FROM BOARD WHERE board_type = 'notice'
 	</select>
+
 </mapper>

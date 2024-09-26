@@ -9,6 +9,7 @@
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
 <link rel="stylesheet" href="/css/board.css">
+<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
 <body>
   <div id="skip_navi">
     <a href="#container">본문 바로가기</a>

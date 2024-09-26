@@ -10,5 +10,4 @@ public interface BoardMapper {
     List<BoardDTO> getFreeBoards(); // 자유게시판 메소드
     List<BoardDTO> getNoticeBoards(); // 공지게시판 메소드
 
-
 }

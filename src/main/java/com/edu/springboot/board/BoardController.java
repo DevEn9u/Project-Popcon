@@ -30,5 +30,7 @@ public class BoardController {
         model.addAttribute("noticeList", noticeList);
         return "boards/notice-board-list"; // JSP 파일 경로
     }
+    
+    
 
 }

@@ -71,10 +71,10 @@ public class MainController {
 //		return "/boards/free-board-list";
 //	}
 	// 자유게시판 - 보기
-	@GetMapping("/freeBoard/view.do")
-	public String freeBoardView() {
-		return "/boards/free-board-view";
-	}
+//	@GetMapping("/freeBoard/view.do")
+//	public String freeBoardView() {
+//		return "/boards/free-board-view";
+//	}
 	// 자유게시판 - 쓰기
 	@GetMapping("/freeBoard/write.do")
 	public String freeBoardWrite() {
