@@ -391,14 +391,15 @@
 	        </div>
 	      </section>
 	</main>
-		<footer id="footer">
-	    ${common_footer }
-	    <section class="btn_wrap">
-          <a class="scroll_btn top_btn" href="#"><span class="blind">아래로 이동</span></a>
-          <a class="qna_btn top_btn" href="#"><span class="blind">질문</span></a>
-        </section>
-	    </footer>
+	<footer id="footer">
+		<div class="inner">
+		    ${common_footer}
+			<section class="btn_wrap">
+			   <a class="scroll_btn top_btn" href="#"><span class="blind">아래로 이동</span></a>
+			   <a class="qna_btn top_btn" href="#"><span class="blind">질문</span></a>
+			</section>
 		</div>
+	</footer>
 	</div>
 </body>
 </html>

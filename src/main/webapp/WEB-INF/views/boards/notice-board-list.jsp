@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <c:import url="../include/head.jsp" />
@@ -43,14 +45,20 @@
                   <th class="col4">날짜</th>
                   <th class="col5">조회수</th>
                 </tr>
-                <tr>
-                  <td>1</td>
-                  <td><a href="./view.do"  class="board_title">팝컨 이용 수칙 및 게시판 이용 수칙 및 개인 정보 보호 및 점심메뉴에 관한 논의 등등등 말줄임을 위해 길게 쭉~~~</a></td>
-                  <td>관리자</td>
-                  <td>2024.03.28</td>
-                  <td>999</td>
-                </tr>
               </thead>
+              <tbody>
+                <c:forEach var="board" items="${noticeList}" varStatus="status">
+                    <tr>
+                        <td>${fn:length(noticeList) - status.index}</td>
+                        <td><a href="./view.do?board_idx=${board.board_idx}" class="board_title">${board.board_title}</a></td>
+                        <td>${board.writer}</td>
+			            <td>
+			                <fmt:formatDate value="${board.postdate}" pattern="yyyy.MM.dd" />
+			            </td>
+                        <td>${board.visitcount}</td>
+                    </tr>
+                </c:forEach>
+              </tbody>
             </table>
             <table>
               <caption>페이징</caption>

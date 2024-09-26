@@ -580,7 +580,7 @@
 #footer .inner .btn_wrap {
   position: fixed;
   right: 100px;
-  bottom: 400px;
+  bottom: 200px;
   z-index: 100;
   gap: 20px 0;
 }
