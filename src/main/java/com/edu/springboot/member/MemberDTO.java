@@ -9,8 +9,9 @@ public class MemberDTO {
 	private String name;
 	private String email;
 	private String pass;
-	private String member_type;
+	private String authority;
 	private String phone;
 	private int point;
 	private String business_number;
+	private int enabled;
 }

@@ -27,18 +27,18 @@
             <h3>POPCON 로그인하기</h3>
           </div>
           <div class="login_area">
-            <form name="loginFrm" action="/login.do" method="post"
+            <form name="loginFrm" action="/loginProc.do" method="post"
             	onsubmit="return validateLogin(this);">
               <fieldset>
                 <legend>로그인</legend>
                 <div class="row input_wrap1">
-                  <input type="text" name="login_id" placeholder="아이디를 입력하세요.">
+                  <input type="text" id="login_id" name="login_id" placeholder="아이디를 입력하세요.">
                 </div>
                 <div class="row input_wrap2">
                   <input type="password" name="login_pw" placeholder="비밀번호를 입력하세요.">
                 </div>
                 <div class="row3 checkbox_wrap">
-                  <input type="checkbox" id="saveUserId" class="blind">
+                  <input type="checkbox" id="saveUserId" name="saveUserId" class="blind">
                   <label for="saveUserId">아이디 기억하기</label>
                   <input type="checkbox" id="remember-me" class="blind">
                   <label for="remember-me">로그인 상태 유지</label>

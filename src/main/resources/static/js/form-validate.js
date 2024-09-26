@@ -45,23 +45,23 @@ return true;
 }
 
 // 아이디 중복 확인
-function idCheck() {
-  let id = document.registerFrm.id.value;
-  if (id == '') {
-    alert("아이디를 입력하세요.");
-    document.registerFrm.id.focus();
-    return false;
-  }
-  else {
-//  window.name = "parentForm";
-//  window.open("../html/IdCheckForm.jsp?id=" + id,
-//  window.open("./checkId.do",
-//      "chkForm", "width=500, height=300, resizable = no, scrollbars = no" );
-	alert("사용 가능한 아이디입니다.");
-	registerFrm.idDuplication.value = "idChecked";
-	
-  }
-}
+//function idCheck() {
+//  let id = document.registerFrm.id.value;
+//  if (id == '') {
+//    alert("아이디를 입력하세요.");
+//    document.registerFrm.id.focus();
+//    return false;
+//  }
+//  else {
+////  window.name = "parentForm";
+////  window.open("../html/IdCheckForm.jsp?id=" + id,
+////  window.open("./checkId.do",
+////      "chkForm", "width=500, height=300, resizable = no, scrollbars = no" );
+//	alert("사용 가능한 아이디입니다.");
+//	registerFrm.idDuplication.value = "idChecked";
+//	
+//  }
+//}
 
 // 가입시 핸드폰 번호 포맷
 function formatPhoneNumber(input) {

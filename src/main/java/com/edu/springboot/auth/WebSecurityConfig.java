@@ -37,13 +37,12 @@ public class WebSecurityConfig {
 //				.requestMatchers("/noticeBoard/write.do").hasRole("ADMIN")
 //				.requestMatchers("/noticeBoard/edit.do").hasRole("ADMIN")
 //				.requestMatchers("/noticeBoard/delete.do").hasRole("ADMIN")
-//				.anyRequest().permitAll()
-				.anyRequest().authenticated()
-
+				.anyRequest().permitAll()
+//				.anyRequest().authenticated()
 			);
 		http.formLogin((formLogin) -> formLogin
 				.loginPage("/login.do") // defalut : /login
-				.loginProcessingUrl("/login.do")
+				.loginProcessingUrl("/loginProc.do")
 				// 로그인 성공시 메인 페이지로 이동.
 				.defaultSuccessUrl("/", true)
 				/* 로그인할 때 아이디와 비밀번호의 파라미터는 input태그의 name
@@ -53,11 +52,11 @@ public class WebSecurityConfig {
 				.permitAll());
 		
 		/* 로그인 정보 저장 */
-		http.rememberMe((rememberMe) -> rememberMe
-				.key("uniqueKey")
-				.tokenValiditySeconds(86400)
-		);
-		
+//		http.rememberMe((rememberMe) -> rememberMe
+//				.key("uniqueKey")
+//				.tokenValiditySeconds(86400)
+//		);
+//		
 		/* 로그아웃에 대한 커스터마이징 */
 		http.logout((logout) -> logout
 				.logoutUrl("/logout.do")
@@ -74,7 +73,7 @@ public class WebSecurityConfig {
 		return http.build();
 	}
 	
-
+	// double slash막기 
 	@Bean
 	public HttpFirewall allowUrlDoubleSlashHttpFirewall() {
 	    DefaultHttpFirewall firewall = new DefaultHttpFirewall();
