@@ -6,9 +6,19 @@
         SELECT * FROM BOARD
     </select>
     <select id="getFreeBoards" resultType="com.edu.springboot.board.BoardDTO">
-    	SELECT * FROM BOARD WHERE board_type = 'free'
+    	SELECT * FROM BOARD WHERE board_type = 'free' ORDER BY postdate DESC
 	</select>
 	<select id="getNoticeBoards" resultType="com.edu.springboot.board.BoardDTO">
-    	SELECT * FROM BOARD WHERE board_type = 'notice'
+    	SELECT * FROM BOARD WHERE board_type = 'notice' ORDER BY postdate DESC
 	</select>
+	<select id="selectBoardById" resultType="com.edu.springboot.board.BoardDTO">
+	    SELECT * FROM BOARD WHERE board_idx = #{board_idx}
+	</select>
+	<!-- 게시글 삽입 쿼리 -->
+	<insert id="insertBoard" parameterType="com.edu.springboot.board.BoardDTO">
+	    INSERT INTO BOARD (board_idx, board_title, contents, writer, board_type, postdate, role)
+	    VALUES (NULL, #{board_title}, #{contents}, #{writer}, #{board_type}, SYSDATE, #{role})
+	</insert>
+
+
 </mapper>

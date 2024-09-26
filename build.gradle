@@ -38,6 +38,7 @@ eclipse.wtp.facet {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.security:spring-security-taglibs'
+	
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -63,6 +64,7 @@ dependencies {
 	implementation 'io.lettuce:lettuce-core:6.2.3.RELEASE'
 	
 	implementation 'org.springframework.boot:spring-boot-starter-mail:3.3.4'
+	
 }
 
 tasks.withType(JavaCompile) {

@@ -193,47 +193,19 @@ public class MainController {
 //	public String mypageCoupon() {
 //		return "/mypages/mypage-coupon";
 //	}
-//	// 회원가입
-//	@PostMapping("/register.do")
-//	public String register() {
-//		return "redirect:login.do";
-//	}
 //	
-	// 자유게시판 - 목록
-//	@GetMapping("/freeBoard/list.do")
-//	public String freeBoardList() {
-//		return "/boards/free-board-list";
-//	}
-//	// 자유게시판 - 보기
-//	@GetMapping("/freeBoard/view.do")
-//	public String freeBoardView() {
-//		return "/boards/free-board-view";
-//	}
-//	// 자유게시판 - 쓰기
-//	@GetMapping("/freeBoard/write.do")
-//	public String freeBoardWrite() {
-//		return "/boards/free-board-write";
-//	}
-//	// 자유게시판 - 수정
-//	@GetMapping("/freeBoard/edit.do")
-//	public String freeBoardEdit() {
-//		return "/boards/free-board-edit";
-//	}
-//	// 자유게시판 - 삭제
-//	@GetMapping("/freeBoard/delete.do")
-//	public String freeBoardDelete() {
-//		return "redirect:/freeBoard/list.do";
-//	}
+	
 	
 	// 공지 - 목록
 //	@GetMapping("/noticeBoard/list.do")
 //	public String noticeBoardList() {
 //		return "/boards/notice-board-list";
 //	}
-	// 공지 - 보기
-//	@GetMapping("/noticeBoard/view.do")
-//	public String noticeBoardView() {
-//		return "/boards/notice-board-view";
+
+//	// 공지 - 삭제
+//	@GetMapping("/noticeBoard/delete.do")
+//	public String noticeBoardDelete() {
+//		return "redirect:/noticeBoard/list.do";
 //	}
 //	// 공지 - 쓰기
 //	@GetMapping("/noticeBoard/write.do")
