@@ -243,10 +243,10 @@ public class MainController {
 //		return "/boards/free-board-view";
 //	}
 	// 자유게시판 - 쓰기
-	@GetMapping("/freeBoard/write.do")
-	public String freeBoardWrite() {
-		return "/boards/free-board-write";
-	}
+//	@GetMapping("/freeBoard/write.do")
+//	public String freeBoardWrite() {
+//		return "/boards/free-board-write";
+//	}
 	// 자유게시판 - 수정
 	@GetMapping("/freeBoard/edit.do")
 	public String freeBoardEdit() {
