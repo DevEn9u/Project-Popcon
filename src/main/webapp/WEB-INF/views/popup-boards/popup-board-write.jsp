@@ -34,6 +34,11 @@
             popupFee.focus();
             return false;
         }
+        if (!/^\d+$/.test(popupFee.value.trim())) { // 숫자만 허용
+            alert("입장료는 숫자만 입력해 주세요.");
+            popupFee.focus();
+            return false;
+        }
         if (!startDate.value.trim()) {
             alert("시작 날짜를 입력해 주세요.");
             startDate.focus();
@@ -41,6 +46,16 @@
         }
         if (!endDate.value.trim()) {
             alert("종료 날짜를 입력해 주세요.");
+            endDate.focus();
+            return false;
+        }
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(startDate.value.trim())) { // YYYY-MM-DD 형식 체크
+            alert("시작 날짜는 YYYY-MM-DD 형식으로 입력해 주세요.");
+            startDate.focus();
+            return false;
+        }
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(endDate.value.trim())) { // YYYY-MM-DD 형식 체크
+            alert("종료 날짜는 YYYY-MM-DD 형식으로 입력해 주세요.");
             endDate.focus();
             return false;
         }
@@ -64,7 +79,35 @@
             document.querySelector('form').submit();
         }
     }
+
+    function dateRule(event) {
+        const input = event.target;
+        let value = input.value.replace(/[^0-9]/g, ''); // 숫자만 허용
+        if (value.length >= 4) {
+            value = value.substring(0, 4) + '-' + value.substring(4);
+        }
+        if (value.length >= 7) {
+            value = value.substring(0, 7) + '-' + value.substring(7);
+        }
+        input.value = value;
+    }
+
+    function payRule(event) {
+        const input = event.target;
+        input.value = input.value.replace(/[^0-9]/g, ''); // 숫자만 허용
+    }
+
+    window.onload = function() {
+        const startDateInput = document.querySelector('input[name="start_date"]');
+        const endDateInput = document.querySelector('input[name="end_date"]');
+        const popupFeeInput = document.querySelector('input[name="popup_fee"]');
+        
+        startDateInput.addEventListener('input', dateRule);
+        endDateInput.addEventListener('input', dateRule);
+        popupFeeInput.addEventListener('input', payRule);
+    }
 </script>
+
 <body>
     ${common_header}
     <main id="pw_container">
@@ -82,7 +125,7 @@
                         <tr>
                             <td class="col_mid col_tit">
                                 제목 : 
-                                <input type="text" class="write_input" name="board_title" required/>
+                                <input type="text" class="write_input" name="board_title" placeholder="제목을 입력해주세요" required/>
                             </td>
                         </tr>
                         <tr class="tr_content">
@@ -92,7 +135,7 @@
                                 <div class="pw_pay_wrap">
                                     <div class="pw_pay">
                                         <span class="pay_tit">입장료 :</span>
-                                        <input type="number" class="pay_input" name="popup_fee" required/>
+                                        <input type="text" class="pay_input" name="popup_fee" placeholder="숫자만 입력해주세요" required/>
                                     </div>
                                 </div>
 
@@ -111,7 +154,7 @@
                                 </div>
                                 <div class="pw_category">
                                     <span class="popupwrite_category">카테고리 :</span>
-                                    <input type="text" class="cate_input" name="category" placeholder="카테고리를 입력" required/>
+                                    <input type="text" class="cate_input" name="category" placeholder="캐릭터, 식품, 게임, 등.." required/>
                                 </div>
                                 <div class="append_wrap">
                   					<div class="thumnail_wrap">

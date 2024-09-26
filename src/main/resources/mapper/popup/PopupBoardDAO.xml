@@ -27,18 +27,12 @@
 	</select>
 	
 
-	<!-- 글작성 임시 -->
-<!--	<insert id="write">
-		INSERT INTO POPUP_BOARD (board_title, contents, popup_fee, start_date, end_date,
-		popup_addr, category)
-		VALUES
-		(popup_board_idx_seq.NEXTVAL)
-	</insert> -->
+	<!-- 글 작성기능 -->
+	<insert id="write" parameterType="com.edu.springboot.popupboards.PopupBoardDTO">
+    	INSERT INTO POPUP_BOARD (board_idx, board_title, contents, popup_fee, start_date, end_date, popup_addr, category, writer, role)
+    	VALUES (NULL, #{board_title}, #{contents}, #{popup_fee}, #{start_date}, #{end_date}, #{popup_addr}, #{category}, #{writer}, #{role})
+	</insert>
 	
-<insert id="write" parameterType="com.edu.springboot.popupboards.PopupBoardDTO">
-    INSERT INTO POPUP_BOARD (board_idx, board_title, contents, popup_fee, start_date, end_date, popup_addr, category, writer, role)
-    VALUES (NULL, #{board_title}, #{contents}, #{popup_fee}, #{start_date}, #{end_date}, #{popup_addr}, #{category}, #{writer}, #{role})
-</insert>
 
 
 </mapper>

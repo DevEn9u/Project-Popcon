@@ -20,5 +20,6 @@ public interface PopupBoardMapper {
     
     //글보기
     public PopupBoardDTO popupView(String board_idx);
+    
 
 }

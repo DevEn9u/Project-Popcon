@@ -377,6 +377,7 @@ textarea {
   border-radius: 30px;
   height: 100%;
   width: 484px;
+  margin-right:10px;
 }
 .pay_tit {
   font-size: 32px;
@@ -385,7 +386,7 @@ textarea {
 .pay_input {
   outline: none;
   height: 100%;
-  width: 70% !important;
+  width: 70%;
   border: none;
   font-size: 32px;
   background-color: transparent !important;
@@ -586,7 +587,6 @@ textarea {
   }
   .pay_input {
     font-size: 20px;
-    width: 40%;
   }
   .pw_date {
     display: block;
@@ -652,6 +652,24 @@ textarea {
     width: 30px;
     height: 30px;
     mask-size: 30px 30px;
+  }
+  
+  .inner_input {
+  	width: 100%;
+  }
+  .write_input {
+  	font-size:26px;
+  	width:50% !important;
+  }
+  .pay_tit {
+  	font-size:18px;
+  }
+  #pw_container .pay_input {
+    font-size:18px;
+  	width:50% !important;
+  }
+  .location_input, .cate_input {
+  	width:60% !important;
   }
 
   #footer .footer_bottom {

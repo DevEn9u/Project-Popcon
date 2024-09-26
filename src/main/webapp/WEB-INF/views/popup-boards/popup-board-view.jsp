@@ -92,7 +92,7 @@
          <!-- 작성자와 비작성자에 따른 버튼 표시 -->
             <c:choose>
               <c:when test="${popup.writer == pageContext.request.userPrincipal.name}">
-                  <button class="pv_delete_btn">삭제하기</button>
+                  <button class="pv_delete_btn" >삭제하기</button>
               </c:when>
               <c:otherwise>
                 <button class="pv_booking_btn" onclick="location.href='../booking.do';">예약하기</button>
