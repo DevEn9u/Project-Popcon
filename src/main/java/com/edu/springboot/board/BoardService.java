@@ -26,5 +26,10 @@ public class BoardService {
     public BoardDTO getBoardById(String boardIdx) {
         return boardMapper.selectBoardById(boardIdx);
     }
+    
+    // 게시글 작성 메서드 추가
+    public void write(BoardDTO boardDTO) {
+        boardMapper.insertBoard(boardDTO); // 매퍼에서 게시글 삽입
+    }
 
 }

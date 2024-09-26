@@ -11,4 +11,5 @@ public interface BoardMapper {
     List<BoardDTO> getFreeBoards(); // 자유게시판 메소드
     List<BoardDTO> getNoticeBoards(); // 공지게시판 메소드
     BoardDTO selectBoardById(String boardIdx); // 자유게시판 게시글 상세 정보 조회
+    void insertBoard(BoardDTO boardDTO);
 }
