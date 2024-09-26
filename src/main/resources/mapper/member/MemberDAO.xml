@@ -6,10 +6,17 @@
 
 <mapper namespace = "com.edu.springboot.member.IMemberService">
 	<!-- 회원가입 -->
+	<!-- 일반 회원 -->
 	<insert id="registerNormal">
 		INSERT INTO member (id, name, email, pass, authority, phone)
 		VALUES
 			(#{id}, #{name}, #{email}, #{pass}, 'ROLE_NORMAL', #{phone})
+	</insert>
+	<!-- 기업 회원 -->
+	<insert id="registerCorp">
+		INSERT INTO member (id, name, email, pass, authority, phone, business_number)
+		VALUES
+			(#{id}, #{name}, #{email}, #{pass}, 'ROLE_CORP', #{phone}, #{business_number} )
 	</insert>
 	
 	<!-- 아이디 중복확인 -->

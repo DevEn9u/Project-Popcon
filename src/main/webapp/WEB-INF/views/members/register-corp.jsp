@@ -7,6 +7,48 @@
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
 <link rel="stylesheet" href="/css/member.css">
+<script>
+// 로그인 성공/실패 메세지 알림
+function showResultMsg() {
+    let message = '${resultMsg}';
+    if (message) {
+        alert(message);
+    }
+}
+
+window.onload = showResultMsg; // 페이지 로드 시 메시지 표시
+	// Id 중복 확인
+	function idCheck() {
+		
+		let id = $('.input_id').val().trim();
+		console.log(id);
+		if (id === '') {
+			alert("아이디를 입력하세요.");
+			$('.input_id').focus();
+			return false;
+		}
+		
+		$.ajax({
+			url: '/register/checkId.do',
+			type: 'GET',
+			data: {
+				input_id : id
+			},
+			success: function(response) {
+				if (response.isDuplicated) {
+					alert(response.msg);
+					$('input[name="idDuplication"]').val("idUnchecked");
+				} else {
+					alert(response.msg);
+					$('input[name="idDuplication"]').val("idChecked");
+				}
+			},
+	        error: function(xhr, status, error) {
+	            console.error("AJAX 요청 오류: ", error); // 오류 발생 시 확인
+	        }
+		});
+	}
+</script>
 <body>
   <div id="skip_navi">
     <a href="#container">본문 바로가기</a>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -59,6 +60,7 @@ public class MemberController {
 	public String findPw() {
 		return "/members/findPw";
 	}
+	
 	
 	// 회원가입 - 메인
 	@GetMapping("/register.do")
@@ -157,8 +159,39 @@ public class MemberController {
 	}
 	// 회원가입 - 기업회원
 	@PostMapping("/register/corp.do")
-	public String registerCorpPost() {
-		return "/members/register-corp";
+	public String registerCorpPost(RedirectAttributes redirectAttributes, HttpServletRequest req) {
+		String id = req.getParameter("id");
+		String name = req.getParameter("name");
+		String email = req.getParameter("email");
+		String pass = req.getParameter("pass");
+		String phone = req.getParameter("phone");
+		String business_number = req.getParameter("businessNumber");
+
+		// 비밀번호 암호화
+		String encodedPass = new BCryptPasswordEncoder().encode(pass);
+		
+		// DTO에 정보 저장
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setId(id);
+		memberDTO.setName(name);
+		memberDTO.setPass(encodedPass);
+		memberDTO.setEmail(email);
+		memberDTO.setPhone(phone);
+		memberDTO.setBusiness_number(business_number);
+		
+		int result = dao.registerCorp(memberDTO);
+		System.out.println("회원가입 결과" + result);
+		
+		// 성공시 view에서 성공 메세지 알려주기
+		if (result > 0) {
+			redirectAttributes.addFlashAttribute("resultMsg", "회원가입에 성공했습니다.");
+			return "redirect:/login.do";
+		}
+		else {
+			// 실패메시지
+			redirectAttributes.addFlashAttribute("resultMsg", "회원가입에 실패했습니다.");
+			return "redirect:/register/corp.do";
+		}
 	}
 	
 
