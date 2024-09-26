@@ -3,11 +3,13 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html lang="ko">
-<c:import url="../include/head.jsp" />
-<c:import url="../include/header.jsp" var="common_header" />
-<c:import url="../include/footer.jsp" var="common_footer" />
+<head>
+	<c:import url="../include/head.jsp" />
+</head>
 <link rel="stylesheet" href="/css/member.css">
 <script src="/js/login-validate.js?v=<?php echo time(); ?"></script>
+<c:import url="../include/header.jsp" var="common_header" />
+<c:import url="../include/footer.jsp" var="common_footer" />
 <body>
   <div id="skip_navi">
     <a href="#container">본문 바로가기</a>
@@ -25,7 +27,7 @@
             <h3>POPCON 로그인하기</h3>
           </div>
           <div class="login_area">
-            <form name="loginFrm" method="post" action="./loginProc.do"
+            <form name="loginFrm" action="/login.do" method="post"
             	onsubmit="return validateLogin(this);">
               <fieldset>
                 <legend>로그인</legend>
@@ -36,8 +38,10 @@
                   <input type="password" name="login_pw" placeholder="비밀번호를 입력하세요.">
                 </div>
                 <div class="row3 checkbox_wrap">
-                  <input type="checkbox" id="check1" class="blind">
-                  <label for="check1">로그인 상태 유지</label>
+                  <input type="checkbox" id="saveUserId" class="blind">
+                  <label for="saveUserId">아이디 기억하기</label>
+                  <input type="checkbox" id="remember-me" class="blind">
+                  <label for="remember-me">로그인 상태 유지</label>
                 </div>
                 <!-- 로그인 실패시 실패 메세지 띄우기 -->
                 <c:if test="${param.error != null }">

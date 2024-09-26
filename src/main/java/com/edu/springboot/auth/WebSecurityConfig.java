@@ -1,16 +1,18 @@
 package com.edu.springboot.auth;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.firewall.DefaultHttpFirewall;
+import org.springframework.security.web.firewall.HttpFirewall;
 
 import jakarta.servlet.DispatcherType;
 
@@ -22,29 +24,39 @@ public class WebSecurityConfig {
 		http.csrf((csrf) -> csrf.disable())
 			.cors((cors) -> cors.disable())
 			.authorizeHttpRequests((request) -> request
-				.dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
+				.dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.INCLUDE).permitAll()
+//				.requestMatchers("/**").permitAll()
 				.requestMatchers("/").permitAll()
 				.requestMatchers("/css/**", "/js/**", "/images/**", "/fonts/**").permitAll()
-				.requestMatchers("/WEB-INF/views/include/**").permitAll()
-				.requestMatchers("/freeBoard/write.do").hasAnyRole("admin", "corp", "normal")
-				.requestMatchers("/freeBoard/edit.do").hasAnyRole("admin", "corp", "normal")
-				.requestMatchers("/freeBoard/delete.do").hasAnyRole("admin", "corp", "normal")
-				.requestMatchers("/popupBoard/write.do").hasAnyRole("admin", "corp")
-				.requestMatchers("/popupBoard/edit.do").hasAnyRole("admin", "corp")
-				.requestMatchers("/popupBoard/delete.do").hasAnyRole("admin", "corp")
-				.requestMatchers("/noticeBoard/write.do").hasRole("ADMIN")
-				.requestMatchers("/noticeBoard/edit.do").hasRole("ADMIN")
-				.requestMatchers("/noticeBoard/delete.do").hasRole("ADMIN")
-				.anyRequest().authenticated()		
+				.requestMatchers("/freeBoard/write.do").hasAnyRole("ADMIN", "CORP", "NORMAL")
+//				.requestMatchers("/freeBoard/edit.do").hasAnyRole("ADMIN", "CORP", "NORMAL")
+//				.requestMatchers("/freeBoard/delete.do").hasAnyRole("ADMIN", "CORP", "NORMAL")
+//				.requestMatchers("/popupBoard/write.do").hasAnyRole("ADMIN", "CORP")
+//				.requestMatchers("/popupBoard/edit.do").hasAnyRole("ADMIN", "CORP")
+//				.requestMatchers("/popupBoard/delete.do").hasAnyRole("ADMIN", "CORP")
+//				.requestMatchers("/noticeBoard/write.do").hasRole("ADMIN")
+//				.requestMatchers("/noticeBoard/edit.do").hasRole("ADMIN")
+//				.requestMatchers("/noticeBoard/delete.do").hasRole("ADMIN")
+//				.anyRequest().permitAll()
+				.anyRequest().authenticated()
+
 			);
 		http.formLogin((formLogin) -> formLogin
 				.loginPage("/login.do") // defalut : /login
-				.loginProcessingUrl("/loginProc.do") 
+				.loginProcessingUrl("/login.do")
+				// 로그인 성공시 메인 페이지로 이동.
+				.defaultSuccessUrl("/", true)
 				/* 로그인할 때 아이디와 비밀번호의 파라미터는 input태그의 name
 				   속성과 동일하게 설정해줘야 로그인 process가 정상작동함. */
 				.usernameParameter("login_id")
 				.passwordParameter("login_pw")
 				.permitAll());
+		
+		/* 로그인 정보 저장 */
+		http.rememberMe((rememberMe) -> rememberMe
+				.key("uniqueKey")
+				.tokenValiditySeconds(86400)
+		);
 		
 		/* 로그아웃에 대한 커스터마이징 */
 		http.logout((logout) -> logout
@@ -62,30 +74,42 @@ public class WebSecurityConfig {
 		return http.build();
 	}
 	
-	/*
-	 로그인 후 획득할 수 있는 권한에 대한 설정을 한다. USER 권한과 ADMIN 권한을
-	 획득하기 위한 아이디/비밀번호를 메모리에 저장한다. DB에 저장하기 위해서는
-	 별도의 커스터마이징이 필요하다.
-	 */
+
 	@Bean
-	public UserDetailsService users() {
-		UserDetails user = User.builder()
-				.username("user")
-				.password(passwordEncoder().encode("1234"))
-				.roles("USER")
-				.build();
-		UserDetails admin = User.builder()
-				.username("admin")
-				.password(passwordEncoder().encode("1234"))
-				.roles("USER", "ADMIN")
-				.build();
-		
-		// 메모리에 사용자 정보를 담는다.
-		return new InMemoryUserDetailsManager(user, admin);
+	public HttpFirewall allowUrlDoubleSlashHttpFirewall() {
+	    DefaultHttpFirewall firewall = new DefaultHttpFirewall();
+	    firewall.setAllowUrlEncodedSlash(true);
+	    return firewall;
 	}
 	
-	// 패스워드 인코더(암호화) : 패스워드를 저장하기 전 암호화한다.
-	public PasswordEncoder passwordEncoder() {
-		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+	
+	// DB 연결을 위한 DataSource를 자동 주입
+	@Autowired
+	private DataSource dataSource;
+	
+	/* 사용자의 인증정보와 권한을 인출
+	   첫번째 쿼리는 아이디, 비밀번호, (계정활성화 나중에) 확인
+	   두번째 쿼리는 사용자 권한(authority) 확인 */
+	@Autowired
+	protected void configure(AuthenticationManagerBuilder auth)
+		throws Exception {
+		auth.jdbcAuthentication()
+			.dataSource(dataSource)
+			.usersByUsernameQuery("SELECT id, pass, enabled "
+					+ " FROM member WHERE id = ?")
+			.authoritiesByUsernameQuery("SELECT id, authority "
+					+ " FROM member WHERE id = ?")
+			// 이 부분은 나중에 암호화하기 위해 추가
+			.passwordEncoder(new BCryptPasswordEncoder());
 	}
+	
+	@Bean
+	public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.httpFirewall(allowUrlDoubleSlashHttpFirewall());
+    }
+	
+//	 패스워드 인코더(암호화) : 패스워드를 저장하기 전 암호화한다.(바로 위에 작성)
+//	public PasswordEncoder passwordEncoder() {
+//		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+//	}
 }

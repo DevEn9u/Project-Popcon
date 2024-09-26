@@ -6,9 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface IMemberService {
-	
-	// 로그인
-	public MemberDTO login(MemberDTO memberDTO);
-	// 회원정보추가
+	// 회원가입
 	public int insert(MemberDTO memberDTO);
 }

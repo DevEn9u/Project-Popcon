@@ -100,7 +100,7 @@ public class MainController {
 //	}
 //	
 //	// 자유게시판 - 목록
-//	@GetMapping("/freeBoard/list.do")
+//	@GetMapping("freeBoard/list.do")
 //	public String freeBoardList() {
 //		return "/boards/free-board-list";
 //	}

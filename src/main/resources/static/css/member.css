@@ -64,7 +64,9 @@
 }
 
 .login_area .checkbox_wrap {
-  margin: 10px 0;
+	display: flex;
+	margin-top: 20px;
+	gap: 0 10px;
 }
 .login_area .checkbox_wrap label {
   font-size: 12px;

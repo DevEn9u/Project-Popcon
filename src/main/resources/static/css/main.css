@@ -96,8 +96,8 @@
   background: var(--point--color1);
 }
 #header .inner .logout {
-  display: none;
-  /* display: flex; */
+/*   display: none; */
+  display: flex;
 }
 #header .inner .logout_btn {
   width: 40px;
