@@ -67,7 +67,7 @@
 		            </table>
 					<!-- 클릭한 날짜가 보이는 readonly input 추가 -->
 					<div class="selected-date-container">
-					    <label for="selectedDate">선택한 날짜: </label>
+					    <label for="selectedDate">선택한 날짜</label>
 					    <input type="text" id="selectedDate" class="selected-date" readonly />
 					</div>
 		          </li>
