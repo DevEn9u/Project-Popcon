@@ -5,6 +5,7 @@
 <html lang="ko">
 <head>
 	<c:import url="../include/head.jsp" />
+	<title>POPCON | 팝컨 - 로그인</title>
 </head>
 <link rel="stylesheet" href="/css/member.css">
 <script src="/js/login-validate.js?v=<?php echo time(); ?"></script>
