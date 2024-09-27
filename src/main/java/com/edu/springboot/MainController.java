@@ -134,16 +134,16 @@ public class MainController {
 	}
 	
 	//팝업 예약 페이지
-	@GetMapping("/popupBoard/booking.do")
-	public String popupbooking() {
-		return "/booking/booking";
-	}
-	//인원,수량 선택 페이지
-	@GetMapping("/popupBoard/select.do")
-	public String popupselect() {
-		return "/booking/booking-select";
-	}
-	
+//	@GetMapping("/popupBoard/booking.do")
+//	public String popupbooking() {
+//		return "/booking/booking";
+//	}
+//	//인원,수량 선택 페이지
+//	@GetMapping("/popupBoard/select.do")
+//	public String popupselect() {
+//		return "/booking/booking-select";
+//	}
+
 	//마이페이지 - 메인
 	@GetMapping("/mypage/mypage.do")
 	public String mypageMain() {

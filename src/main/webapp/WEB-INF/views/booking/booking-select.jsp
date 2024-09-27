@@ -6,10 +6,37 @@
 <head>
 <c:import url="../include/head.jsp" />
 <c:import url="../include/header.jsp" var="common_header" />
+<c:import url="../include/footer.jsp" var="common_footer" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <link rel="stylesheet" href="/css/booking_select.css?v=<?php echo time(); ?>">
 </head>
-<c:import url="../include/footer.jsp" var="common_footer" />
+<script>
+	// 예약 데이터 전송 함수
+	function sendBookingData() {
+	    const visitDate = $("#selectedDate").val(); // 선택한 날짜
+	    const headcountValue = headcount; // 인원 수
+	    const totalPrice = headcountValue * pricePerPerson; // 총 가격
+
+	    // AJAX 요청
+	    $.ajax({
+	        url: "/popupBoard/bookingOk.do",  // 서버의 URL
+	        type: "POST",  // 요청 방식
+	        data: {
+	            visit_date: visitDate,
+	            head_count: headcountValue,
+	            price: totalPrice
+	        },
+	        success: function(response) {
+	            alert("예약이 완료되었습니다: " + response); // 성공 시 알림
+	            window.location.href = "/mypage/mypage.do"; // 예약 완료 후 페이지 이동
+	        },
+	        error: function(xhr, status, error) {
+	            console.error("오류 발생:", error); // 오류 발생 시 콘솔에 출력
+	            alert("예약 중 오류가 발생했습니다.");
+	        }
+	    });
+	    }
+</script>
   <body>
   	${common_header }
 	<main id="bs_container">
@@ -31,12 +58,13 @@
 		    <div class="inner">
 		      <div class="bs_booking_main">
 		        <div class="caution_wrap">
-		          <h2 class="booking_caution1">⸰예매 시 바로 확정</h2>
-		          <h2 class="booking_caution2">⸰최대 10매까지 예매 가능</h2>
+		          <h2 class="booking_caution1">⸰ 예매 시 바로 확정</h2>
+		          <h2 class="booking_caution2">⸰ 최대 10매까지 예매 가능</h2>
 		        </div>
 		        <ul class="select_wrap1">
 		          <li class="select_date">
-		            <img src="../images/imgMGJ/calendar_icon.png" />일정을 선택하세요
+		            <img class=date_img src="../images/imgMGJ/calendar_icon.png" />
+					<p>일정을 선택하세요</p>
 		          </li>
 		          <li class="select_calendar">
 		            <table id="calendar">
@@ -59,23 +87,29 @@
 		              <tbody>
 		              </tbody>
 		            </table>
+					<!-- 클릭한 날짜가 보이는 readonly input 추가 -->
+					<div class="selected-date-container">
+					    <label for="selectedDate" >선택한 날짜: </label>
+					    <input type="text" id="selectedDate" class="selected-date" readonly />
+					</div>
 		          </li>
 		          <li class="select_count">
-		            <img src="../images/imgMGJ/mypage_icon.png" />인원/수량을 선택하세요
+		            <img class="date_img" src="../images/imgMGJ/mypage_icon.png" />
+					<p>인원/수량을 선택하세요</p>
 		          </li>
 		          <li class="count_wrap">
-		            <div class="count_type">일반</div>
-		            <div class="count_pay">10,000원</div>
+		            <p class="count_type">일반</p>
+		            <p class="count_pay">${headcount * price}원</p>
 		            <div class="pm_wrap">
 		              <button class="plus_btn" aria-label="Add one item">+</button>
-		              <div class="count_window">1</div>
+		              <div class="count_window">${headcount}</div>
 		              <button class="min_btn" aria-label="Remove one item">-</button>
 		            </div>
 		          </li>
 		        </ul>
 		      </div>
 		      <div class="bookingbtn_wrap">
-		        <button class="bs_booking_btn">예약하기</button>
+		        <button class="bs_booking_btn" onclick="sendBookingData()">예약하기</button>
 		      </div>
 		    </div>
 		</div>

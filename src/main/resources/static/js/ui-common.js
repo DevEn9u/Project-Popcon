@@ -1,3 +1,6 @@
+let price = 0; // 티켓 가격
+let headcount = 1; // 기본 인원 수
+
 $(function () {
   // 서브메뉴 on
   $('.gnb').on('mouseenter', function () {
@@ -172,8 +175,10 @@ $(function () {
 	function buildCalendar() {
 	    let nowYear = today.getFullYear();
 	    let nowMonth = today.getMonth();
-	    let firstDay = new Date(nowYear, nowMonth, 1).getDay(); // 1일이 무슨 요일인지
-	    let lastDate = new Date(nowYear, nowMonth + 1, 0).getDate(); // 그 달의 마지막 날
+		// 1일이 무슨 요일인지
+	    let firstDay = new Date(nowYear, nowMonth, 1).getDay(); 
+		// 그 달의 마지막 날
+	    let lastDate = new Date(nowYear, nowMonth + 1, 0).getDate(); 
 
 	    // 년.월 작성
 	    $(".year_month").text(nowYear + ". " + (nowMonth + 1));
@@ -186,16 +191,31 @@ $(function () {
 	    for (let i = 0; i < firstDay; i++) {
 	        row.append("<td></td>");
 	    }
+		// 가격과 인원 선택 UI를 기본적으로 숨김
+		$(".select_count, .count_wrap, .selected-date-container").hide();
 
 	    // 날짜 채우기
 	    for (let i = 1; i <= lastDate; i++) {
 	        const dateCell = $("<td class='date'>" + i + "</td>");
 	        
+			
 	        // 날짜 셀 클릭 이벤트 추가
 	        dateCell.on("click", function() {
 	            // 모든 날짜에서 colToday 클래스 제거하고 selectday 클래스 추가
-	            $(".date").removeClass("colToday").removeClass("selectday"); // 기존 클래스 제거
-	            $(this).addClass("selectday"); // 클릭한 날짜에 selectday 클래스 추가
+	            $(".date").removeClass("colToday").removeClass("selectday");
+	            $(this).addClass("selectday");
+				
+				// 선택한 날짜 텍스트 가져오기
+				let selectedDate = $(this).text();
+				let nowYear = today.getFullYear();
+				let nowMonth = today.getMonth() + 1; // 월은 0부터 시작하므로 +1
+				            // 선택한 날짜를 readonly input에 표시
+				$("#selectedDate").val(`${nowYear}-${nowMonth}-${selectedDate}`);
+		
+				// 가격 및 인원 선택 UI 표시
+				$(".select_count, .count_wrap, .selected-date-container").show();
+				// 가격 및 인원 수 업데이트
+				updateDisplay();
 	        });
 
 	        row.append(dateCell);
@@ -223,9 +243,30 @@ $(function () {
 	}
 
 	buildCalendar();
+	
+	// 인원 수 조절 버튼 클릭 이벤트
+	$(".plus_btn").click(function() {
+		if(headcount<10){	
+		    headcount++;
+		    updateDisplay();
+		}
+	});
 
-
-
+	$(".min_btn").click(function() {
+	    if (headcount > 1) {
+	        headcount--;
+	        updateDisplay();
+	    }
+	});
+	
+	function updateDisplay() {
+	    // 가격과 인원 수 업데이트
+	    $(".count_window").text(headcount); // 인원 수 표시
+	    $(".count_pay").text(headcount * price + "원"); // 가격 표시
+	}
+	
+	// 초기 디스플레이 설정
+	updateDisplay();
 
 });
 
@@ -251,7 +292,7 @@ $(document).ready(function() {
     $dateContainer.click(function() {
       $('.date-container').removeClass('active');
       $('.weekday').text(''); // 모든 요일 초기화
-      $(this).addClass('active');
+      $(this).addClass('active'); 
 
       // 클릭한 날짜의 요일 계산
       var clickedIndex = $(this).index(); // 여기서 index()를 사용

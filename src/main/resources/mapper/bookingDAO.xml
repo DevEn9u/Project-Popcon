@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 컨트롤러가 호출하는 인터페이스의 위치를 namespce로 설정 -->
+<mapper namespace="com.edu.springboot.booking.IBookingService">
+
+	<insert id="book">
+	    INSERT INTO booking (popup_idx, member_id, visit_date, booking_date, price, headcount, is_paid)
+	    VALUES
+	    (#{popup_idx}, #{member_id}, #{visit_date}, sysdate, #{price}, #{headcount}, #{is_paid})
+	</insert>
+
+</mapper>
