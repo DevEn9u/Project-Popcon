@@ -8,9 +8,9 @@
 <mapper namespace="com.edu.springboot.booking.IBookingService">
 
 	<insert id="book">
-	    INSERT INTO booking (popup_idx, member_id, visit_date, booking_date, price, headcount, is_paid)
+	    INSERT INTO booking (booking_num, popup_idx, member_id, visit_date, booking_date, price, headcount, is_paid)
 	    VALUES
-	    (#{popup_idx}, #{member_id}, #{visit_date}, sysdate, #{price}, #{headcount}, #{is_paid})
+	    ('booking_num_seq', NULL, #{member_id}, #{visit_date}, sysdate, #{price}, #{headcount}, #{is_paid})
 	</insert>
 
 </mapper>

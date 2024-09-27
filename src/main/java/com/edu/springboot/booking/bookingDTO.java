@@ -14,7 +14,5 @@ public class bookingDTO {
     private int headcount;  // 인원
     private int is_paid;  // 결제 여부
     
-    // 추가적으로 필요할 수 있는 필드 예시
     // private int is_canceled;  // 예약 취소 여부
-    // private String payment_method;  // 결제 방식
 }
