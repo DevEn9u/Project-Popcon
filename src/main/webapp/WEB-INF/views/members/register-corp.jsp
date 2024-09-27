@@ -7,6 +7,8 @@
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
 <link rel="stylesheet" href="/css/member.css">
+<script src="/js/form-validate.js"></script>
+
 <body>
   <div id="skip_navi">
     <a href="#container">본문 바로가기</a>
@@ -18,7 +20,7 @@
         <div class="inner">
           <div class="logo_wrap">
             <h2 class="logo">
-              <a href="../main/index.do"></a>
+              <a href="/"></a>
               <span class="blind">팝콘로고</span>
             </h2>
           </div>
@@ -27,7 +29,7 @@
           	<form name="registerFrm" method="post" action="./corp.do" onsubmit="return validateForm(this);">
               <div class="input_wrap">
                 <div class="item_id">아이디 :</div>
-                <input type="text" name="id" class="input_id" placeholder="6-12자 이내의 아이디를 입력해주세요.">
+                <input type="text" name="id" class="input_id" placeholder="6-12자 이내의 아이디를 입력해주세요." autofocus="autofocus">
                 <button type="button" class="check_btn" onclick="idCheck()">아이디 중복 확인</button>
               </div>
               <div class="input_wrap">
@@ -48,14 +50,14 @@
               <div class="input_wrap">
                 <div class="item_phone">전화번호 :</div>
                 <input type="text" name="phone" class="input_phone" oninput="formatPhoneNumber(this)" placeholder="숫자만 입력해주세요." >
-                <div class="item_regi_num">사업자번호 :</div>
-                <input type="text" name="businessNumber" class="input_regi_num" oninput="formatBusinessNumber(this)" placeholder="숫자만 입력해주세요." >
+                <div class="item_business">사업자번호 :</div>
+                <input type="text" name="businessNumber" class="input_business" oninput="formatBusinessNumber(this)" placeholder="숫자만 입력해주세요." >
               </div>
               <div class="btn_wrap">
                 <button type="submit" class="btn register_btn">회원가입</button>
                 <button type="button" class="btn main_btn" onclick="location.href='../login.do'">취소</button>
               </div>
-			      </form>
+	      	</form>
           </div>
         </div>
       </div>

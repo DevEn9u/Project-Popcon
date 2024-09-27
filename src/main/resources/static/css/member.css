@@ -200,14 +200,14 @@
 .register_wrap .item_com_name {
   width: 50px;
 }
-.register_wrap .item_regi_num {
+.register_wrap .item_business {
   width: 80px;
 }
 
 .register_wrap .input_com_name {
   width: calc(100% - 60px);
 }
-.register_wrap .input_regi_num {
+.register_wrap .input_business {
   width: calc(100% - 90px);
 }
 

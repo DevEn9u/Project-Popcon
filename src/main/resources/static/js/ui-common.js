@@ -1,3 +1,6 @@
+let price = 0; // 티켓 가격
+let headcount = 1; // 기본 인원 수
+
 $(function () {
   // 서브메뉴 on
   $('.gnb').on('mouseenter', function () {
@@ -147,75 +150,6 @@ $(function () {
 	    $('#footer .scroll_btn').removeClass('down');
 	  }
 	});
-	
-	// booking_select 달력 동적으로 삽입
-	var today = new Date();
-	var date = new Date();
-
-	// 이전달 버튼 클릭시
-	$("input[name=preMonth]").click(function () {
-	    $("#calendar > tbody > td").remove();
-	    $("#calendar > tbody > tr").remove();
-	    today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
-	    buildCalendar();
-	});
-
-	// 다음달 버튼 클릭시
-	$("input[name=nextMonth]").click(function () {
-	    $("#calendar > tbody > td").remove();
-	    $("#calendar > tbody > tr").remove();
-	    today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
-	    buildCalendar();
-	});
-
-	// 달력 만들기
-	function buildCalendar() {
-	    let nowYear = today.getFullYear();
-	    let nowMonth = today.getMonth();
-	    let firstDay = new Date(nowYear, nowMonth, 1).getDay(); // 1일이 무슨 요일인지
-	    let lastDate = new Date(nowYear, nowMonth + 1, 0).getDate(); // 그 달의 마지막 날
-
-	    // 년.월 작성
-	    $(".year_month").text(nowYear + ". " + (nowMonth + 1));
-
-	    
-
-	    // 날짜 채우기
-	    $("#calendar tbody").empty(); // 이전에 있던 내용을 비워줌
-	    let row = $("<tr></tr>");
-
-	    // 첫번째 줄 1일 시작 전까지 빈칸으로 채우기
-	    for (let i = 0; i < firstDay; i++) {
-	        row.append("<td></td>");
-	    }
-
-	    // 날짜 채우기
-	    for (let i = 1; i <= lastDate; i++) {
-	        row.append("<td class='date'>" + i + "</td>");
-
-	        // 7일째 되면 새로운 줄을 추가
-	        if ((i + firstDay) % 7 === 0) {
-	            $("#calendar tbody").append(row);
-	            row = $("<tr></tr>"); // 새로운 행 시작
-	        }
-	    }
-
-	    // 남은 날짜 처리
-	    if (row.children().length > 0) {
-	        $("#calendar tbody").append(row); // 남은 row를 추가
-	    }
-
-	    // 오늘 날짜 표시
-	    let todayDate = today.getDate();
-	    $(".date").each(function (index) {
-	        if (nowYear == date.getFullYear() && nowMonth == date.getMonth() && $(this).text() == todayDate) {
-	            $(this).addClass('colToday');
-	        }
-	    });
-	}
-
-	buildCalendar();
-
 
 });
 
@@ -241,7 +175,7 @@ $(document).ready(function() {
     $dateContainer.click(function() {
       $('.date-container').removeClass('active');
       $('.weekday').text(''); // 모든 요일 초기화
-      $(this).addClass('active');
+      $(this).addClass('active'); 
 
       // 클릭한 날짜의 요일 계산
       var clickedIndex = $(this).index(); // 여기서 index()를 사용
