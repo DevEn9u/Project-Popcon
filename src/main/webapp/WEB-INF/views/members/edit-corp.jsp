@@ -3,10 +3,7 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-	<c:import url="../include/head.jsp" />
-	<title>POPCON | 팝컨 - 회원가입</title>
-</head>
+<c:import url="../include/head.jsp" />
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
 <link rel="stylesheet" href="/css/member.css">

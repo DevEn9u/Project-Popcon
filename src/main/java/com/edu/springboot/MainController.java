@@ -25,53 +25,14 @@ public class MainController {
 	
 //    @Autowired
 //    private PopupBoardMapper popupBoardMapper;
-
-//	// member dao 호출을 위해 자동 Bean 주입. 이 Interface를 통해 Mapper 호출
-//	@Autowired
-//	IMemberService dao;
 	
 	@GetMapping("/")
 	public String home() {
 		return "home";
 	}
 
-//	// 아이디 비밀번호 찾기
-//	@GetMapping("/findId.do")
-//	public String findId() {
-//		return "/members/findId";
-//	}
-//	
-//	@GetMapping("/findPw.do")
-//	public String findPw() {
-//		return "/members/findPw";
-//	}
-//	
-//	// 회원가입 - 메인
-//	@GetMapping("/register.do")
-//	public String registerMain() {
-//		return "/members/register-main";
-//	}
-//	// 회원가입 - 개인회원
-//	@GetMapping("/register/normal.do")
-//	public String registerNormal() {
-//		return "/members/register-normal";
-//	}
-//	// 회원가입 - 기업회원
-//	@GetMapping("/register/corp.do")
-//	public String registerCorp() {
-//		return "/members/register-corp";
-//	}
-////	// 회원가입 - 아이디 체크
-////	@GetMapping("/register/checkId.do")
-////	public String checkId() {
-////		return "/members/idCheckForm";
-////	}
-//	// 회원가입
-//	@PostMapping("/register.do")
-//	public String register() {
-//		return "redirect:login.do";
-//	}
-//	
+
+	
 //	// 자유게시판 - 목록
 //	@GetMapping("freeBoard/list.do")
 //	public String freeBoardList() {

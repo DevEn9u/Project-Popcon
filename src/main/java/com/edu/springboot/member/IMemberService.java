@@ -12,4 +12,9 @@ public interface IMemberService {
 	public int registerCorp(MemberDTO memberDTO);
 	// ID 중복 확인
 	public int checkIdDuplicate(String input_id);
+	// 회원정보 가져오기
+	public MemberDTO getMemberByDto(String id);
 }
+
+
+
