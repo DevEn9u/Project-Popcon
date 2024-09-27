@@ -10,6 +10,14 @@
 <script src="/js/login-validate.js?v=<?php echo time(); ?"></script>
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
+<script>
+	window.onload = function() {
+		const resultMsg = '<%= request.getAttribute("resultMsg") != null ? request.getAttribute("resultMsg") : "" %>';
+	    if (resultMsg) {
+	      alert(resultMsg);
+		}
+	};
+</script>
 <body>
   <div id="skip_navi">
     <a href="#container">본문 바로가기</a>
