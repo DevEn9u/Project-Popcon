@@ -34,24 +34,18 @@
                 <div class="item_id">아이디 :</div>
                 <input type="text" name="id" class="input_id" value="${user_id}" readonly="readonly">
               </div>
-              <div class="input_wrap">
-                <input type="hidden" name="idDuplication" value="idChecked" />
-                <div class="item_pass">비밀번호 :</div>
-                <input type="password" name="pass" class="input_pass" placeholder="8자 이상의 비밀번호를 입력해주세요.">
-                <div class="item_pass2">비밀번호 확인 :</div>
-                <input type="password" name="pass2" class="input_pass2" placeholder="비밀번호 확인을 위해 같은 비밀번호를 입력해주세요.">
-              </div>
+
               <div class="input_wrap">
                 <div class="item_name">이름 :</div>
-                <input type="text" name="name" class="input_name" />
+                <input type="text" name="name" class="input_name" value="${memberDTO.name }" readonly="readonly" />
               </div>	
               <div class="input_wrap">
                 <div class="item_email">Email :</div>
-                <input type="text" name="email" class="input_email">
+                <input type="text" name="email" class="input_email" value="${memberDTO.email }">
               </div>
               <div class="input_wrap">
                 <div class="item_phone">전화번호 :</div>
-                <input type="text" name="phone" class="input_phone" oninput="formatPhoneNumber(this)" placeholder="숫자만 입력해주세요." >
+                <input type="text" name="phone" class="input_phone" oninput="formatPhoneNumber(this)" placeholder="숫자만 입력해주세요." value="${memberDTO.phone }">
               </div>
               <div class="btn_wrap">
                 <button type="submit" class="btn register_btn">수정</button>

@@ -48,23 +48,11 @@
                   <td><input type="text" name="board_title" placeholder="제목을 입력해주세요."></td>
                 </tr>
                 <tr>
-                  <th>일정</th>
-                  <td><input type="text" name="board_title" placeholder="일정을 입력해주세요."></td>
-                </tr>
-                <tr>
-                  <th class="t_area">소개</th>
+                  <th class="t_area">내용</th>
                   <td>
                     <textarea cols="30" rows="20" name="contents"
-                      placeholder="필수 입력사항을 작성하고 입력해주세요.&#10;팝업 소개 부분입니다.."></textarea>
+                      placeholder="필수 입력사항을 작성하고 입력해주세요.&#10;비방, 욕설, 도배글 등은 서비스 이용 제한의 사유가 됩니다."></textarea>
                   </td>
-                </tr>
-                <tr>
-                  <th>주소</th>
-                  <td><input type="text" name="board_title" placeholder="주소를 입력해주세요."></td>
-                </tr>
-                <tr>
-                  <th>카테고리</th>
-                  <td><input type="text" name="board_title" placeholder="카테고리를 입력해주세요."></td>
                 </tr>
                 <tr>
                   <th>첨부파일</th>
