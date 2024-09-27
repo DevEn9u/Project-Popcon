@@ -194,6 +194,7 @@ public class MainController {
 //	}
 	
 	
+
 //	@GetMapping("/popupBoard/list.do")
 //	public String popuplist(@RequestParam(name = "category", required = false) String category, Model model) {
 //	    List<PopupBoardDTO> popupList;
@@ -271,4 +272,52 @@ public class MainController {
 //	public String mypageCoupon() {
 //		return "/mypages/mypage-coupon";
 //	}
+
+	//팝업 예약 페이지
+//	@GetMapping("/popupBoard/booking.do")
+//	public String popupbooking() {
+//		return "/booking/booking";
+//	}
+//	//인원,수량 선택 페이지
+//	@GetMapping("/popupBoard/select.do")
+//	public String popupselect() {
+//		return "/booking/booking-select";
+//	}
+
+	//마이페이지 - 메인
+	@GetMapping("/mypage/mypage.do")
+	public String mypageMain() {
+		return "/mypages/mypage-main";
+	}
+	//마이페이지 - 예약 확인
+	@GetMapping("/mypage/myBooking.do")
+	public String mypageBooking() {
+		return "/mypages/mypage-booking";
+	}
+	//마이페이지 - 포인트 확인
+	@GetMapping("/mypage/myPoint.do")
+	public String mypagePoint() {
+		return "/mypages/mypage-point";
+	}
+	//마이페이지 - 내가 작성한 글 확인
+	@GetMapping("/mypage/myPost.do")
+	public String mypagePost() {
+		return "/mypages/mypage-post";
+	}
+	//마이페이지 - 내가쓴 리뷰 확인
+	@GetMapping("/mypage/myReview.do")
+	public String mypageReview() {
+		return "/mypages/mypage-review";
+	}
+	//마이페이지 - 좋아요한 팝업 확인
+	@GetMapping("/mypage/likes.do")
+	public String mypageLikes() {
+		return "/mypages/mypage-likes";
+	}
+	//마이페이지 - 보유한 쿠폰 확인
+	@GetMapping("/mypage/myCoupon.do")
+	public String mypageCoupon() {
+		return "/mypages/mypage-coupon";
+	}
+
 }
