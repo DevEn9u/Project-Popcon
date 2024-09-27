@@ -8,6 +8,11 @@ function validateForm(form) {
 	       !isFieldValid(form.phone, "전화번호를 입력하세요.")) {
 	      	 return false;
 	}
+	
+	if (form.idDuplication.value != "idChecked") {
+		alert("아이디 중복체크를 해주세요.");
+		return false;
+	}
 	if (form.pass.value !== form.pass2.value) {
 			alert("비밀번호가 일치하지 않습니다.");
 			resetPasswords(form);
