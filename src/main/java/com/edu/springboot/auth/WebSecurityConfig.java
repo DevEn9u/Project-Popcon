@@ -5,12 +5,14 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
 
@@ -21,7 +23,15 @@ import jakarta.servlet.DispatcherType;
  이용해 filterChain을 구성한다.
  */
 @Configuration
-public class WebSecurityConfig {	
+public class WebSecurityConfig {
+	// DB 연결을 위한 DataSource를 자동 주입
+	@Autowired
+	private DataSource dataSource;
+	
+//	// JWT 필터 추가
+//	@Autowired
+//	private JwtRequestFilter jwtRequestFilter;
+	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http)
 			throws Exception {
@@ -75,6 +85,8 @@ public class WebSecurityConfig {
 		http.exceptionHandling((expHandling) -> expHandling
 				.accessDeniedPage("/denied.do"));
 		
+//		// jwt 필터 추가
+//		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 		return http.build();
 	}
 	
@@ -87,9 +99,7 @@ public class WebSecurityConfig {
 	}
 	
 	
-	// DB 연결을 위한 DataSource를 자동 주입
-	@Autowired
-	private DataSource dataSource;
+
 	
 	/* 사용자의 인증정보와 권한을 인출
 	   첫번째 쿼리는 아이디, 비밀번호, (계정활성화 나중에) 확인
@@ -103,7 +113,6 @@ public class WebSecurityConfig {
 					+ " FROM member WHERE id = ?")
 			.authoritiesByUsernameQuery("SELECT id, authority "
 					+ " FROM member WHERE id = ?")
-			// 이 부분은 나중에 암호화하기 위해 추가
 			.passwordEncoder(new BCryptPasswordEncoder());
 	}
 	

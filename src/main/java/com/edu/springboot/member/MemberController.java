@@ -185,4 +185,25 @@ public class MemberController {
 		}
 	}
 	
+	// 회원정보 수정 - 일반회원
+	@GetMapping("/member/edit-normal.do")
+	public String editNormalMemberGet(Principal principal, Model model) {
+		String user_id = principal.getName();
+		MemberDTO memberDTO = dao.getMemberById(user_id);
+		model.addAttribute("memberDTO", memberDTO);
+		return "/members/edit-normal";
+	}
+	@PostMapping("/member/edit-normal.do")
+	public String editNormalMemberPost() {
+		return "redirect:/";
+	}
+	// 회원정보 수정 - 기업회원
+	@GetMapping("/member/edit-corp.do")
+	public String editCorpMemberGet() {
+		return "/members/edit-corp";
+	}
+	@PostMapping("/member/edit-corp.do")
+	public String editCorpMemberPost() {
+		return "redirect:/";
+	}
 }
