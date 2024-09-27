@@ -10,13 +10,27 @@
 <script src="../js/file-upload.js"></script>
 <script>
     function checkReset() {
-      if (confirm("게시물을 다시 쓰시겠습니까?")) {
-        let form = document.writeFrm;
-        form.reset();
-      }
-      else {
-        return false;
-      }
+        if (confirm("게시물을 다시 쓰시겠습니까?")) {
+            let form = document.writeFrm;
+            form.reset();
+        }
+        else {
+            return false;
+        }
+    }
+
+    function validateForm(form) {
+        if (form.board_title.value.trim() === "") {
+            alert("제목을 입력해주세요.");
+            form.board_title.focus();
+            return false;
+        }
+        if (form.contents.value.trim() === "") {
+            alert("내용을 입력해주세요.");
+            form.contents.focus();
+            return false;
+        }
+        return true;
     }
 </script>
 <body>
@@ -35,12 +49,10 @@
         <div class="inner">
           <h3>게시글 수정</h3>
           <div class="board_write">
-            <form name="writeFrm" method="post" action="../freeBoard/write.do"
-              onsubmit="return validateForm(this)">
+            <form name="writeFrm" method="post" action="../freeBoard/update.do" enctype="multipart/form-data" onsubmit="return validateForm(this)">
               <!-- 삭제시 idx를 이용해 삭제 -->
-              <input type="hidden" name="idx" value="${ dto.idx }" />       	 
+              <input type="hidden" name="board_idx" value="${ dto.board_idx }" />       	 
               <table>
-              <!-- thead가 없을 때 caption의 position이 absolute이면 th와 td의 width가 지정이 안되는 버그가 생기므로 common.css에서 caption.nohead에서 position을 statice으로 만들어 주었음 -->
                <caption class="nohead">게시글 작성</caption>
                <tr>
                  <th>이름</th>
@@ -48,13 +60,13 @@
                </tr>
                <tr>
                  <th>제목</th>
-                 <td><input type="text" name="title" placeholder="제목을 입력해주세요." value="${ dto.title }"></td>
+                 <td><input type="text" name="board_title" placeholder="제목을 입력해주세요." value="${ dto.board_title }"></td>
                </tr>
                <tr>
                  <th class="t_area">내용</th>
                  <td>
-                   <textarea cols="30" rows="20" name="content"
-                     placeholder="필수 입력사항을 작성하고 입력해주세요.&#10;비방, 욕설, 도배글 등은 서비스 이용 제한의 사유가 됩니다.">${ dto.content }</textarea>
+                   <textarea cols="30" rows="20" name="contents"
+                     placeholder="필수 입력사항을 작성하고 입력해주세요.&#10;비방, 욕설, 도배글 등은 서비스 이용 제한의 사유가 됩니다.">${ dto.contents }</textarea>
                  </td>
                </tr>
                <tr>

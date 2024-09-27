@@ -19,6 +19,18 @@
 	    INSERT INTO BOARD (board_idx, board_title, contents, writer, board_type, postdate, role)
 	    VALUES (NULL, #{board_title}, #{contents}, #{writer}, #{board_type}, SYSDATE, #{role})
 	</insert>
+    <update id="updateBoard" parameterType="com.edu.springboot.board.BoardDTO">
+        UPDATE BOARD
+        SET board_title = #{board_title},
+            contents = #{contents},
+            postdate = SYSDATE
+        WHERE board_idx = #{board_idx}
+    </update>
+	<delete id="deleteBoard" parameterType="String">
+	    DELETE FROM BOARD WHERE board_idx = #{board_idx}
+	</delete>
+
+
 
 
 </mapper>
