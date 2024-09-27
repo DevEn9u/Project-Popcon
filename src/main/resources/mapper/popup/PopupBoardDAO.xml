@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.springboot.popupboards.PopupBoardMapper">
+    <!-- 작성일 기준 최근 작성된 게시글 8개 조회 -->
+    <select id="selectTop8" resultType="com.edu.springboot.popupboards.PopupBoardDTO">
+        SELECT * FROM (
+            SELECT POPUP_BOARD.*, ROWNUM AS rnum 
+            FROM (
+                SELECT * FROM POPUP_BOARD
+                ORDER BY postdate DESC
+            ) POPUP_BOARD
+            WHERE ROWNUM &lt;= 8
+        )
+    </select>
+    
+    <!-- 카테고리 검색 -->
+	<select id="selectByCategory" parameterType="String" resultType="com.edu.springboot.popupboards.PopupBoardDTO">
+    	SELECT * FROM POPUP_BOARD WHERE category = #{category} ORDER BY postdate DESC
+	</select>
+	
+	
+	<!-- 글 보기 -->
+	<select id="popupView" parameterType="String" resultType="com.edu.springboot.popupboards.PopupBoardDTO">
+    	SELECT * FROM POPUP_BOARD WHERE board_idx = #{board_idx}
+	</select>
+	
+
+	<!-- 글 작성기능 -->
+	<insert id="write" parameterType="com.edu.springboot.popupboards.PopupBoardDTO">
+    	INSERT INTO POPUP_BOARD (board_idx, board_title, contents, popup_fee, start_date, end_date, popup_addr, category, writer, role)
+    	VALUES (NULL, #{board_title}, #{contents}, #{popup_fee}, #{start_date}, #{end_date}, #{popup_addr}, #{category}, #{writer}, #{role})
+	</insert>
+	
+
+
+</mapper>

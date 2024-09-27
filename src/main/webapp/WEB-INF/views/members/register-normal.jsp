@@ -7,6 +7,48 @@
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
 <link rel="stylesheet" href="/css/member.css">
+<script>
+// 로그인 성공/실패 메세지 알림
+function showResultMsg() {
+    <% if (request.getAttribute("resultMsg") != null) { %>
+        let message = '<%= request.getAttribute("resultMsg") %>';
+        alert(message);
+    <% } %>
+}
+
+window.onload = showResultMsg; // 페이지 로드 시 메시지 표시
+	// Id 중복 확인
+	function idCheck() {
+		
+		let id = $('.input_id').val().trim();
+		console.log(id);
+		if (id === '') {
+			alert("아이디를 입력하세요.");
+			$('.input_id').focus();
+			return false;
+		}
+		
+		$.ajax({
+			url: '/register/checkId.do',
+			type: 'GET',
+			data: {
+				input_id : id
+			},
+			success: function(response) {
+				if (response.isDuplicated) {
+					alert(response.msg);
+					$('input[name="idDuplication"]').val("idUnchecked");
+				} else {
+					alert(response.msg);
+					$('input[name="idDuplication"]').val("idChecked");
+				}
+			},
+	        error: function(xhr, status, error) {
+	            console.error("AJAX 요청 오류: ", error); // 오류 발생 시 확인
+	        }
+		});
+	}
+</script>
 <body>
   <div id="skip_navi">
     <a href="#container">본문 바로가기</a>
@@ -24,10 +66,11 @@
           </div>
           <!-- 회원가입 폼 -->
           <div class="register_wrap">
-          	<form name="registerFrm" method="post" action="../register.do" onsubmit="return validateForm(this);">
+          	<form name="registerFrm" method="post" action="./normal.do" onsubmit="return validateForm(this);">
               <div class="input_wrap">
                 <div class="item_id">아이디 :</div>
-                <input type="text" name="id" class="input_id" placeholder="6-12자 이내의 아이디를 입력해주세요.">
+                <input type="text" name="id" class="input_id" placeholder="6-12자 이내의 아이디를 입력해주세요." autofocus="autofocus">
+                <label id="label1"></label>
                 <button type="button" class="check_btn" onclick="idCheck()">아이디 중복 확인</button>
               </div>
               <div class="input_wrap">
@@ -40,7 +83,7 @@
               <div class="input_wrap">
                 <div class="item_name">이름 :</div>
                 <input type="text" name="name" class="input_name" />
-              </div>
+              </div>	
               <div class="input_wrap">
                 <div class="item_email">Email :</div>
                 <input type="text" name="email" class="input_email">

@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html lang="ko">
+<head>
 <c:import url="./include/head.jsp" />
+</head>
 <c:import url="./include/header.jsp" var="common_header" />
 <c:import url="./include/footer.jsp" var="common_footer" />
 <body>
@@ -123,7 +125,7 @@
 	          <div class="swiper">
 	            <div class="swiper-wrapper">
 	              <div class="swiper-slide">
-	                <a class="image" href="./popupBoard/view.do"><img src="/images/main/mainslider1.png"></a>
+	                <a class="image" href="./popupBoard/list.do"><img src="/images/main/mainslider1.png"></a>
 	              </div>
 	              <div class="swiper-slide">
 	                <a class="image" href="#"><img src="/images/main/mainslider1.png"></a>

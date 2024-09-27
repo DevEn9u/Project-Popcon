@@ -34,23 +34,23 @@
         <div class="inner">
           <h3>게시글 작성</h3>
           <div class="board_write">
-            <form name="writeFrm" method="post" enctype="multipart/form-data" action="../free-board/write.do"
+            <form name="writeFrm" method="post" enctype="multipart/form-data" action="/freeBoard/write.do"
               onsubmit="return validateForm(this)">
               <table>
                 <!-- thead가 없을 때 caption의 position이 absolute이면 th와 td의 width가 지정이 안되는 버그가 생기므로 common.css에서 caption.nohead에서 position을 statice으로 만들어 주었음 -->
                 <caption class="nohead">게시글 작성</caption>
                 <tr>
                   <th>이름</th>
-                  <td><input type="text" name="name" readonly="readonly" value="${ UserName }"></td>
+                  <td><input type="text" name="writer" readonly="readonly" value="${ user_id }"></td>
                 </tr>
                 <tr>
                   <th>제목</th>
-                  <td><input type="text" name="title" placeholder="제목을 입력해주세요."></td>
+                  <td><input type="text" name="board_title" placeholder="제목을 입력해주세요."></td>
                 </tr>
                 <tr>
                   <th class="t_area">내용</th>
                   <td>
-                    <textarea cols="30" rows="20" name="content"
+                    <textarea cols="30" rows="20" name="contents"
                       placeholder="필수 입력사항을 작성하고 입력해주세요.&#10;비방, 욕설, 도배글 등은 서비스 이용 제한의 사유가 됩니다."></textarea>
                   </td>
                 </tr>

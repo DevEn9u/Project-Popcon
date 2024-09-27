@@ -254,8 +254,8 @@ body {
 }
 
 #popup_view_container {
+	margin: 0 auto;
 	max-width:1250px;
-	margin:0 auto;
 }
 .swiper {
   margin-top: 92px;
@@ -359,7 +359,19 @@ body {
   text-align: center;
   line-height: 44px;
 }
-
+.pv_delete_btn {
+  margin-right: 0;
+  font-size: 16px;
+  font-weight: 600;
+  border: 1px solid white;
+  border-radius: 10px;
+  background-color: black;
+  color: white;
+  width: 88px;
+  height: 44px;
+  text-align: center;
+  line-height: 44px;
+}
 .open_time {
   color: white;
   font-weight: 600;
@@ -474,7 +486,8 @@ body {
     margin-left: 0;
   }
 
-  #container {
+  #popup_view_container {
+    margin:none;
     margin-left: 100px;
     margin-right: 100px;
   }
@@ -523,7 +536,8 @@ body {
   #footer .footer_wrap .col2 .sns > li > a {
     font-size: 12px;
   }
-  #container {
+  #popup_view_container {
+    margin:none;
     margin-left: 10px;
     margin-right: 10px;
   }
