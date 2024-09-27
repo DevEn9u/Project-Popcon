@@ -135,7 +135,7 @@ $(function () {
 	        success: function(response) {
 	            alert("예약이 완료되었습니다: " + response);
 	            // 예약 성공 후 이동할 페이지로 리디렉션
-	            window.location.href = '/mypages/mypage-main';
+	            window.location.href = '/mypages/mypage.do';
 	        },
 	        error: function(error) {
 	            alert("예약 중 오류 발생: " + error.responseText);

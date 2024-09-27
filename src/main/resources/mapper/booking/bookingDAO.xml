@@ -9,7 +9,7 @@
     <insert id="booking">
 	    INSERT INTO booking (booking_num, popup_idx, member_id, visit_date, booking_date, price, headcount, is_paid)
 	    VALUES
-	    (booking_num_seq.NEXTVAL, #{popup_idx}, #{member_id}, #{visit_date}, sysdate, #{price}, #{headcount}, #{is_paid})
+	    (booking_num_seq(), #{popup_idx}, #{member_id}, #{visit_date}, sysdate, #{price}, #{headcount}, #{is_paid})
 	</insert>
 
 </mapper>
