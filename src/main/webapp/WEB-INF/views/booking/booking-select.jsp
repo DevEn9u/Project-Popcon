@@ -3,11 +3,13 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html lang="ko">
+<head>
 <c:import url="../include/head.jsp" />
 <c:import url="../include/header.jsp" var="common_header" />
-<c:import url="../include/footer.jsp" var="common_footer" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <link rel="stylesheet" href="/css/booking_select.css?v=<?php echo time(); ?>">
+</head>
+<c:import url="../include/footer.jsp" var="common_footer" />
   <body>
   	${common_header }
 	<main id="bs_container">
