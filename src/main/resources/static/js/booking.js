@@ -133,12 +133,14 @@ $(function () {
 	            price: price
 	        },
 	        success: function(response) {
-	            alert("예약이 완료되었습니다: " + response);
+	            alert("예약이 완료되었습니다" + "마이페이지에서 예약내역을 확인하세요");
 	            // 예약 성공 후 이동할 페이지로 리디렉션
-	            window.location.href = '/mypages/mypage.do';
+	            window.location.href = '/mypage/mypage.do';
+				console.log("예약 완료");
 	        },
 	        error: function(error) {
-	            alert("예약 중 오류 발생: " + error.responseText);
+	            alert("예약 중 오류 발생");
+				console.log("예약실패")
 	        }
 	    });
 	});
