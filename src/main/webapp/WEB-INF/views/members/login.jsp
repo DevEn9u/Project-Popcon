@@ -48,8 +48,8 @@
                 <div class="row3 checkbox_wrap">
                   <input type="checkbox" id="saveUserId" name="saveUserId" class="blind">
                   <label for="saveUserId">아이디 기억하기</label>
-                  <input type="checkbox" id="remember-me" class="blind">
-                  <label for="remember-me">로그인 상태 유지</label>
+                  <input type="checkbox" id="rememberMe" name="rememberMe" class="blind">
+                  <label for="rememberMe">로그인 상태 유지</label>
                 </div>
                 <!-- 로그인 실패시 실패 메세지 띄우기 -->
                 <c:if test="${param.error != null }">

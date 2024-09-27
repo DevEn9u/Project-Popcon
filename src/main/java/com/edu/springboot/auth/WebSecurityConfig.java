@@ -15,12 +15,17 @@ import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
 
 import jakarta.servlet.DispatcherType;
-
+/*
+ Spring boot부터 WebSecurityConfigurerAdapter는 deprecated되어
+ @Override를 이용한 방식이 사라지고 아래와 같이 @Configuration과 @Bean을
+ 이용해 filterChain을 구성한다.
+ */
 @Configuration
 public class WebSecurityConfig {	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http)
 			throws Exception {
+		// Spring 6부터 Lambda 표현식이 필수사항
 		http.csrf((csrf) -> csrf.disable())
 			.cors((cors) -> cors.disable())
 			.authorizeHttpRequests((request) -> request
@@ -54,7 +59,7 @@ public class WebSecurityConfig {
 		/* 로그인 정보 저장 */
 //		http.rememberMe((rememberMe) -> rememberMe
 //				.key("uniqueKey")
-//				.tokenValiditySeconds(86400)
+//				.tokenValiditySeconds(3600 * 24 * 7) // 토큰 유지 기간(7일)
 //		);
 //		
 		/* 로그아웃에 대한 커스터마이징 */
