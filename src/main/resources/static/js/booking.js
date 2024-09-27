@@ -1,3 +1,4 @@
+let basePrice = 0;
 $(function () {
 	// booking_select 달력 동적으로 삽입
 	var today = new Date();
@@ -57,7 +58,7 @@ $(function () {
 				let selectedDate = $(this).text();
 				let nowYear = today.getFullYear();
 				let nowMonth = today.getMonth() + 1; // 월은 0부터 시작하므로 +1
-				            // 선택한 날짜를 readonly input에 표시
+				// 선택한 날짜를 readonly input에 표시
 				$("#selectedDate").val(`${nowYear}-${nowMonth}-${selectedDate}`);
 		
 				// 가격 및 인원 선택 UI 표시
@@ -92,35 +93,37 @@ $(function () {
 	
 	buildCalendar();
 	
-	// 인원 수 조절 버튼 클릭 이벤트
-	$(".plus_btn").click(function() {
-		if(headcount<10){	
-		    headcount++;
-		    updateDisplay();
-		}
-	});
-	
-	$(".min_btn").click(function() {
-	    if (headcount > 1) {
-	        headcount--;
-	        updateDisplay();
-	    }
-	});
-	
-	function updateDisplay() {
-	    // 가격과 인원 수 업데이트
-	    $(".count_window").text(headcount); // 인원 수 표시
-	    $(".count_pay").text(headcount * price + "원"); // 가격 표시
+	// 인원 수에 따른 가격 업데이트 함수
+	function updatePrice() {
+	    let totalPrice = basePrice * headcount; // 총 가격 계산
+	    $("#price").val(totalPrice); // 총 가격을 input 필드에 반영
 	}
 	
-	// 초기 디스플레이 설정
-	updateDisplay();
+	// 인원 수 조절 버튼 클릭 이벤트
+	$(".plus_btn").on('click', function() {
+		if(headcount < 10) {
+	    	headcount++;
+		}
+	    $("input[name='headcount']").val(headcount); // 입력 필드의 값 업데이트
+		updatePrice();
+	});
 	
+	$(".min_btn").on('click', function() {
+		if(headcount > 1 ) {
+			headcount--;
+		}
+		    $("input[name='headcount']").val(headcount); // 입력 필드의 값 업데이트
+			updatePrice();
+	});
+	
+
 	$(".bs_booking_btn").on('click', function() {
 	    // 입력값 가져오기 및 유효성 검사
 	    const visitDate = $("#selectedDate").val();
-	    const headcount = parseInt($(".count_pay").val());
-	    const price = parseInt($(".count_window").val());
+	    const headcount = parseInt($("#headcount").val());
+	    const price = parseInt($("#price").val());
+		
+		console.log("headcount:", $("#headcount").val(), "price:", $("#price").val());
 
 	    // Ajax 요청
 	    $.ajax({
@@ -135,7 +138,7 @@ $(function () {
 	        success: function(response) {
 	            alert("예약이 완료되었습니다" + "마이페이지에서 예약내역을 확인하세요");
 	            // 예약 성공 후 이동할 페이지로 리디렉션
-	            window.location.href = '/mypage/mypage.do';
+	            window.location.href = '/popupBoard/select.do';
 				console.log("예약 완료");
 	        },
 	        error: function(error) {
@@ -144,6 +147,7 @@ $(function () {
 	        }
 	    });
 	});
+	updatePrice();
 });
 
 	

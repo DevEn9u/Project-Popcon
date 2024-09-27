@@ -77,10 +77,12 @@
 		          </li>
 		          <li class="count_wrap">
 		            <p class="count_type">일반</p>
-		            <p class="count_pay">${headcount * price}원</p>
+		            <p class="count_pay"><input type="number" name="price" id="price" value="" />원</p>
 		            <div class="pm_wrap">
 		              <button class="plus_btn" aria-label="Add one item">+</button>
-		              <div class="count_window">${headcount}</div>
+		              <div class="count_window">
+						<input type="number" name="headcount" id="headcount" value="1" />
+					  </div>
 		              <button class="min_btn" aria-label="Remove one item">-</button>
 		            </div>
 		          </li>
