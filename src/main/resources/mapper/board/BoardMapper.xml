@@ -26,6 +26,10 @@
             postdate = SYSDATE
         WHERE board_idx = #{board_idx}
     </update>
+	<delete id="deleteBoard" parameterType="String">
+	    DELETE FROM BOARD WHERE board_idx = #{board_idx}
+	</delete>
+
 
 
 

@@ -18,36 +18,21 @@ public class BoardController {
 
 	@Autowired
     private final BoardService boardService;
-
+	///////////////////////////////////////////////자유게시판///////////////////////////////////////////////////////////
+	// 자유게시판 목록
     @GetMapping("/freeBoard/list.do")
     public String listBoards(Model model) {
         List<BoardDTO> boardList = boardService.getFreeBoards();
         model.addAttribute("boardList", boardList);
         return "boards/free-board-list";
     }
-    
-    @GetMapping("/noticeBoard/list.do")
-    public String getNoticeBoard(Model model) {
-        List<BoardDTO> noticeList = boardService.getNoticeBoards();
-        model.addAttribute("noticeList", noticeList);
-        return "boards/notice-board-list";
-    }
-    
+    // 자유게시판 상세보기
     @GetMapping("/freeBoard/view.do")
     public String freeBoardView(@RequestParam("board_idx") String boardIdx, Model model) {
         BoardDTO board = boardService.getBoardById(boardIdx);
         model.addAttribute("dto", board);
         return "boards/free-board-view";
     }
-    // 공지게시판 상세보기 메서드
-    @GetMapping("/noticeBoard/view.do")
-    public String viewNoticeBoard(@RequestParam("board_idx") String boardIdx, Model model) {
-        BoardDTO boardDTO = boardService.getBoardById(boardIdx);
-        model.addAttribute("dto", boardDTO);
-        return "boards/notice-board-view";
-    }
-    
-    // 자유게시판 글 작성
     // 게시글 작성 화면 호출
     @GetMapping("/freeBoard/write.do")
     public String writeBoardForm() {
@@ -65,7 +50,6 @@ public class BoardController {
         redirectAttributes.addFlashAttribute("message", "게시글이 등록되었습니다.");
         return "redirect:/freeBoard/list.do";
     }
-    // 자유게시판 글 수정
     // 게시글 수정 화면 호출
     @GetMapping("/freeBoard/edit.do")
     public String editFreeBoardForm(@RequestParam("board_idx") String boardIdx, Model model) {
@@ -81,14 +65,33 @@ public class BoardController {
         redirectAttributes.addFlashAttribute("message", "게시글이 수정되었습니다.");
         return "redirect:/freeBoard/view.do?board_idx=" + boardIdx;
     }
-
-    //공지 글 작성
-    // 게시글 작성 화면 호출
+    @GetMapping("/freeBoard/delete.do")
+    public String deleteFreeBoard(@RequestParam("board_idx") String board_idx) {
+        boardService.deleteBoard(board_idx);
+        return "redirect:/freeBoard/list.do";
+    }
+    
+    ///////////////////////////////////////////////////////공지/////////////////////////////////////////////////////
+    // 공지 목록
+    @GetMapping("/noticeBoard/list.do")
+    public String getNoticeBoard(Model model) {
+        List<BoardDTO> noticeList = boardService.getNoticeBoards();
+        model.addAttribute("noticeList", noticeList);
+        return "boards/notice-board-list";
+    }
+    // 공지 상세보기 
+    @GetMapping("/noticeBoard/view.do")
+    public String viewNoticeBoard(@RequestParam("board_idx") String boardIdx, Model model) {
+        BoardDTO boardDTO = boardService.getBoardById(boardIdx);
+        model.addAttribute("dto", boardDTO);
+        return "boards/notice-board-view";
+    }
+    // 공지 작성 화면 호출
     @GetMapping("/noticeBoard/write.do")
     public String writeNoticeBoardForm() {
         return "boards/notice-board-write"; // 게시글 작성 JSP 파일
     }
-    // 게시글 작성 처리
+    // 공지 작성 처리
     @PostMapping("/noticeBoard/write.do")
     public String writeNoticePost(BoardDTO boardDTO, RedirectAttributes redirectAttributes) {
         // board_type을 'notice'로 설정
@@ -98,16 +101,14 @@ public class BoardController {
         redirectAttributes.addFlashAttribute("message", "공지사항이 등록되었습니다.");
         return "redirect:/noticeBoard/list.do";
     }
-    //공지 글 수정
-    // 게시글 수정 화면 호출
+    // 공지 수정 화면 호출
     @GetMapping("/noticeBoard/edit.do") // 경로를 edit로 변경
     public String editNoticeBoardForm(@RequestParam("board_idx") String boardIdx, Model model) {
         BoardDTO boardDTO = boardService.getBoardById(boardIdx);
         model.addAttribute("dto", boardDTO); // 게시글 정보를 모델에 추가
         return "boards/notice-board-edit"; // 수정 JSP 파일
     }
-
-    // 게시글 수정 처리
+    // 공지 수정 처리
     @PostMapping("/noticeBoard/update.do")
     public String editPost(@RequestParam("board_idx") String boardIdx, BoardDTO boardDTO, RedirectAttributes redirectAttributes) {
         boardDTO.setBoard_idx(boardIdx);
@@ -115,7 +116,12 @@ public class BoardController {
         redirectAttributes.addFlashAttribute("message", "게시글이 수정되었습니다.");
         return "redirect:/noticeBoard/view.do?board_idx=" + boardIdx;
     }
-
+    // 공지 삭제
+    @GetMapping("/noticeBoard/delete.do")
+    public String deleteNoticeBoard(@RequestParam("board_idx") String board_idx) {
+        boardService.deleteBoard(board_idx);
+        return "redirect:/noticeBoard/list.do";
+    }
 
 
 }

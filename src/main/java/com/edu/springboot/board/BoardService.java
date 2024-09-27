@@ -35,5 +35,8 @@ public class BoardService {
     public void update(BoardDTO boardDTO) {
         boardMapper.updateBoard(boardDTO); 
     }
+    public void deleteBoard(String board_idx) {
+        boardMapper.deleteBoard(board_idx);
+    }
 
 }

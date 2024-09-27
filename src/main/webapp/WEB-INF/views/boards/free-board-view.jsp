@@ -65,7 +65,7 @@
                 <button type="button" class="btn board_btn" onclick="location.href='./edit.do?board_idx=${dto.board_idx}';">
                   수정하기
                 </button>
-                <button type="button" class="btn del_btn board_btn" onclick="deletePost();">
+                <button type="button" class="btn del_btn board_btn" onclick="if(confirm('정말 삭제하시겠습니까?')) { location.href='../freeBoard/delete.do?board_idx=${dto.board_idx}'; }">
                   삭제하기
                 </button>
               </c:if>

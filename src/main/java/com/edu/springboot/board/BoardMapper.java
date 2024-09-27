@@ -13,4 +13,6 @@ public interface BoardMapper {
     BoardDTO selectBoardById(String boardIdx); // 자유게시판 게시글 상세 정보 조회
     void insertBoard(BoardDTO boardDTO); // 게시글 작성 메서드
     void updateBoard(BoardDTO boardDTO); // 게시글 수정 메서드
+    public void deleteBoard(String board_idx);
+
 }
