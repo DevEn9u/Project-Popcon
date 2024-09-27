@@ -6,10 +6,15 @@
 <head>
 <c:import url="../include/head.jsp" />
 <c:import url="../include/header.jsp" var="common_header" />
+<c:import url="../include/footer.jsp" var="common_footer" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <link rel="stylesheet" href="/css/booking_select.css?v=<?php echo time(); ?>">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/js/booking.js?v=<?php echo time(); ?>"></script>
 </head>
-<c:import url="../include/footer.jsp" var="common_footer" />
+<script>
+	
+</script>
   <body>
   	${common_header }
 	<main id="bs_container">
@@ -31,12 +36,13 @@
 		    <div class="inner">
 		      <div class="bs_booking_main">
 		        <div class="caution_wrap">
-		          <h2 class="booking_caution1">⸰예매 시 바로 확정</h2>
-		          <h2 class="booking_caution2">⸰최대 10매까지 예매 가능</h2>
+		          <h2 class="booking_caution1">⸰ 예매 시 바로 확정</h2>
+		          <h2 class="booking_caution2">⸰ 최대 10매까지 예매 가능</h2>
 		        </div>
 		        <ul class="select_wrap1">
 		          <li class="select_date">
-		            <img src="../images/imgMGJ/calendar_icon.png" />일정을 선택하세요
+		            <img class=date_img src="../images/imgMGJ/calendar_icon.png" />
+					<p>일정을 선택하세요</p>
 		          </li>
 		          <li class="select_calendar">
 		            <table id="calendar">
@@ -59,16 +65,22 @@
 		              <tbody>
 		              </tbody>
 		            </table>
+					<!-- 클릭한 날짜가 보이는 readonly input 추가 -->
+					<div class="selected-date-container">
+					    <label for="selectedDate">선택한 날짜: </label>
+					    <input type="text" id="selectedDate" class="selected-date" readonly />
+					</div>
 		          </li>
 		          <li class="select_count">
-		            <img src="../images/imgMGJ/mypage_icon.png" />인원/수량을 선택하세요
+		            <img class="date_img" src="../images/imgMGJ/mypage_icon.png" />
+					<p>인원/수량을 선택하세요</p>
 		          </li>
 		          <li class="count_wrap">
-		            <div class="count_type">일반</div>
-		            <div class="count_pay">10,000원</div>
+		            <p class="count_type">일반</p>
+		            <p class="count_pay">${headcount * price}원</p>
 		            <div class="pm_wrap">
 		              <button class="plus_btn" aria-label="Add one item">+</button>
-		              <div class="count_window">1</div>
+		              <div class="count_window">${headcount}</div>
 		              <button class="min_btn" aria-label="Remove one item">-</button>
 		            </div>
 		          </li>
