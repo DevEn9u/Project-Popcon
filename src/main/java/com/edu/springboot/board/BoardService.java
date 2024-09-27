@@ -31,5 +31,9 @@ public class BoardService {
     public void write(BoardDTO boardDTO) {
         boardMapper.insertBoard(boardDTO); // 매퍼에서 게시글 삽입
     }
+    // 게시글 수정 메서드
+    public void update(BoardDTO boardDTO) {
+        boardMapper.updateBoard(boardDTO); 
+    }
 
 }

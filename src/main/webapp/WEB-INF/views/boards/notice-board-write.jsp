@@ -34,7 +34,7 @@
         <div class="inner">
           <h3>게시글 작성</h3> <!-- 부제목 -->
           <div class="board_write">
-            <form name="writeFrm" method="post" action="../notice-board/write.do"
+            <form name="writeFrm" method="post" action="/noticeBoard/write.do"
               onsubmit="return validateForm(this)">
              <table>
                <caption class="nohead">게시글 작성</caption>

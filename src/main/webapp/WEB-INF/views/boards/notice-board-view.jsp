@@ -38,7 +38,7 @@
               <p class="date"><fmt:formatDate value="${board.postdate}" pattern="yyyy.MM.dd" /></p>
               <p class="date">작성자 : ${dto.writer}</p>
               <p class="date">조회수 : ${dto.visitcount}</p>
-              <form name="deleteFrm" method="post" action="./delete.do?idx=${dto.board_idx}">
+              <form name="deleteFrm" method="post" action="./delete.do?board_idx=${dto.board_idx}">
                 <input type="hidden" name="idx" value="${dto.board_idx}" />
               </form>
             </div>
@@ -50,7 +50,7 @@
             </div>
             <div class="btn_wrap">
               <c:if test="${ user_id != null && user_id.toString().equals(dto.writer)}">
-                <button type="button" class="btn board_btn" onclick="location.href='./edit.do?idx=${dto.board_idx}';">
+                <button type="button" class="btn board_btn" onclick="location.href='./edit.do?board_idx=${dto.board_idx}';">
                   수정하기
                 </button>
                 <button type="button" class="btn del_btn board_btn" onclick="deletePost();">
