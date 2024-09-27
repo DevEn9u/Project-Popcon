@@ -13,5 +13,5 @@ public class MemberDTO {
 	private String phone;
 	private int point;
 	private String business_number;
-	private int enabled;
+	private int enabled; 
 }
