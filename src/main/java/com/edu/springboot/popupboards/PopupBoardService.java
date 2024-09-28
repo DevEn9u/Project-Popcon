@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.edu.springboot.board.BoardDTO;
+
 @Service
 public class PopupBoardService {
 
@@ -28,6 +30,16 @@ public class PopupBoardService {
     //글쓰기
     public int writePost(PopupBoardDTO post) {
         return popupBoardMapper.write(post); // DTO 전체를 전달
+    }
+    
+    //글삭제
+    public void delete(String board_idx) {
+        popupBoardMapper.delete(board_idx);
+    }
+    
+    //글수정
+    public void edit(PopupBoardDTO popupboardDTO) {
+        popupBoardMapper.edit(popupboardDTO); 
     }
     
 }

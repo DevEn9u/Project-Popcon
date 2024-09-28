@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,6 +56,8 @@ public class PopupController {
                                  @RequestParam("end_date") String end_date,
                                  @RequestParam("popup_addr") String popup_addr,
                                  @RequestParam("category") String category,
+                                 @RequestParam("open_days") String open_days,
+                                 @RequestParam("open_hours") String open_hours,
                                  HttpServletRequest req) {
         // 로그인한 사용자의 정보를 가져옴
         String writer = req.getUserPrincipal().getName();
@@ -78,6 +81,8 @@ public class PopupController {
         post.setCategory(category);
         post.setWriter(writer);
         post.setRole(role);
+        post.setOpen_days(open_days);
+        post.setOpen_hours(open_hours);
 
         popupBoardMapper.write(post);
 
@@ -85,9 +90,39 @@ public class PopupController {
     }
 
 
-    // 팝업안내 - 글 수정
+//    // 팝업안내 - 글 수정
+//    @GetMapping("/popupBoard/edit.do")
+//    public String popupedit() {
+//        return "/popup-boards/popup-board-edit";
+//    }
+    
+    
+//    // 글 수정 폼 보여주기
+//    @GetMapping("/popupBoard/edit/{board_idx}")
+//    public String popupEdit(@PathVariable("board_idx") String board_idx, Model model) {
+//        PopupBoardDTO popupboardDTO = popupBoardMapper.popupView(board_idx); // 현재 게시글 데이터 가져오기
+//        model.addAttribute("popup", popupboardDTO);
+//        return "/popup-boards/popup-board-edit"; // 수정 페이지로 이동
+//    }
+    
     @GetMapping("/popupBoard/edit.do")
-    public String popupedit() {
-        return "/popup-boards/popup-board-edit";
+    public String popupEdit(@RequestParam("board_idx") String board_idx, Model model) {
+        PopupBoardDTO popupBoard = popupBoardMapper.popupView(board_idx); // 게시물 세부정보 가져오기
+        model.addAttribute("dto", popupBoard);
+        return "/popup-boards/popup-board-edit"; // 수정 페이지로 이동
+    }
+
+    // 글 수정 처리
+    @PostMapping("/popupBoard/edit.do")
+    public String popupEditPost(@ModelAttribute PopupBoardDTO popupboardDTO) {
+        popupBoardMapper.edit(popupboardDTO); // 서비스 호출하여 게시글 수정
+        return "redirect:/popupBoard/view/" + popupboardDTO.getBoard_idx(); // 수정 후 게시글 보기로 리다이렉트
+    }
+
+    //글삭제
+    @PostMapping("/popupBoard/delete.do")
+    public String delete(@RequestParam("board_idx") String board_idx) {
+        popupBoardMapper.delete(board_idx);
+        return "redirect:/popupBoard/list.do";
     }
 }

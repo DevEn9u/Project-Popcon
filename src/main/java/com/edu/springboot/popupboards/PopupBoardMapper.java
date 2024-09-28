@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.edu.springboot.board.BoardDTO;
+
 @Mapper
 public interface PopupBoardMapper {
     
@@ -15,11 +17,16 @@ public interface PopupBoardMapper {
     // 카테고리 기준으로 글 목록 보기
     List<PopupBoardDTO> selectByCategory(@Param("category") String category);
    
-  
+    //글쓰기
     public int write(PopupBoardDTO post);
     
     //글보기
     public PopupBoardDTO popupView(String board_idx);
     
+    //글삭제
+    public void delete(String board_idx);
+    
+    //글수정
+    void edit(PopupBoardDTO popupboardDTO);
 
 }

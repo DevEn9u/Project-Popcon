@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="/css/popup_view.css">
 <body>
 
+
+
   <!-- 주소복사기능 -->
   <script>
   function copyToClipboard(text) {
@@ -18,6 +20,17 @@
       console.error('복사 실패:', err);
     });
   }
+  </script>
+  
+  <script>
+	// 게시물 삭제를 위한 함수
+	function deletePost() {
+		let confirmed = confirm("게시물을 삭제하겠습니까?");
+		if (confirmed) {
+			let form = document.deleteFrm;
+			form.submit(); 
+		}
+	}
   </script>
   ${common_header }
   <main id="popup_view_container">
@@ -92,7 +105,14 @@
          <!-- 작성자와 비작성자에 따른 버튼 표시 -->
             <c:choose>
               <c:when test="${popup.writer == pageContext.request.userPrincipal.name}">
-                  <button class="pv_delete_btn" >삭제하기</button>
+                  <form id="deleteForm" action="${pageContext.request.contextPath}/popupBoard/delete.do" method="post">
+    				<input type="hidden" name="board_idx" value="${popup.board_idx}" />
+    				<button class="pv_delete_btn" type="button" onclick="if(confirm('정말 삭제하시겠습니까?')) { document.getElementById('deleteForm').submit(); }">삭제하기</button>
+				  </form>
+				  <form action="${pageContext.request.contextPath}/popupBoard/edit.do" method="get">
+        			<input type="hidden" name="board_idx" value="${popup.board_idx}" />
+        			<button class="pv_edit_btn" type="submit">수정하기</button>
+    			  </form>
               </c:when>
               <c:otherwise>
                 <button class="pv_booking_btn" onclick="location.href='../booking.do';">예약하기</button>
@@ -107,13 +127,13 @@
             <img src="${pageContext.request.contextPath}/images/imgMGJ/pin.svg" /> ${popup.popup_addr}
           </span>
         </div>
-        <div class="open_time_wrap">
-          <h2 class="open_time">운영 시간</h2>
-          <div class="weekdays">
-            월 - 금 11:00 ~ 17:00 <br />
-            토 10:30 ~ 16:30
-          </div>
-        </div>
+		<div class="open_time_wrap">
+    		<h2 class="open_time">운영 시간</h2>
+    		<div class="weekdays">
+        		${popup.open_days} ${popup.open_hours}
+    		</div>
+		</div>
+
         <div class="content">
           <h2 class="content_tit">팝업 스토어 소개</h2>
           <div class="main_content">
