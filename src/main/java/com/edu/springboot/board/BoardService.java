@@ -38,5 +38,26 @@ public class BoardService {
     public void deleteBoard(String board_idx) {
         boardMapper.deleteBoard(board_idx);
     }
+    
+    public List<BoardDTO> getFreeBoardsWithPaging(int page) {
+        int limit = 10; // 한 페이지에 보여줄 게시글 수
+        int offset = (page - 1) * limit; // 시작 위치
+        return boardMapper.getFreeBoardsWithPaging(offset, limit);
+    }
+
+    public List<BoardDTO> getNoticeBoardsWithPaging(int page) {
+        int limit = 10; // 한 페이지에 보여줄 게시글 수
+        int offset = (page - 1) * limit; // 시작 위치
+        return boardMapper.getNoticeBoardsWithPaging(offset, limit);
+    }
+
+    public int getFreeBoardCount() {
+        return boardMapper.getFreeBoardCount();
+    }
+
+    public int getNoticeBoardCount() {
+        return boardMapper.getNoticeBoardCount();
+    }
+
 
 }

@@ -51,11 +51,30 @@
 				    </c:forEach>
 				</tbody>
             </table>
-            <table>
-              <caption>페이징</caption>
-              <!-- 게시판 페이징은 JSP로 작업 예정 -->
-              <td>첫페이지 이전 1 2 3 다음 마지막 페이지</td>
-            </table>
+			<table>
+			    <caption>페이징</caption>
+			    <tr>
+			        <td>
+			            <c:if test="${currentPage > 1}">
+			                <a href="./list.do?page=${currentPage - 1}">이전</a>
+			            </c:if>
+			            <c:forEach var="i" begin="1" end="${totalPages}">
+			                <c:choose>
+			                    <c:when test="${i == currentPage}">
+			                        <strong>${i}</strong>
+			                    </c:when>
+			                    <c:otherwise>
+			                        <a href="./list.do?page=${i}">${i}</a>
+			                    </c:otherwise>
+			                </c:choose>
+			            </c:forEach>
+			            <c:if test="${currentPage < totalPages}">
+			                <a href="./list.do?page=${currentPage + 1}">다음</a>
+			            </c:if>
+			        </td>
+			    </tr>
+			</table>
+
           </div>
         </div>
       </div>

@@ -19,9 +19,9 @@
     }
 
     function validateForm(form) {
-        if (form.title.value.trim() === "") {
+        if (form.board_title.value.trim() === "") {
             alert("제목을 입력해주세요.");
-            form.title.focus();
+            form.board_title.focus();
             return false;
         }
         if (form.contents.value.trim() === "") {
