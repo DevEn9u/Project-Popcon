@@ -26,6 +26,10 @@ public class BoardService {
     public BoardDTO getBoardById(String boardIdx) {
         return boardMapper.selectBoardById(boardIdx);
     }
+    public void updateVisitCount(String boardIdx) {
+        boardMapper.updateVisitCount(boardIdx);
+    }
+
     
     // 게시글 작성 메서드 추가
     public void write(BoardDTO boardDTO) {

@@ -52,6 +52,11 @@
 	<select id="getNoticeBoardCount" resultType="int">
 	    SELECT COUNT(*) FROM BOARD WHERE board_type = 'notice'
 	</select>
+	<update id="updateVisitCount">
+	    UPDATE BOARD
+	    SET visitcount = visitcount + 1
+	    WHERE board_idx = #{boardIdx}
+	</update>
 
 
 

@@ -20,5 +20,7 @@ public interface BoardMapper {
     List<BoardDTO> getNoticeBoardsWithPaging(@Param("offset") int offset, @Param("limit") int limit);
     int getFreeBoardCount(); // 자유게시판 게시글 수
     int getNoticeBoardCount(); // 공지게시판 게시글 수
+    void updateVisitCount(String boardIdx);
+
 
 }
