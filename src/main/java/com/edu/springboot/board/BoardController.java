@@ -19,12 +19,18 @@ public class BoardController {
     private final BoardService boardService;
 	///////////////////////////////////////////////자유게시판///////////////////////////////////////////////////////////
 	// 자유게시판 목록
-    @GetMapping("/freeBoard/list.do")
-    public String listBoards(Model model) {
-        List<BoardDTO> boardList = boardService.getFreeBoards();
-        model.addAttribute("boardList", boardList);
-        return "boards/free-board-list";
-    }
+	@GetMapping("/freeBoard/list.do")
+	public String listBoards(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+	    List<BoardDTO> boardList = boardService.getFreeBoardsWithPaging(page);
+	    int totalBoardCount = boardService.getFreeBoardCount();
+	    int totalPages = (int) Math.ceil((double) totalBoardCount / 10); // 총 페이지 수
+
+	    model.addAttribute("boardList", boardList);
+	    model.addAttribute("currentPage", page);
+	    model.addAttribute("totalPages", totalPages);
+	    return "boards/free-board-list";
+	}
+
     // 자유게시판 상세보기
     @GetMapping("/freeBoard/view.do")
     public String freeBoardView(@RequestParam("board_idx") String boardIdx, Model model) {
@@ -71,13 +77,19 @@ public class BoardController {
     }
     
     ///////////////////////////////////////////////////////공지/////////////////////////////////////////////////////
-    // 공지 목록
+ // 공지 목록
     @GetMapping("/noticeBoard/list.do")
-    public String getNoticeBoard(Model model) {
-        List<BoardDTO> noticeList = boardService.getNoticeBoards();
+    public String getNoticeBoard(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+        List<BoardDTO> noticeList = boardService.getNoticeBoardsWithPaging(page);
+        int totalBoardCount = boardService.getNoticeBoardCount();
+        int totalPages = (int) Math.ceil((double) totalBoardCount / 10); // 총 페이지 수
+
         model.addAttribute("noticeList", noticeList);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
         return "boards/notice-board-list";
     }
+
     // 공지 상세보기 
     @GetMapping("/noticeBoard/view.do")
     public String viewNoticeBoard(@RequestParam("board_idx") String boardIdx, Model model) {
