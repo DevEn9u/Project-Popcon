@@ -112,8 +112,6 @@ function idCheck() {
 
 // 가입시 핸드폰 번호 포맷
 function formatPhoneNumber(input) {
-  let phone = document.registerFrm.phone.value;
-  
   let cleanedInput = input.value.replace(/[^\d]/g, '');
   
   cleanedInput = cleanedInput.slice(0, 11);
@@ -131,8 +129,6 @@ function formatPhoneNumber(input) {
 }
 // 가입시 사업자 번호 포맷
 function formatBusinessNumber(input) {
-  let phone = document.registerFrm.businessNumber.value;
-  
   let cleanedInput = input.value.replace(/[^\d]/g, '');
   
   cleanedInput = cleanedInput.slice(0, 10);
@@ -172,8 +168,8 @@ function isValidPhone(phone) {
 	return regex.test(phone);
 }
 // 사업자번호 유효성 검사
-function isValidBusiness(businessNumber) {
+function isValidBusiness(business_number) {
 	// 사업자 번호는 000-11-22222 형태의 10자리
 	const regex = /^[0-9]{3}-[0-9]{2}-[0-9]{5}$/;
-	return regex.test(businessNumber);
+	return regex.test(business_number);
 }

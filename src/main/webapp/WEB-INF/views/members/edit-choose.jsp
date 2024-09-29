@@ -29,12 +29,12 @@
             <p>수정할 정보를 선택하세요.</p>
             <ul class="choose_type">
             	<c:if test="${memberDTO.authority == 'ROLE_NORMAL' }">
-	              <li><a href="./edit-normal-info.do">가입 정보 변경</a></li>
-    	          <li><a href="./edit-normal-pass.do">비밀번호 변경</a></li>
+	              <li><a href="./edit-info.do">가입 정보 변경</a></li>
+    	          <li><a href="./edit-pass.do">비밀번호 변경</a></li>
             	</c:if>
             	<c:if test="${memberDTO.authority == 'ROLE_CORP' }">
-              		<li><a href="./edit-corp-info.do">가입 정보 변경</a></li>
-              		<li><a href="./edit-corp-pass.do">비밀번호 변경</a></li>
+              		<li><a href="./edit-info.do">가입 정보 변경</a></li>
+              		<li><a href="./edit-pass.do">비밀번호 변경</a></li>
               	</c:if>
             </ul>
           </div>

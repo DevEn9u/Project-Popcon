@@ -38,9 +38,9 @@
               <div class="input_wrap">
                 <input type="hidden" name="idDuplication" value="idUnchecked" />
                 <div class="item_pass">비밀번호 :</div>
-                <input type="password" name="pass" class="input_pass" placeholder="8자 이상의 비밀번호를 입력해주세요.">
+                <input type="password" name="pass" class="input_pass" placeholder="8자 이상의 비밀번호를 입력해주세요." autocomplete="off">
                 <div class="item_pass2">비밀번호 확인 :</div>
-                <input type="password" name="pass2" class="input_pass2" placeholder="비밀번호 확인을 위해 같은 비밀번호를 입력해주세요.">
+                <input type="password" name="pass2" class="input_pass2" placeholder="비밀번호 확인을 위해 같은 비밀번호를 입력해주세요." autocomplete="off">
               </div>
               <div class="input_wrap">
                 <div class="item_name">이름 :</div>

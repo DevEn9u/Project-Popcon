@@ -30,9 +30,12 @@
 	</select>
 	<!-- 회원 정보 수정 - 계정 정보 수정하기 -->
 	<update id="editMemberInfo" parameterType="com.edu.springboot.member.MemberDTO">
-		UPDATE member SET email = #{email}, phone = #{phone} WHERE id = #{id} 
+		UPDATE member
+		SET email = #{email},
+			phone = #{phone},
+			business_number = #{business_number} WHERE id = #{id} 
 	</update>
-	<!-- 회원 정보 수정 - 계정 비밃너호 수정하기 -->
+	<!-- 회원 정보 수정 - 계정 비밀번호 수정하기 -->
 	<update id="editMemberPass" parameterType="com.edu.springboot.member.MemberDTO">
 		UPDATE member SET pass = #{pass} WHERE id = #{id} 
 	</update>

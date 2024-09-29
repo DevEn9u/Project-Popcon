@@ -51,3 +51,53 @@ function isFieldValid(field, errorMsg) {
     }
     return true;
 }
+
+// 가입시 핸드폰 번호 포맷
+function formatPhoneNumber(input) {
+  let phone = document.registerFrm.phone.value;
+  
+  let cleanedInput = input.value.replace(/[^\d]/g, '');
+  
+  cleanedInput = cleanedInput.slice(0, 11);
+  
+  // 3번째 숫자와 7번째 숫자 뒤에 '-'를 추가하여 '010-1234-5678' 구조로 만들기
+  let dashInput = '';
+  
+  for (let i = 0; i < cleanedInput.length; i++) {
+    if (i === 3 || i === 7) {
+      dashInput += '-';
+    }
+    dashInput += cleanedInput[i];
+  }
+  input.value = dashInput;
+}
+
+// 가입시 사업자 번호 포맷
+function formatBusinessNumber(input) {
+  let cleanedInput = input.value.replace(/[^\d]/g, '');
+  
+  cleanedInput = cleanedInput.slice(0, 10);
+  
+  // 3번째 숫자와 5번째 숫자 뒤에 '-'를 추가하여 '010-12-345678' 구조로 만들기
+  let dashInput = '';
+  
+  for (let i = 0; i < cleanedInput.length; i++) {
+    if (i === 3 || i === 5) {
+      dashInput += '-';
+    }
+    dashInput += cleanedInput[i];
+  }
+  input.value = dashInput;
+}
+/*********** 정보 수정 버튼 클릭시 유효성 검사 ************/
+// 이메일 유효성 검사
+function isValidEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+// 핸드폰번호 유효성 검사
+function isValidPhone(phone) {
+	// 휴대폰 번호는 010으로 시작한 11자리여야 한다.
+	const regex = /^010-[0-9]{4}-[0-9]{4}$/;
+	return regex.test(phone);
+}

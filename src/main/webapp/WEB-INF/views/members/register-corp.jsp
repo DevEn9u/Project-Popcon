@@ -38,9 +38,9 @@
               <div class="input_wrap">
                 <input type="hidden" name="idDuplication" value="idUnchecked" />
                 <div class="item_pass">비밀번호 :</div>
-                <input type="password" name="pass" class="input_pass" placeholder="8자 이상의 비밀번호를 입력해주세요.">
+                <input type="password" name="pass" class="input_pass" placeholder="8자 이상의 비밀번호를 입력해주세요." autocomplete="off">
                 <div class="item_pass2">비밀번호 확인 :</div>
-                <input type="password" name="pass2" class="input_pass2" placeholder="비밀번호 확인을 위해 같은 비밀번호를 입력해주세요.">
+                <input type="password" name="pass2" class="input_pass2" placeholder="비밀번호 확인을 위해 같은 비밀번호를 입력해주세요." autocomplete="off">
               </div>
               <div class="input_wrap">
                 <div class="item_com_name">회사명 :</div>
@@ -54,7 +54,7 @@
                 <div class="item_phone">전화번호 :</div>
                 <input type="text" name="phone" class="input_phone" oninput="formatPhoneNumber(this)" placeholder="숫자만 입력해주세요." >
                 <div class="item_business">사업자번호 :</div>
-                <input type="text" name="businessNumber" class="input_business" oninput="formatBusinessNumber(this)" placeholder="숫자만 입력해주세요." >
+                <input type="text" name="business_number" class="input_business" oninput="formatBusinessNumber(this)" placeholder="숫자만 입력해주세요." >
               </div>
               <div class="btn_wrap">
                 <button type="submit" class="btn register_btn">회원가입</button>
