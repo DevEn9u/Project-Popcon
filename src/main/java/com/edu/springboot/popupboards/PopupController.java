@@ -89,22 +89,6 @@ public class PopupController {
         return "redirect:/popupBoard/list.do";
     }
 
-
-//    // 팝업안내 - 글 수정
-//    @GetMapping("/popupBoard/edit.do")
-//    public String popupedit() {
-//        return "/popup-boards/popup-board-edit";
-//    }
-    
-    
-//    // 글 수정 폼 보여주기
-//    @GetMapping("/popupBoard/edit/{board_idx}")
-//    public String popupEdit(@PathVariable("board_idx") String board_idx, Model model) {
-//        PopupBoardDTO popupboardDTO = popupBoardMapper.popupView(board_idx); // 현재 게시글 데이터 가져오기
-//        model.addAttribute("popup", popupboardDTO);
-//        return "/popup-boards/popup-board-edit"; // 수정 페이지로 이동
-//    }
-    
     @GetMapping("/popupBoard/edit.do")
     public String popupEdit(@RequestParam("board_idx") String board_idx, Model model) {
         PopupBoardDTO popupBoard = popupBoardMapper.popupView(board_idx); // 게시물 세부정보 가져오기
