@@ -19,6 +19,46 @@
 	    INSERT INTO BOARD (board_idx, board_title, contents, writer, board_type, postdate, role)
 	    VALUES (NULL, #{board_title}, #{contents}, #{writer}, #{board_type}, SYSDATE, #{role})
 	</insert>
+    <update id="updateBoard" parameterType="com.edu.springboot.board.BoardDTO">
+        UPDATE BOARD
+        SET board_title = #{board_title},
+            contents = #{contents},
+            postdate = SYSDATE
+        WHERE board_idx = #{board_idx}
+    </update>
+	<delete id="deleteBoard" parameterType="String">
+	    DELETE FROM BOARD WHERE board_idx = #{board_idx}
+	</delete>
+	<select id="getFreeBoardsWithPaging" resultType="com.edu.springboot.board.BoardDTO">
+	    SELECT * FROM (
+	        SELECT ROWNUM AS rn, a.* FROM (
+	            SELECT * FROM BOARD WHERE board_type = 'free' ORDER BY postdate DESC
+	        ) a WHERE ROWNUM &lt;= #{offset} + #{limit}
+	    ) WHERE rn &gt; #{offset}
+	</select>
+	
+	<select id="getNoticeBoardsWithPaging" resultType="com.edu.springboot.board.BoardDTO">
+	    SELECT * FROM (
+	        SELECT ROWNUM AS rn, a.* FROM (
+	            SELECT * FROM BOARD WHERE board_type = 'notice' ORDER BY postdate DESC
+	        ) a WHERE ROWNUM &lt;= #{offset} + #{limit}
+	    ) WHERE rn &gt; #{offset}
+	</select>
+	
+	<select id="getFreeBoardCount" resultType="int">
+	    SELECT COUNT(*) FROM BOARD WHERE board_type = 'free'
+	</select>
+	
+	<select id="getNoticeBoardCount" resultType="int">
+	    SELECT COUNT(*) FROM BOARD WHERE board_type = 'notice'
+	</select>
+	<update id="updateVisitCount">
+	    UPDATE BOARD
+	    SET visitcount = visitcount + 1
+	    WHERE board_idx = #{boardIdx}
+	</update>
+
+
 
 
 </mapper>

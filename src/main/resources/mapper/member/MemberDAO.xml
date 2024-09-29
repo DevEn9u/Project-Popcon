@@ -24,12 +24,19 @@
 		SELECT COUNT(*) FROM member WHERE id = #{input_id}
 	</select>
 
-	<!-- 회원 정보 수정 -->
+	<!-- 회원 정보 수정 - 계정 정보 불러오기 -->
 	<select id="getMemberById" resultType="com.edu.springboot.member.MemberDTO">
 		SELECT * FROM member WHERE id = #{id}
 	</select>
-	<!-- 회원 정보 수정 -->
-	<select id="editMemberInfo" resultType="com.edu.springboot.member.MemberDTO">
-		UPDATE member SET email = #{email}, phone = #{phone} WHERE id = #{id} 
-	</select>
+	<!-- 회원 정보 수정 - 계정 정보 수정하기 -->
+	<update id="editMemberInfo" parameterType="com.edu.springboot.member.MemberDTO">
+		UPDATE member
+		SET email = #{email},
+			phone = #{phone},
+			business_number = #{business_number} WHERE id = #{id} 
+	</update>
+	<!-- 회원 정보 수정 - 계정 비밀번호 수정하기 -->
+	<update id="editMemberPass" parameterType="com.edu.springboot.member.MemberDTO">
+		UPDATE member SET pass = #{pass} WHERE id = #{id} 
+	</update>
  </mapper>

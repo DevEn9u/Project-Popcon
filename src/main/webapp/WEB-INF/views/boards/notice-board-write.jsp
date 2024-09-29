@@ -10,12 +10,31 @@
 <script src="../js/file-upload.js"></script>
 <script>
     function checkReset() {
-      if (confirm("게시물을 다시 쓰시겠습니까?")) {
-        let form = document.writeFrm;
-        form.reset();
-      } else {
-        return false;
-      }
+        if (confirm("게시물을 다시 쓰시겠습니까?")) {
+            let form = document.writeFrm;
+            form.reset();
+        } else {
+            return false;
+        }
+    }
+
+    function validateForm(form) {
+        if (form.board_title.value.trim() === "") {
+            alert("제목을 입력해주세요.");
+            form.board_title.focus();
+            return false;
+        }
+        if (form.contents.value.trim() === "") {
+            alert("내용을 입력해주세요.");
+            form.contents.focus();
+            return false;
+        }
+        return true;
+    }
+
+    document.getElementById("upload").onchange = function() {
+        var fileName = this.value.split("\\").pop(); // Get the file name
+        document.querySelector(".file_name").value = fileName; // Set the file name to the input field
     };
 </script>
 <body>
@@ -34,7 +53,7 @@
         <div class="inner">
           <h3>게시글 작성</h3> <!-- 부제목 -->
           <div class="board_write">
-            <form name="writeFrm" method="post" action="../notice-board/write.do"
+            <form name="writeFrm" method="post" action="/noticeBoard/write.do"
               onsubmit="return validateForm(this)">
              <table>
                <caption class="nohead">게시글 작성</caption>
@@ -62,7 +81,7 @@
             </form>
           </div>
         </div>
-      </div>
+      </div> 
     </main>
     <footer id="footer">
 		<div class="inner">

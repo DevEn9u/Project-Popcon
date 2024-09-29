@@ -10,6 +10,7 @@
 <body>
 ${common_header}
 <main id="popup_list_container">
+
     <div class="popup_list_inner">
         <div class="popup_list_title_wrap">
             <h2 class="popup_list_title"><a href="./list.do">팝업안내</a></h2>
@@ -20,6 +21,7 @@ ${common_header}
             <nav class="kategorie_wrap">
                 <ul class="pl_kategorie">
                     <p class="keyword">키워드</p>
+                    <li class="digital_btn"><a href="./list.do">전체보기</a></li>
                     <li class="char_btn"><a href="./list.do?category=캐릭터">캐릭터</a></li>
                     <li class="fassion_btn"><a href="./list.do?category=패션/뷰티">패션/뷰티</a></li>
                     <li><a href="./list.do?category=식품">식품</a></li>
@@ -29,7 +31,6 @@ ${common_header}
                     <li><a href="./list.do?category=전시">전시</a></li>
                     <li class="digital_btn"><a href="./list.do?category=가전/디지털">가전/디지털</a></li>
                     <li class="char_btn"><a href="./list.do?category=아이돌">아이돌</a></li>
-                    <li class="digital_btn"><a href="./list.do">키워드해제</a></li>
                 </ul>
             </nav>
 

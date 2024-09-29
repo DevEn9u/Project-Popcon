@@ -211,7 +211,7 @@
   width: calc(100% - 90px);
 }
 
-/********* 아이디/비번 찾기 ***********/
+/********* 아이디/비번 찾기 *********/
  .find .logo {
    margin-top: 150px;
    text-align: center;
@@ -295,6 +295,12 @@
    color: var(--point--color2);
  }
 
+/********* 회원 정보 수정 *********/ 
+.edit_page .choose_type > li > a {
+	font-size: 36px;
+}
+
+
 /***************** 태블릿 분기점 *****************/
 @media (max-width: 1200px) {
   /********* 로그인 페이지 *********/
@@ -336,4 +342,4 @@
     font-size: 18px;
   }
 }  
-  
+ 

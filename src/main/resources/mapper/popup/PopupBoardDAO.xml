@@ -29,10 +29,28 @@
 
 	<!-- 글 작성기능 -->
 	<insert id="write" parameterType="com.edu.springboot.popupboards.PopupBoardDTO">
-    	INSERT INTO POPUP_BOARD (board_idx, board_title, contents, popup_fee, start_date, end_date, popup_addr, category, writer, role)
-    	VALUES (NULL, #{board_title}, #{contents}, #{popup_fee}, #{start_date}, #{end_date}, #{popup_addr}, #{category}, #{writer}, #{role})
+    	INSERT INTO POPUP_BOARD (board_idx, board_title, contents, popup_fee, start_date, end_date, popup_addr, category, writer, role, open_days, open_hours)
+    	VALUES (NULL, #{board_title}, #{contents}, #{popup_fee}, #{start_date}, #{end_date}, #{popup_addr}, #{category}, #{writer}, #{role}, #{open_days}, #{open_hours})
 	</insert>
 	
-
+	<!-- 글 삭제기능 -->
+	<delete id="delete" parameterType="String">
+	    DELETE FROM POPUP_BOARD WHERE board_idx = #{board_idx}
+	</delete>
+	
+	<!-- 글 수정기능 -->
+	<update id="edit" parameterType="com.edu.springboot.popupboards.PopupBoardDTO">
+        UPDATE popup_board
+        SET board_title = #{board_title},
+            contents = #{contents},
+            popup_fee = #{popup_fee},
+            start_date = #{start_date},
+            end_date = #{end_date},
+            popup_addr = #{popup_addr},
+            category = #{category},
+            open_days = #{open_days},
+            open_hours = #{open_hours}
+        WHERE board_idx = #{board_idx}
+    </update>
 
 </mapper>

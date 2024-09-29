@@ -19,4 +19,6 @@ public class PopupBoardDTO {
     private String role;          // 권한
     private int popup_fee;         // 입장료
     private int likes_count;       // 좋아요 수
+    private String open_days;      // 팝업 오픈 요일
+    private String open_hours;     // 팝업 오픈 시간
 }

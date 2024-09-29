@@ -3,13 +3,25 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html lang="ko">
-<c:import url="../include/head.jsp" />
+<head>
+    <c:import url="../include/head.jsp" />
+</head>
+
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
-<link rel="stylesheet" href="/css/popup_write.css">
+<link rel="stylesheet" href="/css/board.css">
+<script src="../js/file-upload.js"></script>
 <script>
+    function checkReset() {
+      if (confirm("게시물을 다시 쓰시겠습니까?")) {
+        let form = document.writeFrm;
+        form.reset();
+      } else {
+        return false;
+      };
+    };
+
     function validateForm() {
-        // 모든 입력 필드 선택
         const title = document.querySelector('input[name="board_title"]');
         const contents = document.querySelector('textarea[name="contents"]');
         const popupFee = document.querySelector('input[name="popup_fee"]');
@@ -17,8 +29,9 @@
         const endDate = document.querySelector('input[name="end_date"]');
         const popupAddr = document.querySelector('input[name="popup_addr"]');
         const category = document.querySelector('input[name="category"]');
+        const openDays = document.querySelector('input[name="open_days"]');
+        const openHours = document.querySelector('input[name="open_hours"]');
 
-        // 입력 값 체크
         if (!title.value.trim()) {
             alert("제목을 입력해 주세요.");
             title.focus();
@@ -34,7 +47,7 @@
             popupFee.focus();
             return false;
         }
-        if (!/^\d+$/.test(popupFee.value.trim())) { // 숫자만 허용
+        if (!/^\d+$/.test(popupFee.value.trim())) {
             alert("입장료는 숫자만 입력해 주세요.");
             popupFee.focus();
             return false;
@@ -49,12 +62,12 @@
             endDate.focus();
             return false;
         }
-        if (!/^\d{4}-\d{2}-\d{2}$/.test(startDate.value.trim())) { // YYYY-MM-DD 형식 체크
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(startDate.value.trim())) {
             alert("시작 날짜는 YYYY-MM-DD 형식으로 입력해 주세요.");
             startDate.focus();
             return false;
         }
-        if (!/^\d{4}-\d{2}-\d{2}$/.test(endDate.value.trim())) { // YYYY-MM-DD 형식 체크
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(endDate.value.trim())) {
             alert("종료 날짜는 YYYY-MM-DD 형식으로 입력해 주세요.");
             endDate.focus();
             return false;
@@ -67,6 +80,16 @@
         if (!category.value.trim()) {
             alert("카테고리를 입력해 주세요.");
             category.focus();
+            return false;
+        }
+        if (!openDays.value.trim()) {
+            alert("오픈 요일을 입력해 주세요.");
+            openDays.focus();
+            return false;
+        }
+        if (!openHours.value.trim()) {
+            alert("오픈 시간을 입력해 주세요.");
+            openHours.focus();
             return false;
         }
         
@@ -82,7 +105,7 @@
 
     function dateRule(event) {
         const input = event.target;
-        let value = input.value.replace(/[^0-9]/g, ''); // 숫자만 허용
+        let value = input.value.replace(/[^0-9]/g, ''); 
         if (value.length >= 4) {
             value = value.substring(0, 4) + '-' + value.substring(4);
         }
@@ -94,7 +117,7 @@
 
     function payRule(event) {
         const input = event.target;
-        input.value = input.value.replace(/[^0-9]/g, ''); // 숫자만 허용
+        input.value = input.value.replace(/[^0-9]/g, ''); 
     }
 
     window.onload = function() {
@@ -107,80 +130,89 @@
         popupFeeInput.addEventListener('input', payRule);
     }
 </script>
-
 <body>
-    ${common_header}
-    <main id="pw_container">
-        <div class="write_top">
-            <div class="write_wrap">
-                <h2 class="write_tit">팝업 안내</h2>
-                <h3 class="sub_tit">게시글 작성</h3>
-            </div>
+  <div id="skip_navi">
+    <a href="#container">본문 바로가기</a>
+  </div>
+  <div id="wrap">
+  	${common_header}
+    <main id="container" class="board_page board_write sub_container">
+      <div class="sub_top">
+        <div class="inner">
+          <h2>팝업게시판 - 작성</h2>
         </div>
-        <div class="pw_inner">
-            <div class="board_write_wrap">
-                <form action="/popupBoard/write.do" method="post">
-                    <table>
-                        <caption class="nohead"></caption>
-                        <tr>
-                            <td class="col_mid col_tit">
-                                제목 : 
-                                <input type="text" class="write_input" name="board_title" placeholder="제목을 입력해주세요" required/>
-                            </td>
-                        </tr>
-                        <tr class="tr_content">
-                            <td class="col_mid col_content">
-                                <span class="pw_content_tit">내용 <br /></span>
-                                <textarea class="inner_input" name="contents" placeholder="내용을 입력해주세요" required></textarea>
-                                <div class="pw_pay_wrap">
-                                    <div class="pw_pay">
-                                        <span class="pay_tit">입장료 :</span>
-                                        <input type="text" class="pay_input" name="popup_fee" placeholder="숫자만 입력해주세요" required/>
-                                    </div>
-                                </div>
-
-                                <div class="pw_date">
-                                    <div class="date_start">
-                                        <span class="popup_tit">팝업일정 :</span>
-                                        <input type="text" class="start_input" name="start_date" placeholder="시작: YYYY-MM-DD" required/>
-                                    </div>
-                                    <div class="date_end">
-                                        <input type="text" class="end_input" name="end_date" placeholder="종료: YYYY-MM-DD" required/>
-                                    </div>
-                                </div>
-                                <div class="pw_location">
-                                    <span class="popupwrite_location">팝업주소 :</span>
-                                    <input type="text" class="location_input" name="popup_addr" placeholder="주소를 입력" required/>
-                                </div>
-                                <div class="pw_category">
-                                    <span class="popupwrite_category">카테고리 :</span>
-                                    <input type="text" class="cate_input" name="category" placeholder="캐릭터, 식품, 게임, 등.." required/>
-                                </div>
-                                <div class="append_wrap">
-                  					<div class="thumnail_wrap">
-                    					<div class="pw_thumnail">썸네일</div>
-                    					<div class="file_up">파일 선택</div>
-                  					</div>
-                  					<div class="img_wrap">
-                    					<div class="pw_img">이미지 첨부</div>
-                    						<div class="file_up">파일 선택</div>
-                  						</div>
-                					</div>
-                                <div class="pw_btn_wrap">
-                                    <button type="button" class="pw_upload_btn" onclick="handleSubmit(event);">작성 완료</button>
-                                    <button type="button" class="pw_cancel_btn" onclick="location.href='./list.do';">작성 취소</button>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
+      </div>
+      <div class="contents">
+        <div class="inner">
+          <h3>게시글 작성</h3>
+          <div class="board_write">
+            <form name="writeFrm" method="post" enctype="multipart/form-data" action="/popupBoard/write.do" onsubmit="return validateForm(this)">
+              <table>
+                <caption class="nohead">게시글 작성</caption>
+                <tr>
+                  <th>제목</th>
+                  <td><input type="text" name="board_title" placeholder="제목을 입력해주세요" required></td>
+                </tr>
+                <tr>
+                  <th>내용</th>
+                  <td>
+                    <textarea cols="30" rows="20" name="contents" placeholder="내용을 입력해 주세요." required></textarea>
+                  </td>
+                </tr>
+                <tr>
+                  <th>입장료</th>
+                  <td><input type="text" name="popup_fee" placeholder="숫자만 입력해 주세요" required></td>
+                </tr>
+                <tr>
+                  <th>팝업일정</th>
+                  <td>
+                    <input type="text" name="start_date" placeholder="시작: YYYY-MM-DD" required>
+                    <input type="text" name="end_date" placeholder="종료: YYYY-MM-DD" required>
+                  </td>
+                </tr>
+                <tr>
+                  <th>주소</th>
+                  <td><input type="text" name="popup_addr" placeholder="주소를 입력해 주세요" required></td>
+                </tr>
+                <tr>
+                  <th>카테고리</th>
+                  <td><input type="text" name="category" placeholder="카테고리를 입력해 주세요" required></td>
+                </tr>
+                <tr>
+                  <th>오픈 요일</th>
+                  <td><input type="text" name="open_days" placeholder="월 ~ 금 또는 월, 수, 금 형식으로 입력" required></td>
+                </tr>
+                <tr>
+                  <th>오픈 시간</th>
+                  <td><input type="text" name="open_hours" placeholder="예: 11:00 ~ 17:00" required></td>
+                </tr>
+                <tr>
+                  <th>첨부파일</th>
+                  <td class="td_flex">
+                    <div class="file_wrap">
+                      <input type="text" class="file_name" readonly>
+                      <input type="file" id="upload" class="blind">
+                      <label for="upload">파일선택</label>
+                    </div>
+                    <p class="file_note">이미지 파일은 10MB 이하 jpg, png, gif, webp 확장자 파일만 올릴 수 있습니다.</p>
+                  </td>
+                </tr>
+              </table>
+              <div class="btn_wrap">
+                <button type="submit" class="btn board_btn">등록</button>
+                <button type="button" class="btn board_btn cancel_btn" onclick="checkReset();">다시쓰기</button>
+                <button type="button" onclick="location.href='./list.do';" class="btn board_btn cancel_btn">목록</button>
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     </main>
     <footer id="footer">
-        <div class="inner">
-            ${common_footer}
-        </div>
+		<div class="inner">
+		    ${common_footer}
+		</div>
     </footer>
+  </div>
 </body>
 </html>
