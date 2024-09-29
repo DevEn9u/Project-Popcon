@@ -16,7 +16,7 @@
   </div>
   <div id="wrap">
   	${common_header }
-    <main id="container" class="register_page login_page sub_container">
+    <main id="container" class="edit_page register_page login_page sub_container">
       <div class="contents">
         <div class="inner">
           <div class="logo_wrap">
@@ -28,8 +28,14 @@
           <div class="choose_wrap">
             <p>수정할 정보를 선택하세요.</p>
             <ul class="choose_type">
-              <li><a href="../edit/info.do">가입 정보 변경</a></li>
-              <li><a href="../edit/password.do">비밀번호 변경</a></li>
+            	<c:if test="${memberDTO.authority == 'ROLE_NORMAL' }">
+	              <li><a href="./edit-normal-info.do">가입 정보 변경</a></li>
+    	          <li><a href="./edit-normal-pass.do">비밀번호 변경</a></li>
+            	</c:if>
+            	<c:if test="${memberDTO.authority == 'ROLE_CORP' }">
+              		<li><a href="./edit-corp-info.do">가입 정보 변경</a></li>
+              		<li><a href="./edit-corp-pass.do">비밀번호 변경</a></li>
+              	</c:if>
             </ul>
           </div>
         </div>

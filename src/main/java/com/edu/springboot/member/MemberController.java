@@ -184,23 +184,65 @@ public class MemberController {
 			return "redirect:/register/corp.do";
 		}
 	}
-	// 회원정보 수정 - 메인
+	// 회원정보 수정 - 수정 타입 선택
 	@GetMapping("/member/edit.do")
-	public String editMain() {
-		return "/members/edit-main";
-	}
-	// 회원정보 수정 - 일반회원
-	@GetMapping("/member/edit-normal.do")
-	public String editNormalMemberGet(Principal principal, Model model) {
+	public String editMain(Principal principal, Model model) {
 		String user_id = principal.getName();
 		MemberDTO memberDTO = dao.getMemberById(user_id);
 		model.addAttribute("memberDTO", memberDTO);
-		return "/members/edit-normal";
+		return "/members/edit-choose";
 	}
-	@PostMapping("/member/edit-normal.do")
-	public String editNormalMemberPost() {
-		return "redirect:/";
+	// 회원정보 수정 - 일반회원 정보 변경
+	@GetMapping("/member/edit-normal-info.do")
+	public String editNormalMemberInfoGet(Principal principal, Model model) {
+		String user_id = principal.getName();
+		MemberDTO memberDTO = dao.getMemberById(user_id);
+		model.addAttribute("memberDTO", memberDTO);
+		return "/members/edit-normal-info";
 	}
+	// 회원정보 수정 - 일반회원 정보 변경
+	@PostMapping("/member/edit-normal-info.do")
+	public String editNormalMemberInfoPost(RedirectAttributes redirectAttributes, MemberDTO memberDTO) {
+		int result = dao.editMemberInfo(memberDTO);
+//		System.out.println("정보수정 결과" + result + "*********" + memberDTO);
+		if (result > 0) {
+			redirectAttributes.addFlashAttribute("resultMsg", "정보수정에 성공했습니다.");
+			return "redirect:/";
+		}
+		else {
+			// 실패메시지
+			redirectAttributes.addFlashAttribute("resultMsg", "정보수정에 실패했습니다.");
+			return "redirect:/member/edit-normal-info.do";
+		}
+	}
+	// 회원정보 수정 - 일반회원 비밀번호 변경
+	@GetMapping("/member/edit-normal-pass.do")
+	public String editNormalMemberPassGet(Principal principal, Model model) {
+		String user_id = principal.getName();
+		MemberDTO memberDTO = dao.getMemberById(user_id);
+		model.addAttribute("memberDTO", memberDTO);
+		return "/members/edit-normal-pass";
+	}
+	// 회원정보 수정 - 일반회원 비밀번호 변경
+	@PostMapping("/member/edit-normal-pass.do")
+	public String editNormalMemberPassPost(RedirectAttributes redirectAttributes, HttpServletRequest req, MemberDTO memberDTO) {
+		String pass = req.getParameter("pass");
+		String encodedPass = new BCryptPasswordEncoder().encode(pass);
+		memberDTO.setPass(encodedPass);
+		
+		int result = dao.editMemberPass(memberDTO);
+		System.out.println("정보수정 결과" + result + "*********" + memberDTO);
+		if (result > 0) {
+			redirectAttributes.addFlashAttribute("resultMsg", "정보수정에 성공했습니다.");
+			return "redirect:/";
+		}
+		else {
+			redirectAttributes.addFlashAttribute("resultMsg", "정보수정에 실패했습니다.");
+			return "redirect:/member/edit-normal-pass.do";
+		}
+	}
+	
+	
 	// 회원정보 수정 - 기업회원
 	@GetMapping("/member/edit-corp.do")
 	public String editCorpMemberGet() {
@@ -210,4 +252,6 @@ public class MemberController {
 	public String editCorpMemberPost() {
 		return "redirect:/";
 	}
+	
+	
 }

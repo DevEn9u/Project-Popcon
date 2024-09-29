@@ -10,8 +10,7 @@
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
 <link rel="stylesheet" href="/css/member.css">
-<script src="/js/form-validate.js"></script>
-
+<script src="/js/form-valitate-edit-info.js" ></script>
 <body>
   <div id="skip_navi">
     <a href="#container">본문 바로가기</a>
@@ -27,9 +26,8 @@
               <span class="blind">팝콘로고</span>
             </h2>
           </div>
-          <!-- 회원가입 폼 -->
           <div class="register_wrap">
-          	<form name="registerFrm" method="post" action="./normal.do" onsubmit="return validateForm(this);">
+          	<form name="registerFrm" method="post" action="./edit-normal-info.do" onsubmit="return validateForm(this);">
               <div class="input_wrap">
                 <div class="item_id">아이디 :</div>
                 <input type="text" name="id" class="input_id" value="${user_id}" readonly="readonly">
