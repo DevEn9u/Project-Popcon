@@ -1,6 +1,7 @@
 package com.edu.springboot.board;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -32,12 +36,42 @@ public class BoardController {
 	}
 
     // 자유게시판 상세보기
-    @GetMapping("/freeBoard/view.do")
-    public String freeBoardView(@RequestParam("board_idx") String boardIdx, Model model) {
-        BoardDTO board = boardService.getBoardById(boardIdx);
-        model.addAttribute("dto", board);
-        return "boards/free-board-view";
-    }
+	@GetMapping("/freeBoard/view.do")
+	public String freeBoardView(@RequestParam("board_idx") String boardIdx, Model model, 
+	                            HttpServletRequest request, HttpServletResponse response) {
+
+	    // 조회수 증가 여부를 결정하는 로직
+	    boolean shouldIncreaseVisitCount = true;
+
+	    // 1. 쿠키가 있는지 확인
+	    Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("viewedBoard_" + boardIdx)) {
+	                // 이미 조회한 적이 있다면 조회수 증가 안 함
+	                shouldIncreaseVisitCount = false;
+	                break;
+	            }
+	        }
+	    }
+
+	    // 2. 조회수 증가 로직 (쿠키가 없을 때만 증가)
+	    if (shouldIncreaseVisitCount) {
+	        boardService.updateVisitCount(boardIdx); // 조회수 증가
+
+	        // 3. 쿠키 설정 (24시간 동안 유지)
+	        Cookie newCookie = new Cookie("viewedBoard_" + boardIdx, "true");
+	        newCookie.setMaxAge(24 * 60 * 60); // 24시간 동안 유효
+	        newCookie.setPath("/"); // 애플리케이션 전체에서 쿠키 유효
+	        response.addCookie(newCookie);
+	    }
+
+	    // 게시글 상세 정보 가져오기
+	    BoardDTO board = boardService.getBoardById(boardIdx);
+	    model.addAttribute("dto", board);
+
+	    return "boards/free-board-view";
+	}
     // 게시글 작성 화면 호출
     @GetMapping("/freeBoard/write.do")
     public String writeBoardForm() {
@@ -92,9 +126,39 @@ public class BoardController {
 
     // 공지 상세보기 
     @GetMapping("/noticeBoard/view.do")
-    public String viewNoticeBoard(@RequestParam("board_idx") String boardIdx, Model model) {
+    public String viewNoticeBoard(@RequestParam("board_idx") String boardIdx, Model model, 
+                                  HttpServletRequest request, HttpServletResponse response) {
+
+        // 조회수 증가 여부를 결정하는 로직
+        boolean shouldIncreaseVisitCount = true;
+
+        // 1. 쿠키가 있는지 확인
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("viewedBoard_" + boardIdx)) {
+                    // 이미 조회한 적이 있다면 조회수 증가 안 함
+                    shouldIncreaseVisitCount = false;
+                    break;
+                }
+            }
+        }
+
+        // 2. 조회수 증가 로직 (쿠키가 없을 때만 증가)
+        if (shouldIncreaseVisitCount) {
+            boardService.updateVisitCount(boardIdx); // 조회수 증가
+
+            // 3. 쿠키 설정 (24시간 동안 유지)
+            Cookie newCookie = new Cookie("viewedBoard_" + boardIdx, "true");
+            newCookie.setMaxAge(24 * 60 * 60); // 24시간 동안 유효
+            newCookie.setPath("/"); // 애플리케이션 전체에서 쿠키 유효
+            response.addCookie(newCookie);
+        }
+
+        // 게시글 상세 정보 가져오기
         BoardDTO boardDTO = boardService.getBoardById(boardIdx);
         model.addAttribute("dto", boardDTO);
+
         return "boards/notice-board-view";
     }
     // 공지 작성 화면 호출
