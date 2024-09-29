@@ -184,7 +184,11 @@ public class MemberController {
 			return "redirect:/register/corp.do";
 		}
 	}
-	
+	// 회원정보 수정 - 메인
+	@GetMapping("/member/edit.do")
+	public String editMain() {
+		return "/members/edit-main";
+	}
 	// 회원정보 수정 - 일반회원
 	@GetMapping("/member/edit-normal.do")
 	public String editNormalMemberGet(Principal principal, Model model) {
