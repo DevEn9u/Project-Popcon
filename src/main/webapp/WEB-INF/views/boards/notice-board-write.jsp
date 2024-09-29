@@ -81,7 +81,7 @@
             </form>
           </div>
         </div>
-      </div>
+      </div> 
     </main>
     <footer id="footer">
 		<div class="inner">
