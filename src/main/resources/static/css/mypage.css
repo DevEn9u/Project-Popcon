@@ -88,12 +88,26 @@
   width: 1044px;
   height: 100%;
 }
+.my_info_wrap .tit_wrap {
+	display: flex;
+	justify-content: space-between;
+}
 .my_info_wrap h2 {
   font-size: 45px;
   font-weight: 700;
   color: var(--txt-color-600) /**/;
   margin-left: 90px;
   margin-bottom: 30px;
+}
+.my_info_wrap .tit_wrap .edit_btn {
+	font-size: 17px;
+	transition: all 0.2s;
+	border-radius: 5px;
+}
+.my_info_wrap .tit_wrap .edit_btn:hover {
+	background: var(--point-color1);
+	color: var(--txt-color-500);
+	border: 1px solid var(--txt-color-500);
 }
 .my_info {
   display: flex;
@@ -103,7 +117,7 @@
 }
 .my_info .box1 {
   border: solid 1px #121212;
-  background: #fce8c3;
+  background: var(--point-color1);
   border-radius: 30px;
   width: 100%;
   max-width: 950px;
@@ -210,7 +224,7 @@
 
 .my_info .box2 {
   border: solid 1px #121212;
-  background: #fce8c3;
+  background: var(--point-color1);
   border-radius: 30px;
   width: 100%;
   max-width: 950px;
@@ -323,7 +337,7 @@
 /* 마이페이지 포인트 */
 .my_info .box3 {
   border: solid 1px #121212;
-  background: #fce8c3;
+  background: var(--point-color1);
   border-radius: 30px;
   width: 100%;
   max-width: 950px;

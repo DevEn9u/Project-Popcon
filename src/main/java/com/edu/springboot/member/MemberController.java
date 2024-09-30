@@ -184,6 +184,34 @@ public class MemberController {
 			return "redirect:/register/corp.do";
 		}
 	}
+	// 회원정보 수정 페이지 접근 - 비밀번호 확인
+	@GetMapping("/member/checkPass.do")
+	public String checkPassGet(Principal principal, MemberDTO memberDTO) {
+		return "/members/check-pass";
+	}
+	// 회원정보 수정 페이지 접근 - 비밀번호 확인
+	@PostMapping("/member/checkPass.do")
+	public String checkPassPost(RedirectAttributes redirectAttributes, Principal principal, MemberDTO memberDTO) {
+	    String id = principal.getName();
+	    String inputPass = memberDTO.getPass();
+	    
+	    // DB에서 해당 사용자의 정보를 가져오기
+	    memberDTO.setId(id);
+	    MemberDTO dbMember = dao.getMemberById(id);
+
+	    if (dbMember != null) {
+	        // 입력한 비밀번호와 DB의 비밀번호 비교
+	        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	        if (passwordEncoder.matches(inputPass, dbMember.getPass())) {
+	            // 비밀번호가 일치하는 경우
+	            return "redirect:/member/edit.do";
+	        }
+	    }
+
+	    // 실패 메시지
+	    redirectAttributes.addFlashAttribute("resultMsg", "비밀번호를 확인해주세요.");
+	    return "redirect:/member/checkPass.do";
+	}
 	// 회원정보 수정 - 수정 타입 선택
 	@GetMapping("/member/edit.do")
 	public String editMain(Principal principal, Model model) {
@@ -207,7 +235,7 @@ public class MemberController {
 //		System.out.println("정보수정 결과" + result + "*********" + memberDTO);
 		if (result > 0) {
 			redirectAttributes.addFlashAttribute("resultMsg", "정보수정에 성공했습니다.");
-			return "redirect:/";
+			return "redirect:/mypage/mypage.do";
 		}
 		else {
 			// 실패메시지
@@ -233,15 +261,15 @@ public class MemberController {
 		int result = dao.editMemberPass(memberDTO);
 		System.out.println("정보수정 결과" + result + "*********" + memberDTO);
 		if (result > 0) {
-			redirectAttributes.addFlashAttribute("resultMsg", "정보수정에 성공했습니다.");
-			return "redirect:/";
+			redirectAttributes.addFlashAttribute("resultMsg", "비밀번호 변경에 성공했습니다.");
+			return "redirect:/mypage/mypage.do";
 		}
 		else {
-			redirectAttributes.addFlashAttribute("resultMsg", "정보수정에 실패했습니다.");
+			redirectAttributes.addFlashAttribute("resultMsg", "비밀번호 변경에 실패했습니다.");
 			return "redirect:/member/edit-pass.do";
 		}
 	}
-	
+
 	
 //	// 회원정보 수정 - 기업회원
 //	@GetMapping("/member/edit-corp.do")

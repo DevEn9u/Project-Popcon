@@ -3,11 +3,20 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html lang="ko">
-<c:import url="../include/head.jsp" />
+<head>
+	<c:import url="../include/head.jsp" />
+	<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
+</head>
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
-<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
-<body>
+<script>
+	window.onload = function() {
+		const resultMsg = '<%= request.getAttribute("resultMsg") != null ? request.getAttribute("resultMsg") : "" %>';
+	    if (resultMsg) {
+	      alert(resultMsg);
+		}
+	};
+</script>
 <body>
 	<div id="skip_navi">
 		<a href="#container">본문 바로가기</a>
@@ -45,7 +54,10 @@
             </ul>
           </div>
           <div class="my_info_wrap">
-            <h2>000님, 환영합니다.</h2>
+          	<div class="tit_wrap">
+	            <h2>${user_id }님, 환영합니다.</h2>
+    	        <button type="button" class="edit_btn btn" onclick="location.href='/member/checkPass.do'">정보 수정</button>
+          	</div>
             <div class="my_info">
               <div class="my_mile box1">
                 <div class="top">
