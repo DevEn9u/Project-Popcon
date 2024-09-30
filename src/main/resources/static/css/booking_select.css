@@ -148,9 +148,6 @@ body {
     font-size: 25px;
 }
 
-.select_calendar tbody tr {
-    /* Flex 사용 제거 */
-}
 
 .select_calendar tbody td {
     text-align: center;
@@ -170,7 +167,15 @@ body {
     background: var(--point--color2);
 	color: var(--txt-color-600);
 }
+.select_calendar input [id="selectedDate"] {
+	font-size: 25px;
+	font-weight: 600;
+}
 
+.selected-date-container label{
+	font-size: 30px;
+	font-weight: 700;
+}
 
 .count_wrap {
   position: relative;
