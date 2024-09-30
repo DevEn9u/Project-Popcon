@@ -11,6 +11,10 @@
 <link rel="stylesheet" href="/css/booking_select.css?v=<?php echo time(); ?>">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/js/booking.js?v=<?php echo time(); ?>"></script>
+<!-- 포트원 결제 -->
+<script src="https://js.iamport.kr/v1/iamport.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 </head>
 <script>
 	
@@ -89,7 +93,7 @@
 		        </ul>
 		      </div>
 		      <div class="bookingbtn_wrap">
-		        <button class="bs_booking_btn">예약하기</button>
+		        <button id="payment" class="bs_booking_btn">예약하기</button>
 		      </div>
 		    </div>
 		</div>

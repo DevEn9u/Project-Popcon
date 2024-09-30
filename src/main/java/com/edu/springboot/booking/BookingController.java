@@ -12,8 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class BookingController {
@@ -99,4 +101,19 @@ public class BookingController {
             return "Error: Booking failed";
         }
     }
+    
+    @GetMapping("/getUserId")
+    @ResponseBody
+    public String getUserId() {
+    	String member_id = "";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                member_id = ((UserDetails) principal).getUsername(); // 로그인한 사용자 ID 가져오기
+            }
+        }
+        return member_id;
+    }
+    
 }
