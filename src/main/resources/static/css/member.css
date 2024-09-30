@@ -78,14 +78,22 @@
 	font-weight: 700;
 }
 .login_area .login_btn {
-  display: block;
-  width: 100%;
-  line-height: 60px;
-  background: var(--point--color1);
-  color: var(--txt-color-500);
-  font-weight: 700;
-  text-align: center;
-  margin-top: 24px;
+	display: block;
+	width: 100%;
+	line-height: 60px;
+	background: var(--point--color1);
+	color: var(--txt-color-500);
+	font-weight: 700;
+	text-align: center;
+	margin-top: 24px;
+}
+.login_area .check_btn {
+	width: auto;
+	line-height: 50px;
+	margin-top: 10px;
+	margin-left: auto;
+	padding: 0 12px;
+	border-radius: 5px;
 }
 
 .login_page .link_wrap {

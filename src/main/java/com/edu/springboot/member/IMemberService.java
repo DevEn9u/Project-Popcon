@@ -12,6 +12,8 @@ public interface IMemberService {
 	public int registerCorp(MemberDTO memberDTO);
 	// ID 중복 확인
 	public int checkIdDuplicate(String input_id);
+	// 회원정보 수정 페이지 접근 - 비밀번호 확인
+	public int checkPass(MemberDTO memberDTO);
 	// 회원정보 가져오기 - 회원정보 수정
 	public MemberDTO getMemberById(String id);
 	// 회원 정보 수정 - 비밀번호 제외한 정보 수정

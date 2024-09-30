@@ -11,6 +11,14 @@
 <c:import url="../include/footer.jsp" var="common_footer" />
 <link rel="stylesheet" href="/css/member.css">
 <script src="/js/form-validate-edit-pass.js" ></script>
+<script>
+	window.onload = function() {
+		const resultMsg = '<%= request.getAttribute("resultMsg") != null ? request.getAttribute("resultMsg") : "" %>';
+	    if (resultMsg) {
+	      alert(resultMsg);
+		}
+	};
+</script>
 <body>
   <div id="skip_navi">
     <a href="#container">본문 바로가기</a>
@@ -46,7 +54,7 @@
               </div>
               <div class="btn_wrap">
                 <button type="submit" class="btn register_btn">수정</button>
-                <button type="button" class="btn main_btn" onclick="location.href='../login.do'">취소</button>
+                <button type="button" class="btn main_btn" onclick="location.href='/mypage/mypage.do'">취소</button>
               </div>
 	      	</form>
           </div>

@@ -24,6 +24,10 @@
 		SELECT COUNT(*) FROM member WHERE id = #{input_id}
 	</select>
 
+	<!-- 회원 정보 수정 - 비밀번호 확인 -->
+	<select id="checkPass" parameterType="com.edu.springboot.member.MemberDTO" resultType="int">
+		SELECT COUNT(*) FROM member WHERE id = #{id} AND pass = #{pass}
+	</select>
 	<!-- 회원 정보 수정 - 계정 정보 불러오기 -->
 	<select id="getMemberById" resultType="com.edu.springboot.member.MemberDTO">
 		SELECT * FROM member WHERE id = #{id}
