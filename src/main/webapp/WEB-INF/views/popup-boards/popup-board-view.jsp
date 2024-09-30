@@ -51,18 +51,18 @@
 
 	<script>
 		function deleteComment(commentId, popupBoardIdx) {
-		    let confirmed = confirm("댓글을 삭제하겠습니까?");
+		    let confirmed = confirm("리뷰를 삭제하겠습니까?");
 		    if (confirmed) {
 		        $.ajax({
 		            type: "POST",
 		            url: "${pageContext.request.contextPath}/popupBoard/comDelete.do",
 		            data: { com_idx: commentId, popup_board_idx: popupBoardIdx }, // popup_board_idx 추가
 		            success: function(response) {
-		                alert("댓글이 삭제되었습니다.");
+		                alert("리뷰가 삭제되었습니다.");
 		                location.reload(); // 페이지 새로고침
 		            },
 		            error: function(err) {
-		                alert('댓글 삭제에 실패했습니다.');
+		                alert('리뷰 삭제에 실패했습니다.');
 		                console.error('Error:', err);
 		            }
 		        });
@@ -70,7 +70,7 @@
 		}
 	</script>
 
-	<!-- 댓글 수정 폼  -->
+	<!-- 리뷰 수정 폼  -->
 	<script>
 		let isEditModalOpen = false;
 	
@@ -242,10 +242,10 @@
 						<input type="hidden" name="popup_board_idx"
 							value="${popup.board_idx}" />
 						<textarea name="com_contents" rows="4" cols="50"
-							class="comment_area" placeholder="댓글을 입력하세요"></textarea>
+							class="comment_area" placeholder="리뷰를 입력하세요"></textarea>
 						<br /> <input type="hidden" name="${_csrf.parameterName}"
 							value="${_csrf.token}" />
-						<button type="submit" class="btn comment_btn">댓글 작성</button>
+						<button type="submit" class="btn comment_btn">리뷰 작성</button>
 					</form>
 
 					<!-- 후기 목록 -->
@@ -258,7 +258,7 @@
 									<p class="comment_date">(${comment.formattedPostDate})</p>
 								</div>
 								<p class="comment_content">${comment.com_contents}</p>
-								<!-- 댓글 수정/삭제 버튼 -->
+								<!-- 리뷰 수정/삭제 버튼 -->
 								<c:if
 									test="${comment.com_writer == pageContext.request.userPrincipal.name}">
 									<button type="button" class="btn comment_btn"
