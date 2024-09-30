@@ -10,6 +10,4 @@ public class ImagesDTO {
     private String image_type;      // 이미지 사용 위치 유형
     private String associated_idx;   // 관련된 게시글 또는 댓글의 IDX
     private Date upload_date;       // 이미지 업로드 날짜
-
-
 }
