@@ -9,8 +9,8 @@
 <link rel="stylesheet" href="/css/popup_view.css">
 <body>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvsn1Mzm9UYTiQ1jo4gwurW7PT27advCs&callback=initMap" async defer></script>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCA0TzsH1iRaVCQSJCc8BzZHmGKmpNJhKY&callback=initMap" async defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
   function initMap() {
     var geocoder = new google.maps.Geocoder();
@@ -42,14 +42,53 @@
     });
   }
   
-  // 게시물 삭제를 위한 함수
-  function deletePost() {
-    let confirmed = confirm("게시물을 삭제하겠습니까?");
+
+</script>
+
+<script>
+function deleteComment(commentId, popupBoardIdx) {
+    let confirmed = confirm("댓글을 삭제하겠습니까?");
     if (confirmed) {
-      let form = document.deleteFrm;
-      form.submit(); 
+        $.ajax({
+            type: "POST",
+            url: "${pageContext.request.contextPath}/popupBoard/comDelete.do",
+            data: { com_idx: commentId, popup_board_idx: popupBoardIdx }, // popup_board_idx 추가
+            success: function(response) {
+                alert("댓글이 삭제되었습니다.");
+                location.reload(); // 페이지 새로고침
+            },
+            error: function(err) {
+                alert('댓글 삭제에 실패했습니다.');
+                console.error('Error:', err);
+            }
+        });
     }
-  }
+}
+
+</script>
+
+<script>
+let isEditModalOpen = false; // 모달 상태를 관리하는 변수
+
+function openEditModal(commentId, commentContent) {
+    const editModal = document.getElementById('editCommentModal_' + commentId);
+    const editComIdx = document.getElementById('editComIdx_' + commentId);
+    const editComContents = document.getElementById('editComContents_' + commentId);
+
+    // 모달을 여는 로직
+    if (editModal.style.display === 'block') {
+        editModal.style.display = 'none'; // 모달이 열려있으면 닫기
+    } else {
+        editComIdx.value = commentId; // 댓글 ID 설정
+        editComContents.value = commentContent; // 댓글 내용 설정
+        editModal.style.display = 'block'; // 모달 보이기
+    }
+}
+
+function closeEditModal(commentId) {
+    document.getElementById('editCommentModal_' + commentId).style.display = 'none'; // 모달 숨기기
+    isEditModalOpen = false; // 상태 업데이트
+}
 </script>
 
 ${common_header}
@@ -59,22 +98,64 @@ ${common_header}
       <div class="swiper">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
-            <a href="#">
-              <div class="img_wrap">
-                <img src="${pageContext.request.contextPath}/images/imgMGJ/main_slider1.png" alt="main1" class="main_slider1" />
-                <img src="${pageContext.request.contextPath}/images/imgMGJ/main_slider2.png" alt="main2" class="main_slider2" />
-              </div>
-            </a>
+            <ul class="main_popup">
+              <li>
+                <a href="#">
+                  <div class="img_wrap">
+                    <img src="/images/main/mainslider1.png">
+                    <img src="/images/main/mainslider1.png">
+                  </div>
+                  <div class="txt_wrap">
+                    <p class="slide_title">${popup.board_title}</p>
+                    <p>${popup.start_date} ~ ${popup.end_date}</p>
+                    <p><img src="/images/main/location.svg">${popup.popup_addr}</p>
+                  </div>
+                </a>
+              </li>
+            </ul>
           </div>
-          <!-- 다른 슬라이드 추가 -->
+          <div class="swiper-slide">
+            <ul class="main_popup">
+              <li>
+                <a href="#">
+                  <div class="img_wrap">
+                    <img src="/images/main/mainslider2.jpg">
+                    <img src="/images/main/mainslider2.jpg">
+                  </div>
+                  <div class="txt_wrap">
+                    <p class="slide_title">${popup.board_title}</p>
+                    <p>${popup.start_date} ~ ${popup.end_date}</p>
+                    <p><img src="/images/main/location.svg">${popup.popup_addr}</p>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="swiper-slide">
+            <ul class="main_popup">
+              <li>
+                <a href="#">
+                  <div class="img_wrap">
+                    <img src="/images/main/mainslider2.jpg" alt="팝업 홍보">
+                    <img src="/images/main/mainslider2.jpg" alt="팝업 홍보">
+                  </div>
+                  <div class="txt_wrap">
+                    <p class="slide_title">${popup.board_title}</p>
+                    <p>${popup.start_date} ~ ${popup.end_date}</p>
+                    <p><img src="/images/main/location.svg">${popup.popup_addr}</p>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+        <div class="swiper-pagination pagination"></div>
+        <div class="swiper-button-prev arrow_btn"></div>
+        <div class="swiper-button-next arrow_btn"></div>
       </div>
 
       <div class="pv_title">
-        <span class="pv_sub_title">${popup.writer}</span>
+        <span class="pv_sub_title">${member.name}</span>
         <h2 class="pv_main_title">
           <span class="pv_title_text">${popup.board_title}</span>
           <!-- 작성자와 비작성자에 따른 버튼 표시 -->
@@ -84,7 +165,7 @@ ${common_header}
                 <input type="hidden" name="board_idx" value="${popup.board_idx}" />
                 <button class="pv_delete_btn" type="button" onclick="if(confirm('정말 삭제하시겠습니까?')) { document.getElementById('deleteForm').submit(); }">삭제하기</button>
               </form>
-              <form action="${pageContext.request.contextPath}/popupBoard/edit.do" method="get">
+              <form action="${pageContext.request.contextPath}/popupBoard/edit.do" method="post">
                 <input type="hidden" name="board_idx" value="${popup.board_idx}" />
                 <button class="pv_edit_btn" type="submit">수정하기</button>
               </form>
@@ -138,10 +219,53 @@ ${common_header}
         <button class="pv_booking_btn" onclick="location.href='../booking.do';">예약하기</button>
         <button class="pv_list_btn" onclick="location.href='../list.do';">목록</button>
       </div>
+      <div class="comment_section">
+  <h3>후기 작성하기</h3>
+  <form name="commentFrm" method="post" class="comment_form" action="${pageContext.request.contextPath}/popupBoard/writeComment.do"> 
+    <input type="hidden" name="popup_board_idx" value="${popup.board_idx}" />
+    <textarea name="com_contents" rows="4" cols="50" class="comment_area" placeholder="댓글을 입력하세요"></textarea>
+    <br />
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    <button type="submit" class="btn comment_btn">댓글 작성</button>
+  </form>
+
+  <!-- 후기 목록 -->
+<div class="view_con comment_list">
+    <h3>후기 목록</h3>
+    <c:forEach var="comment" items="${commentsList}">
+        <div class="comment_item">
+            <div class="comment_wrap">
+                <p class="comment_writer">${comment.com_writer}</p>
+                <p class="comment_date"> (${comment.formattedPostDate})</p>
+            </div>
+            <p class="comment_content">${comment.com_contents}</p>
+            <!-- 댓글 수정/삭제 버튼 -->
+            <c:if test="${comment.com_writer == pageContext.request.userPrincipal.name}">
+    <button type="button" class="btn comment_btn" onclick="openEditModal('${comment.com_idx}', '${comment.com_contents}');">수정하기</button>
+    <button type="button" class="btn comment_btn" onclick="deleteComment('${comment.com_idx}', '${popup.board_idx}');">삭제하기</button>
+    
+    <div id="editCommentModal_${comment.com_idx}" style="display:none; position: relative; background-color: #121212; padding: 20px; 
+    border: 1px solid var(--txt-color-600); margin-top:10px;">
+        <form id="editCommentForm" method="post" action="${pageContext.request.contextPath}/popupBoard/comEdit.do">
+            <input type="hidden" name="com_idx" id="editComIdx_${comment.com_idx}" />
+            <input type="hidden" name="popup_board_idx" value="${popup.board_idx}" />
+            <textarea name="com_contents" id="editComContents_${comment.com_idx}" class="edit_content" rows="4" cols="50"></textarea>
+            <button type="submit" class="btn comment_btn" style="margin-top:10px;" >수정 완료</button>
+        </form>
+    </div>
+</c:if>
+        </div>
+    </c:forEach>
+    <c:if test="${empty commentsList}">
+        <p>등록된 후기가 없습니다.</p>
+    </c:if>
+</div>
+
     </div>
   </div>
 </main>
 
+<!-- 경로 문제로 footer 직접 추가하였습니다. -->
 <footer id="footer">
   <div class="inner">
     <section class="footer_wrap">
