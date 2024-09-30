@@ -44,23 +44,16 @@ ${common_header}
                                     ${popup.board_title}
                                     <img src="../images/imgMGJ/like_btn.svg" class="pl_like_btn"/>
                                 </h2>
-                                <span class="popup_location">
-                                    <img src="../images/imgMGJ/pin.svg" />
-                                    ${popup.popup_addr}
-                                </span>
+                                
+                                <div class="popup_location">
+                                <img src="../images/imgMGJ/pin.svg" />
+                                    <span class="location_span">${popup.popup_addr}</span>
+                                </div>
                                 <span class="popup_date">
                                     ${popup.postdate}
                                 </span>
                             </div>
                         </a>
-
-                        <!-- 삭제 버튼 추가 -->
-                        <c:if test="${popup.writer == sessionScope.member.loginId}">
-                            <form action="<c:url value='/popupBoard/delete.do'/>" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
-                                <input type="hidden" name="board_idx" value="${popup.board_idx}" />
-                                <button type="submit" class="pl_delete_btn">삭제하기</button>
-                            </form>
-                        </c:if>
                     </li>
                 </c:forEach>
             </ul>
