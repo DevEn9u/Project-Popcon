@@ -1,4 +1,5 @@
-let basePrice = 0;
+let basePrice = 100;
+const totalPrice = headcount * basePrice;
 $(function () {
 	// booking_select 달력 동적으로 삽입
 	var today = new Date();
@@ -116,38 +117,115 @@ $(function () {
 			updatePrice();
 	});
 	
+	$.get("/getUserId", function(response) {
+		const member_id = response;
+		console.log("User ID:", member_id);
+	  // 만약 basePrice가 0일 경우 Ajax를 통한 예약 처리
+	  if (basePrice == 0) {
+	      
+	      // 예약 버튼 클릭 이벤트
+	      $(".bs_booking_btn").on('click', function() {
+	          // 입력값 가져오기 및 유효성 검사
+	          const visitDate = $("#selectedDate").val();
+	          const headcount = parseInt($("#headcount").val());
+	          const price = parseInt($("#price").val());
+	            
+	          console.log("headcount:", headcount, "price:", price);
+	    
+	          // Ajax 요청으로 예약 처리
+	          $.ajax({
+	              url: '/popupBoard/select.do',
+	              type: 'POST',
+	              data: {
+	                  popup_idx: null,
+	                  visit_date: visitDate,
+	                  headcount: headcount,
+	                  price: price
+	              },
+	              success: function(response) {
+	                  alert("예약이 완료되었습니다");
+	                  // 예약 성공 후 이동할 페이지로 리디렉션
+	                  window.location.href = '/popupBoard/select.do';
+	                  console.log("예약 완료");
+	              },
+	              error: function(error) {
+	                  alert("예약 중 오류 발생");
+	                  console.log("예약 실패");
+	              }
+	          });
+	      });
 
-	$(".bs_booking_btn").on('click', function() {
-	    // 입력값 가져오기 및 유효성 검사
-	    const visitDate = $("#selectedDate").val();
-	    const headcount = parseInt($("#headcount").val());
-	    const price = parseInt($("#price").val());
-		
-		console.log("headcount:", $("#headcount").val(), "price:", $("#price").val());
+	    } else {
+			$(".bs_booking_btn").on('click', function() {
+			    // alert("버튼 클릭됨.");
 
-	    // Ajax 요청
-	    $.ajax({
-	        url: '/popupBoard/select.do',
-	        type: 'POST',
-	        data: {
-	            popup_idx: null,
-	            visit_date: visitDate,
-	            headcount: headcount,
-	            price: price
-	        },
-	        success: function(response) {
-	            alert("예약이 완료되었습니다" + "마이페이지에서 예약내역을 확인하세요");
-	            // 예약 성공 후 이동할 페이지로 리디렉션
-	            window.location.href = '/popupBoard/select.do';
-				console.log("예약 완료");
-	        },
-	        error: function(error) {
-	            alert("예약 중 오류 발생");
-				console.log("예약실패")
-	        }
-	    });
-	});
+			    // 전달할 데이터
+			    const visitDate = $("#selectedDate").val();
+			    const headcount = parseInt($("#headcount").val());
+			    const price = parseInt($("#price").val());
+
+			    console.log("visitDate:", visitDate, "headcount:", headcount, "price:", price);
+
+			    // datepicker가 선택되지 않은 경우 알림창 띄움
+			    if (visitDate == "") {
+			        alert("날짜를 선택해주세요");
+			        return;
+			    }
+
+			    // kg이니시스 결제 API
+			    var IMP = window.IMP; // 생략가능
+			    console.log("IMP 객체 확인:", IMP);  // IMP 객체 확인
+
+			    IMP.init('imp64567525');  // 가맹점 식별코드
+
+			    // 결제창 호출
+			    IMP.request_pay({
+			        pg: "html5_inicis",
+			        pay_method: "card",
+			        merchant_uid: "gpay_" + new Date().getTime(),   // 주문번호
+			        name: "예약명",
+			        amount: price,   // 숫자 타입
+			        buyer_name: member_id,  // member_id 확인 필요
+
+			    }, function (rsp) {  // 결제 콜백 함수
+			        console.log("결제 응답:", rsp);  // 응답 로그 출력
+			        if (rsp.success) {  // 결제 성공 시
+			            var msg = '결제가 완료되었습니다.';
+			            var result = {
+			                "membernum": headcount,  // 이용 인원
+			                "mpayprice": rsp.paid_amount,  // 결제 금액
+			                "mpaydate": new Date().toISOString().slice(0, 10),  // 결제일
+			                "mpayperiod": visitDate,  // 상품 이용 기간
+			                "mpaytime": "",
+			                "trainername": "",
+			                "tgoodsint": null,
+			            };
+			            console.log("결제 성공 데이터:", result);
+
+			            // 결제 결과 서버로 전송
+			            $.ajax({
+			                url: '/popupBoard/select.do',
+			                type: 'POST',
+			                contentType: 'application/json',
+			                data: JSON.stringify(result),
+			                success: function(res) {
+			                    console.log("서버 응답:", res);
+			                    location.href = res;  // 성공 시 리디렉션
+			                },
+			                error: function(err) {
+			                    console.log("서버 오류:", err);
+			                }
+			            });
+			        } else {
+			            var msg = '결제 실패';
+			            msg += '\n에러 내용: ' + rsp.error_msg;
+			        }
+			        alert(msg);
+			    });
+			});
+
+		}
+	// 가격 업데이트 함수 호출 (필요한 경우)
 	updatePrice();
+	});  
 });
-
-	
