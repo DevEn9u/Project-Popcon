@@ -6,6 +6,12 @@
 
 <mapper namespace="com.edu.springboot.booking.IBookingService">
 
+	<select id="PopupDetails" parameterType="String" resultType="com.edu.springboot.popupboards.PopupBoardDTO">
+	    SELECT board_title, start_date, end_date, popup_addr, popup_fee
+	    FROM popup_board
+	    WHERE board_idx = #{board_idx}
+	</select>
+    
     <insert id="booking">
 	    INSERT INTO booking (booking_num, popup_idx, member_id, visit_date, booking_date, price, headcount, is_paid)
 	    VALUES

@@ -9,10 +9,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.edu.springboot.popupboards.PopupBoardDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -23,14 +27,18 @@ public class BookingController {
     IBookingService book;
 
     // 팝업 예약 페이지
-    @GetMapping("/popupBoard/booking.do")
-    public String popupbooking() {
+    @GetMapping("/popupBoard/booking/{board_idx}")
+    public String getBookingDetails(@PathVariable("board_idx") String board_idx, Model model) {
+        PopupBoardDTO PopupDetails = book.PopupDetails(board_idx);
+        model.addAttribute("PopupDetails", PopupDetails);
         return "/booking/booking";
     }
 
     // 인원, 수량 선택 페이지
-    @GetMapping("/popupBoard/select.do")
-    public String popupselect() {
+    @GetMapping("/popupBoard/select/{board_idx}")
+    public String popupselect(@PathVariable("board_idx") String board_idx, Model model) {
+    	PopupBoardDTO PopupDetails = book.PopupDetails(board_idx);
+        model.addAttribute("PopupDetails", PopupDetails);
         return "/booking/booking-select";
     }
     
