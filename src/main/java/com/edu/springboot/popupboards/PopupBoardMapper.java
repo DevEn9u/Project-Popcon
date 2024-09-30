@@ -33,7 +33,7 @@ public interface PopupBoardMapper {
     public int writeComment(CommentDTO comment); // 추가: 댓글 작성 메서드
 
     // 특정 게시글의 댓글 목록 조회
-    public List<CommentDTO> getComments(@Param("popup_board_idx") String popup_board_idx); // 추가: 댓글 목록 조회 메서드
+    public List<CommentDTO> getComments(@Param("popup_board_idx") String popup_board_idx);
 
     // 댓글 삭제
     void deleteComment(String com_idx);

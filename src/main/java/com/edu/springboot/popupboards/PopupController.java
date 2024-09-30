@@ -40,7 +40,7 @@ public class PopupController {
         model.addAttribute("popupList", popupList);
         return "popup-boards/popup-board-list"; 
     }
-
+ 
     // 팝업안내 - 글 보기
     @GetMapping("/popupBoard/view/{board_idx}")
     public String popupview(@PathVariable("board_idx") String board_idx, Model model) {
@@ -161,13 +161,13 @@ public class PopupController {
     //댓글 수정
     @PostMapping("popupBoard/comEdit.do")
     public String editComment(@ModelAttribute CommentDTO commentDTO, RedirectAttributes redirectAttributes) {
-        int result = popupBoardMapper.editComment(commentDTO); // Use service to call the edit method
+        int result = popupBoardMapper.editComment(commentDTO); 
         if (result > 0) {
             redirectAttributes.addFlashAttribute("message", "댓글이 수정되었습니다.");
         } else {
             redirectAttributes.addFlashAttribute("message", "댓글 수정에 실패했습니다.");
         }
-        return "redirect:/popupBoard/view/" + commentDTO.getPopup_board_idx(); // Use commentDTO to get the board index
+        return "redirect:/popupBoard/view/" + commentDTO.getPopup_board_idx();
     }
     
     

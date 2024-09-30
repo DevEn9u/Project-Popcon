@@ -29,7 +29,7 @@ public class PopupBoardService {
     
     // 글쓰기
     public int writePost(PopupBoardDTO post) {
-        return popupBoardMapper.write(post); // DTO 전체를 전달
+        return popupBoardMapper.write(post);
     }
     
     // 글삭제

@@ -62,7 +62,7 @@
     <c:if test="${not empty user_id}">
       <div class="logout">
         <button type="button" class="logout_btn" onclick="location.href='/logout.do'">로그아웃</button>
-        <a class="mypage" href="#">마이페이지</a>
+        <a class="mypage" href="/mypage/mypage.do">마이페이지</a>
       </div>
     </c:if>
     </div>

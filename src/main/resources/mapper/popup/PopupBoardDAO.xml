@@ -69,6 +69,7 @@
 	    DELETE FROM COMMENTS WHERE com_idx = #{com_idx}
 	</delete>
 	
+	<!-- 댓글 수정 기능 -->
 	<update id="editComment" parameterType="com.edu.springboot.popupboards.CommentDTO">
     	UPDATE COMMENTS
     	SET com_contents = #{com_contents}

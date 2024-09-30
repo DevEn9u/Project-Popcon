@@ -23,5 +23,4 @@
   <script src="/js/jquery-ui.min.js?v=<?php echo time(); ?"></script>
   <script src="/js/swiper-bundle.min.js?v=<?php echo time(); ?"></script>
   <script src="/js/ui-common.js?v=<?php echo time(); ?>"></script>
-<%--   <script src="/js/form-validate.js?v=<?php echo time(); ?"></script> --%>
 
