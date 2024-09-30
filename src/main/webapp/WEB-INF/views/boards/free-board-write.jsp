@@ -74,7 +74,7 @@
                   <td class="td_flex">
                     <div class="file_wrap">
                       <input type="text" class="file_name" readonly>
-                      <input type="file" id="upload" class="blind">
+                      <input type="file" id="upload" class="blind" name="images" multiple>
                       <label for="upload">파일선택</label>
                     </div>
                     <p class="file_note">이미지 파일은 10MB 이하 jpg, png, gif, webp 확장자 파일만 올릴 수 있습니다.</p>

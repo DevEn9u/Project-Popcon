@@ -55,9 +55,9 @@
               <!-- 게시물 본문 내용 출력 -->
               <p>${dto.contents}</p>
               <!-- 게시물 이미지 출력 -->
-              <c:if test="${dto.images != null}">
-                <img src="${dto.images}" alt="첨부 이미지">
-              </c:if>
+			<c:forEach var="image" items="${images}">
+			    <img src="${image.image_url}" alt="Image" />
+			</c:forEach>
             </div>
             <div class="btn_wrap">
               <!-- session에 저장된 UserId와 게시물 작성자가 동일할 때 수정&삭제 버튼 출력 -->
