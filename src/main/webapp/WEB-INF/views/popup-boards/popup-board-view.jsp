@@ -236,7 +236,7 @@
 					<button class="pv_list_btn" onclick="location.href='../list.do';">목록</button>
 				</div>
 				<div class="comment_section">
-					<h3>후기 작성하기</h3>
+					<h3>후기 작성하기</h3> 
 					<form name="commentFrm" method="post" class="comment_form"
 						action="${pageContext.request.contextPath}/popupBoard/writeComment.do">
 						<input type="hidden" name="popup_board_idx"
