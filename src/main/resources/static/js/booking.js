@@ -185,7 +185,7 @@ $(function () {
 			        merchant_uid: "gpay_" + new Date().getTime(),   // 주문번호
 			        name: "예약명",
 			        amount: price,   // 숫자 타입
-			        buyer_name: member_id,  // member_id 확인 필요
+			        buyer_name: member_id,  // controller를 통해 불러옴.
 
 			    }, function (rsp) {  // 결제 콜백 함수
 			        console.log("결제 응답:", rsp);  // 응답 로그 출력
@@ -196,9 +196,6 @@ $(function () {
 			                "mpayprice": rsp.paid_amount,  // 결제 금액
 			                "mpaydate": new Date().toISOString().slice(0, 10),  // 결제일
 			                "mpayperiod": visitDate,  // 상품 이용 기간
-			                "mpaytime": "",
-			                "trainername": "",
-			                "tgoodsint": null,
 			            };
 			            console.log("결제 성공 데이터:", result);
 
@@ -207,7 +204,12 @@ $(function () {
 			                url: '/popupBoard/select.do',
 			                type: 'POST',
 			                contentType: 'application/json',
-			                data: JSON.stringify(result),
+							data: {
+								    popup_idx: null,
+								    visit_date: visitDate,
+								    headcount: headcount,
+								    price: price
+								  },
 			                success: function(res) {
 			                    console.log("서버 응답:", res);
 			                    location.href = res;  // 성공 시 리디렉션

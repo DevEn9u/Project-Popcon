@@ -26,13 +26,13 @@
 	    <div class="bs_booking_tit">
 	      <div class="inner">
 	        <img
-	          src="../images/imgMGJ/booking_img.png"
+	          src="/images/imgMGJ/booking_img.png"
 	          alt="booking_img"
 	          class="bs_booking_img"
 	        />
 	        <span class="bs_location">
-	          <img src="../images/imgMGJ/pin.svg" alt="pin" class="bs_pin" />
-	          서울특별시 강남구 선릉로 807 K 현대미술관
+	          <img src="/images/imgMGJ/pin.svg" alt="pin" class="bs_pin" />
+	          ${PopupDetails.popup_addr}
 	        </span>
 	      </div>
 	    </div>
@@ -45,7 +45,7 @@
 		        </div>
 		        <ul class="select_wrap1">
 		          <li class="select_date">
-		            <img class=date_img src="../images/imgMGJ/calendar_icon.png" />
+		            <img class=date_img src="/images/imgMGJ/calendar_icon.png" />
 					<p>일정을 선택하세요</p>
 		          </li>
 		          <li class="select_calendar">
@@ -76,7 +76,7 @@
 					</div>
 		          </li>
 		          <li class="select_count">
-		            <img class="date_img" src="../images/imgMGJ/mypage_icon.png" />
+		            <img class="date_img" src="/images/imgMGJ/mypage_icon.png" />
 					<p>인원/수량을 선택하세요</p>
 		          </li>
 		          <li class="count_wrap">

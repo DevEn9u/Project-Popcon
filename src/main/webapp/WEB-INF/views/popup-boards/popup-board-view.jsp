@@ -52,6 +52,12 @@
   }
 </script>
 
+<script>
+  function goToBooking(board_idx) {
+    location.href = `/popupBoard/booking/` + board_idx;
+  }
+</script>
+
 ${common_header}
 <main id="popup_view_container">
   <div class="popup_view_inner">
@@ -90,7 +96,7 @@ ${common_header}
               </form>
             </c:when>
             <c:otherwise>
-              <button class="pv_booking_btn" onclick="location.href='../booking.do';">예약하기</button>
+              <button class="pv_booking_btn" onclick="goToBooking(${popup.board_idx});">예약하기</button>
             </c:otherwise>
           </c:choose>
           <img src="${pageContext.request.contextPath}/images/imgMGJ/like_btn.svg" alt="좋아요" class="like_btn" />
@@ -135,7 +141,7 @@ ${common_header}
       </div>
 
       <div class="pv_btn_wrap">
-        <button class="pv_booking_btn" onclick="location.href='../booking.do';">예약하기</button>
+        <button class="pv_booking_btn" onclick="goToBooking(${popup.board_idx});">예약하기</button>
         <button class="pv_list_btn" onclick="location.href='../list.do';">목록</button>
       </div>
     </div>

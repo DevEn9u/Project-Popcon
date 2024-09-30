@@ -12,7 +12,6 @@ public class bookingDTO {
     private java.sql.Date booking_date;  // 예약 날짜
     private int price;  // 가격
     private int headcount;  // 인원
-    private int is_paid;  // 결제 여부
-    
-    // private int is_canceled;  // 예약 취소 여부
+    private int is_paid;  // 결제 여부  
+    private int is_canceled;  // 예약 취소 여부
 }

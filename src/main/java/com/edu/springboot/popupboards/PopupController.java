@@ -33,7 +33,7 @@ public class PopupController {
         model.addAttribute("popupList", popupList);
         return "popup-boards/popup-board-list"; 
     }
-
+ 
     // 팝업안내 - 글 보기
     @GetMapping("/popupBoard/view/{board_idx}")
     public String popupview(@PathVariable("board_idx") String board_idx, Model model) {
