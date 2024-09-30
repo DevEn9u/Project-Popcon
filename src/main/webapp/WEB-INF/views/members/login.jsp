@@ -41,16 +41,17 @@
               <fieldset>
                 <legend>로그인</legend>
                 <div class="row input_wrap1">
-                  <input type="text" id="login_id" name="login_id" placeholder="아이디를 입력하세요.">
+                  <input type="text" id="login_id" name="login_id" placeholder="아이디를 입력하세요."
+                  	value="${savedUserId }">
                 </div>
                 <div class="row input_wrap2">
                   <input type="password" name="login_pw" placeholder="비밀번호를 입력하세요.">
                 </div>
                 <div class="row3 checkbox_wrap">
-                  <input type="checkbox" id="saveUserId" name="saveUserId" class="blind">
-                  <label for="saveUserId">아이디 기억하기</label>
-                  <input type="checkbox" id="rememberMe" name="rememberMe" class="blind">
-                  <label for="rememberMe">로그인 상태 유지</label>
+                  <input type="checkbox" id="saveCheck" name="saveCheck" class="blind">
+                  <label for="saveCheck">아이디 기억하기</label>
+                  <input type="checkbox" id="remember-me" name="remember-me" class="blind">
+                  <label for="remember-me">로그인 상태 유지</label>
                 </div>
                 <!-- 로그인 실패시 실패 메세지 띄우기 -->
                 <c:if test="${param.error != null }">
