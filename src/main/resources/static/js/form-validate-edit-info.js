@@ -1,26 +1,17 @@
 function validateForm(form) {
-	// 회원가입 폼 내용 검증
-	if (!isFieldValid(form.name, "이름을 입력하세요.") || 
-	       !isFieldValid(form.email, "이메일을 입력하세요.") || 
-	       !isFieldValid(form.phone, "전화번호를 입력하세요.")) {
+	// 변수 초기화
+	let email = form.email.value.trim();
+	let phone = form.phone.value.trim();
+	
+	let business = form.business_number ? form.business_number.value.trim() : "";
+
+		// 회원가입 폼 내용 검증
+	if (!isFieldValid(form.email, "이메일을 입력하세요.") ||
+			!isFieldValid(form.phone, "전화번호를 입력하세요.") ||
+			(business && !isFieldValid(form.business_number, "사업자번호를 입력하세요."))) {
 	      	 return false;
 	}
-	
-	if (form.idDuplication.value != "idChecked") {
-		alert("아이디 중복체크를 해주세요.");
-		return false;
-	}
-	if (form.pass.value !== form.pass2.value) {
-			alert("비밀번호가 일치하지 않습니다.");
-			resetPasswords(form);
-			return false;
-	}
 
-	let email = document.querySelector('.input_email').value.trim();
-	let phone = document.querySelector('.input_phone').value.trim();
-	
-	let businessInput = document.querySelector('.input_business');
-	let business = businessInput ? businessInput.value.trim() : "";
 
   	if (!isValidEmail(email)) {
       alert("유효하지 않은 이메일 주소입니다.");
@@ -78,7 +69,7 @@ function formatBusinessNumber(input) {
   
   cleanedInput = cleanedInput.slice(0, 10);
   
-  // 3번째 숫자와 5번째 숫자 뒤에 '-'를 추가하여 '010-12-345678' 구조로 만들기
+  // 3번째 숫자와 5번째 숫자 뒤에 '-'를 추가하여 '010-12-34567' 구조로 만들기
   let dashInput = '';
   
   for (let i = 0; i < cleanedInput.length; i++) {
@@ -89,6 +80,7 @@ function formatBusinessNumber(input) {
   }
   input.value = dashInput;
 }
+
 /*********** 정보 수정 버튼 클릭시 유효성 검사 ************/
 // 이메일 유효성 검사
 function isValidEmail(email) {
@@ -100,4 +92,10 @@ function isValidPhone(phone) {
 	// 휴대폰 번호는 010으로 시작한 11자리여야 한다.
 	const regex = /^010-[0-9]{4}-[0-9]{4}$/;
 	return regex.test(phone);
+}
+// 사업자번호 유효성 검사
+function isValidBusiness(business_number) {
+	// 사업자 번호는 000-11-22222 형태의 10자리
+	const regex = /^[0-9]{3}-[0-9]{2}-[0-9]{5}$/;
+	return regex.test(business_number);
 }
