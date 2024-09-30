@@ -60,10 +60,10 @@ public class WebSecurityConfig {
 //				.anyRequest().authenticated()
 			);
 		http.formLogin((formLogin) -> formLogin
-				.loginPage("/login.do") // defalut : /login
+				.loginPage("/login.do")
 				.loginProcessingUrl("/loginProc.do")
 				// 로그인 성공시 메인 페이지로 이동.
-				.defaultSuccessUrl("/", true)
+//				.defaultSuccessUrl("/", true)
 				/* 로그인할 때 아이디와 비밀번호의 파라미터는 input태그의 name
 				   속성과 동일하게 설정해줘야 로그인 process가 정상작동함. */
 				.usernameParameter("login_id")

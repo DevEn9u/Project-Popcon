@@ -35,7 +35,7 @@ public class MemberController {
 //		model.addAttribute("user_id", user_id);
 		
 		String saveCheck = req.getParameter("saveCheck");
-		boolean isChecked = saveCheck != null; // "on"이면 true. "off"면 false
+		boolean isChecked = (saveCheck != null); // "on"이면 true. "off"면 false
 		
 		// 쿠키 확인
 		Cookie[] cookies = req.getCookies();
@@ -51,8 +51,12 @@ public class MemberController {
 	
 	@PostMapping("/login.do")
 	public String loginPost(Principal principal, HttpServletRequest req, HttpServletResponse resp) {
+		System.out.println("로그인버튼 클릭함");
 		String user_id = principal.getName();
 		String saveCheck = req.getParameter("saveCheck");
+		System.out.println("User ID: " + user_id);
+		System.out.println("Save Check: " + saveCheck);
+		
 		
         if (saveCheck != null) {
         	Cookie cookie = new Cookie("saveLoginId", user_id);
@@ -67,8 +71,6 @@ public class MemberController {
             cookie.setPath("/");
             resp.addCookie(cookie);
         }
-        System.out.println("User ID: " + user_id);
-        System.out.println("Save Check: " + saveCheck);
 		return "redirect:/login.do";
 	}
 		

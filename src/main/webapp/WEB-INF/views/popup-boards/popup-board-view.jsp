@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -9,201 +9,347 @@
 <link rel="stylesheet" href="/css/popup_view.css">
 <body>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvsn1Mzm9UYTiQ1jo4gwurW7PT27advCs&callback=initMap" async defer></script>
+	<!-- 민경준 구글 맵 API 사용하였습니다 -->
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCA0TzsH1iRaVCQSJCc8BzZHmGKmpNJhKY&callback=initMap"
+		async defer></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+	  function initMap() {
+	    var geocoder = new google.maps.Geocoder();
+	    var address = "${popup.popup_addr}";
+	
+	    geocoder.geocode({ 'address': address }, function (results, status) {
+	      if (status === 'OK') {
+	        var map = new google.maps.Map(document.getElementById('map'), {
+	          zoom: 15,
+	          center: results[0].geometry.location
+	        });
+	
+	        var marker = new google.maps.Marker({
+	          position: results[0].geometry.location,
+	          map: map
+	        });
+	      } else {
+	        alert('지도 로드에 실패했습니다: ' + status);
+	      }
+	    });
+	  }
 
-<script>
-  function initMap() {
-    var geocoder = new google.maps.Geocoder();
-    var address = "${popup.popup_addr}";
-
-    geocoder.geocode({ 'address': address }, function (results, status) {
-      if (status === 'OK') {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
-          center: results[0].geometry.location
-        });
-
-        var marker = new google.maps.Marker({
-          position: results[0].geometry.location,
-          map: map
-        });
-      } else {
-        alert('지도 로드에 실패했습니다: ' + status);
-      }
-    });
-  }
-
-  // 주소 복사 기능
-  function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(function() {
-      alert('주소가 복사되었습니다: ' + text);
-    }, function(err) {
-      console.error('복사 실패:', err);
-    });
-  }
+	  // 주소 복사 기능
+	  function copyToClipboard(text) {
+	    navigator.clipboard.writeText(text).then(function() {
+	      alert('주소가 복사되었습니다: ' + text);
+	    }, function(err) {
+	      console.error('복사 실패:', err);
+	    });
+	  }
   
-  // 게시물 삭제를 위한 함수
-  function deletePost() {
-    let confirmed = confirm("게시물을 삭제하겠습니까?");
-    if (confirmed) {
-      let form = document.deleteFrm;
-      form.submit(); 
-    }
-  }
-</script>
 
-${common_header}
-<main id="popup_view_container">
-  <div class="popup_view_inner">
-    <div class="pv_content_wrap">
-      <div class="swiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <a href="#">
-              <div class="img_wrap">
-                <img src="${pageContext.request.contextPath}/images/imgMGJ/main_slider1.png" alt="main1" class="main_slider1" />
-                <img src="${pageContext.request.contextPath}/images/imgMGJ/main_slider2.png" alt="main2" class="main_slider2" />
-              </div>
-            </a>
-          </div>
-          <!-- 다른 슬라이드 추가 -->
-        </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-      </div>
+	</script>
 
-      <div class="pv_title">
-        <span class="pv_sub_title">${popup.writer}</span>
-        <h2 class="pv_main_title">
-          <span class="pv_title_text">${popup.board_title}</span>
-          <!-- 작성자와 비작성자에 따른 버튼 표시 -->
-          <c:choose>
-            <c:when test="${popup.writer == pageContext.request.userPrincipal.name}">
-              <form id="deleteForm" action="${pageContext.request.contextPath}/popupBoard/delete.do" method="post">
-                <input type="hidden" name="board_idx" value="${popup.board_idx}" />
-                <button class="pv_delete_btn" type="button" onclick="if(confirm('정말 삭제하시겠습니까?')) { document.getElementById('deleteForm').submit(); }">삭제하기</button>
-              </form>
-              <form action="${pageContext.request.contextPath}/popupBoard/edit.do" method="get">
-                <input type="hidden" name="board_idx" value="${popup.board_idx}" />
-                <button class="pv_edit_btn" type="submit">수정하기</button>
-              </form>
-            </c:when>
-            <c:otherwise>
-              <button class="pv_booking_btn" onclick="location.href='../booking.do';">예약하기</button>
-            </c:otherwise>
-          </c:choose>
-          <img src="${pageContext.request.contextPath}/images/imgMGJ/like_btn.svg" alt="좋아요" class="like_btn" />
-        </h2>
-        <div class="pv_title_date">
-          ${popup.start_date} ~ ${popup.end_date}
-        </div>
-        <span class="pv_title_location">
-          <img src="${pageContext.request.contextPath}/images/imgMGJ/pin.svg" /> ${popup.popup_addr}
-        </span>
-      </div>
+	<script>
+		function deleteComment(commentId, popupBoardIdx) {
+		    let confirmed = confirm("리뷰를 삭제하겠습니까?");
+		    if (confirmed) {
+		        $.ajax({
+		            type: "POST",
+		            url: "${pageContext.request.contextPath}/popupBoard/comDelete.do",
+		            data: { com_idx: commentId, popup_board_idx: popupBoardIdx }, // popup_board_idx 추가
+		            success: function(response) {
+		                alert("리뷰가 삭제되었습니다.");
+		                location.reload(); // 페이지 새로고침
+		            },
+		            error: function(err) {
+		                alert('리뷰 삭제에 실패했습니다.');
+		                console.error('Error:', err);
+		            }
+		        });
+		    }
+		}
+	</script>
 
-      <div class="open_time_wrap">
-        <h2 class="open_time">운영 시간</h2>
-        <div class="weekdays">
-          ${popup.open_days} ${popup.open_hours}
-        </div>
-      </div>
+	<!-- 리뷰 수정 폼  -->
+	<script>
+		let isEditModalOpen = false;
+	
+		function openEditModal(commentId, commentContent) {
+	    	const editModal = document.getElementById('editCommentModal_' + commentId);
+	    	const editComIdx = document.getElementById('editComIdx_' + commentId);
+	    	const editComContents = document.getElementById('editComContents_' + commentId);
+	
+	    	// 모달을 여는 로직
+		    if (editModal.style.display === 'block') {
+		        editModal.style.display = 'none';
+		    } else {
+		        editComIdx.value = commentId;
+		        editComContents.value = commentContent;
+		        editModal.style.display = 'block';
+		    }
+		}
+	
+		function closeEditModal(commentId) {
+		    document.getElementById('editCommentModal_' + commentId).style.display = 'none';
+		    isEditModalOpen = false;
+		}
+	</script>
 
-      <div class="content">
-        <h2 class="content_tit">팝업 스토어 소개</h2>
-        <div class="main_content">
-          ${popup.contents}
-        </div>
-      </div>
+	<script>
+	  function goToBooking(board_idx) {
+	    location.href = `/popupBoard/booking/` + board_idx;
+	  }
+	</script>
 
-      <div class="caution_wrap">
-        <h2 class="caution">안내 및 주의사항</h2>
-        <div class="caution_main">
-          상기 일정은 지역 사정에 따라 변경될 수 있습니다.<br />
-          자세한 내용은 게시판에서 확인하세요.
-        </div>
-      </div>
+	${common_header}
+	<main id="popup_view_container">
+		<div class="popup_view_inner">
+			<div class="pv_content_wrap">
+				<div class="swiper">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<ul class="main_popup">
+								<li><a href="#">
+										<div class="img_wrap">
+											<img src="/images/main/mainslider1.png"> <img
+												src="/images/main/mainslider1.png">
+										</div>
+										<div class="txt_wrap">
+											<p class="slide_title">${popup.board_title}</p>
+											<p>${popup.start_date}~${popup.end_date}</p>
+											<p>
+												<img src="/images/main/location.svg">${popup.popup_addr}</p>
+										</div>
+								</a></li>
+							</ul>
+						</div>
+						<div class="swiper-slide">
+							<ul class="main_popup">
+								<li><a href="#">
+										<div class="img_wrap">
+											<img src="/images/main/mainslider2.jpg"> <img
+												src="/images/main/mainslider2.jpg">
+										</div>
+										<div class="txt_wrap">
+											<p class="slide_title">${popup.board_title}</p>
+											<p>${popup.start_date}~${popup.end_date}</p>
+											<p>
+												<img src="/images/main/location.svg">${popup.popup_addr}</p>
+										</div>
+								</a></li>
+							</ul>
+						</div>
+						<div class="swiper-slide">
+							<ul class="main_popup">
+								<li><a href="#">
+										<div class="img_wrap">
+											<img src="/images/main/mainslider2.jpg" alt="팝업 홍보"> <img
+												src="/images/main/mainslider2.jpg" alt="팝업 홍보">
+										</div>
+										<div class="txt_wrap">
+											<p class="slide_title">${popup.board_title}</p>
+											<p>${popup.start_date}~${popup.end_date}</p>
+											<p>
+												<img src="/images/main/location.svg">${popup.popup_addr}</p>
+										</div>
+								</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="swiper-pagination pagination"></div>
+					<div class="swiper-button-prev arrow_btn"></div>
+					<div class="swiper-button-next arrow_btn"></div>
+				</div>
 
-      <div class="location">
-        <h2 class="location_tit">위치</h2>
-        <div id="map" style="width: 100%; height: 400px;"></div> <!-- 구글 지도 표시 영역 -->
-        <div class="location_copy">
-          ${popup.popup_addr}
-          <div class="pv_copy_btn" onclick="copyToClipboard('${popup.popup_addr}')">주소 복사</div>
-        </div>
-      </div>
+				<div class="pv_title">
+					<span class="pv_sub_title">${member.name}</span>
+					<h2 class="pv_main_title">
+						<span class="pv_title_text">${popup.board_title}</span>
+						<!-- 작성자와 비작성자에 따른 버튼 표시 -->
+						<c:choose>
+							<c:when
+								test="${popup.writer == pageContext.request.userPrincipal.name}">
+								<form id="deleteForm"
+									action="${pageContext.request.contextPath}/popupBoard/delete.do"
+									method="post">
+									<input type="hidden" name="board_idx"
+										value="${popup.board_idx}" />
+									<button class="pv_delete_btn" type="button"
+										onclick="if(confirm('정말 삭제하시겠습니까?')) { document.getElementById('deleteForm').submit(); }">삭제하기</button>
+								</form>
+								<form
+									action="${pageContext.request.contextPath}/popupBoard/edit.do"
+									method="post">
+									<input type="hidden" name="board_idx"
+										value="${popup.board_idx}" />
+									<button class="pv_edit_btn" type="submit">수정하기</button>
+								</form>
+							</c:when>
+							<c:otherwise>
+								<button class="pv_booking_btn"
+									onclick="goToBooking(${popup.board_idx});">예약하기</button>
+							</c:otherwise>
+						</c:choose>
+						<img
+							src="${pageContext.request.contextPath}/images/imgMGJ/like_btn.svg"
+							alt="좋아요" class="like_btn" />
+					</h2>
+					<div class="pv_title_date">${popup.start_date}~
+						${popup.end_date}</div>
+					<span class="pv_title_location"> <img
+						src="${pageContext.request.contextPath}/images/imgMGJ/pin.svg" />
+						${popup.popup_addr}
+					</span>
+				</div>
 
-      <div class="pv_btn_wrap">
-        <button class="pv_booking_btn" onclick="location.href='../booking.do';">예약하기</button>
-        <button class="pv_list_btn" onclick="location.href='../list.do';">목록</button>
-      </div>
-    </div>
-  </div>
-</main>
+				<div class="open_time_wrap">
+					<h2 class="open_time">운영 시간</h2>
+					<div class="weekdays">${popup.open_days}${popup.open_hours}</div>
+				</div>
 
-<footer id="footer">
-  <div class="inner">
-    <section class="footer_wrap">
-      <div class="footer_top">
-        <div class="txt_wrap">
-          <ul class="txt">
-            <li><a href="#">서비스 이용약관</a></li>
-            <li><a href="#">개인정보 처리방침</a></li>
-            <li><a href="#">마케팅 수신 동의</a></li>
-            <li><a href="#">고객센터</a></li>
-            <li><a href="#">비즈니스</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer_bottom">
-        <div class="col1">
-          <div class="company_wrap">
-            <p>(주)플로팅플래닛</p>
-            <p>주소 : 서울 종로구 삼일대로17길 51 스타골드빌딩 5층</p>
-            <p>문의전화 : (02)333-4567</p>
-            <p>이메일 : popcon@popcon.co.kr</p>
-            <p>대표전화 : (02)333-4567</p>
-            <p>FAX : (02)333-5432</p>
-          </div>
-        </div>
-        <div class="col2">
-          <div class="sns_wrap">
-            <ul class="sns">
-              <li>
-                <a href="#">
-                  <img src="${pageContext.request.contextPath}/images/main/footer_sns_images/icon-kakao.svg">
-                  카카오톡
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <img src="${pageContext.request.contextPath}/images/main/footer_sns_images/icon-instagram.svg">
-                  인스타그램
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <img src="${pageContext.request.contextPath}/images/main/footer_sns_images/icon-facebook.svg">
-                  페이스북
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <img src="${pageContext.request.contextPath}/images/main/footer_sns_images/icon-naverblog.svg">
-                  블로그
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <span class="copyright">Copyright 2024. Floating Planet Co.,Ltd. All rights reserved</span>
-      <div class="footer_logo">
-        <img src="${pageContext.request.contextPath}/images/main/footer_awards.png" alt="">
-      </div>
-    </section>
-  </div>
-</footer>
+				<div class="content">
+					<h2 class="content_tit">팝업 스토어 소개</h2>
+					<div class="main_content">${popup.contents}</div>
+				</div>
+
+				<div class="caution_wrap">
+					<h2 class="caution">안내 및 주의사항</h2>
+					<div class="caution_main">
+						상기 일정은 지역 사정에 따라 변경될 수 있습니다.<br /> 자세한 내용은 게시판에서 확인하세요.
+					</div>
+				</div>
+
+				<div class="location">
+					<h2 class="location_tit">위치</h2>
+					<div id="map" style="width: 100%; height: 400px;"></div>
+					<!-- 구글 지도 표시 영역 -->
+					<div class="location_copy">
+						${popup.popup_addr}
+						<div class="pv_copy_btn"
+							onclick="copyToClipboard('${popup.popup_addr}')">주소 복사</div>
+					</div>
+				</div>
+
+				<div class="pv_btn_wrap">
+					<button class="pv_booking_btn"
+						onclick="goToBooking(${popup.board_idx});">예약하기</button>
+					<button class="pv_list_btn" onclick="location.href='../list.do';">목록</button>
+				</div>
+				<div class="comment_section">
+					<h3>후기 작성하기</h3> 
+					<form name="commentFrm" method="post" class="comment_form"
+						action="${pageContext.request.contextPath}/popupBoard/writeComment.do">
+						<input type="hidden" name="popup_board_idx"
+							value="${popup.board_idx}" />
+						<textarea name="com_contents" rows="4" cols="50"
+							class="comment_area" placeholder="리뷰를 입력하세요"></textarea>
+						<br /> <input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
+						<button type="submit" class="btn comment_btn">리뷰 작성</button>
+					</form>
+
+					<!-- 후기 목록 -->
+					<div class="view_con comment_list">
+						<h3>후기 목록</h3>
+						<c:forEach var="comment" items="${commentsList}">
+							<div class="comment_item">
+								<div class="comment_wrap">
+									<p class="comment_writer">${comment.com_writer}</p>
+									<p class="comment_date">(${comment.formattedPostDate})</p>
+								</div>
+								<p class="comment_content">${comment.com_contents}</p>
+								<!-- 리뷰 수정/삭제 버튼 -->
+								<c:if
+									test="${comment.com_writer == pageContext.request.userPrincipal.name}">
+									<button type="button" class="btn comment_btn"
+										onclick="openEditModal('${comment.com_idx}', '${comment.com_contents}');">수정하기</button>
+									<button type="button" class="btn comment_btn"
+										onclick="deleteComment('${comment.com_idx}', '${popup.board_idx}');">삭제하기</button>
+
+									<div id="editCommentModal_${comment.com_idx}"
+										style="display: none; position: relative; background-color: #121212; padding: 20px; border: 1px solid var(--txt-color-600); margin-top: 10px;">
+										<form id="editCommentForm" method="post"
+											action="${pageContext.request.contextPath}/popupBoard/comEdit.do">
+											<input type="hidden" name="com_idx"
+												id="editComIdx_${comment.com_idx}" /> <input type="hidden"
+												name="popup_board_idx" value="${popup.board_idx}" />
+											<textarea name="com_contents"
+												id="editComContents_${comment.com_idx}" class="edit_content"
+												rows="4" cols="50"></textarea>
+											<button type="submit" class="btn comment_btn"
+												style="margin-top: 10px;">수정 완료</button>
+										</form>
+									</div>
+								</c:if>
+							</div>
+						</c:forEach>
+						<c:if test="${empty commentsList}">
+							<p>등록된 후기가 없습니다.</p>
+						</c:if>
+					</div>
+
+				</div>
+			</div>
+	</main>
+
+	<!-- 경로 문제로 footer 직접 추가하였습니다. -->
+	<footer id="footer">
+		<div class="inner">
+			<section class="footer_wrap">
+				<div class="footer_top">
+					<div class="txt_wrap">
+						<ul class="txt">
+							<li><a href="#">서비스 이용약관</a></li>
+							<li><a href="#">개인정보 처리방침</a></li>
+							<li><a href="#">마케팅 수신 동의</a></li>
+							<li><a href="#">고객센터</a></li>
+							<li><a href="#">비즈니스</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="footer_bottom">
+					<div class="col1">
+						<div class="company_wrap">
+							<p>(주)플로팅플래닛</p>
+							<p>주소 : 서울 종로구 삼일대로17길 51 스타골드빌딩 5층</p>
+							<p>문의전화 : (02)333-4567</p>
+							<p>이메일 : popcon@popcon.co.kr</p>
+							<p>대표전화 : (02)333-4567</p>
+							<p>FAX : (02)333-5432</p>
+						</div>
+					</div>
+					<div class="col2">
+						<div class="sns_wrap">
+							<ul class="sns">
+								<li><a href="#"> <img
+										src="${pageContext.request.contextPath}/images/main/footer_sns_images/icon-kakao.svg">
+										카카오톡
+								</a></li>
+								<li><a href="#"> <img
+										src="${pageContext.request.contextPath}/images/main/footer_sns_images/icon-instagram.svg">
+										인스타그램
+								</a></li>
+								<li><a href="#"> <img
+										src="${pageContext.request.contextPath}/images/main/footer_sns_images/icon-facebook.svg">
+										페이스북
+								</a></li>
+								<li><a href="#"> <img
+										src="${pageContext.request.contextPath}/images/main/footer_sns_images/icon-naverblog.svg">
+										블로그
+								</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<span class="copyright">Copyright 2024. Floating Planet
+					Co.,Ltd. All rights reserved</span>
+				<div class="footer_logo">
+					<img
+						src="${pageContext.request.contextPath}/images/main/footer_awards.png"
+						alt="">
+				</div>
+			</section>
+		</div>
+	</footer>
 </body>
 </html>

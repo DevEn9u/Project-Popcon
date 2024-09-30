@@ -32,13 +32,19 @@
         }
         return true;
     }
+
+    // 이미지 파일 선택 시 파일 이름 표시
+    function handleFileSelect(input) {
+        const fileName = input.files.length > 0 ? input.files[0].name : "";
+        document.querySelector(".file_name").value = fileName; // 파일 이름을 표시
+    }
 </script>
 <body>
   <div id="skip_navi">
     <a href="#container">본문 바로가기</a>
   </div>
   <div id="wrap">
-  	${common_header}
+    ${common_header}
     <main id="container" class="board_page board_write sub_container">
       <div class="sub_top">
         <div class="inner">
@@ -52,11 +58,10 @@
             <form name="writeFrm" method="post" enctype="multipart/form-data" action="/freeBoard/write.do"
               onsubmit="return validateForm(this)">
               <table>
-                <!-- thead가 없을 때 caption의 position이 absolute이면 th와 td의 width가 지정이 안되는 버그가 생기므로 common.css에서 caption.nohead에서 position을 statice으로 만들어 주었음 -->
                 <caption class="nohead">게시글 작성</caption>
                 <tr>
                   <th>이름</th>
-                  <td><input type="text" name="writer" readonly="readonly" value="${ user_id }"></td>
+                  <td><input type="text" name="writer" readonly="readonly" value="${user_id}"></td>
                 </tr>
                 <tr>
                   <th>제목</th>
@@ -74,7 +79,7 @@
                   <td class="td_flex">
                     <div class="file_wrap">
                       <input type="text" class="file_name" readonly>
-                      <input type="file" id="upload" class="blind">
+                      <input type="file" id="upload" class="blind" name="imageFile" multiple onchange="handleFileSelect(this)"> <!-- name 변경 -->
                       <label for="upload">파일선택</label>
                     </div>
                     <p class="file_note">이미지 파일은 10MB 이하 jpg, png, gif, webp 확장자 파일만 올릴 수 있습니다.</p>
@@ -93,11 +98,10 @@
       </div>
     </main>
     <footer id="footer">
-		<div class="inner">
-		    ${common_footer}
-		</div>
+      <div class="inner">
+          ${common_footer}
+      </div>
     </footer>
   </div>
 </body>
-
 </html>
