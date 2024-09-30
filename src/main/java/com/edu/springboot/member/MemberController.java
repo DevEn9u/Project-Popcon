@@ -232,7 +232,6 @@ public class MemberController {
 	@PostMapping("/member/edit-info.do")
 	public String editNormalMemberInfoPost(RedirectAttributes redirectAttributes, MemberDTO memberDTO) {
 		int result = dao.editMemberInfo(memberDTO);
-//		System.out.println("정보수정 결과" + result + "*********" + memberDTO);
 		if (result > 0) {
 			redirectAttributes.addFlashAttribute("resultMsg", "정보수정에 성공했습니다.");
 			return "redirect:/mypage/mypage.do";
