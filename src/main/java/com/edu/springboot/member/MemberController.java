@@ -8,11 +8,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,11 +34,11 @@ public class MemberController {
 	@Autowired
 	IMemberService dao;
 	
-//	@Autowired
-//	private FindIdMail findIdMail;
-//	
-//	private String verificationCode; 	// 인증 코드
-//	private String foundUserId;	 		// 찾은 아이디
+	@Autowired
+	private FindIdMail findIdMail;
+	
+	private String verificationCode; 	// 인증 코드
+	private String email;
 	
 	// 로그인(Spring Security 커스텀 로그인 페이지)
 	@GetMapping("/login.do")
@@ -64,7 +67,6 @@ public class MemberController {
 		return "/members/findId";
 	}
 
-	
 	@GetMapping("/findPw.do")
 	public String findPw() {
 		return "/members/findPw";

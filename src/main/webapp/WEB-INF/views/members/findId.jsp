@@ -39,8 +39,9 @@
                 <div class="emailSentResult"></div>
                 <!-- 인증번호 입력 -->
                 <div class="row input_wrap2">
-                  <input type="hidden" name="verificationCode" value="" />
-                  <input type="text" class="check_num" name="check_num" id="check_num" placeholder="인증번호를 입력하세요." required>
+                  <input type="hidden" class="sent_code" name="sent_code" value="" />
+                  <input type="text" class="input_code" name="input_code" id="input_code" placeholder="인증번호를 입력하세요." required>
+                  <div class="checkCodeResult"></div>
                 </div>
                 <button type="button" class="check_btn login_btn btn" onclick="verifyCode()">인증하기</button>
               </fieldset>
@@ -56,44 +57,5 @@
       </div>
     </footer>
   </div>
-
-  <script>
-  	function sendVerificationCode() {
-  		const name = $('.name').val();
-  		const email = $('.email').val();
-  		$.ajax({
-  			url: "check-info.do",
-	  		data: {"name" : name, "email" : email},
-	  		success : (data) => {
-	  			if (data === 'true') {
-					// 아이디와 이메일이 일치할 경우 인증번호 발송
-					$.ajax({
-						url: "/send-verification-code.do",
-						data: {"email" : email},
-						success: (data) => {
-							console.log(data);
-							emailSentResult.innerText = "인증번호가 발송되었습니다.";
-						},
-						error: (error) => {
-							emailSentResult.innerText = "인증번호 발송에 실패하였습니다.";
-						}
-					})
-	  			} else {
-	  				emailSentResult.innerText = "아이디와 이메일 주소를 다시 확인해주세요.";
-	  			}
-	  		},
-	  		error: (error) => {
-	  			console.log(error);
-	  		}
-  		})
-  	}
-	
-  	// 유효성 검사 변수
-  	let check_email = false;
-  	
-  	// 인증번호 일치여부 확인
-  	
-  	
-  </script>
 </body>
 </html>

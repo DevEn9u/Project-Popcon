@@ -7,7 +7,9 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface IMemberService {
 	// 아이디 찾기
-	public String getMemberByEmail(String id);
+	public String getMemberByEmail(String email);
+	// 사용자 정보 검증
+    public int checkUserInfo(String id, String email); 
 	// 회원가입 - 일반 회원
 	public int registerNormal(MemberDTO memberDTO);
 	// 회원가입 - 기업 회원

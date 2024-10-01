@@ -19,7 +19,7 @@ public class FindIdMail {
     private JavaMailSender javaMailSender;
 
     // 인증 코드 생성
-    private String createVerificationCode() {
+    public String createVerificationCode() {
         return String.valueOf(100000 + new Random().nextInt(900000)); // 6자리 랜덤 숫자
     }
 
@@ -53,8 +53,7 @@ public class FindIdMail {
     }
 
     // 메일 발송 메소드
-    public void sendVerificationEmail(String to) throws MessagingException, UnsupportedEncodingException {
-        String verificationCode = createVerificationCode(); // 인증 코드 생성
+    public void sendVerificationEmail(String to, String verificationCode) throws MessagingException, UnsupportedEncodingException {
         MimeMessage message = createMessage(to, verificationCode); // 메일 내용 작성
         javaMailSender.send(message); // 메일 발송
     }
