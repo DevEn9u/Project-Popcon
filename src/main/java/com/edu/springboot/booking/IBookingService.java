@@ -11,5 +11,5 @@ public interface IBookingService {
 	public PopupBoardDTO PopupDetails(String board_idx);
 	// 예약하기
 	public int booking(bookingDTO dto);
-	
+
 }

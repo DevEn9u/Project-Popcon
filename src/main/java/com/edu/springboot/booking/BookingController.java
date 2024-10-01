@@ -13,15 +13,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.edu.springboot.popupboards.PopupBoardDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 @Controller
 public class BookingController {
@@ -32,7 +30,7 @@ public class BookingController {
     @GetMapping("/popupBoard/booking/{board_idx}")
     public String getBookingDetails(@PathVariable("board_idx") String board_idx, Model model, HttpSession session) {
         PopupBoardDTO PopupDetails = book.PopupDetails(board_idx);
-        model.addAttribute("PopupDetails", PopupDetails);
+        model.addAttribute("details", PopupDetails);
         
         // 세션에 board_idx 저장
         session.setAttribute("board_idx", board_idx);

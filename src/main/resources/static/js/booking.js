@@ -129,15 +129,16 @@ $(function () {
 	          const visitDate = $("#selectedDate").val();
 	          const headcount = parseInt($("#headcount").val());
 	          const price = parseInt($("#price").val());
+			  const boardIdx = $("#boardIdx").val();
 	            
-	          console.log("headcount:", headcount, "price:", price);
+	          console.log("headcount:", headcount, "price:", price, "idx:", boardIdx);
 	    
 	          // Ajax 요청으로 예약 처리
 	          $.ajax({
 	              url: '/popupBoard/select/{board_idx}',
 	              type: 'POST',
 	              data: {
-	                  popup_idx: null,
+	                  popup_idx: boardIdx,
 	                  visit_date: visitDate,
 	                  headcount: headcount,
 	                  price: price

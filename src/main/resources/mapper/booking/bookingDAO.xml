@@ -6,16 +6,23 @@
 
 <mapper namespace="com.edu.springboot.booking.IBookingService">
 
+	<!-- 팝업 정보 호출 -->
 	<select id="PopupDetails" parameterType="String" resultType="com.edu.springboot.popupboards.PopupBoardDTO">
 	    SELECT board_title, start_date, end_date, popup_addr, popup_fee
 	    FROM popup_board
 	    WHERE board_idx = #{board_idx}
 	</select>
     
+    <!-- 예약 정보 저장 -->
     <insert id="booking">
 	    INSERT INTO booking (booking_num, popup_idx, member_id, visit_date, booking_date, price, headcount, is_paid)
 	    VALUES
 	    (booking_num_seq(), #{popup_idx}, #{member_id}, #{visit_date}, sysdate, #{price}, #{headcount}, #{is_paid})
 	</insert>
+	
+	<!-- 팝업 가격 정보 조회 -->
+	<select id="getPopupFee" parameterType="String" resultType="int">
+    	SELECT popup_fee FROM popup_board WHERE board_idx = #{board_idx}
+	</select>
 
 </mapper>

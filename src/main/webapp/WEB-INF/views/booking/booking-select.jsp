@@ -16,9 +16,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 </head>
-<script>
-	
-</script>
+
   <body>
   	${common_header }
 	<main id="bs_container">
@@ -73,6 +71,7 @@
 					<div class="selected-date-container">
 					    <label for="selectedDate">선택한 날짜</label>
 					    <input type="text" id="selectedDate" class="selected-date" readonly />
+						<input type="hidden" id="boardIdx" value="${board_idx}">
 					</div>
 		          </li>
 		          <li class="select_count">
