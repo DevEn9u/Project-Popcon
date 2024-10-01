@@ -3,6 +3,7 @@ package com.edu.springboot.member;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.edu.springboot.smtp.EmailSending;
+import com.edu.springboot.smtp.FindIdMail;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,6 +30,12 @@ public class MemberController {
 	// member dao 호출을 위해 자동 Bean 주입. 이 Interface를 통해 Mapper 호출
 	@Autowired
 	IMemberService dao;
+	
+//	@Autowired
+//	private FindIdMail findIdMail;
+//	
+//	private String verificationCode; 	// 인증 코드
+//	private String foundUserId;	 		// 찾은 아이디
 	
 	// 로그인(Spring Security 커스텀 로그인 페이지)
 	@GetMapping("/login.do")
@@ -48,24 +57,24 @@ public class MemberController {
 	    model.addAttribute("isChecked", isChecked);
 		return "members/login";
 	}
-		
-	// 권한이 부족할 경우
-	@RequestMapping("/denied.do")
-	public String login3() {
-		return "/auth/denied";
-	}
 	
 	// 아이디 비밀번호 찾기
 	@GetMapping("/findId.do")
 	public String findId() {
 		return "/members/findId";
 	}
+
 	
 	@GetMapping("/findPw.do")
 	public String findPw() {
 		return "/members/findPw";
 	}
-	
+		
+	// 권한이 부족할 경우
+	@RequestMapping("/denied.do")
+	public String login3() {
+		return "/auth/denied";
+	}
 	
 	// 회원가입 - 메인
 	@GetMapping("/register.do")
@@ -224,7 +233,7 @@ public class MemberController {
 		model.addAttribute("memberDTO", memberDTO);
 		return "/members/edit-choose";
 	}
-	// 회원정보 수정 - 일반회원 정보 변경
+	// 회원정보 수정 - 회원 정보 변경
 	@GetMapping("/member/edit-info.do")
 	public String editNormalMemberInfoGet(Principal principal, Model model) {
 		String user_id = principal.getName();
@@ -232,7 +241,7 @@ public class MemberController {
 		model.addAttribute("memberDTO", memberDTO);
 		return "/members/edit-info";
 	}
-	// 회원정보 수정 - 일반회원 정보 변경
+	// 회원정보 수정 - 회원 정보 변경
 	@PostMapping("/member/edit-info.do")
 	public String editNormalMemberInfoPost(RedirectAttributes redirectAttributes, MemberDTO memberDTO) {
 		int result = dao.editMemberInfo(memberDTO);
@@ -246,7 +255,7 @@ public class MemberController {
 			return "redirect:/member/edit-info.do";
 		}
 	}
-	// 회원정보 수정 - 일반회원 비밀번호 변경
+	// 회원정보 수정 - 회원 비밀번호 변경
 	@GetMapping("/member/edit-pass.do")
 	public String editNormalMemberPassGet(Principal principal, Model model) {
 		String user_id = principal.getName();
@@ -254,7 +263,7 @@ public class MemberController {
 		model.addAttribute("memberDTO", memberDTO);
 		return "/members/edit-pass";
 	}
-	// 회원정보 수정 - 일반회원 비밀번호 변경
+	// 회원정보 수정 - 회원 비밀번호 변경
 	@PostMapping("/member/edit-pass.do")
 	public String editNormalMemberPassPost(RedirectAttributes redirectAttributes, HttpServletRequest req, MemberDTO memberDTO) {
 		String pass = req.getParameter("pass");

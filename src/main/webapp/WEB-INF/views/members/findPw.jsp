@@ -10,7 +10,7 @@
   <body>
     <div id="wrap">
 	${common_header}
-      <main id="sub_container">
+      <main id="login_page sub_container">
         <div class="find_page">
           <div class="logo">
             <h2>
@@ -38,9 +38,9 @@
               <button class="send_btn">비밀번호 찾기</button>
             </div>
             <ul class="link_wrap">
-              <li><a href="#">아이디 찾기</a></li>
-              <li><a href="#">회원 가입</a></li>
-              <li><a href="#">로그인</a></li>
+            <li><a href="/register.do">회원가입</a></li>
+            <li><a href="/findId.do">ID 찾기</a></li>
+            <li><a href="/findPw.do">비밀번호 찾기</a></li>
             </ul>
           </div>
         </div>

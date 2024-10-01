@@ -29,7 +29,9 @@
       <div class="sub_top">
         <div class="inner">
           <h2>공지사항</h2>
-          <a href="./write.do" class="write_btn">게시물 작성하기</a>
+<%--           <c:if test="${memberDTO.authority == 'ROLE_ADMIN' }"> --%>
+	          <a href="./write.do" class="write_btn">게시물 작성하기</a>
+<%--           </c:if> --%>
         </div>
       </div>
       <div class="contents">
