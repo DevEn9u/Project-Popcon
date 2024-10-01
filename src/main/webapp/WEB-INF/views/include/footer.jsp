@@ -30,25 +30,25 @@
             <ul class="sns">
               <li>
                 <a href="#">
-                  <img src="../images/main/footer_sns_images/icon-kakao.svg">
+                  <img src="/images/main/footer_sns_images/icon-kakao.svg">
                   카카오톡
                 </a>
               </li>
               <li>
                 <a href="#">
-                  <img src="../images/main/footer_sns_images/icon-instagram.svg">
+                  <img src="/images/main/footer_sns_images/icon-instagram.svg">
                   인스타그램
                 </a>
               </li>
               <li>
                 <a href="#">
-                  <img src="../images/main/footer_sns_images/icon-facebook.svg">
+                  <img src="/images/main/footer_sns_images/icon-facebook.svg">
                   페이스북
                 </a>
               </li>
               <li>
                 <a href="#">
-                  <img src="../images/main/footer_sns_images/icon-naverblog.svg">
+                  <img src="/images/main/footer_sns_images/icon-naverblog.svg">
                   블로그
                 </a>
               </li>
@@ -58,7 +58,7 @@
       </div>
       <span class="copyright">Copyright 2024. Floating Planet Co.,Ltd. All rights reserved</span>
       <div class="footer_logo">
-        <img src="../images/main/footer_awards.png" alt="">
+        <img src="/images/main/footer_awards.png" alt="">
       </div>
     </section>
 <!-- </footer> -->

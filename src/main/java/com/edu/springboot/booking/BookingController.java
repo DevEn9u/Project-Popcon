@@ -26,7 +26,7 @@ public class BookingController {
     @Autowired
     IBookingService book;
 
-    // 팝업 예약 페이지
+    // 팝업 예약 페이지 - 완료
     @GetMapping("/popupBoard/booking/{board_idx}")
     public String getBookingDetails(@PathVariable("board_idx") String board_idx, Model model) {
         PopupBoardDTO PopupDetails = book.PopupDetails(board_idx);
@@ -34,7 +34,19 @@ public class BookingController {
         return "/booking/booking";
     }
 
-    // 인원, 수량 선택 페이지
+    // 날짜 유효성 검사 메서드
+    private boolean isValidDate(String dateString) {
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    	format.setLenient(false); // 유효하지 않은 날짜 처리
+    	try {
+    		format.parse(dateString);
+    		return true; // 유효한 날짜
+    	} catch (ParseException e) {
+    		return false; // 잘못된 날짜 형식
+    	}
+    }
+    
+    // 인원, 수량 선택 페이지 - 요청명 이상하게 뜸...
     @GetMapping("/popupBoard/select/{board_idx}")
     public String popupselect(@PathVariable("board_idx") String board_idx, Model model) {
     	PopupBoardDTO PopupDetails = book.PopupDetails(board_idx);
@@ -42,19 +54,8 @@ public class BookingController {
         return "/booking/booking-select";
     }
     
-    // 날짜 유효성 검사 메서드
-    private boolean isValidDate(String dateString) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        format.setLenient(false); // 유효하지 않은 날짜 처리
-        try {
-            format.parse(dateString);
-            return true; // 유효한 날짜
-        } catch (ParseException e) {
-            return false; // 잘못된 날짜 형식
-        }
-    }
 
-    @PostMapping("/popupBoard/select.do")
+    @PostMapping("/popupBoard/select/{board_idx}")
     public String createBooking(HttpServletRequest req) {
         String popup_idx = req.getParameter("popup_idx");
         Date visit_date = java.sql.Date.valueOf(req.getParameter("visit_date"));
