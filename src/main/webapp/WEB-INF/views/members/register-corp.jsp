@@ -34,9 +34,9 @@
                 <div class="item_id">아이디 :</div>
                 <input type="text" name="id" class="input_id" placeholder="6-12자 이내의 아이디를 입력해주세요." autofocus="autofocus">
                 <button type="button" class="check_btn" onclick="idCheck()">아이디 중복 확인</button>
+                <input type="hidden" name="idDuplication" value="idUnchecked" />
               </div>
               <div class="input_wrap">
-                <input type="hidden" name="idDuplication" value="idUnchecked" />
                 <div class="item_pass">비밀번호 :</div>
                 <input type="password" name="pass" class="input_pass" placeholder="8자 이상의 비밀번호를 입력해주세요." autocomplete="off">
                 <div class="item_pass2">비밀번호 확인 :</div>

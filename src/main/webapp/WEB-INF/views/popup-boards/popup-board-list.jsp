@@ -16,7 +16,10 @@ ${common_header}
             <h2 class="popup_list_title"><a href="./list.do">팝업안내</a></h2>
         </div>
         <div class="pl_main">
+      	  <c:if test="${memberDTO.authority == 'ROLE_ADMIN' || memberDTO.authority == 'ROLE_CORP'}">
+<!-- 	          <a href="./write.do" class="write_btn">게시물 작성하기</a> -->
             <button class="pl_write_btn" onclick="location.href='./write.do';">게시물 작성하기</button>
+          </c:if>
             
             <nav class="kategorie_wrap">
                 <ul class="pl_kategorie">

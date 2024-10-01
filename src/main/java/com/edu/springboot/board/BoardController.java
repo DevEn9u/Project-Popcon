@@ -1,5 +1,6 @@
 package com.edu.springboot.board;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.edu.springboot.member.IMemberService;
+import com.edu.springboot.member.MemberDTO;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,17 +25,27 @@ public class BoardController {
 
 	@Autowired
     private final BoardService boardService;
+	private final IMemberService memberService;
 	///////////////////////////////////////////////자유게시판///////////////////////////////////////////////////////////
 	// 자유게시판 목록
 	@GetMapping("/freeBoard/list.do")
-	public String listBoards(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+	public String listBoards(@RequestParam(value = "page", defaultValue = "1") int page, Model model, HttpServletRequest req) {
 	    List<BoardDTO> boardList = boardService.getFreeBoardsWithPaging(page);
 	    int totalBoardCount = boardService.getFreeBoardCount();
 	    int totalPages = (int) Math.ceil((double) totalBoardCount / 10); // 총 페이지 수
-
+	    
 	    model.addAttribute("boardList", boardList);
 	    model.addAttribute("currentPage", page);
 	    model.addAttribute("totalPages", totalPages);
+	    
+	    // 로그인한 상태라면 자유게시판에 '게시물 작성하기'버튼을 보여주기 위함. 로그인하지 않으면 보이지 않음.
+	    try {
+	    	String id = (String) model.getAttribute("user_id");
+	    	MemberDTO memberDTO = memberService.getMemberById(id);
+	    	model.addAttribute("memberDTO", memberDTO);	 
+	    	
+	    } catch (Exception e) {}
+	    
 	    return "boards/free-board-list";
 	}
 
@@ -121,6 +135,15 @@ public class BoardController {
         model.addAttribute("noticeList", noticeList);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
+        
+	    // ADMIN 계정에만 공지사항에 '게시물 작성하기'버튼을 보여주기 위함.
+	    try {
+	    	String id = (String) model.getAttribute("user_id");
+	    	MemberDTO memberDTO = memberService.getMemberById(id);
+	    	model.addAttribute("memberDTO", memberDTO);	 
+	    	
+	    } catch (Exception e) {}
+	    
         return "boards/notice-board-list";
     }
 
