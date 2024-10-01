@@ -33,10 +33,29 @@
         return true;
     }
 
-    // 이미지 파일 선택 시 파일 이름 표시
+    // 이미지 파일 선택 시 파일 이름 표시 및 유효성 검사
     function handleFileSelect(input) {
-        const fileName = input.files.length > 0 ? input.files[0].name : "";
-        document.querySelector(".file_name").value = fileName; // 파일 이름을 표시
+        const files = input.files;
+        const fileNames = [];
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        const maxSize = 10 * 1024 * 1024; // 10MB
+
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            if (!allowedTypes.includes(file.type)) {
+                alert('허용되지 않은 파일 형식입니다: ' + file.name);
+                input.value = '';
+                return;
+            }
+            if (file.size > maxSize) {
+                alert('파일 크기는 10MB 이하이어야 합니다: ' + file.name);
+                input.value = '';
+                return;
+            }
+            fileNames.push(file.name);
+        }
+
+        document.querySelector(".file_name").value = fileNames.join(', ');
     }
 </script>
 <body>
@@ -78,11 +97,11 @@
                   <th>첨부파일</th>
                   <td class="td_flex">
                     <div class="file_wrap">
-                      <input type="text" class="file_name" readonly>
-                      <input type="file" id="upload" class="blind" name="imageFile" multiple onchange="handleFileSelect(this)"> <!-- name 변경 -->
-                      <label for="upload">파일선택</label>
-                    </div>
-                    <p class="file_note">이미지 파일은 10MB 이하 jpg, png, gif, webp 확장자 파일만 올릴 수 있습니다.</p>
+                       <input type="text" class="file_name" readonly>
+                       <input type="file" id="upload" class="blind" name="imageFile" multiple onchange="handleFileSelect(this)">
+                       <label for="upload">파일선택</label>
+                     </div>
+                     <p class="file_note">이미지 파일은 10MB 이하 jpg, png, gif, webp 확장자 파일만 올릴 수 있습니다.</p>
                   </td>
                 </tr>
               </table>

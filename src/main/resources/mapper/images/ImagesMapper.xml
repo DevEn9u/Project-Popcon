@@ -1,7 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.edu.springboot.images.ImagesMapper">
+<mapper namespace="com.edu.springboot.images.ImageMapper">
+    
+	<insert id="insertImage" parameterType="com.edu.springboot.images.ImageDTO">
+	    <selectKey keyProperty="image_idx" resultType="String" order="BEFORE">
+	        SELECT image_idx_seq.NEXTVAL FROM dual
+	    </selectKey>
+	    INSERT INTO IMAGES (image_idx, image_url, image_type, associated_id, upload_date)
+	    VALUES (#{image_idx}, #{image_url}, #{image_type}, #{associated_id}, SYSDATE)
+	</insert>
 
+    
+    <select id="selectImagesByAssociatedIdAndType" resultType="com.edu.springboot.images.ImageDTO">
+        SELECT * FROM IMAGES
+        WHERE associated_id = #{associated_id}
+        AND image_type = #{image_type}
+    </select>
+    
+    <delete id="deleteImagesByAssociatedIdAndType">
+        DELETE FROM IMAGES
+        WHERE associated_id = #{associated_id}
+        AND image_type = #{image_type}
+    </delete>
+    
+    <delete id="deleteImageById">
+        DELETE FROM IMAGES
+        WHERE image_idx = #{imageIdx}
+    </delete>
+    
+    <select id="selectImageById" resultType="com.edu.springboot.images.ImageDTO">
+        SELECT * FROM IMAGES WHERE image_idx = #{imageIdx}
+    </select>
+    
 </mapper>
-  

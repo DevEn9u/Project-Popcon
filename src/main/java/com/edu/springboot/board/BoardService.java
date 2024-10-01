@@ -4,12 +4,18 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.edu.springboot.images.ImageService;
 
 @Service
 public class BoardService {
     
     @Autowired
     private BoardMapper boardMapper;
+    
+    @Autowired
+    private ImageService imageService;
 
     public List<BoardDTO> getAllBoards() {
         return boardMapper.selectAllBoards(); // 매퍼에서 데이터 가져오기
@@ -26,20 +32,31 @@ public class BoardService {
     public BoardDTO getBoardById(String boardIdx) {
         return boardMapper.selectBoardById(boardIdx);
     }
+    
     public void updateVisitCount(String boardIdx) {
         boardMapper.updateVisitCount(boardIdx);
     }
 
-    
     // 게시글 작성 메서드 추가
+    @Transactional
     public void write(BoardDTO boardDTO) {
         boardMapper.insertBoard(boardDTO); // 매퍼에서 게시글 삽입
+        // board_idx가 자동 생성되어 boardDTO에 설정됨
+        System.out.println("Generated board_idx: " + boardDTO.getBoard_idx());
     }
+
     // 게시글 수정 메서드
+    @Transactional
     public void update(BoardDTO boardDTO) {
-        boardMapper.updateBoard(boardDTO); 
+        boardMapper.updateBoard(boardDTO);
+        System.out.println("Generated board_idx: " + boardDTO.getBoard_idx());
     }
+    
+    @Transactional
     public void deleteBoard(String board_idx) {
+        // 관련 이미지 삭제
+        imageService.deleteImages(board_idx, "BOARD");
+        // 게시글 삭제
         boardMapper.deleteBoard(board_idx);
     }
     
@@ -62,6 +79,4 @@ public class BoardService {
     public int getNoticeBoardCount() {
         return boardMapper.getNoticeBoardCount();
     }
-
-
 }

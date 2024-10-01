@@ -9,14 +9,6 @@
 <c:import url="../include/footer.jsp" var="common_footer" />
 <link rel="stylesheet" href="/css/board.css">
 <script>
-	// 게시물 삭제를 위한 함수
-	function deletePost() {
-		let confirmed = confirm("게시물을 삭제하겠습니까?");
-		if (confirmed) {
-			let form = document.deleteFrm;
-			form.submit(); 
-		}
-	}
 
 	// 댓글 삭제를 위한 함수
 	function deleteComment(commentIdx) {
@@ -44,7 +36,7 @@
             <div class="tit_wrap">
               <!-- 게시물 제목, 작성일, 작성자, 조회수 동적 출력 -->
               <h3>${dto.board_title}</h3>
-              <p class="date"><fmt:formatDate value="${board.postdate}" pattern="yyyy.MM.dd" /></p>
+              <p class="date"><fmt:formatDate value="${dto.postdate}" pattern="yyyy.MM.dd" /></p>
               <p class="date">작성자 : ${dto.writer}</p>
               <p class="date">조회수 : ${dto.visitcount}</p>
               <form name="deleteFrm" method="post" action="./delete.do?board_idx=${dto.board_idx}">
@@ -55,9 +47,9 @@
               <!-- 게시물 본문 내용 출력 -->
               <p>${dto.contents}</p>
               <!-- 게시물 이미지 출력 -->
-			<c:forEach var="image" items="${images}">
-			    <img src="${image.image_url}" alt="Image" />
-			</c:forEach>
+              <c:forEach var="image" items="${images}">
+                  <img src="${image.image_url}" alt="Image" />
+              </c:forEach>
             </div>
             <div class="btn_wrap">
               <!-- session에 저장된 UserId와 게시물 작성자가 동일할 때 수정&삭제 버튼 출력 -->
@@ -74,11 +66,17 @@
           </div>
           <div class="comment_section">
             <h3>댓글 작성하기</h3>
-            <form name="commentFrm" method="post" class="comment_form" action="./comWrite.do">
+            <form name="commentFrm" method="post" class="comment_form" action="./comWrite.do" enctype="multipart/form-data">
               <input type="hidden" name="boardIdx" value="${dto.board_idx}" />
               <!-- 댓글 작성자 정보 -->
               작성자 : <input type="text" name="name" class="comment_writer" value="${UserName}" readonly="readonly" />
               <textarea name="commCon" rows="4" cols="50" class="comment_area" placeholder="댓글을 입력하세요"></textarea>
+              <div class="file_wrap">
+                  <input type="text" class="file_name" readonly>
+                  <input type="file" id="comment_upload" class="blind" name="imageFile" multiple onchange="handleFileSelect(this)">
+                  <label for="comment_upload">파일선택</label>
+              </div>
+              <p class="file_note">이미지 파일은 10MB 이하 jpg, png, gif, webp 확장자 파일만 올릴 수 있습니다.</p>
               <br />
               <button type="submit" class="btn comment_btn">댓글 작성</button>
             </form>
@@ -91,6 +89,10 @@
                   <div class="txt_wrap">
                     <p>${comment.name} (${comment.postDate})</p>
                     <p>${comment.content}</p>
+                    <!-- 댓글 이미지 출력 -->
+                    <c:forEach var="image" items="${comment.images}">
+                        <img src="${image.image_url}" alt="Image" />
+                    </c:forEach>
                   </div>
                   <!-- 댓글 수정/삭제 버튼 -->
                   <c:if test="${ UserId != null && UserId.toString().equals(comment.writer)}">
@@ -113,7 +115,7 @@
     </main>
     <footer id="footer">
 		<div class="inner">
-		    ${common_footer}
+			${common_footer}
 		</div>
     </footer>
   </div>
