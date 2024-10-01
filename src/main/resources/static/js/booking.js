@@ -1,6 +1,8 @@
-let basePrice = 0;
-const totalPrice = headcount * basePrice;
+//let basePrice = parseFloat($("#basePrice").val());
+//const totalPrice = headcount * basePrice;
+
 $(function () {
+	
 	// booking_select 달력 동적으로 삽입
 	var today = new Date();
 	var date = new Date();
@@ -65,7 +67,7 @@ $(function () {
 				// 가격 및 인원 선택 UI 표시
 				$(".select_count, .count_wrap, .selected-date-container").show();
 				// 가격 및 인원 수 업데이트
-				updateDisplay();
+				updatePrice();
 	        });
 	
 	        row.append(dateCell);
@@ -96,8 +98,11 @@ $(function () {
 	
 	// 인원 수에 따른 가격 업데이트 함수
 	function updatePrice() {
-	    let totalPrice = basePrice * headcount; // 총 가격 계산
-	    $("#price").val(totalPrice); // 총 가격을 input 필드에 반영
+		
+		let basePrice = parseFloat($("#basePrice").val()) || 0; // 숫자로 변환, 값이 없으면 0으로 초기화
+		let totalPrice = basePrice * headcount; // 총 가격 계산
+		$("#price").val(totalPrice); // 총 가격을 input 필드에 반영
+		console.log("Total Price:", totalPrice); // 총 가격 로그
 	}
 	
 	// 인원 수 조절 버튼 클릭 이벤트
@@ -126,6 +131,7 @@ $(function () {
 	      // 예약 버튼 클릭 이벤트
 	      $(".bs_booking_btn").on('click', function() {
 	          // 입력값 가져오기 및 유효성 검사
+			  
 	          const visitDate = $("#selectedDate").val();
 	          const headcount = parseInt($("#headcount").val());
 	          const price = parseInt($("#price").val());

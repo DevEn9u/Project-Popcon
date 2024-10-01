@@ -16,7 +16,9 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 </head>
-
+<script>
+	let basePrice = ${details.popup_fee};
+</script>
   <body>
   	${common_header }
 	<main id="bs_container">
@@ -80,7 +82,10 @@
 		          </li>
 		          <li class="count_wrap">
 		            <p class="count_type">일반</p>
-		            <p class="count_pay"><input type="number" name="price" id="price" value="" />원</p>
+		            <p class="count_pay">
+						<input type="hidden" name="basePrice" id="basePrice" value="${details.popup_fee}" readonly />
+						<input type="number" name="price"  id="price" value="${details.popup_fee}" readonly />원
+					</p>
 		            <div class="pm_wrap">
 		              <button class="plus_btn" aria-label="Add one item">+</button>
 		              <div class="count_window">
