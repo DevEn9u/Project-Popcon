@@ -32,7 +32,7 @@
 	        />
 	        <span class="bs_location">
 	          <img src="/images/imgMGJ/pin.svg" alt="pin" class="bs_pin" />
-	          ${PopupDetails.popup_addr}
+	          ${details.popup_addr}
 	        </span>
 	      </div>
 	    </div>

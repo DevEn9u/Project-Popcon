@@ -20,6 +20,8 @@ import com.edu.springboot.popupboards.PopupBoardDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 public class BookingController {
@@ -28,9 +30,13 @@ public class BookingController {
 
     // 팝업 예약 페이지 - 완료
     @GetMapping("/popupBoard/booking/{board_idx}")
-    public String getBookingDetails(@PathVariable("board_idx") String board_idx, Model model) {
+    public String getBookingDetails(@PathVariable("board_idx") String board_idx, Model model, HttpSession session) {
         PopupBoardDTO PopupDetails = book.PopupDetails(board_idx);
         model.addAttribute("PopupDetails", PopupDetails);
+        
+        // 세션에 board_idx 저장
+        session.setAttribute("board_idx", board_idx);
+        
         return "/booking/booking";
     }
 
@@ -46,11 +52,22 @@ public class BookingController {
     	}
     }
     
-    // 인원, 수량 선택 페이지 - 요청명 이상하게 뜸...
+    // 인원, 수량 선택 페이지
     @GetMapping("/popupBoard/select/{board_idx}")
-    public String popupselect(@PathVariable("board_idx") String board_idx, Model model) {
-    	PopupBoardDTO PopupDetails = book.PopupDetails(board_idx);
-        model.addAttribute("PopupDetails", PopupDetails);
+    public String popupselect(HttpSession session, Model model) {
+        
+        // 세션에서 board_idx 가져오기
+        String board_idx = (String) session.getAttribute("board_idx");
+        
+        // board_idx가 존재하는지 확인 (null 체크)
+        if (board_idx != null) {
+            PopupBoardDTO PopupDetails = book.PopupDetails(board_idx);
+            model.addAttribute("details", PopupDetails);
+        } else{
+            // 예외 처리: board_idx가 없을 경우 적절한 처리
+            return "redirect:/error"; // 에러 페이지로 리다이렉트하거나 처리
+        }
+        
         return "/booking/booking-select";
     }
     
@@ -105,7 +122,7 @@ public class BookingController {
 
         // 예약 결과에 따라 응답 반환
         if (bookingResult > 0) {
-            return "redirect:/popupBoard/select.do";
+            return "redirect:/mypage/mypage.do";
         } else {
             return "Error: Booking failed";
         }

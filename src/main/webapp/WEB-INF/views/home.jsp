@@ -14,7 +14,7 @@
 	</div>
 	<div id="wrap">
 	${common_header }
-	<main id="container">
+	<!--<main id="container">
 	      <section class="main_slider">
 	        <div class="inner">
 	          <div class="swiper">
@@ -390,7 +390,7 @@
 	          </div>
 	        </div>
 	      </section>
-	</main>
+	</main>-->
 	<footer id="footer">
 		<div class="inner">
 		    ${common_footer}

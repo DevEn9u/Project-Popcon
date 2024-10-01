@@ -8,11 +8,7 @@
 <c:import url="../include/footer.jsp" var="common_footer" />
 <link rel="stylesheet" href="/css/booking_main.css?v=<?php echo time(); ?>">
   <body>
-<script>
-	function goToBooking(board_idx) {
-		location.href = `/popupBoard/select/` + board_idx;
-	}
-</script>
+	
   	${common_header }
     <main id="bm_container">
       <div class="booking_main_inner">
@@ -33,7 +29,8 @@
             <h2 class="box_tit">${PopupDetails.board_title}</h2>
             <h3 class="box_pay">${PopupDetails.popup_fee}원</h3>
             <span class="box_date">이용 기간: ${PopupDetails.start_date} ~ ${PopupDetails.end_date}</span>
-            <button class="bm_booking_btn" onclick="goToBooking(${popup.board_idx});">예매하기</button>
+			<button class="bm_booking_btn" onclick="location.href = `/popupBoard/select/${board_idx}`">예매하기</button>
+
           </div>
           <div class="bm_qna_box">
             <h2 class="bm_qna_tit">문의하기</h2>
