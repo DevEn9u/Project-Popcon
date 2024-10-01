@@ -2,9 +2,7 @@ function validateForm(form) {
 	// 변수 초기화
 	let email = form.email.value.trim();
 	let phone = form.phone.value.trim();
-	
 	let business = form.business_number ? form.business_number.value.trim() : "";
-
 		// 회원가입 폼 내용 검증
 	if (!isFieldValid(form.email, "이메일을 입력하세요.") ||
 			!isFieldValid(form.phone, "전화번호를 입력하세요.") ||
@@ -27,6 +25,7 @@ function validateForm(form) {
 		
   	if (business && !isValidBusiness(business)) {
       alert("사업자 번호 10자리를 입력해주세요.\n예시]111-12-56789");
+	  $('.input_business').val("");
 	  $('.input_business').focus();
       return false;
   	}

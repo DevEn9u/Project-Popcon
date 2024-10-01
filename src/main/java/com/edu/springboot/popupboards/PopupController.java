@@ -38,6 +38,15 @@ public class PopupController {
         }
         
         model.addAttribute("popupList", popupList);
+        
+	    // ADMIN, CORP 계정에만 팝업게시판에 '게시물 작성하기'버튼을 보여주기 위함.
+	    try {
+	    	String id = (String) model.getAttribute("user_id");
+	    	MemberDTO memberDTO = memberService.getMemberById(id);
+	    	model.addAttribute("memberDTO", memberDTO);	 
+	    	
+	    } catch (Exception e) {}
+	    
         return "popup-boards/popup-board-list"; 
     }
  

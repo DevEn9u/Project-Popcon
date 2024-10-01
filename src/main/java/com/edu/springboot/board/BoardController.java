@@ -1,8 +1,12 @@
 package com.edu.springboot.board;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+
+import java.security.Principal;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -15,8 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 import com.edu.springboot.images.ImageDTO;
 import com.edu.springboot.images.ImageService;
+
+import com.edu.springboot.member.IMemberService;
+import com.edu.springboot.member.MemberDTO;
+
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,8 +36,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BoardController {
 
+
 	private final BoardService boardService;
     private final ImageService imageService;
+    private final IMemberService memberService;
 
     @Value("${file.upload-dir}")
     private String uploadDir;
@@ -46,8 +57,18 @@ public class BoardController {
         model.addAttribute("boardList", boardList);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
+        
+	    // 로그인한 상태라면 자유게시판에 '게시물 작성하기'버튼을 보여주기 위함. 로그인하지 않으면 보이지 않음.
+	    try {
+	    	String id = (String) model.getAttribute("user_id");
+	    	MemberDTO memberDTO = memberService.getMemberById(id);
+	    	model.addAttribute("memberDTO", memberDTO);	 
+	    	
+	    } catch (Exception e) {}
+        
         return "boards/free-board-list";
     }
+
 
     // 자유게시판 상세보기
     @GetMapping("/freeBoard/view.do")
@@ -261,6 +282,15 @@ public class BoardController {
         model.addAttribute("noticeList", noticeList);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
+        
+	    // ADMIN 계정에만 공지사항에 '게시물 작성하기'버튼을 보여주기 위함.
+	    try {
+	    	String id = (String) model.getAttribute("user_id");
+	    	MemberDTO memberDTO = memberService.getMemberById(id);
+	    	model.addAttribute("memberDTO", memberDTO);	 
+	    	
+	    } catch (Exception e) {}
+	    
         return "boards/notice-board-list";
     }
 
