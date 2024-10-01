@@ -3,6 +3,7 @@ package com.edu.springboot.auth;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,7 +11,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
@@ -24,13 +27,14 @@ import jakarta.servlet.DispatcherType;
  */
 @Configuration
 public class WebSecurityConfig {
+	
+	// 로그인 정보 저장을 위한 key
+	@Value("${remember.me.key}")
+	private String rememberMeKey;
+	
 	// DB 연결을 위한 DataSource를 자동 주입
 	@Autowired
 	private DataSource dataSource;
-	
-//	// JWT 필터 추가
-//	@Autowired
-//	private JwtRequestFilter jwtRequestFilter;
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http)
@@ -56,22 +60,23 @@ public class WebSecurityConfig {
 //				.anyRequest().authenticated()
 			);
 		http.formLogin((formLogin) -> formLogin
-				.loginPage("/login.do") // defalut : /login
+				.loginPage("/login.do")
 				.loginProcessingUrl("/loginProc.do")
 				// 로그인 성공시 메인 페이지로 이동.
-				.defaultSuccessUrl("/", true)
+//				.defaultSuccessUrl("/", true)
 				/* 로그인할 때 아이디와 비밀번호의 파라미터는 input태그의 name
 				   속성과 동일하게 설정해줘야 로그인 process가 정상작동함. */
 				.usernameParameter("login_id")
 				.passwordParameter("login_pw")
+				.failureHandler(new CustomAuthenticationFailureHandler())
 				.permitAll());
-		
+
 		/* 로그인 정보 저장 */
-//		http.rememberMe((rememberMe) -> rememberMe
-//				.key("uniqueKey")
-//				.tokenValiditySeconds(3600 * 24 * 7) // 토큰 유지 기간(7일)
-//		);
-//		
+		http.rememberMe((rememberMe) -> rememberMe
+				.key(rememberMeKey)
+				.tokenValiditySeconds(3600 * 24 * 7)
+				.userDetailsService(userDetailsService())); // 토큰 유지 기간(7일)
+		
 		/* 로그아웃에 대한 커스터마이징 */
 		http.logout((logout) -> logout
 				.logoutUrl("/logout.do")
@@ -85,8 +90,6 @@ public class WebSecurityConfig {
 		http.exceptionHandling((expHandling) -> expHandling
 				.accessDeniedPage("/denied.do"));
 		
-//		// jwt 필터 추가
-//		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 		return http.build();
 	}
 	
@@ -121,6 +124,16 @@ public class WebSecurityConfig {
         return (web) -> web.httpFirewall(allowUrlDoubleSlashHttpFirewall());
     }
 	
+	// JDBC 연결하여 Remember-me 구현
+	public UserDetailsService userDetailsService() {
+		JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
+		// 사용자 정보 쿼리 수정(기본 쿼리문이 custimize 되었기  때문에 수정해야함)
+	    manager.setUsersByUsernameQuery("SELECT id, pass, enabled FROM member WHERE id = ?");
+	    // 권한 정보 쿼리 수정
+	    manager.setAuthoritiesByUsernameQuery("SELECT id, authority FROM member WHERE id = ?");
+	    
+	    return manager;
+	}
 //	 패스워드 인코더(암호화) : 패스워드를 저장하기 전 암호화한다.(바로 위에 작성)
 //	public PasswordEncoder passwordEncoder() {
 //		return PasswordEncoderFactories.createDelegatingPasswordEncoder();

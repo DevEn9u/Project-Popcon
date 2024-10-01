@@ -43,4 +43,5 @@
 	<update id="editMemberPass" parameterType="com.edu.springboot.member.MemberDTO">
 		UPDATE member SET pass = #{pass} WHERE id = #{id} 
 	</update>
+	
  </mapper>

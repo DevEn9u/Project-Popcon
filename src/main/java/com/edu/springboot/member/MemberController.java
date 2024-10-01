@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class MemberController {
@@ -27,22 +30,48 @@ public class MemberController {
 	
 	// 로그인(Spring Security 커스텀 로그인 페이지)
 	@GetMapping("/login.do")
-	public String loginGet(Principal principal, Model model) {
-		try {
-			String user_id = principal.getName();
-			model.addAttribute("user_id", user_id);
-			System.out.println("로그인 상태입니다.");
-		}
-		catch (Exception e) {
-			System.out.println("로그인 전입니다.");
+	public String loginGet(Principal principal, Model model, HttpServletRequest req) {
+//		String user_id = principal.getName();
+//		model.addAttribute("user_id", user_id);
+		
+		String saveCheck = req.getParameter("saveCheck");
+		boolean isChecked = (saveCheck != null); // "on"이면 true. "off"면 false
+		
+		// 쿠키 확인
+		Cookie[] cookies = req.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("saveLoginId")) {
+					model.addAttribute("savedUserId", cookie.getValue());
+				}
+			}
 		}
 		return "members/login";
 	}
 	
 	@PostMapping("/login.do")
-	public String loginPost() {
-
-		return "redirect:/";
+	public String loginPost(Principal principal, HttpServletRequest req, HttpServletResponse resp) {
+		System.out.println("로그인버튼 클릭함");
+		String user_id = principal.getName();
+		String saveCheck = req.getParameter("saveCheck");
+		System.out.println("User ID: " + user_id);
+		System.out.println("Save Check: " + saveCheck);
+		
+		
+        if (saveCheck != null) {
+        	Cookie cookie = new Cookie("saveLoginId", user_id);
+        	cookie.setMaxAge(24 * 60 * 60); // 24시간 동안 유효
+        	cookie.setPath("/"); // 애플리케이션 전체에서 쿠키 유효
+        	resp.addCookie(cookie);
+        }
+        // 체크박스 체크되지 않은 경우 쿠키 삭제
+        else {
+            Cookie cookie = new Cookie("saveLoginId", null);
+            cookie.setMaxAge(0); // 쿠키 삭제
+            cookie.setPath("/");
+            resp.addCookie(cookie);
+        }
+		return "redirect:/login.do";
 	}
 		
 	// 권한이 부족할 경우

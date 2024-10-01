@@ -22,3 +22,4 @@ public class PopupBoardDTO {
     private String open_days;      // 팝업 오픈 요일
     private String open_hours;     // 팝업 오픈 시간
 }
+
