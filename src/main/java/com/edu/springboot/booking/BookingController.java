@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.edu.springboot.popupboards.PopupBoardDTO;
@@ -21,40 +20,57 @@ import com.edu.springboot.popupboards.PopupBoardDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+
 @Controller
 public class BookingController {
     @Autowired
     IBookingService book;
 
-    // 팝업 예약 페이지
+    // 팝업 예약 페이지 - 완료
     @GetMapping("/popupBoard/booking/{board_idx}")
-    public String getBookingDetails(@PathVariable("board_idx") String board_idx, Model model) {
+    public String getBookingDetails(@PathVariable("board_idx") String board_idx, Model model, HttpSession session) {
         PopupBoardDTO PopupDetails = book.PopupDetails(board_idx);
-        model.addAttribute("PopupDetails", PopupDetails);
+        model.addAttribute("details", PopupDetails);
+        
+        // 세션에 board_idx 저장
+        session.setAttribute("board_idx", board_idx);
+        
         return "/booking/booking";
     }
 
+    // 날짜 유효성 검사 메서드
+    private boolean isValidDate(String dateString) {
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    	format.setLenient(false); // 유효하지 않은 날짜 처리
+    	try {
+    		format.parse(dateString);
+    		return true; // 유효한 날짜
+    	} catch (ParseException e) {
+    		return false; // 잘못된 날짜 형식
+    	}
+    }
+    
     // 인원, 수량 선택 페이지
     @GetMapping("/popupBoard/select/{board_idx}")
-    public String popupselect(@PathVariable("board_idx") String board_idx, Model model) {
-    	PopupBoardDTO PopupDetails = book.PopupDetails(board_idx);
-        model.addAttribute("PopupDetails", PopupDetails);
+    public String popupselect(HttpSession session, Model model) {
+        
+        // 세션에서 board_idx 가져오기
+        String board_idx = (String) session.getAttribute("board_idx");
+        
+        // board_idx가 존재하는지 확인 (null 체크)
+        if (board_idx != null) {
+            PopupBoardDTO PopupDetails = book.PopupDetails(board_idx);
+            model.addAttribute("details", PopupDetails);
+        } else{
+            // 예외 처리: board_idx가 없을 경우 적절한 처리
+            return "redirect:/error"; // 에러 페이지로 리다이렉트하거나 처리
+        }
+        
         return "/booking/booking-select";
     }
     
-    // 날짜 유효성 검사 메서드
-    private boolean isValidDate(String dateString) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        format.setLenient(false); // 유효하지 않은 날짜 처리
-        try {
-            format.parse(dateString);
-            return true; // 유효한 날짜
-        } catch (ParseException e) {
-            return false; // 잘못된 날짜 형식
-        }
-    }
 
-    @PostMapping("/popupBoard/select.do")
+    @PostMapping("/popupBoard/select/{board_idx}")
     public String createBooking(HttpServletRequest req) {
         String popup_idx = req.getParameter("popup_idx");
         Date visit_date = java.sql.Date.valueOf(req.getParameter("visit_date"));
@@ -104,7 +120,7 @@ public class BookingController {
 
         // 예약 결과에 따라 응답 반환
         if (bookingResult > 0) {
-            return "redirect:/popupBoard/select.do";
+            return "redirect:/mypage/mypage.do";
         } else {
             return "Error: Booking failed";
         }

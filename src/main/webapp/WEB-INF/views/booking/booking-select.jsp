@@ -17,7 +17,7 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 </head>
 <script>
-	
+	let basePrice = ${details.popup_fee};
 </script>
   <body>
   	${common_header }
@@ -32,7 +32,7 @@
 	        />
 	        <span class="bs_location">
 	          <img src="/images/imgMGJ/pin.svg" alt="pin" class="bs_pin" />
-	          ${PopupDetails.popup_addr}
+	          ${details.popup_addr}
 	        </span>
 	      </div>
 	    </div>
@@ -73,6 +73,7 @@
 					<div class="selected-date-container">
 					    <label for="selectedDate">선택한 날짜</label>
 					    <input type="text" id="selectedDate" class="selected-date" readonly />
+						<input type="hidden" id="boardIdx" value="${board_idx}">
 					</div>
 		          </li>
 		          <li class="select_count">
@@ -81,7 +82,10 @@
 		          </li>
 		          <li class="count_wrap">
 		            <p class="count_type">일반</p>
-		            <p class="count_pay"><input type="number" name="price" id="price" value="" />원</p>
+		            <p class="count_pay">
+						<input type="hidden" name="basePrice" id="basePrice" value="${details.popup_fee}" readonly />
+						<input type="number" name="price"  id="price" value="${details.popup_fee}" readonly />원
+					</p>
 		            <div class="pm_wrap">
 		              <button class="plus_btn" aria-label="Add one item">+</button>
 		              <div class="count_window">
