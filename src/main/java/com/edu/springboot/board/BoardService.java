@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.edu.springboot.images.ImageService;
+import com.edu.springboot.popupboards.CommentDTO;
 
 @Service
 public class BoardService {
@@ -16,6 +17,9 @@ public class BoardService {
     
     @Autowired
     private ImageService imageService;
+    
+    @Autowired
+    private CommentMapper commentMapper; // 댓글 매퍼 추가
 
     public List<BoardDTO> getAllBoards() {
         return boardMapper.selectAllBoards(); // 매퍼에서 데이터 가져오기
@@ -78,5 +82,25 @@ public class BoardService {
 
     public int getNoticeBoardCount() {
         return boardMapper.getNoticeBoardCount();
+    }
+    
+    // 댓글 작성
+    public void writeComment(CommentDTO comment) {
+        commentMapper.writeComment(comment);
+    }
+
+    // 댓글 목록 조회
+    public List<CommentDTO> getComments(String board_idx) {
+        return commentMapper.getComments(board_idx);
+    }
+
+    // 댓글 삭제
+    public void deleteComment(String com_idx) {
+        commentMapper.deleteComment(com_idx);
+    }
+
+    // 댓글 수정
+    public void editComment(CommentDTO commentDTO) {
+        commentMapper.editComment(commentDTO);
     }
 }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.springboot.board.CommentMapper">
+
+    <!-- 댓글 작성 -->
+    <insert id="writeComment" parameterType="com.edu.springboot.popupboards.CommentDTO">
+        <selectKey keyProperty="com_idx" resultType="String" order="BEFORE">
+            SELECT TO_CHAR(comment_idx_seq.NEXTVAL) FROM dual
+        </selectKey>
+        INSERT INTO COMMENTS (com_idx, board_idx, com_writer, com_contents, com_postdate)
+        VALUES (#{com_idx}, #{board_idx}, #{com_writer}, #{com_contents}, SYSDATE)
+    </insert>
+    
+	<!-- 댓글 목록 조회 -->
+	<select id="getComments" parameterType="String" resultType="com.edu.springboot.popupboards.CommentDTO">
+	    SELECT C.*, M.name AS com_writer_name
+	    FROM COMMENTS C
+	    JOIN MEMBER M ON C.com_writer = M.id
+	    WHERE C.board_idx = #{board_idx}
+	    ORDER BY C.com_postdate ASC
+	</select>
+
+    
+    <!-- 댓글 삭제 -->
+    <delete id="deleteComment" parameterType="String">
+        DELETE FROM COMMENTS WHERE com_idx = #{com_idx}
+    </delete>
+    
+    <!-- 댓글 수정 -->
+    <update id="editComment" parameterType="com.edu.springboot.popupboards.CommentDTO">
+        UPDATE COMMENTS
+        SET com_contents = #{com_contents}
+        WHERE com_idx = #{com_idx}
+    </update>
+</mapper>

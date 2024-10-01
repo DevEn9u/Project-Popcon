@@ -271,6 +271,8 @@ public class BoardController {
         return "redirect:/freeBoard/edit.do?board_idx=" + boardIdx;
     }
     
+
+    
     ///////////////////////////////////////////////////////공지/////////////////////////////////////////////////////
  // 공지 목록
     @GetMapping("/noticeBoard/list.do")
