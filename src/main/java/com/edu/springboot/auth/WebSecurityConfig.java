@@ -68,6 +68,7 @@ public class WebSecurityConfig {
 				   속성과 동일하게 설정해줘야 로그인 process가 정상작동함. */
 				.usernameParameter("login_id")
 				.passwordParameter("login_pw")
+				.successHandler(new CustomAuthenticationSuccessHandler())
 				.failureHandler(new CustomAuthenticationFailureHandler())
 				.permitAll());
 
