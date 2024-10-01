@@ -16,9 +16,14 @@
 	</select>
 	<!-- 게시글 삽입 쿼리 -->
 	<insert id="insertBoard" parameterType="com.edu.springboot.board.BoardDTO">
+	    <!-- 시퀀스에서 다음 값 가져오기 -->
+	    <selectKey keyProperty="board_idx" resultType="String" order="BEFORE">
+	        SELECT board_seq.NEXTVAL FROM dual
+	    </selectKey>
 	    INSERT INTO BOARD (board_idx, board_title, contents, writer, board_type, postdate, role)
-	    VALUES (NULL, #{board_title}, #{contents}, #{writer}, #{board_type}, SYSDATE, #{role})
+	    VALUES (#{board_idx}, #{board_title}, #{contents}, #{writer}, #{board_type}, SYSDATE, #{role})
 	</insert>
+
     <update id="updateBoard" parameterType="com.edu.springboot.board.BoardDTO">
         UPDATE BOARD
         SET board_title = #{board_title},
