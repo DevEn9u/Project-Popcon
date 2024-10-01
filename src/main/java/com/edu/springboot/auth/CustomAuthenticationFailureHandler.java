@@ -11,10 +11,10 @@ import java.io.IOException;
 public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
     @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
+    public void onAuthenticationFailure(HttpServletRequest req, HttpServletResponse resp,
                                         AuthenticationException exception) throws IOException, ServletException {
         // 로그인 실패 메시지를 request에 추가
-        request.setAttribute("error", exception.getMessage());
-        request.getRequestDispatcher("/login.do").forward(request, response);
+        req.setAttribute("error", exception.getMessage());
+        req.getRequestDispatcher("/login.do").forward(req, resp);
     }
 }

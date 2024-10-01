@@ -14,6 +14,7 @@
 	</div>
 	<div id="wrap">
 	${common_header }
+
 	<!--<main id="container">
 	      <section class="main_slider">
 	        <div class="inner">
@@ -86,7 +87,6 @@
 	              </div>
 	            </div>
 	            <div class="swiper-pagination pagination"></div>
-	            
 	            <div class="swiper-button-prev arrow_btn "></div>
 	            <div class="swiper-button-next arrow_btn"></div>
 	          </div>
