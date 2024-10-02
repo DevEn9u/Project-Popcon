@@ -20,9 +20,5 @@
 	    (booking_num_seq(), #{popup_idx}, #{member_id}, #{visit_date}, sysdate, #{price}, #{headcount}, #{is_paid})
 	</insert>
 	
-	<!-- 팝업 가격 정보 조회 -->
-	<select id="getPopupFee" parameterType="String" resultType="int">
-    	SELECT popup_fee FROM popup_board WHERE board_idx = #{board_idx}
-	</select>
 
 </mapper>
