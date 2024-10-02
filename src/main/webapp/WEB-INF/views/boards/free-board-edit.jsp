@@ -81,7 +81,7 @@
                <caption class="nohead">게시글 작성</caption>
                <tr>
                  <th>이름</th>
-                 <td><input type="text" name="name" readonly="readonly" value="${ user_id }"></td>
+                 <td><input type="text" name="name" readonly="readonly" value="${ dto.writer }"></td>
                </tr>
                <tr>
                  <th>제목</th>
