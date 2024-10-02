@@ -5,7 +5,7 @@
 <html lang="ko">
 
 <head>
-  <title>POPCON | 아이디 찾기</title>
+  <title>POPCON | 비밀번호 찾기</title>
   <c:import url="../include/head.jsp" />
   <link rel="stylesheet" href="/css/member.css">
 </head>
@@ -26,13 +26,14 @@
               <a href="/"></a>
               <span class="blind">팝콘로고</span>
             </h2>
-            <h3>POPCON 아이디 찾기</h3>
+            <h3>POPCON 비밀번호 찾기</h3>
           </div>
           <div class="find_area login_area">
             <form name="checkCodeFrm" action="/sendVerificationCode.do" method="POST" id="checkCodeFrm">
               <fieldset>
-                <legend>아이디 찾기</legend>
+                <legend>비밀번호 찾기</legend>
                 <div class="row input_wrap1">
+                  <input type="text" class="input_id" name="id" id="id" placeholder="아이디 입력하세요." required>
                   <input type="text" class="input_name" name="name" id="name" placeholder="이름을 입력하세요." required>
                   <input type="text" class="input_email" name="email" id="email" placeholder="이메일을 입력하세요." required>
                 </div>
@@ -40,7 +41,6 @@
                 <div class="emailSentResult"></div>
                 <!-- 인증번호 입력 -->
                 <div class="row input_wrap2">
-<!--                   <input type="hidden" class="sent_code" name="sent_code" value="" /> -->
                   <input type="text" class="input_code" name="input_code" id="input_code" placeholder="인증번호를 입력하세요." required>
                   <div class="checkCodeResult"></div>
                 </div>
