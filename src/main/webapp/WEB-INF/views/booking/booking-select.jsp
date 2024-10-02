@@ -34,6 +34,9 @@
 	          <img src="/images/imgMGJ/pin.svg" alt="pin" class="bs_pin" />
 	          ${details.popup_addr}
 	        </span>
+			<span class="bs_location popup_date">
+				<p class="startDate">${details.start_date}</p> <p>~</p> <p class="endDate">${details.end_date}</p>
+			</span>
 	      </div>
 	    </div>
 		<div class="bs_main_box">
