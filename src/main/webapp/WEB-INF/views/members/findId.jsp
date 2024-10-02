@@ -28,7 +28,7 @@
             <h3>POPCON 아이디 찾기</h3>
           </div>
           <div class="find_area login_area">
-            <form name="checkCodeFrm" action="/sendCode.do" method="POST" id="checkCodeFrm">
+            <form name="checkCodeFrm" action="/sendVerificationCode.do" method="POST" id="checkCodeFrm">
               <fieldset>
                 <legend>아이디 찾기</legend>
                 <div class="row input_wrap1">
@@ -39,7 +39,7 @@
                 <div class="emailSentResult"></div>
                 <!-- 인증번호 입력 -->
                 <div class="row input_wrap2">
-                  <input type="hidden" class="sent_code" name="sent_code" value="" />
+<!--                   <input type="hidden" class="sent_code" name="sent_code" value="" /> -->
                   <input type="text" class="input_code" name="input_code" id="input_code" placeholder="인증번호를 입력하세요." required>
                   <div class="checkCodeResult"></div>
                 </div>
@@ -51,6 +51,57 @@
         </div>
       </div>
     </main>
+    <script>
+function sendVerificationCode() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+
+    fetch('/sendVerificationCode.do', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            document.querySelector('.emailSentResult').innerText = "인증 코드가 발송되었습니다.";
+        } else {
+            document.querySelector('.emailSentResult').innerText = "오류 발생: " + data.message;
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+function verifyCode() {
+    const inputCode = document.getElementById("input_code").value;
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+
+    fetch('/verifyCode.do', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ inputCode, name, email }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.valid) {
+            document.getElementById('resultMessage').innerHTML =
+            	`인증이 완료되었습니다.<br> 아이디: ` + data.userId;
+        } else {
+            document.getElementById('resultMessage').innerText = "인증 코드가 일치하지 않습니다.";
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+</script>
     <footer id="footer">
       <div class="inner">
         ${common_footer}
