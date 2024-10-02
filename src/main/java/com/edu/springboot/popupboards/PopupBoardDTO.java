@@ -1,6 +1,10 @@
 package com.edu.springboot.popupboards;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.edu.springboot.images.ImageDTO;
+
 import lombok.Data;
 
 @Data
@@ -21,5 +25,7 @@ public class PopupBoardDTO {
     private int likes_count;       // 좋아요 수
     private String open_days;      // 팝업 오픈 요일
     private String open_hours;     // 팝업 오픈 시간
+    
+    private List<ImageDTO> images;
 }
 

@@ -38,28 +38,28 @@ ${common_header}
             </nav>
 
             <ul class="popup_wrap">
-                <c:forEach var="popup" items="${popupList}">
-                    <li class="popup_banner">
-                        <a href="/popupBoard/view/${popup.board_idx}">
-                            <img src="../images/imgMGJ/popup_img.png" class="popup_img" />
-                            <div class="txt_title">
-                                <h2>
-                                    ${popup.board_title}
-                                    <img src="../images/imgMGJ/like_btn.svg" class="pl_like_btn"/>
-                                </h2>
-                                
-                                <div class="popup_location">
-                                <img src="../images/imgMGJ/pin.svg" />
-                                    <span class="location_span">${popup.popup_addr}</span>
-                                </div>
-                                <span class="popup_date">
-                                    ${popup.postdate}
-                                </span>
-                            </div>
-                        </a>
-                    </li>
-                </c:forEach>
-            </ul>
+    <c:forEach var="popup" items="${popupList}">
+        <li class="popup_banner">
+            <a href="/popupBoard/view/${popup.board_idx}">
+                <img src="${popup.thumb}" alt="Thumbnail" class="popup_thumbnail"/> <!-- Display the first uploaded image -->
+                <div class="txt_title">
+                    <h2>
+                        ${popup.board_title}
+                        <img src="../images/imgMGJ/like_btn.svg" class="pl_like_btn"/>
+                    </h2>
+                    
+                    <div class="popup_location">
+                        <img src="../images/imgMGJ/pin.svg" />
+                        <span class="location_span">${popup.popup_addr}</span>
+                    </div>
+                    <span class="popup_date">
+                        ${popup.postdate}
+                    </span>
+                </div>
+            </a>
+        </li>
+    </c:forEach>
+</ul>
         </div>
     </div>
 </main>

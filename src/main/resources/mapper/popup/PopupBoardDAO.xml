@@ -29,8 +29,11 @@
 
 	<!-- 글 작성기능 -->
 	<insert id="write" parameterType="com.edu.springboot.popupboards.PopupBoardDTO">
-    	INSERT INTO POPUP_BOARD (board_idx, board_title, contents, popup_fee, start_date, end_date, popup_addr, category, writer, role, open_days, open_hours)
-    	VALUES (NULL, #{board_title}, #{contents}, #{popup_fee}, #{start_date}, #{end_date}, #{popup_addr}, #{category}, #{writer}, #{role}, #{open_days}, #{open_hours})
+	<selectKey keyProperty="board_idx" resultType="String" order="BEFORE">
+        SELECT popup_board_idx_seq.NEXTVAL FROM dual
+    </selectKey>
+    	INSERT INTO POPUP_BOARD (board_idx, board_title, contents, popup_fee, start_date, end_date, popup_addr, category, writer, role, open_days, open_hours, thumb)
+    	VALUES (#{board_idx}, #{board_title}, #{contents}, #{popup_fee}, #{start_date}, #{end_date}, #{popup_addr}, #{category}, #{writer}, #{role}, #{open_days}, #{open_hours}, #{thumb})
 	</insert>
 	
 	<!-- 글 삭제기능 -->
@@ -40,18 +43,19 @@
 	
 	<!-- 글 수정기능 -->
 	<update id="edit" parameterType="com.edu.springboot.popupboards.PopupBoardDTO">
-        UPDATE popup_board
-        SET board_title = #{board_title},
-            contents = #{contents},
-            popup_fee = #{popup_fee},
-            start_date = #{start_date},
-            end_date = #{end_date},
-            popup_addr = #{popup_addr},
-            category = #{category},
-            open_days = #{open_days},
-            open_hours = #{open_hours}
-        WHERE board_idx = #{board_idx}
-    </update>
+	    UPDATE popup_board
+	    SET board_title = #{board_title},
+	        contents = #{contents},
+	        popup_fee = #{popup_fee},
+	        start_date = #{start_date},
+	        end_date = #{end_date},
+	        popup_addr = #{popup_addr},
+	        category = #{category},
+	        open_days = #{open_days},
+	        open_hours = #{open_hours},
+	        thumb = #{thumb, jdbcType=VARCHAR}
+	    WHERE board_idx = #{board_idx}
+	</update>
     
     <!-- 댓글 -->
     <insert id="writeComment" parameterType="com.edu.springboot.popupboards.CommentDTO">

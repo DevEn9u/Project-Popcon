@@ -2,6 +2,7 @@ package com.edu.springboot.popupboards;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Options;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +29,9 @@ public class PopupBoardService {
     }
     
     // 글쓰기
-    public int writePost(PopupBoardDTO post) {
-        return popupBoardMapper.write(post);
+    @Options(useGeneratedKeys = true, keyProperty = "board_idx")
+    public int write(PopupBoardDTO post) {
+    	return popupBoardMapper.write(post);
     }
     
     // 글삭제

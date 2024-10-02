@@ -99,9 +99,10 @@
     function handleSubmit(event) {
         event.preventDefault();
         if (validateForm()) {
-            document.querySelector('form').submit();
+            document.writeFrm.submit(); // 이 줄에서 폼을 제출
         }
     }
+    
 
     function dateRule(event) {
         const input = event.target;
@@ -129,6 +130,57 @@
         endDateInput.addEventListener('input', dateRule);
         popupFeeInput.addEventListener('input', payRule);
     }
+
+    // 이미지 파일 선택 시 파일 이름 표시 및 유효성 검사
+    function handleFileSelect(input) {
+        const files = input.files;
+        const fileNames = [];
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        const maxSize = 10 * 1024 * 1024; // 10MB
+
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            if (!allowedTypes.includes(file.type)) {
+                alert('허용되지 않은 파일 형식입니다: ' + file.name);
+                input.value = '';
+                return;
+            }
+            if (file.size > maxSize) {
+                alert('파일 크기는 10MB 이하이어야 합니다: ' + file.name);
+                input.value = '';
+                return;
+            }
+            fileNames.push(file.name);
+        }
+
+        document.querySelector(".file_name").value = fileNames.join(', ');
+    }
+
+    function handleThumbSelect(input) {
+        const files = input.files;
+        const fileNames = [];
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        const maxSize = 10 * 1024 * 1024; // 10MB
+
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            if (!allowedTypes.includes(file.type)) {
+                alert('허용되지 않은 썸네일 파일 형식입니다: ' + file.name);
+                input.value = '';
+                document.querySelector(".thumb_name").value = ''; // Clear the file name display
+                return;
+            }
+            if (file.size > maxSize) {
+                alert('썸네일 파일 크기는 10MB 이하이어야 합니다: ' + file.name);
+                input.value = '';
+                document.querySelector(".thumb_name").value = ''; // Clear the file name display
+                return;
+            }
+            fileNames.push(file.name);
+        }
+
+        document.querySelector(".thumb_name").value = fileNames.join(', ');
+    }
 </script>
 <body>
   <div id="skip_navi">
@@ -146,7 +198,7 @@
         <div class="inner">
           <h3>게시글 수정</h3>
           <div class="board_write">
-            <form name="writeFrm" method="post" enctype="multipart/form-data" action="/popupBoard/edit.do" onsubmit="return handleSubmit(event);">
+            <form name="writeFrm" method="post" enctype="multipart/form-data" action="../popupBoard/edit.do" onsubmit="return validateForm(this);">
               <!-- 게시글 수정에 필요한 ID -->
               <input type="hidden" name="board_idx" value="${ dto.board_idx }" />
               <table>
@@ -182,39 +234,115 @@
                 </tr>
                 <tr>
                   <th>오픈 요일</th>
-                  <td><input type="text" name="open_days" placeholder="월 ~ 금 또는 월, 수, 금 형식으로 입력" value="${ dto.open_days }" required></td>
+                  <td><input type="text" name="open_days" placeholder="오픈 요일을 입력해 주세요" value="${ dto.open_days }" required></td>
                 </tr>
                 <tr>
                   <th>오픈 시간</th>
-                  <td><input type="text" name="open_hours" placeholder="예: 11:00 ~ 17:00" value="${ dto.open_hours }" required></td>
+                  <td><input type="text" name="open_hours" placeholder="오픈 시간을 입력해 주세요" value="${ dto.open_hours }" required></td>
                 </tr>
                 <tr>
                   <th>첨부파일</th>
                   <td class="td_flex">
                     <div class="file_wrap">
-                      <input type="text" class="file_name" readonly>
-                      <input type="file" id="upload" class="blind">
-                      <label for="upload">파일선택</label>
-                    </div>
-                    <p class="file_note">이미지 파일은 10MB 이하 jpg, png, gif, webp 확장자 파일만 올릴 수 있습니다.</p>
+                       <input type="text" class="file_name" readonly>
+                       <input type="file" id="upload" class="blind" name="imageFile" multiple onchange="handleFileSelect(this)">
+                       <label for="upload">파일선택</label>
+                     </div>
+                     <p class="file_note">이미지 파일은 10MB 이하 jpg, png, gif, webp 확장자 파일만 올릴 수 있습니다.</p>
                   </td>
                 </tr>
+     
+				<tr>
+				    <th>썸네일 이미지</th>
+				    <td class="td_flex">
+				        <div class="file_wrap">
+				            <input type="text" class="thumb_name" readonly>
+				            <input type="file" id="thumbUpload" class="blind" name="thumbFile" onchange="handleThumbSelect(this)">
+				            <label for="thumbUpload">썸네일 선택</label>
+				        </div>
+				        <p class="file_note">썸네일 이미지 파일은 10MB 이하 jpg, png, gif, webp 확장자 파일만 올릴 수 있습니다.</p>
+				    </td>
+				</tr>
+				<tr>
+                <th>기존 이미지</th>
+                <td>
+                  <c:forEach var="image" items="${images}">
+                    <div class="existing_image">
+                      <img src="${pageContext.request.contextPath}${image.image_url}" alt="Image" />
+                      <a href="deleteImage.do?image_idx=${image.image_idx}&board_idx=${popup.board_idx}" onclick="return confirm('이미지를 삭제하시겠습니까?');">삭제</a>
+                    </div>
+                  </c:forEach>
+                </td>
+              </tr>
               </table>
-              <div class="btn_wrap">
-                <button type="submit" class="btn board_btn">수정</button>
-                <button type="button" class="btn board_btn cancel_btn" onclick="checkReset();">다시쓰기</button>
-                <button type="button" onclick="location.href='./list.do';" class="btn board_btn cancel_btn">목록</button>
+              <div class="btn_area">
+                <button type="submit" class="submit_btn">수정하기</button>
+                <button type="button" class="reset_btn" onclick="checkReset();">취소</button>
               </div>
             </form>
           </div>
         </div>
       </div>
     </main>
-    <footer id="footer">
+    	<!-- 경로 문제로 footer 직접 추가하였습니다. -->
+	<footer id="footer">
 		<div class="inner">
-		    ${common_footer}
+			<section class="footer_wrap">
+				<div class="footer_top">
+					<div class="txt_wrap">
+						<ul class="txt">
+							<li><a href="#">서비스 이용약관</a></li>
+							<li><a href="#">개인정보 처리방침</a></li>
+							<li><a href="#">마케팅 수신 동의</a></li>
+							<li><a href="#">고객센터</a></li>
+							<li><a href="#">비즈니스</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="footer_bottom">
+					<div class="col1">
+						<div class="company_wrap">
+							<p>(주)플로팅플래닛</p>
+							<p>주소 : 서울 종로구 삼일대로17길 51 스타골드빌딩 5층</p>
+							<p>문의전화 : (02)333-4567</p>
+							<p>이메일 : popcon@popcon.co.kr</p>
+							<p>대표전화 : (02)333-4567</p>
+							<p>FAX : (02)333-5432</p>
+						</div>
+					</div>
+					<div class="col2">
+						<div class="sns_wrap">
+							<ul class="sns">
+								<li><a href="#"> <img
+										src="${pageContext.request.contextPath}/images/main/footer_sns_images/icon-kakao.svg">
+										카카오톡
+								</a></li>
+								<li><a href="#"> <img
+										src="${pageContext.request.contextPath}/images/main/footer_sns_images/icon-instagram.svg">
+										인스타그램
+								</a></li>
+								<li><a href="#"> <img
+										src="${pageContext.request.contextPath}/images/main/footer_sns_images/icon-facebook.svg">
+										페이스북
+								</a></li>
+								<li><a href="#"> <img
+										src="${pageContext.request.contextPath}/images/main/footer_sns_images/icon-naverblog.svg">
+										블로그
+								</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<span class="copyright">Copyright 2024. Floating Planet
+					Co.,Ltd. All rights reserved</span>
+				<div class="footer_logo">
+					<img
+						src="${pageContext.request.contextPath}/images/main/footer_awards.png"
+						alt="">
+				</div>
+			</section>
 		</div>
-    </footer>
+	</footer>
   </div>
 </body>
 </html>

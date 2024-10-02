@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edu.springboot.images.ImageMapper">
-    
+	
 	<insert id="insertImage" parameterType="com.edu.springboot.images.ImageDTO">
 	    <selectKey keyProperty="image_idx" resultType="String" order="BEFORE">
 	        SELECT image_idx_seq.NEXTVAL FROM dual
@@ -10,6 +10,7 @@
 	    INSERT INTO IMAGES (image_idx, image_url, image_type, associated_id, upload_date)
 	    VALUES (#{image_idx}, #{image_url}, #{image_type}, #{associated_id}, SYSDATE)
 	</insert>
+	
 
     
     <select id="selectImagesByAssociatedIdAndType" resultType="com.edu.springboot.images.ImageDTO">
@@ -32,5 +33,7 @@
     <select id="selectImageById" resultType="com.edu.springboot.images.ImageDTO">
         SELECT * FROM IMAGES WHERE image_idx = #{imageIdx}
     </select>
+    
+    
     
 </mapper>

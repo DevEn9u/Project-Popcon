@@ -1,8 +1,13 @@
 package com.edu.springboot.popupboards;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,21 +15,33 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.edu.springboot.member.IMemberService;
 import com.edu.springboot.member.MemberDTO;
+import com.edu.springboot.images.ImageDTO;
+import com.edu.springboot.images.ImageService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 
 @Controller
+@RequiredArgsConstructor
 public class PopupController {
     
     @Autowired
     private PopupBoardMapper popupBoardMapper;
+    private final ImageService imageService;
 
     @Autowired
     private IMemberService memberService; // MemberService 추가
+    
+    @Value("${file.upload-dir}")
+    private String uploadDir;
+
+    private static final String[] ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".webp"};
+    private static final long MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 
     // 팝업 글 목록 보기
     @GetMapping("/popupBoard/list.do")
@@ -62,6 +79,10 @@ public class PopupController {
         // 댓글 목록 가져오기
         List<CommentDTO> commentsList = popupBoardMapper.getComments(board_idx);
         
+        // 관련 이미지 가져오기
+        List<ImageDTO> images = imageService.getImages(board_idx, "POPUP");
+        model.addAttribute("images", images);
+        
         // 모델에 데이터 추가
         model.addAttribute("popup", popupBoard);
         model.addAttribute("commentsList", commentsList);
@@ -77,7 +98,8 @@ public class PopupController {
     }
     
     @PostMapping("/popupBoard/write.do")
-    public String popupWritePost(@RequestParam("board_title") String board_title,
+    public String popupWritePost(PopupBoardDTO boardDTO,
+                                 @RequestParam("board_title") String board_title,
                                  @RequestParam("contents") String contents,
                                  @RequestParam("popup_fee") int popup_fee,
                                  @RequestParam("start_date") String start_date,
@@ -86,11 +108,15 @@ public class PopupController {
                                  @RequestParam("category") String category,
                                  @RequestParam("open_days") String open_days,
                                  @RequestParam("open_hours") String open_hours,
+                                 @RequestParam("thumbFile") MultipartFile thumbFile, // 썸네일 파일 추가
+                                 @RequestParam("imageFile") MultipartFile[] imageFiles,
+                                 RedirectAttributes redirectAttributes,
                                  HttpServletRequest req) {
         // 로그인한 사용자의 정보를 가져옴
         String writer = req.getUserPrincipal().getName();
         String role = null;
 
+        // 사용자 역할 확인
         if (req.isUserInRole("ROLE_CORP")) {
             role = "ROLE_CORP";
         } else if (req.isUserInRole("ROLE_NORMAL")) {
@@ -99,6 +125,7 @@ public class PopupController {
             role = "ROLE_ADMIN";
         }
 
+        // 팝업 게시글 DTO 설정
         PopupBoardDTO post = new PopupBoardDTO();
         post.setBoard_title(board_title);
         post.setContents(contents);
@@ -111,31 +138,262 @@ public class PopupController {
         post.setRole(role);
         post.setOpen_days(open_days);
         post.setOpen_hours(open_hours);
+        
+        // 썸네일 파일 처리
+        if (!thumbFile.isEmpty()) {
+            String thumbOriginalFilename = org.springframework.util.StringUtils.cleanPath(thumbFile.getOriginalFilename());
+            String thumbFileExtension = thumbOriginalFilename.substring(thumbOriginalFilename.lastIndexOf(".")).toLowerCase();
+            
+            // 파일 확장자 검증
+            if (!Arrays.asList(ALLOWED_EXTENSIONS).contains(thumbFileExtension)) {
+                redirectAttributes.addFlashAttribute("error", "허용되지 않은 썸네일 파일 형식입니다.");
+                return "redirect:/popupBoard/write.do"; // 에러 시 리다이렉트
+            }
 
+            // 파일 크기 검증
+            if (thumbFile.getSize() > MAX_FILE_SIZE) {
+                redirectAttributes.addFlashAttribute("error", "썸네일 파일 크기는 10MB 이하이어야 합니다.");
+                return "redirect:/popupBoard/write.do"; // 에러 시 리다이렉트
+            }
+
+            try {
+                // 파일 저장
+                String thumbNewFilename = UUID.randomUUID().toString() + thumbFileExtension;
+                File thumbDest = new File(uploadDir + "/" + thumbNewFilename);
+                thumbFile.transferTo(thumbDest);
+
+                // 썸네일 URL 설정
+                String thumbImageUrl = "/uploads/images/" + thumbNewFilename;
+                post.setThumb(thumbImageUrl); // 썸네일 URL 설정
+            } catch (IOException e) {
+                e.printStackTrace();
+                redirectAttributes.addFlashAttribute("error", "썸네일 파일 업로드 중 오류가 발생했습니다.");
+                return "redirect:/popupBoard/write.do"; // 에러 시 리다이렉트
+            }
+        }
+
+        // 1. 게시글 먼저 저장
         popupBoardMapper.write(post);
 
-        return "redirect:/popupBoard/list.do";
+        // 2. 게시글 ID (board_idx) 획득
+        String boardIdx = post.getBoard_idx();
+
+        // 3. 이미지 처리
+        if (imageFiles != null && imageFiles.length > 0) {
+            for (int i = 0; i < imageFiles.length; i++) {
+                MultipartFile file = imageFiles[i];
+                if (!file.isEmpty()) {
+                    // 파일 확장자 검증
+                    String originalFilename = org.springframework.util.StringUtils.cleanPath(file.getOriginalFilename());
+                    String fileExtension = originalFilename.substring(originalFilename.lastIndexOf(".")).toLowerCase();
+                    if (!Arrays.asList(ALLOWED_EXTENSIONS).contains(fileExtension)) {
+                        redirectAttributes.addFlashAttribute("error", "허용되지 않은 파일 형식입니다.");
+                        continue;
+                    }
+
+                    // 파일 크기 검증
+                    if (file.getSize() > MAX_FILE_SIZE) {
+                        redirectAttributes.addFlashAttribute("error", "파일 크기는 10MB 이하이어야 합니다.");
+                        continue;
+                    }
+
+                    try {
+                        // 파일 저장
+                        String newFilename = UUID.randomUUID().toString() + fileExtension;
+                        File dest = new File(uploadDir + "/" + newFilename);
+                        file.transferTo(dest);
+
+                        // 이미지 URL 설정
+                        String imageUrl = "/uploads/images/" + newFilename;
+
+                        // 썸네일 URL 설정 (첫 번째 이미지)
+                        if (post.getThumb() == null) {
+                            post.setThumb(imageUrl); // 첫 번째 이미지로 썸네일 설정
+                        }
+
+                        // ImageDTO 생성 및 저장
+                        ImageDTO imageDTO = new ImageDTO();
+                        imageDTO.setImage_url(imageUrl);
+                        imageDTO.setImage_type("POPUP");
+                        imageDTO.setAssociated_id(boardIdx); // 저장된 board_idx 설정
+                        imageService.saveImage(imageDTO); // 이미지 저장
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        redirectAttributes.addFlashAttribute("error", "파일 업로드 중 오류가 발생했습니다.");
+                    }
+                }
+            }
+        }
+
+        return "redirect:/popupBoard/list.do"; // 리다이렉트
     }
+
+
+
 
     @GetMapping("/popupBoard/edit.do")
     public String popupEdit(@RequestParam("board_idx") String board_idx, Model model) {
         PopupBoardDTO popupBoard = popupBoardMapper.popupView(board_idx); // 게시물 세부정보 가져오기
         model.addAttribute("dto", popupBoard);
+        
+        // 기존 이미지 가져오기
+        List<ImageDTO> images = imageService.getImages(board_idx, "POPUP");
+        model.addAttribute("images", images); // 모델에 기존 이미지 추가
+        
         return "/popup-boards/popup-board-edit"; // 수정 페이지로 이동
     }
 
-    // 글 수정 처리
+//    // 글 수정 처리
+//    @PostMapping("/popupBoard/edit.do")
+//    public String popupEditPost(@ModelAttribute PopupBoardDTO popupboardDTO) {
+//        popupBoardMapper.edit(popupboardDTO); // 서비스 호출하여 게시글 수정
+//        
+//        return "redirect:/popupBoard/view/" + popupboardDTO.getBoard_idx(); // 수정 후 게시글 보기로 리다이렉트
+//    }
+    
     @PostMapping("/popupBoard/edit.do")
-    public String popupEditPost(@ModelAttribute PopupBoardDTO popupboardDTO) {
-        popupBoardMapper.edit(popupboardDTO); // 서비스 호출하여 게시글 수정
-        return "redirect:/popupBoard/view/" + popupboardDTO.getBoard_idx(); // 수정 후 게시글 보기로 리다이렉트
+    public String popupEditPost(
+            @RequestParam("board_idx") String board_idx, // 요청에서 board_idx 가져오기
+            @RequestParam("board_title") String board_title,
+            @RequestParam("contents") String contents,
+            @RequestParam("popup_fee") int popup_fee,
+            @RequestParam("start_date") String start_date,
+            @RequestParam("end_date") String end_date,
+            @RequestParam("popup_addr") String popup_addr,
+            @RequestParam("category") String category,
+            @RequestParam("open_days") String open_days,
+            @RequestParam("open_hours") String open_hours,
+            @RequestParam("thumbFile") MultipartFile thumbFile, // 썸네일 파일 추가
+            @RequestParam("imageFile") MultipartFile[] imageFiles,
+            RedirectAttributes redirectAttributes) {
+
+        // 팝업 게시글 DTO 생성 및 값 설정
+        PopupBoardDTO post = new PopupBoardDTO();
+        post.setBoard_idx(board_idx); // board_idx 설정
+        post.setBoard_title(board_title);
+        post.setContents(contents);
+        post.setPopup_fee(popup_fee);
+        post.setStart_date(start_date);
+        post.setEnd_date(end_date);
+        post.setPopup_addr(popup_addr);
+        post.setCategory(category);
+        post.setOpen_days(open_days);
+        post.setOpen_hours(open_hours);
+        
+        // 썸네일 파일 처리
+        if (thumbFile != null && !thumbFile.isEmpty()) {
+            String thumbOriginalFilename = org.springframework.util.StringUtils.cleanPath(thumbFile.getOriginalFilename());
+            String thumbFileExtension = thumbOriginalFilename.substring(thumbOriginalFilename.lastIndexOf(".")).toLowerCase();
+
+            // 파일 확장자 검증
+            if (!Arrays.asList(ALLOWED_EXTENSIONS).contains(thumbFileExtension)) {
+                redirectAttributes.addFlashAttribute("error", "허용되지 않은 썸네일 파일 형식입니다.");
+                return "redirect:/popupBoard/edit.do?board_idx=" + board_idx; // 에러 시 리다이렉트
+            }
+
+            // 파일 크기 검증
+            if (thumbFile.getSize() > MAX_FILE_SIZE) {
+                redirectAttributes.addFlashAttribute("error", "썸네일 파일 크기는 10MB 이하이어야 합니다.");
+                return "redirect:/popupBoard/edit.do?board_idx=" + board_idx; // 에러 시 리다이렉트
+            }
+
+            try {
+                // 파일 저장
+                String thumbNewFilename = UUID.randomUUID().toString() + thumbFileExtension;
+                File thumbDest = new File(uploadDir + "/" + thumbNewFilename);
+                thumbFile.transferTo(thumbDest);
+
+                // 썸네일 URL 설정
+                String thumbImageUrl = "/uploads/images/" + thumbNewFilename;
+                post.setThumb(thumbImageUrl); // 썸네일 URL 설정
+            } catch (IOException e) {
+                e.printStackTrace();
+                redirectAttributes.addFlashAttribute("error", "썸네일 파일 업로드 중 오류가 발생했습니다.");
+                return "redirect:/popupBoard/edit.do?board_idx=" + board_idx; // 에러 시 리다이렉트
+            }
+        }
+
+        // 게시글 수정 처리
+        popupBoardMapper.edit(post); // 게시글 수정
+
+        // 이미지 처리
+        if (imageFiles != null && imageFiles.length > 0) {
+            for (MultipartFile file : imageFiles) {
+                if (!file.isEmpty()) {
+                    // 파일 확장자 검증
+                    String originalFilename = org.springframework.util.StringUtils.cleanPath(file.getOriginalFilename());
+                    String fileExtension = originalFilename.substring(originalFilename.lastIndexOf(".")).toLowerCase();
+
+                    if (!Arrays.asList(ALLOWED_EXTENSIONS).contains(fileExtension)) {
+                        redirectAttributes.addFlashAttribute("error", "허용되지 않은 파일 형식입니다.");
+                        continue;
+                    }
+
+                    // 파일 크기 검증
+                    if (file.getSize() > MAX_FILE_SIZE) {
+                        redirectAttributes.addFlashAttribute("error", "파일 크기는 10MB 이하이어야 합니다.");
+                        continue;
+                    }
+
+                    try {
+                        // 파일 저장
+                        String newFilename = UUID.randomUUID().toString() + fileExtension;
+                        File dest = new File(uploadDir + "/" + newFilename);
+                        file.transferTo(dest);
+
+                        // 이미지 URL 설정
+                        String imageUrl = "/uploads/images/" + newFilename;
+
+                        // 썸네일 URL 설정 (첫 번째 이미지)
+                        if (post.getThumb() == null) {
+                            post.setThumb(imageUrl); // 첫 번째 이미지로 썸네일 설정
+                        }
+
+                        // ImageDTO 생성 및 저장
+                        ImageDTO imageDTO = new ImageDTO();
+                        imageDTO.setImage_url(imageUrl);
+                        imageDTO.setImage_type("POPUP");
+                        imageDTO.setAssociated_id(board_idx); // board_idx 설정
+                        imageService.saveImage(imageDTO); // 이미지 저장
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        redirectAttributes.addFlashAttribute("error", "파일 업로드 중 오류가 발생했습니다.");
+                    }
+                }
+            }
+        }
+
+        return "redirect:/popupBoard/view/" + board_idx; // 수정 후 해당 게시글 보기로 리다이렉트
     }
+
+    
+    
 
     // 글 삭제
     @PostMapping("/popupBoard/delete.do")
     public String delete(@RequestParam("board_idx") String board_idx) {
         popupBoardMapper.delete(board_idx);
         return "redirect:/popupBoard/list.do";
+    }
+    
+    @GetMapping("/popupBoard/deleteImage.do")
+    public String deleteImage(@RequestParam("image_idx") String imageIdx,
+                              @RequestParam("board_idx") String boardIdx) {
+        ImageDTO image = imageService.getImageById(imageIdx);
+        if (image != null) {
+            // 파일 삭제
+            String filePath = uploadDir + "/" + image.getImage_url().replace("/uploads/images/", "");
+            File file = new File(filePath);
+            if (file.exists()) {
+                file.delete();
+            }
+            // DB에서 이미지 삭제
+            imageService.deleteImage(imageIdx);
+        }
+
+        return "redirect:/popupBoard/edit.do?board_idx=" + boardIdx;
     }
     
     // 댓글 작성

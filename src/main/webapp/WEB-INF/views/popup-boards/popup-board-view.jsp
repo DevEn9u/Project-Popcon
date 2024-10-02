@@ -101,6 +101,8 @@
 	  }
 	</script>
 
+
+
 	${common_header}
 	<main id="popup_view_container">
 		<div class="popup_view_inner">
@@ -111,8 +113,10 @@
 							<ul class="main_popup">
 								<li><a href="#">
 										<div class="img_wrap">
-											<img src="/images/main/mainslider1.png"> <img
-												src="/images/main/mainslider1.png">
+											<!-- 게시물 이미지 출력 -->
+              								<c:forEach var="image" items="${images}">
+                  								<img src="${image.image_url}" alt="Image" />
+              								</c:forEach>
 										</div>
 										<div class="txt_wrap">
 											<p class="slide_title">${popup.board_title}</p>
@@ -127,8 +131,9 @@
 							<ul class="main_popup">
 								<li><a href="#">
 										<div class="img_wrap">
-											<img src="/images/main/mainslider2.jpg"> <img
-												src="/images/main/mainslider2.jpg">
+              								<c:forEach var="image" items="${images}">
+                  								<img src="${image.image_url}" alt="Image" />
+              								</c:forEach>
 										</div>
 										<div class="txt_wrap">
 											<p class="slide_title">${popup.board_title}</p>
@@ -143,8 +148,9 @@
 							<ul class="main_popup">
 								<li><a href="#">
 										<div class="img_wrap">
-											<img src="/images/main/mainslider2.jpg" alt="팝업 홍보"> <img
-												src="/images/main/mainslider2.jpg" alt="팝업 홍보">
+              								<c:forEach var="image" items="${images}">
+                  								<img src="${image.image_url}" alt="Image" />
+              								</c:forEach>
 										</div>
 										<div class="txt_wrap">
 											<p class="slide_title">${popup.board_title}</p>
@@ -177,13 +183,11 @@
 									<button class="pv_delete_btn" type="button"
 										onclick="if(confirm('정말 삭제하시겠습니까?')) { document.getElementById('deleteForm').submit(); }">삭제하기</button>
 								</form>
-								<form
-									action="${pageContext.request.contextPath}/popupBoard/edit.do"
-									method="post">
-									<input type="hidden" name="board_idx"
-										value="${popup.board_idx}" />
-									<button class="pv_edit_btn" type="submit">수정하기</button>
-								</form>
+<button type="button" class="pv_edit_btn" 
+        onclick="location.href='${pageContext.request.contextPath}/popupBoard/edit.do?board_idx=${popup.board_idx}';">
+    수정하기
+</button>
+
 							</c:when>
 							<c:otherwise>
 								<button class="pv_booking_btn"
