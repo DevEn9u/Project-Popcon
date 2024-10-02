@@ -3,10 +3,8 @@ package com.edu.springboot.board;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-
 import java.security.Principal;
-
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,17 +17,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 import com.edu.springboot.images.ImageDTO;
 import com.edu.springboot.images.ImageService;
-
 import com.edu.springboot.member.IMemberService;
 import com.edu.springboot.member.MemberDTO;
-
+import com.edu.springboot.popupboards.CommentDTO;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -72,7 +69,7 @@ public class BoardController {
 
     // 자유게시판 상세보기
     @GetMapping("/freeBoard/view.do")
-    public String freeBoardView(@RequestParam("board_idx") String boardIdx, Model model, 
+    public String freeBoardView(@RequestParam("board_idx") String boardIdx, @RequestParam(value = "editingCommentId", required = false) String editingCommentId, Model model, 
                                 HttpServletRequest request, HttpServletResponse response) {
 
         // 조회수 증가 여부를 결정하는 로직
@@ -109,9 +106,10 @@ public class BoardController {
         List<ImageDTO> images = imageService.getImages(boardIdx, "BOARD");
         model.addAttribute("images", images);
 
-        // 댓글 목록 가져오기 (추후 구현)
-        // ...
-
+        // 댓글 목록 가져오기
+        List<CommentDTO> comments = boardService.getComments(boardIdx);
+        model.addAttribute("comments", comments);
+        model.addAttribute("editingCommentId", editingCommentId);
         return "boards/free-board-view";
     }
 
@@ -271,6 +269,211 @@ public class BoardController {
         return "redirect:/freeBoard/edit.do?board_idx=" + boardIdx;
     }
     
+
+    // 댓글 작성
+    @PostMapping("/freeBoard/writeComment.do")
+    public String writeComment(@RequestParam("board_idx") String board_idx,
+                               @RequestParam("com_contents") String com_contents,
+                               @RequestParam("com_writer") String com_writer,
+                               @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
+                               RedirectAttributes redirectAttributes) {
+        // 디버그 로그 추가
+        System.out.println("writeComment - board_idx: " + board_idx);
+        System.out.println("writeComment - com_writer: " + com_writer);
+        System.out.println("writeComment - com_contents: " + com_contents);
+        
+        // 댓글 DTO 생성 및 값 설정
+        CommentDTO commentDTO = new CommentDTO();
+        commentDTO.setBoard_idx(board_idx);
+        commentDTO.setCom_writer(com_writer);
+        commentDTO.setCom_contents(com_contents);
+        
+        // 댓글 저장 (com_idx가 생성됨)
+        boardService.writeComment(commentDTO);
+        String com_idx = commentDTO.getCom_idx();
+        
+        // 이미지 처리
+        if (imageFile != null && !imageFile.isEmpty()) {
+            // 파일 확장자 검증
+            String originalFilename = org.springframework.util.StringUtils.cleanPath(imageFile.getOriginalFilename());
+            String fileExtension = originalFilename.substring(originalFilename.lastIndexOf(".")).toLowerCase();
+            if (!Arrays.asList(ALLOWED_EXTENSIONS).contains(fileExtension)) {
+                redirectAttributes.addFlashAttribute("error", "허용되지 않은 파일 형식입니다.");
+                return "redirect:/freeBoard/view.do?board_idx=" + board_idx;
+            }
+            // 파일 크기 검증
+            if (imageFile.getSize() > MAX_FILE_SIZE) {
+                redirectAttributes.addFlashAttribute("error", "파일 크기는 10MB 이하이어야 합니다.");
+                return "redirect:/freeBoard/view.do?board_idx=" + board_idx;
+            }
+            try {
+                // 파일 저장
+                String newFilename = UUID.randomUUID().toString() + fileExtension;
+                File dest = new File(uploadDir + "/" + newFilename);
+                imageFile.transferTo(dest);
+                
+                // 이미지 URL 설정 (웹 접근 가능한 경로)
+                String imageUrl = "/uploads/images/" + newFilename;
+                
+                // ImageDTO 생성 및 저장
+                ImageDTO imageDTO = new ImageDTO();
+                imageDTO.setImage_url(imageUrl);
+                imageDTO.setImage_type("COMMENT");
+                imageDTO.setAssociated_id(com_idx); // 댓글 ID와 연관
+                imageService.saveImage(imageDTO);
+                
+            } catch (IOException e) {
+                e.printStackTrace();
+                redirectAttributes.addFlashAttribute("error", "파일 업로드 중 오류가 발생했습니다.");
+                return "redirect:/freeBoard/view.do?board_idx=" + board_idx;
+            }
+        }
+        
+        redirectAttributes.addFlashAttribute("message", "댓글이 작성되었습니다.");
+        return "redirect:/freeBoard/view.do?board_idx=" + board_idx;
+    }
+
+
+    
+    // 댓글 삭제
+    @PostMapping("/freeBoard/deleteComment.do")
+    public String deleteComment(@RequestParam("com_idx") String com_idx,
+                                @RequestParam("board_idx") String board_idx,
+                                Principal principal,
+                                RedirectAttributes redirectAttributes) {
+        // 로그인 여부 확인
+        if (principal == null) {
+            redirectAttributes.addFlashAttribute("error", "로그인이 필요합니다.");
+            return "redirect:/login"; // 로그인 페이지로 리다이렉트
+        }
+
+        String userId = principal.getName();
+        System.out.println("deleteComment - userId: " + userId);
+
+        CommentDTO existingComment = boardService.getCommentById(com_idx);
+
+        // 댓글 작성자와 로그인한 사용자 비교
+        if (!userId.equals(existingComment.getCom_writer())) {
+            redirectAttributes.addFlashAttribute("error", "삭제 권한이 없습니다.");
+            return "redirect:/freeBoard/view.do?board_idx=" + board_idx;
+        }
+
+        // 댓글 삭제
+        boardService.deleteComment(com_idx);
+        redirectAttributes.addFlashAttribute("message", "댓글이 삭제되었습니다.");
+        return "redirect:/freeBoard/view.do?board_idx=" + board_idx;
+    }
+
+
+
+    // 댓글 수정
+    @PostMapping("/freeBoard/editComment.do")
+    public String editComment(@RequestParam("com_idx") String com_idx,
+                              @RequestParam("board_idx") String board_idx,
+                              @RequestParam("com_contents") String com_contents,
+                              @RequestParam(value = "deleteImageIds", required = false) List<String> deleteImageIds,
+                              @RequestParam(value = "newImageFile", required = false) MultipartFile newImageFile,
+                              Principal principal,
+                              RedirectAttributes redirectAttributes) {
+        // 로그인 여부 확인
+        if (principal == null) {
+            redirectAttributes.addFlashAttribute("error", "로그인이 필요합니다.");
+            return "redirect:/login"; // 로그인 페이지로 리다이렉트
+        }
+
+        String userId = principal.getName();
+
+        // 댓글 작성자 확인
+        CommentDTO existingComment = boardService.getCommentById(com_idx);
+        if (!userId.equals(existingComment.getCom_writer())) {
+            redirectAttributes.addFlashAttribute("error", "수정 권한이 없습니다.");
+            return "redirect:/freeBoard/view.do?board_idx=" + board_idx;
+        }
+
+        // 댓글 내용 업데이트
+        CommentDTO commentDTO = new CommentDTO();
+        commentDTO.setCom_idx(com_idx);
+        commentDTO.setCom_contents(com_contents);
+        boardService.editComment(commentDTO);
+
+        // 이미지 삭제 처리
+        if (deleteImageIds != null && !deleteImageIds.isEmpty()) {
+            for (String imageIdx : deleteImageIds) {
+                imageService.deleteImage(imageIdx);
+                // 실제 파일 삭제 로직 추가 필요
+            }
+        }
+
+        // 새로운 이미지 업로드 처리
+        if (newImageFile != null && !newImageFile.isEmpty()) {
+            // 파일 확장자 검증
+            String originalFilename = org.springframework.util.StringUtils.cleanPath(newImageFile.getOriginalFilename());
+            String fileExtension = originalFilename.substring(originalFilename.lastIndexOf(".")).toLowerCase();
+            if (!Arrays.asList(ALLOWED_EXTENSIONS).contains(fileExtension)) {
+                redirectAttributes.addFlashAttribute("error", "허용되지 않은 파일 형식입니다.");
+                return "redirect:/freeBoard/view.do?board_idx=" + board_idx;
+            }
+            // 파일 크기 검증
+            if (newImageFile.getSize() > MAX_FILE_SIZE) {
+                redirectAttributes.addFlashAttribute("error", "파일 크기는 10MB 이하이어야 합니다.");
+                return "redirect:/freeBoard/view.do?board_idx=" + board_idx;
+            }
+            try {
+                // 파일 저장
+                String newFilename = UUID.randomUUID().toString() + fileExtension;
+                File dest = new File(uploadDir + "/" + newFilename);
+                newImageFile.transferTo(dest);
+                
+                // 이미지 URL 설정 (웹 접근 가능한 경로)
+                String imageUrl = "/uploads/images/" + newFilename;
+                
+                // ImageDTO 생성 및 저장
+                ImageDTO imageDTO = new ImageDTO();
+                imageDTO.setImage_url(imageUrl);
+                imageDTO.setImage_type("COMMENT");
+                imageDTO.setAssociated_id(com_idx); // 댓글 ID와 연관
+                imageService.saveImage(imageDTO);
+                
+            } catch (IOException e) {
+                e.printStackTrace();
+                redirectAttributes.addFlashAttribute("error", "파일 업로드 중 오류가 발생했습니다.");
+                return "redirect:/freeBoard/view.do?board_idx=" + board_idx;
+            }
+        }
+
+        redirectAttributes.addFlashAttribute("message", "댓글이 수정되었습니다.");
+        return "redirect:/freeBoard/view.do?board_idx=" + board_idx;
+    }
+    // 댓글 이미지 삭제
+    @GetMapping("/freeBoard/deleteCommentImage.do")
+    public String deleteCommentImage(@RequestParam("image_idx") String image_idx,
+                                     @RequestParam("board_idx") String board_idx,
+                                     @RequestParam("com_idx") String com_idx,
+                                     Principal principal,
+                                     RedirectAttributes redirectAttributes) {
+        // 로그인 여부 확인
+        if (principal == null) {
+            redirectAttributes.addFlashAttribute("error", "로그인이 필요합니다.");
+            return "redirect:/login"; // 로그인 페이지로 리다이렉트
+        }
+
+        String userId = principal.getName();
+
+        // 댓글 작성자 확인
+        CommentDTO existingComment = boardService.getCommentById(com_idx);
+        if (!userId.equals(existingComment.getCom_writer())) {
+            redirectAttributes.addFlashAttribute("error", "이미지 삭제 권한이 없습니다.");
+            return "redirect:/freeBoard/view.do?board_idx=" + board_idx;
+        }
+
+        // 이미지 삭제
+        imageService.deleteImage(image_idx);
+
+        redirectAttributes.addFlashAttribute("message", "이미지가 삭제되었습니다.");
+        // 수정 모드로 리다이렉트
+        return "redirect:/freeBoard/view.do?board_idx=" + board_idx + "&editingCommentId=" + com_idx + "#comment_" + com_idx;
+    }
+
 
     
     ///////////////////////////////////////////////////////공지/////////////////////////////////////////////////////

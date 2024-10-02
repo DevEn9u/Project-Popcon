@@ -2,6 +2,9 @@ package com.edu.springboot.popupboards;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
+import com.edu.springboot.images.ImageDTO;
 
 import lombok.Data;
 
@@ -9,9 +12,11 @@ import lombok.Data;
 public class CommentDTO {
 	 private String com_idx;
 	 private String popup_board_idx;
+	 private String board_idx;
 	 private String com_writer;
 	 private String com_contents;
 	 private Date com_postdate;
+	 private List<ImageDTO> com_img;
 	 
 	 //날짜를 한국어 형태로
 	 public String getFormattedPostDate() {
