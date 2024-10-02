@@ -147,7 +147,6 @@ $(function () {
 		console.log("User ID:", member_id);
 	  // 만약 basePrice가 0일 경우 Ajax를 통한 예약 처리
 	  if (basePrice == 0) {
-	      
 	      // 예약 버튼 클릭 이벤트
 	      $(".bs_booking_btn").on('click', function() {
 	          // 입력값 가져오기 및 유효성 검사
@@ -169,13 +168,13 @@ $(function () {
 	                  headcount: headcount,
 	                  price: price
 	              },
-	              success: function(response) {
+	              success: function() {
 	                  alert("예약이 완료되었습니다");
 	                  // 예약 성공 후 이동할 페이지로 리디렉션
-	                  window.location.href = '/popupBoard/select/{board_idx}';
+	                  window.location.href = '/mypage/mypage.do';
 	                  console.log("예약 완료");
 	              },
-	              error: function(error) {
+	              error: function() {
 	                  alert("예약 중 오류 발생");
 	                  console.log("예약 실패");
 	              }
@@ -190,6 +189,7 @@ $(function () {
 			    const visitDate = $("#selectedDate").val();
 			    const headcount = parseInt($("#headcount").val());
 			    const price = parseInt($("#price").val());
+				const boardIdx = $("#boardIdx").val();
 
 			    console.log("visitDate:", visitDate, "headcount:", headcount, "price:", price);
 
@@ -227,20 +227,22 @@ $(function () {
 			            console.log("결제 성공 데이터:", result);
 
 			            // 결제 결과 서버로 전송
-			            $.ajax({
-			                url: '/popupBoard/select/{board_idx}',
-			                type: 'POST',
-			                contentType: 'application/json',
+						$.ajax({
+							
+							url: '/popupBoard/select/{board_idx}',
+							type: 'POST',
 							data: {
-								    popup_idx: null,
-								    visit_date: visitDate,
-								    headcount: headcount,
-								    price: price
-								  },
-			                success: function(res) {
-			                    console.log("서버 응답:", res);
-			                    location.href = res;  // 성공 시 리디렉션
-			                },
+							    popup_idx: boardIdx,
+							    visit_date: visitDate,
+							    headcount: headcount,
+							    price: price
+							},
+							success: function() {
+							    alert("예약이 완료되었습니다");
+							    // 예약 성공 후 이동할 페이지로 리디렉션
+							    window.location.href = '/mypage/mypage.do';
+							    console.log("예약 완료");
+							},
 			                error: function(err) {
 			                    console.log("서버 오류:", err);
 			                }
@@ -252,7 +254,6 @@ $(function () {
 			        alert(msg);
 			    });
 			});
-
 		}
 	// 가격 업데이트 함수 호출 (필요한 경우)
 	updatePrice();
