@@ -1,15 +1,13 @@
 package com.edu.springboot.member;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface IMemberService {
 	// 아이디 찾기
-	public String getMemberByEmail(String email);
+	public int isUserExists(MemberDTO memberDTO);
 	// 사용자 정보 검증
-    public int checkUserInfo(String id, String email); 
+    public String getMemberInfo(MemberDTO memberDTO); 
 	// 회원가입 - 일반 회원
 	public int registerNormal(MemberDTO memberDTO);
 	// 회원가입 - 기업 회원

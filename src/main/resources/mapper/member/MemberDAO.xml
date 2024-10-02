@@ -6,15 +6,14 @@
 
 <mapper namespace = "com.edu.springboot.member.IMemberService">
 	<!-- 아이디 비밀번호 찾기 -->
-	<select id="getMemberByEmail" resultType="String">
-		SELECT id FROM member WHERE email = #{email}
-	</select>
-	<select id="checkUserInfo" parameterType="map" resultType="int">
-	    SELECT COUNT(*) 
+	<select id="isUserExists" parameterType="com.edu.springboot.member.MemberDTO" >
+	    SELECT COUNT(*)
 	    FROM member 
 	    WHERE name = #{name} AND email = #{email}
 	</select>
-	
+	<select id="getMemberInfo" parameterType="com.edu.springboot.member.MemberDTO" resultType="String">
+		SELECT id FROM member WHERE name = #{name} AND email = #{email}
+	</select>
 	
 	<!-- 회원가입 -->
 	<!-- 일반 회원 -->

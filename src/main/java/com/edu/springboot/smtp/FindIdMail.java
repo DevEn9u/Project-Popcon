@@ -47,13 +47,14 @@ public class FindIdMail {
         msg += "</div>";
         
         message.setText(msg, "utf-8", "html"); // 내용, charset 타입, subtype
-        message.setFrom(new InternetAddress("goodjobproject@naver.com", "GoodJob_Admin")); // 보내는 사람
+        message.setFrom(new InternetAddress("dlsrnrk@naver.com", "POPCON_Official")); // 로그인한 사용자 주소 사용
         
         return message;
     }
 
     // 메일 발송 메소드
-    public void sendVerificationEmail(String to, String verificationCode) throws MessagingException, UnsupportedEncodingException {
+    public void sendVerificationEmail(String to, String verificationCode)
+    		throws MessagingException, UnsupportedEncodingException {
         MimeMessage message = createMessage(to, verificationCode); // 메일 내용 작성
         javaMailSender.send(message); // 메일 발송
     }
