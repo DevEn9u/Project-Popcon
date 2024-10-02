@@ -78,7 +78,7 @@
               <!-- 게시물 제목, 작성일, 작성자, 조회수 동적 출력 -->
               <h3>${dto.board_title}</h3>
               <p class="date"><fmt:formatDate value="${dto.postdate}" pattern="yyyy.MM.dd" /></p>
-              <p class="date">작성자 : ${dto.writer}</p>
+              <p class="date">작성자 : ${writerName}</p>
               <p class="date">조회수 : ${dto.visitcount}</p>
               <form name="deleteFrm" method="post" action="./delete.do?board_idx=${dto.board_idx}">
                 <input type="hidden" name="board_idx" value="${dto.board_idx}" />
@@ -110,7 +110,7 @@
             <form name="commentFrm" method="post" class="comment_form" action="../freeBoard/writeComment.do" enctype="multipart/form-data" onsubmit="return validateCommentForm();">
               <input type="hidden" name="board_idx" value="${dto.board_idx}" />
               <!-- 댓글 작성자 정보 -->
-              작성자 : <input type="text" name="com_writer" class="comment_writer" value="${user_id}" readonly="readonly" />
+              작성자 : ${user_name } <input type="text" name="com_writer" class="comment_writer blind" value="${user_id}" readonly="readonly" />
               <textarea name="com_contents" id="com_contents" rows="4" cols="50" class="comment_area" placeholder="댓글을 입력하세요"></textarea>
               <!-- 파일 업로드 기능 -->
               <div class="file_wrap">
@@ -129,7 +129,7 @@
 			  <c:forEach var="comment" items="${comments}">
 			    <div class="comment_item" id="comment_${comment.com_idx}">
 			      <div class="txt_wrap">
-			        <p>${comment.com_writer} (<fmt:formatDate value="${comment.com_postdate}" pattern="yyyy.MM.dd HH:mm:ss" />)</p>
+			        <p>${comment.comWriterName} (<fmt:formatDate value="${comment.com_postdate}" pattern="yyyy.MM.dd HH:mm:ss" />)</p>
 			        <!-- 댓글 내용 또는 수정 폼 -->
 			        <c:choose>
 			          <c:when test="${editingCommentId == comment.com_idx}">

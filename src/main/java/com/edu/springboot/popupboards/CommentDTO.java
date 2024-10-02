@@ -17,6 +17,7 @@ public class CommentDTO {
 	 private String com_contents;
 	 private Date com_postdate;
 	 private List<ImageDTO> com_img;
+	 private String comWriterName;
 	 
 	 //날짜를 한국어 형태로
 	 public String getFormattedPostDate() {
