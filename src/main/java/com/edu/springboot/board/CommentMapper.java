@@ -20,4 +20,8 @@ public interface CommentMapper {
 
     // 댓글 수정
     void editComment(CommentDTO commentDTO);
+    
+    // 댓글 ID로 댓글 조회
+    CommentDTO getCommentById(String com_idx);
+
 }

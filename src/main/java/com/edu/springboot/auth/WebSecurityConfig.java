@@ -1,23 +1,25 @@
 package com.edu.springboot.auth;
 
+import java.util.Arrays;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import jakarta.servlet.DispatcherType;
 /*
@@ -41,7 +43,8 @@ public class WebSecurityConfig {
 			throws Exception {
 		// Spring 6부터 Lambda 표현식이 필수사항
 		http.csrf((csrf) -> csrf.disable())
-			.cors((cors) -> cors.disable())
+			.cors((cors) -> cors.configurationSource(corsConfigurationSource()))
+//			.cors((cors) -> cors.disable())
 			.authorizeHttpRequests((request) -> request
 				.dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.INCLUDE).permitAll()
 				.requestMatchers("/").permitAll()
@@ -52,11 +55,12 @@ public class WebSecurityConfig {
 				.requestMatchers("/popupBoard/write.do").hasAnyRole("ADMIN", "CORP")
 				.requestMatchers("/popupBoard/edit.do").hasAnyRole("ADMIN", "CORP")
 				.requestMatchers("/popupBoard/delete.do").hasAnyRole("ADMIN", "CORP")
+				.requestMatchers("/popupBoard/booking/**").hasAnyRole("ADMIN", "CORP", "NORMAL")
 				.requestMatchers("/noticeBoard/write.do").hasRole("ADMIN")
 				.requestMatchers("/noticeBoard/edit.do").hasRole("ADMIN")
 				.requestMatchers("/noticeBoard/delete.do").hasRole("ADMIN")
+				.requestMatchers("/mypage/**").hasAnyRole("ADMIN", "CORP", "NORMAL")
 				.anyRequest().permitAll()
-//				.anyRequest().authenticated()
 			);
 		http.formLogin((formLogin) -> formLogin
 				.loginPage("/login.do")
@@ -91,6 +95,20 @@ public class WebSecurityConfig {
 				.accessDeniedPage("/denied.do"));
 		
 		return http.build();
+	}
+	
+	@Bean
+	public CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration();
+		configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000")); // 리액트 앱의 URL
+		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+		configuration.setAllowedHeaders(Arrays.asList("*"));
+		configuration.setAllowCredentials(true); // 인증 정보 전송 허용
+
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration); // 모든 경로에 대해 CORS 설정 적용
+
+		return source;
 	}
 	
 	// double slash막기 

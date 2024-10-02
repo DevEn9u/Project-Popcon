@@ -19,4 +19,6 @@ public class BoardDTO {
     private String role;           // 권한
     
     private List<ImageDTO> images; // 연관된 이미지 리스트
+    
+    private String writerName; // 작성자 이름
 }
