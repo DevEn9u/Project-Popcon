@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.edu.springboot.images.ImageDTO;
 import com.edu.springboot.images.ImageService;
 import com.edu.springboot.popupboards.CommentDTO;
 
@@ -85,22 +86,37 @@ public class BoardService {
     }
     
     // 댓글 작성
+    @Transactional
     public void writeComment(CommentDTO comment) {
         commentMapper.writeComment(comment);
     }
 
     // 댓글 목록 조회
     public List<CommentDTO> getComments(String board_idx) {
-        return commentMapper.getComments(board_idx);
+        List<CommentDTO> comments = commentMapper.getComments(board_idx);
+        for (CommentDTO comment : comments) {
+            // 각 댓글에 대한 이미지 리스트를 가져옴
+            List<ImageDTO> images = imageService.getImages(comment.getCom_idx(), "COMMENT");
+            comment.setCom_img(images);
+        }
+        return comments;
     }
 
+
     // 댓글 삭제
+    @Transactional
     public void deleteComment(String com_idx) {
         commentMapper.deleteComment(com_idx);
     }
 
     // 댓글 수정
+    @Transactional
     public void editComment(CommentDTO commentDTO) {
         commentMapper.editComment(commentDTO);
     }
+    // 댓글 정보 가져오기    
+    public CommentDTO getCommentById(String com_idx) {
+        return commentMapper.getCommentById(com_idx);
+    }
+
 }

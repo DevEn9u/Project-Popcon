@@ -60,7 +60,61 @@ public class MemberController {
 	    model.addAttribute("isChecked", isChecked);
 		return "members/login";
 	}
+	//////////////////////////////////////////////////////////////////
+	// 인증 코드 발송
+	@PostMapping("/sendVerificationCode.do")
+	@ResponseBody
+	public ResponseEntity<?> sendVerificationCode(@RequestBody Map<String, String> requestData) {
+	    
+		String name = requestData.get("name");
+	    String email = requestData.get("email");
+	    
+	    MemberDTO memberDTO = new MemberDTO();
+	    memberDTO.setName(name);
+	    memberDTO.setEmail(email);
+
+	    // DB에서 이름과 이메일 확인
+	    int result = dao.isUserExists(memberDTO);
+	    if (result <= 0) {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+	                             .body(Map.of("success", false, "message", "등록된 사용자 정보가 없습니다."));
+	    }
+	    // 인증 코드 생성
+	    verificationCode = findIdMail.createVerificationCode();
+	    this.email = email; // 이메일 주소 저장
+
+	    try {
+	        findIdMail.sendVerificationEmail(email, verificationCode);
+	        return ResponseEntity.ok(Map.of("success", true, "message", "인증 코드가 발송되었습니다."));
+	    } catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                             .body(Map.of("success", false, "message", "메일 발송에 실패했습니다."));
+	    }
+	}
 	
+	// 인증 코드 검증
+	@PostMapping("/verifyCode.do")
+	@ResponseBody
+	public ResponseEntity<?> verifyCode(@RequestBody Map<String, String> requestData) {
+		System.out.println("Received request data: " + requestData);
+	    String inputCode = requestData.get("inputCode");
+	    String name = requestData.get("name"); // 클라이언트로부터 이름 받기
+	    String email = requestData.get("email"); // 클라이언트로부터 이메일 받기
+	    
+	    boolean isValid = verificationCode != null && verificationCode.equals(inputCode);
+	    String userId = null;
+	    if (isValid) {
+	    	MemberDTO memberDTO = new MemberDTO();
+	    	memberDTO.setName(name);
+	    	memberDTO.setEmail(email);
+	    	// 디버깅
+//	    	userId = dao.getMemberInfo(memberDTO);
+//	    	System.out.println("*****" + isValid + "*******");
+//	    	System.out.println("아이디" + dao.getMemberInfo(memberDTO) + "이름 : " + name);
+	    }
+	    return ResponseEntity.ok(Map.of("valid", isValid, "userId", userId));
+	}
+	/////////////////////////////////////////////////////////////////
 	// 아이디 비밀번호 찾기
 	@GetMapping("/findId.do")
 	public String findId() {
