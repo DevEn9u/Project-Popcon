@@ -63,5 +63,10 @@ public class PopupBoardService {
     public int editComment(CommentDTO commentDTO) {
         return popupBoardMapper.editComment(commentDTO);
     }
+    
+    // 썸네일 지우기
+    public void deleteThumbnail(String board_idx) {
+        popupBoardMapper.deleteThumbnail(board_idx); // Mapper 메서드 호출
+    }
 
 }

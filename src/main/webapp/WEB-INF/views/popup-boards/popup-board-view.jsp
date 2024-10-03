@@ -122,7 +122,7 @@
 											<p class="slide_title">${popup.board_title}</p>
 											<p>${popup.start_date}~${popup.end_date}</p>
 											<p>
-												<img src="/images/main/location.svg">${popup.popup_addr}</p>
+												<img src="/images/main/location.svg" alt="location_pin" class="loc_pin">${popup.popup_addr}</p>
 										</div>
 								</a></li>
 							</ul>
@@ -183,10 +183,10 @@
 									<button class="pv_delete_btn" type="button"
 										onclick="if(confirm('정말 삭제하시겠습니까?')) { document.getElementById('deleteForm').submit(); }">삭제하기</button>
 								</form>
-<button type="button" class="pv_edit_btn" 
-        onclick="location.href='${pageContext.request.contextPath}/popupBoard/edit.do?board_idx=${popup.board_idx}';">
-    수정하기
-</button>
+								<button type="button" class="pv_edit_btn" 
+        							onclick="location.href='${pageContext.request.contextPath}/popupBoard/edit.do?board_idx=${popup.board_idx}';">
+    								수정하기
+								</button>
 
 							</c:when>
 							<c:otherwise>
@@ -208,7 +208,7 @@
 
 				<div class="open_time_wrap">
 					<h2 class="open_time">운영 시간</h2>
-					<div class="weekdays">${popup.open_days}${popup.open_hours}</div>
+					<div class="weekdays">${popup.open_days} ${popup.open_hours}</div>
 				</div>
 
 				<div class="content">

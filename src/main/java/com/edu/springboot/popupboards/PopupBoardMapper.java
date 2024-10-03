@@ -40,5 +40,8 @@ public interface PopupBoardMapper {
     
     //댓글 수정
     int editComment(CommentDTO commentDTO);
+    
+    //썸네일 지우기
+    public void deleteThumbnail(String board_idx);
 
 }

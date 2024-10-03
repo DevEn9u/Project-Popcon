@@ -235,11 +235,15 @@ public class PopupController {
     @GetMapping("/popupBoard/edit.do")
     public String popupEdit(@RequestParam("board_idx") String board_idx, Model model) {
         PopupBoardDTO popupBoard = popupBoardMapper.popupView(board_idx); // 게시물 세부정보 가져오기
-        model.addAttribute("dto", popupBoard);
+        model.addAttribute("popup", popupBoard);
         
         // 기존 이미지 가져오기
         List<ImageDTO> images = imageService.getImages(board_idx, "POPUP");
         model.addAttribute("images", images); // 모델에 기존 이미지 추가
+        
+        // 기존 썸네일 가져오기
+        String thumb = popupBoard.getThumb();
+        model.addAttribute("thumb", thumb); // 모델에 썸네일 추가
         
         return "/popup-boards/popup-board-edit"; // 수정 페이지로 이동
     }
@@ -396,7 +400,25 @@ public class PopupController {
         return "redirect:/popupBoard/edit.do?board_idx=" + boardIdx;
     }
     
-    // 댓글 작성
+    @GetMapping("/popupBoard/deleteThumbnail.do")
+    public String deleteThumbnail(@RequestParam("board_idx") String board_idx, 
+                                  @RequestParam("thumb") String thumb) {
+        // 기존 썸네일 경로로부터 파일 삭제
+        String filePath = uploadDir + "/" + thumb.replace("/uploads/images/", "");
+        File file = new File(filePath);
+        if (file.exists()) {
+            file.delete(); // 파일 삭제
+        }
+        
+        // DB에서 썸네일 경로 업데이트 
+        PopupBoardDTO post = popupBoardMapper.popupView(board_idx);
+        post.setThumb(null); // 썸네일 삭제
+        popupBoardMapper.edit(post); // DB 업데이트
+
+        return "redirect:/popupBoard/edit.do?board_idx=" + board_idx; // 수정 페이지로 리다이렉트
+    }
+    
+    // 댓글 작성 
     @PostMapping("/popupBoard/writeComment.do")
     public String writeComment(@RequestParam("popup_board_idx") String popup_board_idx,
                                 HttpServletRequest req,
