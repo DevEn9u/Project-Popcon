@@ -62,7 +62,7 @@
                <caption class="nohead">게시글 수정</caption>
                <tr>
                  <th>작성자</th>
-                 <td><input type="text" name="writer" readonly="readonly" value="${dto.writer}"></td>
+                 <td><input class="blind" type="text" name="writer" readonly="readonly" value="${dto.writer}"><input type="text" name="writer" readonly="readonly" value="${user_name}"></td>
                </tr>
                <tr>
                  <th>제목</th>

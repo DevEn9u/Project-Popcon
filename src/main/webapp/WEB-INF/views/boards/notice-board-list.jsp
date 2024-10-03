@@ -53,7 +53,7 @@
                     <tr>
                         <td>${fn:length(noticeList) - status.index}</td>
                         <td><a href="./view.do?board_idx=${board.board_idx}" class="board_title">${board.board_title}</a></td>
-                        <td>${board.writer}</td>
+                        <td>${board.writerName}</td>
 			            <td>
 			                <fmt:formatDate value="${board.postdate}" pattern="yyyy.MM.dd" />
 			            </td>

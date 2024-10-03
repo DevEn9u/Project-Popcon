@@ -36,7 +36,7 @@
             <div class="tit_wrap">
               <h3>${dto.board_title}</h3>
               <p class="date"><fmt:formatDate value="${board.postdate}" pattern="yyyy.MM.dd" /></p>
-              <p class="date">작성자 : ${dto.writer}</p>
+              <p class="date">작성자 : ${writerName}</p>
               <p class="date">조회수 : ${dto.visitcount}</p>
               <form name="deleteFrm" method="post" action="./delete.do?board_idx=${dto.board_idx}">
                 <input type="hidden" name="idx" value="${dto.board_idx}" />
