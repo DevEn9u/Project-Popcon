@@ -291,7 +291,7 @@
               </table>
               <div class="btn_area">
                 <button type="submit" class="submit_btn btn">수정하기</button>
-                <button type="button" class="reset_btn btn" onclick="location.href='./list.do';">목록으로</button>
+                <button type="button" class="reset_btn btn" onclick="location.href='/popupBoard/view/${popup.board_idx}'">뒤로가기</button>
               </div>
             </form>
           </div>
