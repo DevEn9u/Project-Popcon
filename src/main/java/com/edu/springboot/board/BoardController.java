@@ -665,9 +665,9 @@ public class BoardController {
         return "boards/notice-board-write"; // 게시글 작성 JSP 파일
     }
 
-    // 공지 작성 처리
+ // 공지 작성 처리
     @PostMapping("/noticeBoard/write.do")
-    public String writeNoticePost(BoardDTO boardDTO, @RequestParam("imageFile") MultipartFile[] imageFiles, Principal principal, RedirectAttributes redirectAttributes) {
+    public String writeNoticePost(BoardDTO boardDTO, Principal principal, RedirectAttributes redirectAttributes) {
         // 로그인 여부 확인
         if (principal == null) {
             redirectAttributes.addFlashAttribute("error", "로그인이 필요합니다.");
@@ -678,55 +678,11 @@ public class BoardController {
         MemberDTO member = memberService.getMemberById(userId);
 
         if (member != null && "ROLE_ADMIN".equals(member.getAuthority())) {
-            boardDTO.setWriter(userId);
-            boardDTO.setBoard_type("notice"); // board_type을 'notice'로 설정
+            boardDTO.setWriter(userId); // 작성자에 userId 설정
+            // board_type을 'notice'로 설정
+            boardDTO.setBoard_type("notice");
             boardDTO.setRole("ROLE_ADMIN"); // 공지게시판 작성 시 ROLE_ADMIN 설정
-            boardService.write(boardDTO); // 게시글 저장
-
-            // 게시글 ID (board_idx) 획득
-            String boardIdx = boardDTO.getBoard_idx();
-
-            // 이미지 처리
-            if (imageFiles != null && imageFiles.length > 0) {
-                for (MultipartFile file : imageFiles) {
-                    if (!file.isEmpty()) {
-                        // 파일 확장자 검증
-                        String originalFilename = org.springframework.util.StringUtils.cleanPath(file.getOriginalFilename());
-                        String fileExtension = originalFilename.substring(originalFilename.lastIndexOf("."))
-                                .toLowerCase();
-                        if (!Arrays.asList(ALLOWED_EXTENSIONS).contains(fileExtension)) {
-                            redirectAttributes.addFlashAttribute("error", "허용되지 않은 파일 형식입니다.");
-                            continue;
-                        }
-                        // 파일 크기 검증
-                        if (file.getSize() > MAX_FILE_SIZE) {
-                            redirectAttributes.addFlashAttribute("error", "파일 크기는 10MB 이하이어야 합니다.");
-                            continue;
-                        }
-                        try {
-                            // 파일 저장
-                            String newFilename = UUID.randomUUID().toString() + fileExtension;
-                            File dest = new File(uploadDir + "/" + newFilename);
-                            file.transferTo(dest);
-
-                            // 이미지 URL 설정 (웹 접근 가능한 경로)
-                            String imageUrl = "/uploads/images/" + newFilename;
-
-                            // ImageDTO 생성 및 저장
-                            ImageDTO imageDTO = new ImageDTO();
-                            imageDTO.setImage_url(imageUrl);
-                            imageDTO.setImage_type("BOARD");
-                            imageDTO.setAssociated_id(boardIdx);
-                            imageService.saveImage(imageDTO);
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            redirectAttributes.addFlashAttribute("error", "파일 업로드 중 오류가 발생했습니다.");
-                        }
-                    }
-                }
-            }
-
+            boardService.write(boardDTO);
             redirectAttributes.addFlashAttribute("message", "공지사항이 등록되었습니다.");
             return "redirect:/noticeBoard/list.do";
         } else {
@@ -734,8 +690,6 @@ public class BoardController {
             return "redirect:/noticeBoard/list.do";
         }
     }
-
-
 
     // 공지 수정 화면 호출
     @GetMapping("/noticeBoard/edit.do") // 경로를 edit로 변경
