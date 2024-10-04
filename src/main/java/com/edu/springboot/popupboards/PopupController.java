@@ -337,7 +337,7 @@ public class PopupController {
                         // 파일 저장
                         String newFilename = UUID.randomUUID().toString() + fileExtension;
                         File dest = new File(uploadDir + "/" + newFilename);
-                        file.transferTo(dest);
+                        file.transferTo(dest);   
 
                         // 이미지 URL 설정
                         String imageUrl = "/uploads/images/" + newFilename;
