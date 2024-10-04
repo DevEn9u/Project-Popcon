@@ -21,19 +21,26 @@ body {
 	width: 100%;
 }
 .bs_booking_tit {
-	width: 100%;
-	background: #efefef;
+	margin-top: 80px;
+	max-width: 100%;
+	max-height: 650px;
+	background-color: #efefef;
+	display: flex;
+    flex-direction: column;
+	align-items: center;
 }
 
 .bs_booking_tit .inner {
-  margin: 80px auto 0;
+  margin: 0 auto;
   max-width: 1920px;
-  max-height: 550px;
+  max-height: 650px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .bs_booking_img {
+  width: 1250px;
+  height: 450px;
   margin-top: 25px;
 }
 .bs_pin {
@@ -46,11 +53,11 @@ body {
   font-size: 30px;
   font-weight: 600;
   margin-top: 10px;
-  margin-left: 100px;
+  /*margin-left: 100px;*/
 }
 .popup_date {
 	display: flex;
-	margin-left: 140px;
+	margin-left: 30px;
 }
 .bs_location p {
 	font-size: 18px;
@@ -58,9 +65,7 @@ body {
 	margin-bottom: 10px;
 }
 .bs_booking_main {
-  padding-top: 20px;
-  margin-left: 118px;
-  margin-right: 98px;
+  padding: 20px;
 }
 .bs_main_box {
 	width: 100%;
@@ -68,8 +73,7 @@ body {
 }
 .bs_main_box .inner {
   position: relative;
-  
-  max-width: 1920px;
+  max-width: 1250px;
   margin: 50px auto 0;
 }
 .caution_wrap {

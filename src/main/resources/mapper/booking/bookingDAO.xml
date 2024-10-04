@@ -8,7 +8,7 @@
 
 	<!-- 팝업 정보 호출 -->
 	<select id="PopupDetails" parameterType="String" resultType="com.edu.springboot.popupboards.PopupBoardDTO">
-	    SELECT board_title, start_date, end_date, popup_addr, popup_fee
+	    SELECT board_title, thumb, start_date, end_date, popup_addr, popup_fee
 	    FROM popup_board
 	    WHERE board_idx = #{board_idx}
 	</select>
@@ -19,6 +19,8 @@
 	    VALUES
 	    (booking_num_seq(), #{popup_idx}, #{member_id}, #{visit_date}, sysdate, #{price}, #{headcount}, #{is_paid})
 	</insert>
+	
+	
 	
 
 </mapper>

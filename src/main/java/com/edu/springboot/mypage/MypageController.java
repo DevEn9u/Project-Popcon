@@ -31,10 +31,6 @@ public class MypageController {
 	//마이페이지 - 메인
 	@GetMapping("/mypage/mypage.do")
 	public String mypageMain(Principal principal, Model model) {
-//		String member_id = principal.getName();
-//		bookingDTO bookingInfo = page.bookingInfo(member_id);
-//		model.addAttribute("bookingInfo", bookingInfo);
-		
 		return "/mypages/mypage-main";
 	}
 	
@@ -44,8 +40,7 @@ public class MypageController {
 		return "/mypages/mypage-booking";
 	}
 	
-	
-	
+ 
 	//마이페이지 - 포인트 확인
 	@GetMapping("/mypage/myPoint.do")
 	public String mypagePoint() {

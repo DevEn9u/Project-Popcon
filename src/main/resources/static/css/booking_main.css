@@ -7,11 +7,7 @@
 }
 
 body {
-  font-family: 'Pretendard', sans-serif;
-  margin: 0;
-  padding: 0;
-  max-width: 1920px;
-  color: black;
+  color: #121212;
 }
 
 /* 컬러 변수 */
@@ -24,19 +20,28 @@ body {
 }
 
 
+.booking_main_inner {
+	width: 100%;
+}
 
 .booking_tit {
   position:relative;
   margin-top: 80px;
-  max-width: 1920px;
+  max-width: 100%;
   max-height: 550px;
   background-color: #efefef;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+.booking_tit .inner {
+	margin: 0 auto;
+}
 .booking_img {
   margin-top: 25px;
+  width: 1250px;
+  height: 450px;
+  border-radius: 30px;
 }
 .bm_pin {
   width: 30px;
@@ -47,15 +52,17 @@ body {
   font-size: 30px;
   font-weight: 600;
   margin-top: 10px;
-  margin-left: 100px;
+  margin-left: 20px;
   margin-bottom: 30px;
   display: flex;
   align-items: center;
 }
 
 .booking_main {
+  max-width: 1250px;
   margin-left: 118px;
   margin-right: 98px;
+  margin:0 auto;
 }
 .bm_main_tit,
 .bm_qna_tit {
@@ -68,9 +75,9 @@ body {
 .bm_img_tit {
 	position:absolute;
 	bottom:20%;
-	left: 7%;
 	font-size:50px;
 	font-weight:600;
+	margin-left: 20px;
 	color:white;
 }
 .booking_box {
