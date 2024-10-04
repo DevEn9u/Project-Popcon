@@ -107,10 +107,10 @@ public class MemberController {
 	    	MemberDTO memberDTO = new MemberDTO();
 	    	memberDTO.setName(name);
 	    	memberDTO.setEmail(email);
+	    	userId = dao.getMemberInfo(memberDTO);
 	    	// 디버깅
-//	    	userId = dao.getMemberInfo(memberDTO);
-//	    	System.out.println("*****" + isValid + "*******");
-//	    	System.out.println("아이디" + dao.getMemberInfo(memberDTO) + "이름 : " + name);
+	    	System.out.println("*****" + isValid + "*******");
+	    	System.out.println("아이디" + dao.getMemberInfo(memberDTO) + "이름 : " + name);
 	    }
 	    return ResponseEntity.ok(Map.of("valid", isValid, "userId", userId));
 	}
