@@ -20,23 +20,23 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
-//@Slf4j
-//@Configuration
-//public class MyLoginSuccessHandler
-//	implements AuthenticationSuccessHandler {
-//
-//	private final Logger log = LoggerFactory.getLogger(getClass());
-//	@Override
-//	public void onAuthenticationSuccess(HttpServletRequest request,
-//										HttpServletResponse response,
-//										Authentication authentication)
-//					throws IOException, ServletException {
-//
-//		// 아이디 저장
-//		String rememberId = request.getParameter("saveUserId"); // 아이디 저장 여부
-//		String login_id = request.getParameter("login_id");		// 아이디
-//		log.info("rememberId : " + rememberId);
-//	}
-//	
-//
-//}
+@Slf4j
+@Configuration
+public class MyLoginSuccessHandler
+	implements AuthenticationSuccessHandler {
+
+	private final Logger log = LoggerFactory.getLogger(getClass());
+	@Override
+	public void onAuthenticationSuccess(HttpServletRequest request,
+										HttpServletResponse response,
+										Authentication authentication)
+					throws IOException, ServletException {
+
+		// 아이디 저장
+		String rememberId = request.getParameter("saveUserId"); // 아이디 저장 여부
+		String login_id = request.getParameter("login_id");		// 아이디
+		log.info("rememberId : " + rememberId);
+	}
+	
+
+}
