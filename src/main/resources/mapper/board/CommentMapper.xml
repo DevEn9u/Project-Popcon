@@ -16,7 +16,7 @@
     
     <!-- 댓글 목록 조회 -->
     <select id="getComments" parameterType="String" resultType="com.edu.springboot.popupboards.CommentDTO">
-        SELECT * FROM COMMENTS WHERE board_idx = #{board_idx} ORDER BY com_postdate ASC
+        SELECT * FROM COMMENTS WHERE board_idx = #{board_idx} ORDER BY com_postdate DESC
     </select>
     
     <!-- 댓글 삭제 -->

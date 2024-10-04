@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -342,13 +343,14 @@ public class BoardController {
             // DB에서 이미지 삭제
             imageService.deleteImage(imageIdx);
         }
-        return "redirect:/freeBoard/edit.do?board_idx=" + boardIdx;
+        // 리다이렉트 URL에 앵커 추가
+        return "redirect:/freeBoard/edit.do?board_idx=" + boardIdx + "#image_section";
     }
 
     // 댓글 작성
     @PostMapping("/freeBoard/writeComment.do")
     public String writeComment(@RequestParam("board_idx") String board_idx,
-            @RequestParam("com_contents") String com_contents,
+            @RequestParam("com_contents") String com_contents, @ModelAttribute CommentDTO comment,
             @RequestParam(value = "imageFile", required = false) MultipartFile imageFile, Principal principal,
             RedirectAttributes redirectAttributes) {
         // 로그인 여부 확인
@@ -414,7 +416,8 @@ public class BoardController {
         }
 
         redirectAttributes.addFlashAttribute("message", "댓글이 작성되었습니다.");
-        return "redirect:/freeBoard/view.do?board_idx=" + board_idx;
+        // 새로 작성된 댓글의 com_idx를 이용해 앵커 추가
+        return "redirect:/freeBoard/view.do?board_idx=" + commentDTO.getBoard_idx() + "#comment_" + commentDTO.getCom_idx();
     }
 
     // 댓글 삭제
@@ -446,7 +449,8 @@ public class BoardController {
         // 댓글 삭제
         boardService.deleteComment(com_idx);
         redirectAttributes.addFlashAttribute("message", "댓글이 삭제되었습니다.");
-        return "redirect:/freeBoard/view.do?board_idx=" + board_idx;
+        // 삭제 후 댓글 목록의 시작 부분으로 앵커 추가
+        return "redirect:/freeBoard/view.do?board_idx=" + board_idx + "#comments_section";
     }
     
     
@@ -533,7 +537,7 @@ public class BoardController {
         }
 
         redirectAttributes.addFlashAttribute("message", "댓글이 수정되었습니다.");
-        return "redirect:/freeBoard/view.do?board_idx=" + board_idx;
+        return "redirect:/freeBoard/view.do?board_idx=" + board_idx + "#comment_" + com_idx;
     }
 
     // 댓글 이미지 삭제

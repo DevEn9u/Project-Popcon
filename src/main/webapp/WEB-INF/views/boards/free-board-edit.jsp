@@ -108,12 +108,14 @@
               <tr>
                 <th>기존 이미지</th>
                 <td>
-                  <c:forEach var="image" items="${images}">
-                    <div class="existing_image">
-                      <img src="${pageContext.request.contextPath}${image.image_url}" alt="Image" />
-                      <a href="deleteImage.do?image_idx=${image.image_idx}&board_idx=${dto.board_idx}" onclick="return confirm('이미지를 삭제하시겠습니까?');">삭제</a>
-                    </div>
-                  </c:forEach>
+                <div id="image_section" style="scroll-margin-top: 300px;">
+	                  <c:forEach var="image" items="${images}">
+	                    <div class="existing_image">
+	                      <img src="${pageContext.request.contextPath}${image.image_url}" alt="Image" />
+	                      <a href="deleteImage.do?image_idx=${image.image_idx}&board_idx=${dto.board_idx}" onclick="return confirm('이미지를 삭제하시겠습니까?');">삭제</a>
+	                    </div>
+	                  </c:forEach>
+                  </div>
                 </td>
               </tr>
               </table>
