@@ -448,6 +448,8 @@ public class BoardController {
         redirectAttributes.addFlashAttribute("message", "댓글이 삭제되었습니다.");
         return "redirect:/freeBoard/view.do?board_idx=" + board_idx;
     }
+    
+    
 
     // 댓글 수정
     @PostMapping("/freeBoard/editComment.do")
@@ -553,11 +555,9 @@ public class BoardController {
             return "redirect:/freeBoard/view.do?board_idx=" + board_idx;
         }
 
-        String userName = member.getName();
-
         // 댓글 작성자 확인
         CommentDTO existingComment = boardService.getCommentById(com_idx);
-        if (!userName.equals(existingComment.getCom_writer())) {
+        if (!userId.equals(existingComment.getCom_writer()) && !"ROLE_ADMIN".equals(member.getAuthority())) {
             redirectAttributes.addFlashAttribute("error", "이미지 삭제 권한이 없습니다.");
             return "redirect:/freeBoard/view.do?board_idx=" + board_idx;
         }
@@ -570,6 +570,7 @@ public class BoardController {
         return "redirect:/freeBoard/view.do?board_idx=" + board_idx + "&editingCommentId=" + com_idx + "#comment_"
                 + com_idx;
     }
+
 
     /////////////////////////////////////////////////////// 공지/////////////////////////////////////////////////////
     // 공지 목록
@@ -603,7 +604,7 @@ public class BoardController {
     }
 
 
-    // 공지 상세보기
+ // 공지 상세보기
     @GetMapping("/noticeBoard/view.do")
     public String viewNoticeBoard(@RequestParam("board_idx") String boardIdx, Model model, HttpServletRequest request,
             HttpServletResponse response) {
@@ -637,6 +638,11 @@ public class BoardController {
         // 게시글 상세 정보 가져오기
         BoardDTO boardDTO = boardService.getBoardById(boardIdx);
         
+        if (boardDTO == null) {
+            // 게시글이 없을 경우 처리 (예: 에러 페이지로 이동)
+            return "redirect:/noticeBoard/list.do";
+        }
+
         // 작성자 이름 조회
         MemberDTO member = memberService.getMemberById(boardDTO.getWriter());
         String writerName = (member != null) ? member.getName() : "알 수 없음";
@@ -644,8 +650,13 @@ public class BoardController {
         
         model.addAttribute("dto", boardDTO);
 
+        // 관련 이미지 가져오기
+        List<ImageDTO> images = imageService.getImages(boardIdx, "BOARD");
+        model.addAttribute("images", images);
+
         return "boards/notice-board-view";
     }
+
 
 
     // 공지 작성 화면 호출
@@ -654,7 +665,7 @@ public class BoardController {
         return "boards/notice-board-write"; // 게시글 작성 JSP 파일
     }
 
-    // 공지 작성 처리
+ // 공지 작성 처리
     @PostMapping("/noticeBoard/write.do")
     public String writeNoticePost(BoardDTO boardDTO, Principal principal, RedirectAttributes redirectAttributes) {
         // 로그인 여부 확인
@@ -667,8 +678,9 @@ public class BoardController {
         MemberDTO member = memberService.getMemberById(userId);
 
         if (member != null && "ROLE_ADMIN".equals(member.getAuthority())) {
-            boardDTO.setWriter(userId);
-            boardDTO.setBoard_type("notice"); // board_type을 'notice'로 설정
+            boardDTO.setWriter(userId); // 작성자에 userId 설정
+            // board_type을 'notice'로 설정
+            boardDTO.setBoard_type("notice");
             boardDTO.setRole("ROLE_ADMIN"); // 공지게시판 작성 시 ROLE_ADMIN 설정
             boardService.write(boardDTO);
             redirectAttributes.addFlashAttribute("message", "공지사항이 등록되었습니다.");
@@ -678,7 +690,6 @@ public class BoardController {
             return "redirect:/noticeBoard/list.do";
         }
     }
-
 
     // 공지 수정 화면 호출
     @GetMapping("/noticeBoard/edit.do") // 경로를 edit로 변경
