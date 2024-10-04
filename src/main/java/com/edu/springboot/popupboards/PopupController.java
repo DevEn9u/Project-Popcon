@@ -455,14 +455,14 @@ public class PopupController {
             // 파일 크기 검증
             if (imageFile.getSize() > MAX_FILE_SIZE) {
                 redirectAttributes.addFlashAttribute("error", "파일 크기는 10MB 이하이어야 합니다.");
-                return "redirect:/popupBoard/view/" + popup_board_idx; 
+                return "redirect:/popupBoard/view/" + popup_board_idx;  
             }
             try {
                 // 파일 저장
                 String newFilename = UUID.randomUUID().toString() + fileExtension;
                 File dest = new File(uploadDir + "/" + newFilename);
                 imageFile.transferTo(dest);
-
+ 
                 // 이미지 URL 설정 (웹 접근 가능한 경로)
                 String imageUrl = "/uploads/images/" + newFilename;
 

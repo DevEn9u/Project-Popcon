@@ -245,7 +245,7 @@
       action="${pageContext.request.contextPath}/popupBoard/writeComment.do"
       enctype="multipart/form-data"> <!-- 이 부분 추가 -->
     <input type="hidden" name="popup_board_idx" value="${popup.board_idx}" />
-    <textarea name="com_contents" rows="4" cols="50"
+    <textarea name="com_contents" rows="4" cols="50" 
               class="comment_area" placeholder="리뷰를 입력하세요"></textarea>
     <br /> <input type="hidden" name="${_csrf.parameterName}"
               value="${_csrf.token}" />
