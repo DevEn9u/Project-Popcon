@@ -120,7 +120,7 @@
               <div class="btn_wrap">
                 <button type="submit" class="btn board_btn">등록</button>
                 <button type="button" class="btn board_btn cancel_btn" onclick="checkReset();">다시쓰기</button>
-                <button type="button" onclick="location.href='./list.do';" class="btn board_btn cancel_btn">목록으로</button>
+                <button type="button" onclick="location.href='./view.do?board_idx=${dto.board_idx}';" class="btn board_btn cancel_btn">수정취소</button>
               </div>
             </form>
           </div>
