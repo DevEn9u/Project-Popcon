@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.edu.springboot.member.IMypageService">
+	
+	<!-- 예약 정보 가져오기 -->
+	<select id="bookingInfo" parameterType="String" resultType="com.edu.springboot.booking.bookingDTO">
+		SELECT booking_num, popup_idx, visit_date, price, headcount
+		FROM booking
+		WHERE member_id = #{member_id}
+	</select>
+	
+	<!-- 예약한 팝업의 제목 가져오기 -->
+	<select id="bookingTitle" parameterType="String" resultType="com.edu.springboot.popupboards.PopupBoardDTO">
+		SELECT board_title FROM POPUP_BOARD 
+		WHERE board_idx in (SELECT popup_idx FROM booking WHERE member_id = #{member_id});
+	</select>
+	
+</mapper>

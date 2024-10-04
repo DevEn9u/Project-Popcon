@@ -26,7 +26,7 @@
 	    <div class="bs_booking_tit">
 	      <div class="inner">
 	        <img
-	          src="/images/imgMGJ/booking_img.png"
+	          src="${details.thumb}"
 	          alt="booking_img"
 	          class="bs_booking_img"
 	        />
