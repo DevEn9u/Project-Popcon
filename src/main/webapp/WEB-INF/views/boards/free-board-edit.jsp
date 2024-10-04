@@ -87,7 +87,7 @@
                  <th>제목</th>
                  <td><input type="text" name="board_title" placeholder="제목을 입력해주세요." value="${ dto.board_title }"></td>
                </tr>
-               <tr>
+               <tr> 
                  <th class="t_area">내용</th>
                  <td>
                    <textarea cols="30" rows="20" name="contents"
