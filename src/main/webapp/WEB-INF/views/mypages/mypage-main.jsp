@@ -55,14 +55,14 @@
           </div>
           <div class="my_info_wrap">
           	<div class="tit_wrap">
-	            <h2>${user_id }님, 환영합니다.</h2>
+	            <h2>${user_id}님, 환영합니다.</h2>
     	        <button type="button" class="edit_btn btn" onclick="location.href='/member/checkPass.do'">정보 수정</button>
           	</div>
             <div class="my_info">
               <div class="my_mile box1">
                 <div class="top">
                   <strong>나의 마일리지</strong>
-                  <a href="mypage_point.html"
+                  <a href="/mypage/myPoint.do"
                     ><p>자세히 보기<span></span></p
                   ></a>
                 </div>
@@ -71,7 +71,7 @@
               <div class="my_recent box1">
                 <div class="top">
                   <strong>최근 예약 내역</strong>
-                  <a href="mypage_booking.html"
+                  <a href="/mypage/myBooking.do"
                     ><p>자세히 보기<span></span></p
                   ></a>
                 </div>
@@ -80,10 +80,10 @@
                     <li>
                       <strong>예약한 팝업명</strong>
                       <div class="txt_wrap">
-                        예약 날짜
-                        <span></span>예약 인원
+                        ${info.visit_date}
+                        <span></span>${info.headcount}
                       </div>
-                      <p>총 12,345원</p>
+                      <p>총 ${info.price}원</p>
                     </li>
                   </ul>
                   <ul class="booking_list">
