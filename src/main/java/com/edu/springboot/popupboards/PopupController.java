@@ -251,7 +251,7 @@ public class PopupController {
 
     @PostMapping("/popupBoard/edit.do")
     public String popupEditPost(
-            @RequestParam("board_idx") String board_idx, // 요청에서 board_idx 가져오기
+            @RequestParam("board_idx") String board_idx,
             @RequestParam("board_title") String board_title,
             @RequestParam("contents") String contents,
             @RequestParam("popup_fee") int popup_fee,
@@ -261,13 +261,12 @@ public class PopupController {
             @RequestParam("category") String category,
             @RequestParam("open_days") String open_days,
             @RequestParam("open_hours") String open_hours,
-            @RequestParam("thumbFile") MultipartFile thumbFile, // 썸네일 파일 추가
+            @RequestParam("thumbFile") MultipartFile thumbFile,
             @RequestParam("imageFile") MultipartFile[] imageFiles,
             RedirectAttributes redirectAttributes) {
 
         // 팝업 게시글 DTO 생성 및 값 설정
-        PopupBoardDTO post = new PopupBoardDTO();
-        post.setBoard_idx(board_idx); // board_idx 설정
+        PopupBoardDTO post = popupBoardMapper.popupView(board_idx); // 기존 데이터를 가져옴
         post.setBoard_title(board_title);
         post.setContents(contents);
         post.setPopup_fee(popup_fee);
@@ -309,10 +308,11 @@ public class PopupController {
                 redirectAttributes.addFlashAttribute("error", "썸네일 파일 업로드 중 오류가 발생했습니다.");
                 return "redirect:/popupBoard/edit.do?board_idx=" + board_idx; // 에러 시 리다이렉트
             }
+        } else {
+            // 썸네일 파일이 없으면 기존 썸네일 유지
+            PopupBoardDTO existingPost = popupBoardMapper.popupView(board_idx);
+            post.setThumb(existingPost.getThumb()); // 기존 썸네일 유지
         }
-
-        // 게시글 수정 처리
-        popupBoardMapper.edit(post); // 게시글 수정
 
         // 이미지 처리
         if (imageFiles != null && imageFiles.length > 0) {
@@ -342,11 +342,6 @@ public class PopupController {
                         // 이미지 URL 설정
                         String imageUrl = "/uploads/images/" + newFilename;
 
-                        // 썸네일 URL 설정 (첫 번째 이미지)
-                        if (post.getThumb() == null) {
-                            post.setThumb(imageUrl); // 첫 번째 이미지로 썸네일 설정
-                        }
-
                         // ImageDTO 생성 및 저장
                         ImageDTO imageDTO = new ImageDTO();
                         imageDTO.setImage_url(imageUrl);
@@ -361,6 +356,9 @@ public class PopupController {
                 }
             }
         }
+        
+        // 게시글 수정 처리
+        popupBoardMapper.edit(post); // 게시글 수정
 
         return "redirect:/popupBoard/view/" + board_idx; // 수정 후 해당 게시글 보기로 리다이렉트
     }
