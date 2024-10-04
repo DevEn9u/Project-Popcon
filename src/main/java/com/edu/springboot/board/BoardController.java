@@ -603,7 +603,7 @@ public class BoardController {
     }
 
 
-    // 공지 상세보기
+ // 공지 상세보기
     @GetMapping("/noticeBoard/view.do")
     public String viewNoticeBoard(@RequestParam("board_idx") String boardIdx, Model model, HttpServletRequest request,
             HttpServletResponse response) {
@@ -637,6 +637,11 @@ public class BoardController {
         // 게시글 상세 정보 가져오기
         BoardDTO boardDTO = boardService.getBoardById(boardIdx);
         
+        if (boardDTO == null) {
+            // 게시글이 없을 경우 처리 (예: 에러 페이지로 이동)
+            return "redirect:/noticeBoard/list.do";
+        }
+
         // 작성자 이름 조회
         MemberDTO member = memberService.getMemberById(boardDTO.getWriter());
         String writerName = (member != null) ? member.getName() : "알 수 없음";
@@ -644,8 +649,13 @@ public class BoardController {
         
         model.addAttribute("dto", boardDTO);
 
+        // 관련 이미지 가져오기
+        List<ImageDTO> images = imageService.getImages(boardIdx, "BOARD");
+        model.addAttribute("images", images);
+
         return "boards/notice-board-view";
     }
+
 
 
     // 공지 작성 화면 호출
@@ -656,7 +666,7 @@ public class BoardController {
 
     // 공지 작성 처리
     @PostMapping("/noticeBoard/write.do")
-    public String writeNoticePost(BoardDTO boardDTO, Principal principal, RedirectAttributes redirectAttributes) {
+    public String writeNoticePost(BoardDTO boardDTO, @RequestParam("imageFile") MultipartFile[] imageFiles, Principal principal, RedirectAttributes redirectAttributes) {
         // 로그인 여부 확인
         if (principal == null) {
             redirectAttributes.addFlashAttribute("error", "로그인이 필요합니다.");
@@ -670,7 +680,52 @@ public class BoardController {
             boardDTO.setWriter(userId);
             boardDTO.setBoard_type("notice"); // board_type을 'notice'로 설정
             boardDTO.setRole("ROLE_ADMIN"); // 공지게시판 작성 시 ROLE_ADMIN 설정
-            boardService.write(boardDTO);
+            boardService.write(boardDTO); // 게시글 저장
+
+            // 게시글 ID (board_idx) 획득
+            String boardIdx = boardDTO.getBoard_idx();
+
+            // 이미지 처리
+            if (imageFiles != null && imageFiles.length > 0) {
+                for (MultipartFile file : imageFiles) {
+                    if (!file.isEmpty()) {
+                        // 파일 확장자 검증
+                        String originalFilename = org.springframework.util.StringUtils.cleanPath(file.getOriginalFilename());
+                        String fileExtension = originalFilename.substring(originalFilename.lastIndexOf("."))
+                                .toLowerCase();
+                        if (!Arrays.asList(ALLOWED_EXTENSIONS).contains(fileExtension)) {
+                            redirectAttributes.addFlashAttribute("error", "허용되지 않은 파일 형식입니다.");
+                            continue;
+                        }
+                        // 파일 크기 검증
+                        if (file.getSize() > MAX_FILE_SIZE) {
+                            redirectAttributes.addFlashAttribute("error", "파일 크기는 10MB 이하이어야 합니다.");
+                            continue;
+                        }
+                        try {
+                            // 파일 저장
+                            String newFilename = UUID.randomUUID().toString() + fileExtension;
+                            File dest = new File(uploadDir + "/" + newFilename);
+                            file.transferTo(dest);
+
+                            // 이미지 URL 설정 (웹 접근 가능한 경로)
+                            String imageUrl = "/uploads/images/" + newFilename;
+
+                            // ImageDTO 생성 및 저장
+                            ImageDTO imageDTO = new ImageDTO();
+                            imageDTO.setImage_url(imageUrl);
+                            imageDTO.setImage_type("BOARD");
+                            imageDTO.setAssociated_id(boardIdx);
+                            imageService.saveImage(imageDTO);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            redirectAttributes.addFlashAttribute("error", "파일 업로드 중 오류가 발생했습니다.");
+                        }
+                    }
+                }
+            }
+
             redirectAttributes.addFlashAttribute("message", "공지사항이 등록되었습니다.");
             return "redirect:/noticeBoard/list.do";
         } else {
@@ -678,6 +733,7 @@ public class BoardController {
             return "redirect:/noticeBoard/list.do";
         }
     }
+
 
 
     // 공지 수정 화면 호출

@@ -107,6 +107,8 @@ public class BoardService {
     // 댓글 삭제
     @Transactional
     public void deleteComment(String com_idx) {
+    	// 관련 이미지 삭제
+        imageService.deleteImages(com_idx, "COMMENT");
         commentMapper.deleteComment(com_idx);
     }
 

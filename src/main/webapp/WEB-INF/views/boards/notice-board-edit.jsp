@@ -75,22 +75,11 @@
                      placeholder="필수 입력사항을 작성하고 입력해주세요.&#10;비방, 욕설, 도배글 등은 서비스 이용 제한의 사유가 됩니다.">${ dto.contents }</textarea>
                  </td>
                </tr>
-               <tr>
-                <th>첨부파일</th>
-                <td class="td_flex">
-                  <div class="file_wrap">
-                    <input type="text" class="file_name" readonly>
-                    <input type="file" id="upload" class="blind">
-                    <label for="upload">파일선택</label>
-                  </div>
-                  <p class="file_note">이미지 파일은 10MB 이하 jpg, png, gif, webp 확장자 파일만 올릴 수 있습니다.</p>
-                </td>
-              </tr>
               </table>
               <div class="btn_wrap">
                 <button type="submit" class="btn board_btn">수정하기</button>
                 <button type="button" class="btn board_btn cancel_btn" onclick="checkReset();">다시쓰기</button>
-                <button type="button" onclick="location.href='./list.do';" class="btn board_btn cancel_btn">목록으로</button>
+                <button type="button" onclick="location.href='./view.do?board_idx=${dto.board_idx}';" class="btn board_btn cancel_btn">수정취소</button>
               </div>
             </form>
           </div>
