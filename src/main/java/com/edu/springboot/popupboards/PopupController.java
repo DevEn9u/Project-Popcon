@@ -409,16 +409,30 @@ public class PopupController {
         return "redirect:/popupBoard/edit.do?board_idx=" + board_idx; // 수정 페이지로 리다이렉트
     }
     
-    // 댓글 작성 
     @PostMapping("/popupBoard/writeComment.do")
     public String writeComment(@RequestParam("popup_board_idx") String popup_board_idx,
                                 HttpServletRequest req,
                                 @RequestParam("com_contents") String com_contents,
-                                @RequestParam(value = "imageFile", required = false) MultipartFile imageFile, Principal principal,
+                                @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
+                                Principal principal,
                                 RedirectAttributes redirectAttributes) {
         // 로그인한 사용자의 정보를 가져옴
         String com_writer = req.getUserPrincipal().getName(); // 작성자 이름 가져오기
         String com_writer_id = memberService.getMemberById(com_writer).getId(); // 작성자의 ID 가져오기
+
+        // 파라미터 출력
+        System.out.println("popup_board_idx: " + popup_board_idx);
+        System.out.println("com_writer: " + com_writer);
+        System.out.println("com_writer_id: " + com_writer_id);
+        System.out.println("com_contents: " + com_contents);
+
+        // 이미지 파일 정보 출력
+        if (imageFile != null) {
+            System.out.println("imageFile: " + imageFile.getOriginalFilename());
+            System.out.println("imageFile Size: " + imageFile.getSize());
+        } else {
+            System.out.println("imageFile: No file uploaded");
+        }
 
         // 댓글 DTO 생성 및 값 설정
         CommentDTO commentDTO = new CommentDTO();
@@ -427,21 +441,21 @@ public class PopupController {
         commentDTO.setCom_contents(com_contents);
         
         popupBoardMapper.writeComment(commentDTO);
-        String com_idx = commentDTO.getCom_idx();
+        String com_idx = commentDTO.getCom_idx(); // 댓글 ID
         
         // 이미지 처리
-        if (imageFile != null && !imageFile.isEmpty()) {
+        if (imageFile != null && !imageFile.isEmpty()) {  // 파일 체크
             // 파일 확장자 검증
             String originalFilename = org.springframework.util.StringUtils.cleanPath(imageFile.getOriginalFilename());
             String fileExtension = originalFilename.substring(originalFilename.lastIndexOf(".")).toLowerCase();
             if (!Arrays.asList(ALLOWED_EXTENSIONS).contains(fileExtension)) {
                 redirectAttributes.addFlashAttribute("error", "허용되지 않은 파일 형식입니다.");
-                return "redirect:/popupBoard/view.do?board_idx=" + popup_board_idx;
+                return "redirect:/popupBoard/view/" + popup_board_idx; 
             }
             // 파일 크기 검증
             if (imageFile.getSize() > MAX_FILE_SIZE) {
                 redirectAttributes.addFlashAttribute("error", "파일 크기는 10MB 이하이어야 합니다.");
-                return "redirect:/freeBoard/view.do?board_idx=" + popup_board_idx;
+                return "redirect:/popupBoard/view/" + popup_board_idx; 
             }
             try {
                 // 파일 저장
@@ -456,19 +470,18 @@ public class PopupController {
                 ImageDTO imageDTO = new ImageDTO();
                 imageDTO.setImage_url(imageUrl);
                 imageDTO.setImage_type("COMMENT");
-                imageDTO.setAssociated_id(com_idx); // 댓글 ID와 연관
+                imageDTO.setAssociated_id(popup_board_idx); // 여기 수정: board_idx로 설정
                 imageService.saveImage(imageDTO);
 
             } catch (IOException e) {
                 e.printStackTrace();
                 redirectAttributes.addFlashAttribute("error", "파일 업로드 중 오류가 발생했습니다.");
-                return "redirect:/popupBoard/view.do?board_idx=" + popup_board_idx;
+                return "redirect:/popupBoard/view/" + popup_board_idx; 
             }
         }
         
         return "redirect:/popupBoard/view/" + popup_board_idx;
     }
-    
     //댓글 지우기
     @PostMapping("popupBoard/comDelete.do")
     public String deleteComment(

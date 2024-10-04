@@ -235,32 +235,36 @@
 				</div>
 
 				<div class="pv_btn_wrap">
-					<button class="pv_booking_btn"
+					<button class="pv_booking_btn" 
 						onclick="goToBooking(${popup.board_idx});">예약하기</button>
 					<button class="pv_list_btn" onclick="location.href='../list.do';">목록</button>
 				</div>
 				<div class="comment_section">
-					<h3>후기 작성하기</h3> 
-					<form name="commentFrm" method="post" class="comment_form"
-						action="${pageContext.request.contextPath}/popupBoard/writeComment.do">
-						<input type="hidden" name="popup_board_idx"
-							value="${popup.board_idx}" />
-						<textarea name="com_contents" rows="4" cols="50"
-							class="comment_area" placeholder="리뷰를 입력하세요"></textarea>
-						<br /> <input type="hidden" name="${_csrf.parameterName}"
-							value="${_csrf.token}" />
-						<!-- 파일 업로드 기능 -->
-              <div class="file_wrap">
-                  <input type="text" class="file_name" readonly>
-                  <input type="file" id="comment_upload" class="blind" name="imageFile" multiple onchange="handleFileSelect(this)">
-                  <label for="comment_upload" class="comment_upload">파일선택</label>
-              </div>
-						<button type="submit" class="btn comment_btn">리뷰 작성</button>
-					</form>
+    <h3>후기 작성하기</h3> 
+    <form name="commentFrm" method="post" class="comment_form"
+      action="${pageContext.request.contextPath}/popupBoard/writeComment.do"
+      enctype="multipart/form-data"> <!-- 이 부분 추가 -->
+    <input type="hidden" name="popup_board_idx" value="${popup.board_idx}" />
+    <textarea name="com_contents" rows="4" cols="50"
+              class="comment_area" placeholder="리뷰를 입력하세요"></textarea>
+    <br /> <input type="hidden" name="${_csrf.parameterName}"
+              value="${_csrf.token}" />
+    <!-- 파일 업로드 기능 -->
+    <div class="file_wrap">
+        <input type="text" class="file_name" readonly>
+        <input type="file" id="comment_upload" class="blind" name="imageFile" multiple onchange="handleFileSelect(this)">
+        <label for="comment_upload" class="comment_upload">파일선택</label>
+    </div>
+    <button type="submit" class="btn comment_btn">리뷰 작성</button>
+</form>
+
+</div>
 
 					<!-- 후기 목록 -->
 					<div class="view_con comment_list">
 						<h3>후기 목록</h3>
+						 <!-- 현재 board_idx를 텍스트로 출력 -->
+        <p>현재 게시글 ID: ${popup.board_idx}</p>
 						<c:forEach var="comment" items="${commentsList}">
 							<div class="comment_item">
 								<div class="comment_wrap">
