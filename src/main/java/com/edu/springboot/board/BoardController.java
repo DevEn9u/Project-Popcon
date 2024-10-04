@@ -448,6 +448,8 @@ public class BoardController {
         redirectAttributes.addFlashAttribute("message", "댓글이 삭제되었습니다.");
         return "redirect:/freeBoard/view.do?board_idx=" + board_idx;
     }
+    
+    
 
     // 댓글 수정
     @PostMapping("/freeBoard/editComment.do")
@@ -553,11 +555,9 @@ public class BoardController {
             return "redirect:/freeBoard/view.do?board_idx=" + board_idx;
         }
 
-        String userName = member.getName();
-
         // 댓글 작성자 확인
         CommentDTO existingComment = boardService.getCommentById(com_idx);
-        if (!userName.equals(existingComment.getCom_writer())) {
+        if (!userId.equals(existingComment.getCom_writer()) && !"ROLE_ADMIN".equals(member.getAuthority())) {
             redirectAttributes.addFlashAttribute("error", "이미지 삭제 권한이 없습니다.");
             return "redirect:/freeBoard/view.do?board_idx=" + board_idx;
         }
@@ -570,6 +570,7 @@ public class BoardController {
         return "redirect:/freeBoard/view.do?board_idx=" + board_idx + "&editingCommentId=" + com_idx + "#comment_"
                 + com_idx;
     }
+
 
     /////////////////////////////////////////////////////// 공지/////////////////////////////////////////////////////
     // 공지 목록
