@@ -28,10 +28,7 @@ public class MainController {
 		return "home";
 	}
 	@GetMapping("/chat.do")
-	public String chat(Model model, Principal principal) {
-		String user_id = principal.getName();
-		
-		model.addAttribute("user_id", user_id);
+	public String chat() {
 		return "forward:/chat/index.html";
 	}
 	

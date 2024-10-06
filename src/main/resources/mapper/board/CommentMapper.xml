@@ -12,6 +12,16 @@
 	    INSERT INTO COMMENTS (com_idx, board_idx, com_writer, com_contents, com_postdate)
 	    VALUES (#{com_idx}, #{board_idx}, #{com_writer}, #{com_contents}, SYSDATE)
 	</insert>
+	
+	    <!-- 댓글 작성 -->
+	<insert id="popup_writeComment" parameterType="com.edu.springboot.popupboards.CommentDTO">
+	    <selectKey keyProperty="com_idx" resultType="String" order="BEFORE">
+	        SELECT TO_CHAR(comment_idx_seq.NEXTVAL) FROM dual
+	    </selectKey>
+	    INSERT INTO COMMENTS (com_idx, popup_board_idx, com_writer, com_contents, com_postdate)
+	    VALUES (#{com_idx}, #{popup_board_idx}, #{com_writer}, #{com_contents}, SYSDATE)
+	</insert>
+	
 
     
     <!-- 댓글 목록 조회 -->
