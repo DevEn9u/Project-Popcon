@@ -2,6 +2,7 @@ package com.edu.springboot.board;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -106,6 +107,8 @@ public class BoardService {
     // 댓글 삭제
     @Transactional
     public void deleteComment(String com_idx) {
+    	// 관련 이미지 삭제
+        imageService.deleteImages(com_idx, "COMMENT");
         commentMapper.deleteComment(com_idx);
     }
 

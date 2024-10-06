@@ -79,5 +79,13 @@
     	SET com_contents = #{com_contents}
     	WHERE com_idx = #{com_idx}
 	</update>
+	
+	<!-- 썸네일 삭제 기능 -->
+    <update id="deleteThumbnail" parameterType="String">
+        UPDATE POPUP_BOARD
+        SET thumb = NULL
+        WHERE board_idx = #{board_idx}
+    </update>
+
 
 </mapper>

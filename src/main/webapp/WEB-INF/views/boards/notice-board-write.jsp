@@ -59,7 +59,7 @@
                <caption class="nohead">게시글 작성</caption>
                <tr>
                  <th>이름</th>
-                 <td><input type="text" name="writer" readonly="readonly" value="${ user_id }"></td>
+                 <td><input class="blind" type="text" name="writer" readonly="readonly" value="${ user_id }"><input type="text" name="writer" readonly="readonly" value="${ user_name }"></td>
                </tr>
                <tr>
                  <th>제목</th>

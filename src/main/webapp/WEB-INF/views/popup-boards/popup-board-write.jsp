@@ -31,6 +31,8 @@
         const category = document.querySelector('input[name="category"]');
         const openDays = document.querySelector('input[name="open_days"]');
         const openHours = document.querySelector('input[name="open_hours"]');
+        const thumbnailFile = document.querySelector('input[name="thumbFile"]');
+        const generalFile = document.querySelector('input[name="imageFile"]');
 
         if (!title.value.trim()) {
             alert("제목을 입력해 주세요.");
@@ -92,6 +94,19 @@
             openHours.focus();
             return false;
         }
+        
+        if (!generalFile.files.length) {
+            alert("이미지를 2장 업로드 해주세요.");
+            generalFile.focus();
+            return false;
+        }
+        
+        if (!thumbnailFile.files.length) {
+            alert("썸네일 이미지를 업로드 해주세요.");
+            thumbnailFile.focus();
+            return false;
+        }
+        
         
         return true;
     }

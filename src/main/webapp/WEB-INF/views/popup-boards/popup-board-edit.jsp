@@ -200,45 +200,45 @@
           <div class="board_write">
             <form name="writeFrm" method="post" enctype="multipart/form-data" action="../popupBoard/edit.do" onsubmit="return validateForm(this);">
               <!-- 게시글 수정에 필요한 ID -->
-              <input type="hidden" name="board_idx" value="${ dto.board_idx }" />
+              <input type="hidden" name="board_idx" value="${ popup.board_idx }" />
               <table>
                 <caption class="nohead">게시글 수정</caption>
                 <tr>
                   <th>제목</th>
-                  <td><input type="text" name="board_title" placeholder="제목을 입력해주세요" value="${ dto.board_title }" required></td>
+                  <td><input type="text" name="board_title" placeholder="제목을 입력해주세요" value="${ popup.board_title }" required></td>
                 </tr>
                 <tr>
                   <th>내용</th>
                   <td>
-                    <textarea cols="30" rows="20" name="contents" placeholder="내용을 입력해 주세요." required>${ dto.contents }</textarea>
+                    <textarea cols="30" rows="20" name="contents" placeholder="내용을 입력해 주세요." required>${ popup.contents }</textarea>
                   </td>
                 </tr>
                 <tr>
                   <th>입장료</th>
-                  <td><input type="text" name="popup_fee" placeholder="숫자만 입력해 주세요" value="${ dto.popup_fee }" required></td>
+                  <td><input type="text" name="popup_fee" placeholder="숫자만 입력해 주세요" value="${ popup.popup_fee }" required></td>
                 </tr>
                 <tr>
                   <th>팝업일정</th>
                   <td>
-                    <input type="text" name="start_date" placeholder="시작: YYYY-MM-DD" value="${ dto.start_date }" required>
-                    <input type="text" name="end_date" placeholder="종료: YYYY-MM-DD" value="${ dto.end_date }" required>
+                    <input type="text" name="start_date" placeholder="시작: YYYY-MM-DD" value="${ popup.start_date }" required>
+                    <input type="text" name="end_date" placeholder="종료: YYYY-MM-DD" value="${ popup.end_date }" required>
                   </td>
                 </tr>
                 <tr>
                   <th>주소</th>
-                  <td><input type="text" name="popup_addr" placeholder="주소를 입력해 주세요" value="${ dto.popup_addr }" required></td>
+                  <td><input type="text" name="popup_addr" placeholder="주소를 입력해 주세요" value="${ popup.popup_addr }" required></td>
                 </tr>
                 <tr>
                   <th>카테고리</th>
-                  <td><input type="text" name="category" placeholder="카테고리를 입력해 주세요" value="${ dto.category }" required></td>
+                  <td><input type="text" name="category" placeholder="카테고리를 입력해 주세요" value="${ popup.category }" required></td>
                 </tr>
                 <tr>
                   <th>오픈 요일</th>
-                  <td><input type="text" name="open_days" placeholder="오픈 요일을 입력해 주세요" value="${ dto.open_days }" required></td>
+                  <td><input type="text" name="open_days" placeholder="오픈 요일을 입력해 주세요" value="${ popup.open_days }" required></td>
                 </tr>
                 <tr>
                   <th>오픈 시간</th>
-                  <td><input type="text" name="open_hours" placeholder="오픈 시간을 입력해 주세요" value="${ dto.open_hours }" required></td>
+                  <td><input type="text" name="open_hours" placeholder="오픈 시간을 입력해 주세요" value="${ popup.open_hours }" required></td>
                 </tr>
                 <tr>
                   <th>첨부파일</th>
@@ -251,7 +251,19 @@
                      <p class="file_note">이미지 파일은 10MB 이하 jpg, png, gif, webp 확장자 파일만 올릴 수 있습니다.</p>
                   </td>
                 </tr>
-     
+				<c:if test="${not empty images}">
+				    <tr>
+				        <th>기존 이미지</th>
+				        <td>
+				            <c:forEach var="image" items="${images}">
+				                <div class="existing_image">
+				                    <img src="${pageContext.request.contextPath}${image.image_url}" alt="Image" />
+				                    <a href="deleteImage.do?image_idx=${image.image_idx}&board_idx=${popup.board_idx}" onclick="return confirm('이미지를 삭제하시겠습니까?');">삭제</a>
+				                </div>
+				            </c:forEach>
+				        </td>
+				    </tr>
+				</c:if>
 				<tr>
 				    <th>썸네일 이미지</th>
 				    <td class="td_flex">
@@ -263,21 +275,23 @@
 				        <p class="file_note">썸네일 이미지 파일은 10MB 이하 jpg, png, gif, webp 확장자 파일만 올릴 수 있습니다.</p>
 				    </td>
 				</tr>
-				<tr>
-                <th>기존 이미지</th>
-                <td>
-                  <c:forEach var="image" items="${images}">
-                    <div class="existing_image">
-                      <img src="${pageContext.request.contextPath}${image.image_url}" alt="Image" />
-                      <a href="deleteImage.do?image_idx=${image.image_idx}&board_idx=${popup.board_idx}" onclick="return confirm('이미지를 삭제하시겠습니까?');">삭제</a>
-                    </div>
-                  </c:forEach>
-                </td>
-              </tr>
+				<c:if test="${not empty popup.thumb}">
+				    <tr>
+				        <th>기존 썸네일 이미지</th>
+				        <td>
+				            <div class="existing_thumbnail">
+				                <img src="${pageContext.request.contextPath}${popup.thumb}" alt="Thumbnail" />
+				                <a href="deleteThumbnail.do?board_idx=${popup.board_idx}&thumb=${popup.thumb}" 
+				                   onclick="return confirm('썸네일 이미지를 삭제하시겠습니까?');">삭제</a>
+				            </div>
+				        </td>
+				    </tr>
+				</c:if>
+              
               </table>
               <div class="btn_area">
-                <button type="submit" class="submit_btn">수정하기</button>
-                <button type="button" class="reset_btn" onclick="checkReset();">취소</button>
+                <button type="submit" class="submit_btn btn">수정하기</button>
+                <button type="button" class="reset_btn btn" onclick="location.href='/popupBoard/view/${popup.board_idx}'">뒤로가기</button>
               </div>
             </form>
           </div>

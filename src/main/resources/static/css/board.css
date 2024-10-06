@@ -239,6 +239,15 @@
     width: 100%;
     height: auto;
 }
+
+.btn_area {
+	display:flex;
+	justify-content: center;
+    margin-top: 50px;
+    gap: 10px;
+}
+
+
 /***************** 태블릿 분기점 *****************/
 @media (max-width: 1200px) {
   /********* 게시판 공통  *********/

@@ -102,7 +102,7 @@ body {
   margin-left: 25px;
 }
 .pv_title_date {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   font-weight: 600;
 }
 .pv_title_location {
@@ -133,7 +133,7 @@ body {
   font-weight: 700;
 }
 .txt_wrap p {
-    margin-bottom: 7px;
+    margin-bottom: 10px;
 }
 .slide_title {
     font-size: 35px;
@@ -339,6 +339,12 @@ body {
 .edit_content {
 	background-color:#121212;
 	border:1px solid var(--txt-color-600);
+}
+.loc_pin {
+	margin-right:10px;
+}
+.comment_upload {
+	background:none !important;
 }
 
 /* 태블릿 분기점 */

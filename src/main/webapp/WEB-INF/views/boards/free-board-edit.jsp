@@ -81,13 +81,13 @@
                <caption class="nohead">게시글 작성</caption>
                <tr>
                  <th>이름</th>
-                 <td><input type="text" name="name" readonly="readonly" value="${ dto.writer }"></td>
+                 <td><input class="blind" type="text" name="name" readonly="readonly" value="${ dto.writer }"><input type="text" name="name" readonly="readonly" value="${ user_name}"></td>
                </tr>
                <tr>
                  <th>제목</th>
                  <td><input type="text" name="board_title" placeholder="제목을 입력해주세요." value="${ dto.board_title }"></td>
                </tr>
-               <tr>
+               <tr> 
                  <th class="t_area">내용</th>
                  <td>
                    <textarea cols="30" rows="20" name="contents"
@@ -108,19 +108,21 @@
               <tr>
                 <th>기존 이미지</th>
                 <td>
-                  <c:forEach var="image" items="${images}">
-                    <div class="existing_image">
-                      <img src="${pageContext.request.contextPath}${image.image_url}" alt="Image" />
-                      <a href="deleteImage.do?image_idx=${image.image_idx}&board_idx=${dto.board_idx}" onclick="return confirm('이미지를 삭제하시겠습니까?');">삭제</a>
-                    </div>
-                  </c:forEach>
+                <div id="image_section" style="scroll-margin-top: 300px;">
+	                  <c:forEach var="image" items="${images}">
+	                    <div class="existing_image">
+	                      <img src="${pageContext.request.contextPath}${image.image_url}" alt="Image" />
+	                      <a href="deleteImage.do?image_idx=${image.image_idx}&board_idx=${dto.board_idx}" onclick="return confirm('이미지를 삭제하시겠습니까?');">삭제</a>
+	                    </div>
+	                  </c:forEach>
+                  </div>
                 </td>
               </tr>
               </table>
               <div class="btn_wrap">
                 <button type="submit" class="btn board_btn">등록</button>
                 <button type="button" class="btn board_btn cancel_btn" onclick="checkReset();">다시쓰기</button>
-                <button type="button" onclick="location.href='./list.do';" class="btn board_btn cancel_btn">목록으로</button>
+                <button type="button" onclick="location.href='./view.do?board_idx=${dto.board_idx}';" class="btn board_btn cancel_btn">수정취소</button>
               </div>
             </form>
           </div>
