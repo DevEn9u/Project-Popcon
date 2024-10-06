@@ -30,16 +30,22 @@ public interface PopupBoardMapper {
     void edit(PopupBoardDTO popupboardDTO);
     
     // 댓글 작성
-    public int writeComment(CommentDTO comment); // 추가: 댓글 작성 메서드
+    //public int writeComment(CommentDTO comment); // 추가: 댓글 작성 메서드
+    
+    // 댓글 작성
+    void popup_writeComment(CommentDTO comment);
 
     // 특정 게시글의 댓글 목록 조회
     public List<CommentDTO> getComments(@Param("popup_board_idx") String popup_board_idx);
-
+    
     // 댓글 삭제
     void deleteComment(String com_idx);
     
     //댓글 수정
     int editComment(CommentDTO commentDTO);
+    
+    //댓글 수정 시 이미지 삭제
+    int deleteCommentImage(String imageId);
     
     //썸네일 지우기
     public void deleteThumbnail(String board_idx);
