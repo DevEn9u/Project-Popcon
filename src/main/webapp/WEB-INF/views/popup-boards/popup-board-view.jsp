@@ -93,12 +93,43 @@
 		    document.getElementById('editCommentModal_' + commentId).style.display = 'none';
 		    isEditModalOpen = false;
 		}
+		function deleteImage(imageIdx, commentId) {
+		    let confirmed = confirm("이 이미지를 삭제하시겠습니까?");
+		    if (confirmed) {
+		        $.ajax({
+		            type: "POST",
+		            url: "${pageContext.request.contextPath}/popupBoard/comDeleteImage.do", // 이미지 삭제 요청 URL
+		            data: { imageIdx: imageIdx }, // imageIdx를 문자열로 보냄
+		            success: function(response) {
+		                alert(response);
+		                // 삭제 후 모달을 새로 고침하여 변경 사항 반영
+		                location.reload();
+		            },
+		            error: function(err) {
+		                alert('이미지 삭제에 실패했습니다.');
+		                console.error('Error:', err);
+		            }
+		        });
+		    }
+		}
+
 	</script>
 
 	<script>
 	  function goToBooking(board_idx) {
 	    location.href = `/popupBoard/booking/` + board_idx;
 	  }
+	</script>
+	
+	<script>
+    function handleFileSelect(input) {
+        var fileNames = [];
+        for (var i = 0; i < input.files.length; i++) {
+            fileNames.push(input.files[i].name);
+        }
+        // 선택한 파일 이름을 표시
+        input.previousElementSibling.value = fileNames.join(', ');
+    }
 	</script>
 
 
@@ -180,17 +211,17 @@
 									method="post">
 									<input type="hidden" name="board_idx"
 										value="${popup.board_idx}" />
-									<button class="pv_delete_btn" type="button"
+									<button class="btn pv_delete_btn" type="button"
 										onclick="if(confirm('정말 삭제하시겠습니까?')) { document.getElementById('deleteForm').submit(); }">삭제하기</button>
 								</form>
-								<button type="button" class="pv_edit_btn" 
+								<button type="button" class="btn pv_edit_btn" 
         							onclick="location.href='${pageContext.request.contextPath}/popupBoard/edit.do?board_idx=${popup.board_idx}';">
     								수정하기
 								</button>
 
 							</c:when>
 							<c:otherwise>
-								<button class="pv_booking_btn"
+								<button class="btn pv_booking_btn"
 									onclick="goToBooking(${popup.board_idx});">예약하기</button>
 							</c:otherwise>
 						</c:choose>
@@ -235,9 +266,9 @@
 				</div>
 
 				<div class="pv_btn_wrap">
-					<button class="pv_booking_btn" 
+					<button class="btn pv_booking_btn" 
 						onclick="goToBooking(${popup.board_idx});">예약하기</button>
-					<button class="pv_list_btn" onclick="location.href='../list.do';">목록</button>
+					<button class="btn pv_list_btn" onclick="location.href='../list.do';">목록</button>
 				</div>
 				<div class="comment_section">
     <h3>후기 작성하기</h3> 
@@ -260,47 +291,75 @@
 
 </div>
 
-					<!-- 후기 목록 -->
-					<div class="view_con comment_list">
-						<h3>후기 목록</h3>
-						 <!-- 현재 board_idx를 텍스트로 출력 -->
-        <p>현재 게시글 ID: ${popup.board_idx}</p>
-						<c:forEach var="comment" items="${commentsList}">
-							<div class="comment_item">
-								<div class="comment_wrap">
-									<p class="comment_writer">${comment.com_writer}</p>
-									<p class="comment_date">(${comment.formattedPostDate})</p>
-								</div>
-								<p class="comment_content">${comment.com_contents}</p>
-								<!-- 리뷰 수정/삭제 버튼 -->
-								<c:if
-									test="${comment.com_writer == pageContext.request.userPrincipal.name}">
-									<button type="button" class="btn comment_btn"
-										onclick="openEditModal('${comment.com_idx}', '${comment.com_contents}');">수정하기</button>
-									<button type="button" class="btn comment_btn"
-										onclick="deleteComment('${comment.com_idx}', '${popup.board_idx}');">삭제하기</button>
+<!-- 후기목록 -->
+<div class="view_con comment_list">
+    <h3>후기 목록</h3>
+    <c:forEach var="comment" items="${comments}">
+        <div class="comment_item">
+            <div class="comment_wrap">
+                <p class="comment_writer">${comment.comWriterName}</p>
+                <p class="comment_date">(${comment.formattedPostDate})</p>
+            </div>
+                        <!-- 첨부된 이미지가 있으면 출력 -->
+            <c:if test="${not empty comment.com_img}">
+                <div class="comment_images">
+                    <c:forEach var="image" items="${comment.com_img}">
+                        <img src="${image.image_url}" alt="Image" style="max-width: 100%; height: auto; margin-bottom: 10px;" />
+                    </c:forEach>
+                </div>
+            </c:if>
+            <c:if test="${empty comment.com_img}">
+    			<p>첨부된 이미지가 없습니다.</p>
+			</c:if>
+            <p class="comment_content">${comment.com_contents}</p>
+            <!-- 리뷰 수정/삭제 버튼 -->
+<!-- 리뷰 수정/삭제 버튼 -->
+<c:if test="${comment.com_writer == pageContext.request.userPrincipal.name}">
+    <button type="button" class="btn comment_btn"
+        onclick="openEditModal('${comment.com_idx}', '${comment.com_contents}');">수정하기</button>
+    <button type="button" class="btn delete_btn"
+        onclick="deleteComment('${comment.com_idx}', '${popup.board_idx}');">삭제하기</button>
 
-									<div id="editCommentModal_${comment.com_idx}"
-										style="display: none; position: relative; background-color: #121212; padding: 20px; border: 1px solid var(--txt-color-600); margin-top: 10px;">
-										<form id="editCommentForm" method="post"
-											action="${pageContext.request.contextPath}/popupBoard/comEdit.do">
-											<input type="hidden" name="com_idx"
-												id="editComIdx_${comment.com_idx}" /> <input type="hidden"
-												name="popup_board_idx" value="${popup.board_idx}" />
-											<textarea name="com_contents"
-												id="editComContents_${comment.com_idx}" class="edit_content"
-												rows="4" cols="50"></textarea>
-											<button type="submit" class="btn comment_btn"
-												style="margin-top: 10px;">수정 완료</button>
-										</form>
-									</div>
-								</c:if>
-							</div>
-						</c:forEach>
-						<c:if test="${empty commentsList}">
-							<p>등록된 후기가 없습니다.</p>
-						</c:if>
-					</div>
+<div id="editCommentModal_${comment.com_idx}"
+    style="display: none; position: relative; background-color: #121212; padding: 20px; border: 1px solid var(--txt-color-600); margin-top: 10px;">
+    <form id="editCommentForm" method="post" action="${pageContext.request.contextPath}/popupBoard/comEdit.do" enctype="multipart/form-data"> <!-- enctype 추가 -->
+        <input type="hidden" name="com_idx" id="editComIdx_${comment.com_idx}" /> 
+        <input type="hidden" name="popup_board_idx" value="${popup.board_idx}" />
+        
+        <!-- 첨부된 이미지 표시 -->
+        <c:if test="${not empty comment.com_img}">
+            <h4 class="pop_comimg_head">첨부된 이미지</h4>
+            <div class="comment_images">
+                <c:forEach var="image" items="${comment.com_img}">
+                    <div>
+                        <img src="${image.image_url}" alt="Image" style="max-width: 100%; height: auto; margin-bottom: 10px;" />
+                        <button type="button" class="btn comment_btn" onclick="deleteImage('${image.image_idx}', '${comment.com_idx}');">이미지 삭제</button>
+                    </div>
+                </c:forEach>
+            </div>
+        </c:if>
+
+        <!-- 파일 업로드 기능 -->
+        <div class="file_wrap">
+            <input type="text" class="file_name" readonly>
+            <input type="file" id="edit_comment_upload_${comment.com_idx}" class="blind" name="imageFile" multiple onchange="handleFileSelect(this)">
+            <label for="edit_comment_upload_${comment.com_idx}" class="comment_upload">파일 선택</label>
+        </div>
+        
+        <textarea name="com_contents" id="editComContents_${comment.com_idx}" class="edit_content" rows="4" cols="50"></textarea>
+
+        <button type="submit" class="btn comment_btn" style="margin-top: 10px;">수정 완료</button>
+    </form>
+</div>
+
+</c:if>
+        </div>
+    </c:forEach>
+    <c:if test="${empty comments}">
+        <p>등록된 후기가 없습니다.</p>
+    </c:if>
+</div>
+
 
 				</div>
 			</div>

@@ -377,6 +377,7 @@ public class BoardController {
         // 댓글 저장 (com_idx가 생성됨)
         boardService.writeComment(commentDTO);
         String com_idx = commentDTO.getCom_idx();
+        System.out.println("저장된 댓글 ID: " + commentDTO.getCom_idx());
 
         // 이미지 처리
         if (imageFile != null && !imageFile.isEmpty()) {

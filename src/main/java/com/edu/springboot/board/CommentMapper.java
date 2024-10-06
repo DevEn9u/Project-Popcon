@@ -1,7 +1,6 @@
 package com.edu.springboot.board;
 
 import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,6 +11,8 @@ public interface CommentMapper {
 
     // 댓글 작성
     void writeComment(CommentDTO comment);
+    
+    void popup_writeComment(CommentDTO comment);
 
     // 댓글 목록 조회
     List<CommentDTO> getComments(@Param("board_idx") String board_idx);
