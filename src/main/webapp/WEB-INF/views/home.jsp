@@ -396,9 +396,30 @@
 		    ${common_footer}
 			<section class="btn_wrap">
 			   <a class="scroll_btn top_btn" href="#"><span class="blind">아래로 이동</span></a>
-			   <a class="qna_btn top_btn" href="#" id="openChat"><span class="blind">질문</span></a>
+			   <c:if test="${not empty user_id }">
+				   <a class="qna_btn top_btn" href="#" id="openChat"><span class="blind">질문</span></a>
+			   </c:if>
 			</section>
 		</div>
+		<script>
+		  const openChatWin = (roomId, userId) => {
+			    window.open(
+// 			      `/chat.do?roomId=${roomId}&userId=${userId}`,
+			      "/chat.do?roomId=" + roomId + "&userId=" + userId,
+			      '',
+			      'width=500, height=800'
+			    );
+			  };
+		  $('#openChat').on('click', function(e) {
+			  e.preventDefault();
+			  // Model에서 id 가져오기
+			  const userId = "${user_id}";
+			  // roomId는 'user-유저아이디'로 설정
+			  const roomId = "user-" + userId;
+			  console.log(roomId);
+			  openChatWin(roomId, userId);
+		  })
+		</script>
 	</footer>
 	</div>
 </body>
