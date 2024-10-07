@@ -55,7 +55,7 @@
           </div>
           <div class="my_info_wrap">
           	<div class="tit_wrap">
-	            <h2>${user_id}님, 환영합니다.</h2>
+	            <h2>${user_name}님, 환영합니다.</h2>
     	        <button type="button" class="edit_btn btn" onclick="location.href='/member/checkPass.do'">정보 수정</button>
           	</div>
             <div class="my_info">

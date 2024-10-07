@@ -60,6 +60,7 @@ public class WebSecurityConfig {
 				.requestMatchers("/noticeBoard/edit.do").hasRole("ADMIN")
 				.requestMatchers("/noticeBoard/delete.do").hasRole("ADMIN")
 				.requestMatchers("/mypage/**").hasAnyRole("ADMIN", "CORP", "NORMAL")
+				.requestMatchers("/chat.do").hasAnyRole("ADMIN", "CORP", "NORMAL")
 				.anyRequest().permitAll()
 			);
 		http.formLogin((formLogin) -> formLogin
@@ -97,7 +98,7 @@ public class WebSecurityConfig {
 		return http.build();
 	}
 	
-	@Bean
+//	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
 		configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000")); // 리액트 앱의 URL

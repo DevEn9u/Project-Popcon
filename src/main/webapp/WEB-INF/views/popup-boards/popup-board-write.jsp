@@ -117,7 +117,8 @@
             document.querySelector('form').submit();
         }
     }
-
+	
+    //날짜입력 시 - 자동추가. YYYY-MM-DD 형식으로 입력시킴
     function dateRule(event) {
         const input = event.target;
         let value = input.value.replace(/[^0-9]/g, ''); 
@@ -126,6 +127,9 @@
         }
         if (value.length >= 7) {
             value = value.substring(0, 7) + '-' + value.substring(7);
+        }
+        if (value.length > 10) {
+            value = value.substring(0, 10);
         }
         input.value = value;
     }
