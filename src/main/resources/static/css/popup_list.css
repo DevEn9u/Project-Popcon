@@ -206,6 +206,23 @@ body {
   filter: invert(34%) sepia(94%) saturate(7482%) hue-rotate(-1deg) brightness(95%) contrast(102%); /* 원하는 빨간색 필터 */
 }
 
+
+/*관리자 페이지 서식 */
+.ad_pl_main {
+	margin-left:90px;
+}
+.pv_delete_btn {
+	position: absolute;
+	top:0;
+	right:0;
+	-webkit-mask-image: url(../images/imgMGJ/delete_btn.svg);
+    -webkit-mask-size: cover;
+    -webkit-mask-repeat: no-repeat;
+    width:30px;
+	height:30px;
+	margin-left: 25px;
+}
+
 /* 태블릿 분기점 */
 @media (max-width: 1200px) {
   .popup_list_title_wrap h2 a {

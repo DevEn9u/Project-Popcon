@@ -1,5 +1,7 @@
 package com.edu.springboot.popupboards;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,4 +15,7 @@ public interface LikeMapper {
     
     // 좋아요 삭제 메서드
     void deleteLike(String likes_idx);
+    
+    // 특정 회원이 좋아요한 모든 팝업 조회
+    List<LikeDTO> findLikesByMemberId(@Param("member_id") String member_id);
 }
