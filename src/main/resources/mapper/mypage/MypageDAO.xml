@@ -4,7 +4,7 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace = "com.edu.springboot.member.IMypageService">
+<mapper namespace = "com.edu.springboot.mypage.MypageMapper">
 	
 	<!-- 예약 정보 가져오기 -->
 	<select id="bookingInfo" parameterType="String" resultType="com.edu.springboot.booking.bookingDTO">
@@ -18,5 +18,21 @@
 		SELECT board_title FROM POPUP_BOARD 
 		WHERE board_idx in (SELECT popup_idx FROM booking WHERE member_id = #{member_id});
 	</select>
+	
+    <!-- 내가 작성한 게시글 목록 조회 -->
+    <select id="getPostsByWriter" parameterType="map" resultType="com.edu.springboot.board.BoardDTO">
+        SELECT board_idx, writer, board_title, contents, board_type, postdate
+        FROM BOARD
+        WHERE writer = #{writer}
+        ORDER BY postdate DESC
+        OFFSET #{offset} ROWS FETCH NEXT #{limit} ROWS ONLY
+    </select>
+    
+    <!-- 내가 작성한 게시글 총 수 조회 -->
+    <select id="countPostsByWriter" parameterType="String" resultType="int">
+        SELECT COUNT(*) 
+        FROM BOARD 
+        WHERE writer = #{writer}
+    </select>
 	
 </mapper>
