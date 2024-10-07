@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/css/popup_view.css">
 <body>
 
-<!-- 조아요 클릭시 빨개짐 -->
+<!-- 조아요 클릭시 빨개짐. -->
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const likeBtn = document.getElementById('likeBtn');
