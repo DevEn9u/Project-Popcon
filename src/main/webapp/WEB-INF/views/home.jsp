@@ -401,5 +401,19 @@
 		</div>
 	</footer>
 	</div>
+	<script>
+	  document.getElementById('openChat').addEventListener('click', function(e) {
+		    e.preventDefault(); // 기본 클릭 이벤트 방지
+
+		    const roomId = 'user-'; // 기본 채팅방 이름
+		    const userId = prompt('대화명을 입력하세요:'); // 대화명 입력받기
+
+		    if (userId) {
+		      window.open(`/talk?roomId=${roomId}&userId=${userId}`, '', 'width=500, height=700');
+		    } else {
+		      alert('대화명을 입력해주세요.');
+		    }
+		  });
+	</script>
 </body>
 </html>
