@@ -1,5 +1,7 @@
 package com.edu.springboot.popupboards;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +39,11 @@ public class LikeService {
 	            addLike(member_id, board_id);
 	            return true; // 좋아요가 추가됨
 	        }
+	    }
+	    
+	    // 특정 회원이 좋아요한 모든 팝업 조회
+	    public List<LikeDTO> getLikesByMemberId(String memberId) {
+	        return likeMapper.findLikesByMemberId(memberId);
 	    }
 	   
 }

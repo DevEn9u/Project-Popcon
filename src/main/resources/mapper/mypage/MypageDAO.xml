@@ -34,5 +34,39 @@
         FROM BOARD 
         WHERE writer = #{writer}
     </select>
+    
+    <!-- 내가 작성한 리뷰 목록 조회 (작성자 이름 포함, Oracle 12c 이상) -->
+    <select id="getReviewsByWriterAll" parameterType="String" resultType="com.edu.springboot.popupboards.CommentDTO">
+        SELECT 
+            c.com_idx, 
+            c.board_idx, 
+            c.popup_board_idx, 
+            c.com_writer, 
+            c.com_contents, 
+            c.com_postdate, 
+            c.com_img,
+            m.name AS comWriterName,
+            p.board_title AS popup_title
+        FROM 
+            COMMENTS c
+        JOIN 
+            MEMBER m ON c.com_writer = m.id
+        JOIN 
+            POPUP_BOARD p ON c.popup_board_idx = p.board_idx
+        WHERE 
+            c.com_writer = #{writer}
+            AND c.popup_board_idx IS NOT NULL
+        ORDER BY 
+            c.com_postdate DESC
+    </select>
+
+    <!-- 내가 작성한 리뷰 총 수 조회 -->
+    <select id="countReviewsByWriter" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM COMMENTS c
+        WHERE 
+            c.com_writer = #{writer}
+            AND c.popup_board_idx IS NOT NULL
+    </select>
 	
 </mapper>

@@ -9,7 +9,7 @@
             SELECT likes_idx_seq.NEXTVAL FROM dual
         </selectKey>
         INSERT INTO LIKES (likes_idx, member_id, board_id)
-        VALUES (NULL, #{member_id}, #{board_id})
+        VALUES (#{likes_idx}, #{member_id}, #{board_id})
     </insert>
 
  <!-- 좋아요 확인 쿼리 -->
@@ -22,4 +22,11 @@
         DELETE FROM LIKES 
         WHERE likes_idx = #{likes_idx}
     </delete>
+    
+    <!-- 좋아요 목록 조회 쿼리 -->
+    <select id="findLikesByMemberId" parameterType="String" resultType="com.edu.springboot.popupboards.LikeDTO">
+        SELECT * FROM LIKES
+        WHERE member_id = #{member_id}
+    </select>
+    
 </mapper>

@@ -18,6 +18,7 @@ public class CommentDTO {
 	 private Date com_postdate;
 	 private List<ImageDTO> com_img;
 	 private String comWriterName;
+	 private String popup_title;
 	 
 	 //날짜를 한국어 형태로
 	 public String getFormattedPostDate() {

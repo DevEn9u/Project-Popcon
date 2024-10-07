@@ -1,12 +1,15 @@
 
 package com.edu.springboot.mypage;
 
-import org.apache.ibatis.annotations.Mapper;
-import com.edu.springboot.booking.bookingDTO;
-import com.edu.springboot.popupboards.PopupBoardDTO;
-import com.edu.springboot.board.BoardDTO;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.edu.springboot.board.BoardDTO;
+import com.edu.springboot.booking.bookingDTO;
+import com.edu.springboot.popupboards.CommentDTO;
+import com.edu.springboot.popupboards.PopupBoardDTO;
 
 @Mapper
 public interface MypageMapper {
@@ -21,4 +24,10 @@ public interface MypageMapper {
     
     // 내가 작성한 게시글 총 수 조회
     public int countPostsByWriter(String writer);
+    
+    // 내가 작성한 리뷰 목록 조회 (모든 리뷰, 작성자 이름 및 팝업 제목 포함)
+    List<CommentDTO> getReviewsByWriterAll(String writer);
+
+    // 내가 작성한 리뷰 총 수 조회
+    int countReviewsByWriter(String writer);
 }
