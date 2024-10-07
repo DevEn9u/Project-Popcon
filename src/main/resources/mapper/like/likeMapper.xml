@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.edu.springboot.popupboards.LikeMapper">
+
+ <!-- 좋아요 추가 쿼리 -->
+    <insert id="insertLike" parameterType="com.edu.springboot.popupboards.LikeDTO">
+        <selectKey keyProperty="likes_idx" resultType="String" order="BEFORE">
+            SELECT likes_idx_seq.NEXTVAL FROM dual
+        </selectKey>
+        INSERT INTO LIKES (likes_idx, member_id, board_id)
+        VALUES (NULL, #{member_id}, #{board_id})
+    </insert>
+
+ <!-- 좋아요 확인 쿼리 -->
+    <select id="findLike" parameterType="com.edu.springboot.popupboards.LikeDTO" resultType="com.edu.springboot.popupboards.LikeDTO">
+        SELECT * FROM LIKES
+        WHERE board_id = #{board_id} AND member_id = #{member_id}
+    </select>
+    <!-- 좋아요 삭제 쿼리 -->
+    <delete id="deleteLike" parameterType="String">
+        DELETE FROM LIKES 
+        WHERE likes_idx = #{likes_idx}
+    </delete>
+</mapper>

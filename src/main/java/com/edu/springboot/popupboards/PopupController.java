@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -37,6 +38,8 @@ public class PopupController {
     private final PopupBoardService popupBoardService;
     private final PopupBoardMapper popupBoardMapper;
     private final ImageService imageService;
+    private final LikeService likeService;
+    private final LikeMapper likeMapper;
 
     @Autowired
     private IMemberService memberService; 
@@ -47,41 +50,56 @@ public class PopupController {
     private static final String[] ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".webp"};
     private static final long MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 
-    // 팝업 글 목록 보기
     @GetMapping("/popupBoard/list.do")
-    public String popuplist(@RequestParam(name = "category", required = false) String category, Model model) {
+    public String popuplist(@RequestParam(name = "category", required = false) String category, Model model, Principal principal) {
         List<PopupBoardDTO> popupList;
         
         if (category != null && !category.isEmpty()) {
             popupList = popupBoardMapper.selectByCategory(category); // 선택한 카테고리 게시물 조회
         } else {
-            popupList = popupBoardMapper.selectTop8(); //상위 8개 게시물 조회
+            popupList = popupBoardMapper.selectTop8(); // 상위 8개 게시물 조회
         }
         
+        // 로그인한 사용자 ID 가져오기
+        String userId = principal != null ? principal.getName() : null;
+        
+        // 각 게시물에 대해 좋아요 상태를 추가
+        for (PopupBoardDTO popup : popupList) {
+            LikeDTO existingLike = likeMapper.findLike(popup.getBoard_idx(), userId);
+            boolean isLiked = existingLike != null;
+            popup.setLiked(isLiked); // PopupBoardDTO에 isLiked 필드 추가 필요
+        }
+
         model.addAttribute("popupList", popupList);
         
-	    // ADMIN, CORP 계정에만 팝업게시판에 '게시물 작성하기'버튼을 보여주기 위함.
-	    try {
-	    	String id = (String) model.getAttribute("user_id");
-	    	MemberDTO memberDTO = memberService.getMemberById(id);
-	    	model.addAttribute("memberDTO", memberDTO);	 
-	    	
-	    } catch (Exception e) {}
-	    
+        // ADMIN, CORP 계정에만 팝업게시판에 '게시물 작성하기' 버튼을 보여주기 위함.
+        try {
+            String id = (String) model.getAttribute("user_id");
+            MemberDTO memberDTO = memberService.getMemberById(id);
+            model.addAttribute("memberDTO", memberDTO);     
+        } catch (Exception e) {}
+        
         return "popup-boards/popup-board-list"; 
     }
+
+
+
  
     // 팝업안내 - 글 보기
     @GetMapping("/popupBoard/view/{board_idx}")
-    public String popupview(@PathVariable("board_idx") String board_idx, Model model) {
-        // 게시글 ID로 데이터를 가져옴
+    public String popupview(@PathVariable("board_idx") String board_idx, Model model, Principal principal) {
+    	 // 게시글 ID로 데이터를 가져옴
         PopupBoardDTO popupBoard = popupBoardMapper.popupView(board_idx); 
+        
+     // 좋아요 상태 조회
+        String userId = principal.getName();
+        LikeDTO existingLike = likeMapper.findLike(popupBoard.getBoard_idx(), userId);
+        boolean isLiked = existingLike != null; // 좋아요 여부 확인
         
         // 작성자 정보 조회
         MemberDTO member = memberService.getMemberById(popupBoard.getWriter()); // 작성자 ID를 사용하여 MemberDTO 조회
         String writerName = (member != null) ? member.getName() : "알 수 없음";
         model.addAttribute("writerName", writerName);
-        
         
         // 댓글 목록 가져오기 (서비스에서 가져온 댓글 리스트 사용)
         List<CommentDTO> comments = popupBoardService.getComments(board_idx); // 서비스 메서드 호출로 변경
@@ -93,16 +111,17 @@ public class PopupController {
         }
         model.addAttribute("comments", comments);
         
-        
         // 관련 이미지 가져오기
         List<ImageDTO> images = imageService.getImages(board_idx, "POPUP");
         model.addAttribute("images", images);
+       
         
         // 모델에 데이터 추가
         model.addAttribute("popup", popupBoard);
         model.addAttribute("comments", comments);
         model.addAttribute("member", member); // MemberDTO 추가
-        
+        model.addAttribute("isLiked", isLiked); // 좋아요 여부 추가
+         
         
         return "/popup-boards/popup-board-view"; // 반환할 뷰 경로 확인
     }
@@ -580,6 +599,18 @@ public class PopupController {
         }
     }
 
-    
+    @PostMapping("/popupBoard/like.do")
+    @ResponseBody // AJAX 요청에 대한 응답을 위한 어노테이션
+    public ResponseEntity<String> likePost(@RequestParam("board_id") String board_id, Principal principal) {
+        String userId = principal.getName(); // 현재 로그인한 사용자의 ID
 
+        // 좋아요 추가 또는 삭제 처리
+        boolean isLiked = likeService.toggleLike(board_id, userId); // LikeService의 메서드 호출
+        
+        if (isLiked) {
+            return ResponseEntity.ok("liked"); // 좋아요가 추가되었음을 클라이언트에 응답
+        } else {
+            return ResponseEntity.ok("unliked"); // 좋아요가 삭제되었음을 클라이언트에 응답
+        }
+    }
 }
