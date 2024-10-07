@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.edu.springboot.board.BoardDTO;
 import com.edu.springboot.booking.bookingDTO;
+import com.edu.springboot.images.ImageDTO;
+import com.edu.springboot.images.ImageService;
 import com.edu.springboot.popupboards.CommentDTO;
 import com.edu.springboot.popupboards.PopupBoardDTO;
 
@@ -17,6 +19,8 @@ public class MypageServiceImpl implements IMypageService {
 
     @Autowired
     private MypageMapper mypageMapper;
+    @Autowired
+    private ImageService imageService;
 
     @Override
     public bookingDTO bookingInfo(String member_id) {
@@ -43,12 +47,16 @@ public class MypageServiceImpl implements IMypageService {
     }
     
     @Override
-    public List<CommentDTO> getReviewsByWriter(String writer, int offset, int limit) {
-        HashMap<String, Object> params = new HashMap<>();
-        params.put("writer", writer);
-        params.put("offset", offset);
-        params.put("limit", limit);
-        return mypageMapper.getReviewsByWriter(params);
+    public List<CommentDTO> getAllReviewsByWriter(String writer) {
+        List<CommentDTO> reviews = mypageMapper.getReviewsByWriterAll(writer);
+        
+        // 각 리뷰에 대한 이미지를 가져와 설정
+        for (CommentDTO review : reviews) {
+            List<ImageDTO> images = imageService.getImages(review.getCom_idx(), "COMMENT");
+            review.setCom_img(images);
+        }
+        
+        return reviews;
     }
 
     @Override

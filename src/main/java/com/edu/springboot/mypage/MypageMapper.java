@@ -25,8 +25,8 @@ public interface MypageMapper {
     // 내가 작성한 게시글 총 수 조회
     public int countPostsByWriter(String writer);
     
-    // 내가 작성한 리뷰 목록 조회 (작성자 이름 포함)
-    List<CommentDTO> getReviewsByWriter(Map<String, Object> params);
+    // 내가 작성한 리뷰 목록 조회 (모든 리뷰, 작성자 이름 및 팝업 제목 포함)
+    List<CommentDTO> getReviewsByWriterAll(String writer);
 
     // 내가 작성한 리뷰 총 수 조회
     int countReviewsByWriter(String writer);

@@ -66,26 +66,26 @@
                                             <div class="popup_txt">
                                                 <span class="pop_icon"></span>
                                                 <div class="info_wrap">
-                                                    <strong>
-                                                        <c:choose>
-                                                            <c:when test="${review.popup_board_idx != null}">
-                                                                ${fn:escapeXml(review.comWriterName)}
-                                                            </c:when>
-                                                            <c:otherwise>알 수 없는 팝업</c:otherwise>
-                                                        </c:choose>
-                                                    </strong>
+													<strong>
+													    <c:choose>
+													        <c:when test="${review.popup_board_idx != null}">
+													            ${fn:escapeXml(review.popup_title)}
+													        </c:when>
+													        <c:otherwise>알 수 없는 팝업</c:otherwise>
+													    </c:choose>
+													</strong>
                                                     <div class="dayman_wrap">
                                                         <fmt:formatDate value="${review.com_postdate}" pattern="yyyy.MM.dd" />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="review_block">
-                                                <a href="${pageContext.request.contextPath}/popupBoard/view.do?board_idx=${review.popup_board_idx}">
-                                                    <span class="img">
-                                                        <c:if test="${not empty review.com_img}">
-                                                            <img src="${pageContext.request.contextPath}/uploads/${review.com_img}" alt="리뷰 이미지" />
-                                                        </c:if>
-                                                    </span>
+                                                <a href="${pageContext.request.contextPath}/popupBoard/view/${review.popup_board_idx}">
+													<span class="img">
+													    <c:forEach var="image" items="${review.com_img}">
+													        <img src="${image.image_url}" alt="리뷰 이미지" />
+													    </c:forEach>
+													</span>
                                                     <p>
                                                         ${fn:escapeXml(review.com_contents)}
                                                     </p>
@@ -100,26 +100,6 @@
                                                 작성한 리뷰가 없습니다.
                                             </div>
                                         </div>
-                                    </c:if>
-                                </div>
-                                <div class="pagenation_wrap">
-                                    <c:if test="${currentPage > 1}">
-                                        <a href="${pageContext.request.contextPath}/mypage/myReview.do?page=${currentPage - 1}&size=${pageSize}" class="prev">이전</a>
-                                    </c:if>
-                                    <div class="page_num">
-                                        <c:forEach begin="1" end="${totalPages}" var="i">
-                                            <c:choose>
-                                                <c:when test="${i == currentPage}">
-                                                    <a href="${pageContext.request.contextPath}/mypage/myReview.do?page=${i}&size=${pageSize}" class="on">${i}</a>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <a href="${pageContext.request.contextPath}/mypage/myReview.do?page=${i}&size=${pageSize}">${i}</a>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </c:forEach>
-                                    </div>
-                                    <c:if test="${currentPage < totalPages}">
-                                        <a href="${pageContext.request.contextPath}/mypage/myReview.do?page=${currentPage + 1}&size=${pageSize}" class="next">다음</a>
                                     </c:if>
                                 </div>
                             </div>

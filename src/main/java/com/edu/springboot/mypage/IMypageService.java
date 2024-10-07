@@ -22,7 +22,7 @@ public interface IMypageService {
     int countPostsByWriter(String writer);
     
     // 내가 작성한 리뷰 목록 조회 (작성자 이름 포함)
-    List<CommentDTO> getReviewsByWriter(String writer, int offset, int limit);
+    List<CommentDTO> getAllReviewsByWriter(String writer);
 
     // 내가 작성한 리뷰 총 수 조회
     int countReviewsByWriter(String writer);

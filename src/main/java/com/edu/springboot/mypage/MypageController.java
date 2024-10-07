@@ -84,8 +84,6 @@ public class MypageController {
     // 마이페이지 - 내가 작성한 리뷰 확인
     @GetMapping("/mypage/myReview.do")
     public String mypageReview(
-            @RequestParam(value = "page", defaultValue = "1") int currentPage,
-            @RequestParam(value = "size", defaultValue = "10") int pageSize,
             Principal principal,
             Model model) {
         
@@ -96,29 +94,11 @@ public class MypageController {
         
         String userId = principal.getName();
         
-        // 내가 작성한 리뷰 총 수 조회
-        int totalReviews = mypageService.countReviewsByWriter(userId);
-        int totalPages = (int) Math.ceil((double) totalReviews / pageSize);
-        
-        // 페이지 번호 유효성 검사
-        if (currentPage > totalPages && totalPages != 0) {
-            currentPage = totalPages;
-        }
-        if (currentPage < 1) {
-            currentPage = 1;
-        }
-        
-        // 페이징을 위한 offset 계산
-        int offset = (currentPage - 1) * pageSize;
-        
-        // 내가 작성한 리뷰 목록 조회
-        List<CommentDTO> reviews = mypageService.getReviewsByWriter(userId, offset, pageSize);
+        // 내가 작성한 리뷰 목록 조회 (모든 리뷰)
+        List<CommentDTO> reviews = mypageService.getAllReviewsByWriter(userId);
         
         // 모델에 데이터 추가
         model.addAttribute("reviews", reviews);
-        model.addAttribute("currentPage", currentPage);
-        model.addAttribute("pageSize", pageSize);
-        model.addAttribute("totalPages", totalPages);
         
         return "/mypages/mypage-review";
     }
