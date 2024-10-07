@@ -1,6 +1,7 @@
 // MypageServiceImpl.java
 package com.edu.springboot.mypage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,7 +13,10 @@ import com.edu.springboot.booking.bookingDTO;
 import com.edu.springboot.images.ImageDTO;
 import com.edu.springboot.images.ImageService;
 import com.edu.springboot.popupboards.CommentDTO;
+import com.edu.springboot.popupboards.LikeDTO;
+import com.edu.springboot.popupboards.LikeService;
 import com.edu.springboot.popupboards.PopupBoardDTO;
+import com.edu.springboot.popupboards.PopupBoardMapper;
 
 @Service
 public class MypageServiceImpl implements IMypageService {
@@ -21,6 +25,10 @@ public class MypageServiceImpl implements IMypageService {
     private MypageMapper mypageMapper;
     @Autowired
     private ImageService imageService;
+    @Autowired
+    private LikeService likeService;
+    @Autowired
+    private PopupBoardMapper popupBoardMapper; 
 
     @Override
     public bookingDTO bookingInfo(String member_id) {
@@ -62,5 +70,21 @@ public class MypageServiceImpl implements IMypageService {
     @Override
     public int countReviewsByWriter(String writer) {
         return mypageMapper.countReviewsByWriter(writer);
+    }
+    
+    @Override
+    public List<PopupBoardDTO> getLikedPopupsByMemberId(String memberId) {
+        List<LikeDTO> likes = likeService.getLikesByMemberId(memberId);
+        List<PopupBoardDTO> likedPopups = new ArrayList<>();
+
+        for (LikeDTO like : likes) {
+            // 각 좋아요에 해당하는 팝업 게시판 정보 조회
+            PopupBoardDTO popup = popupBoardMapper.popupView(like.getBoard_id());
+            if (popup != null) {
+                likedPopups.add(popup);
+            }
+        }
+
+        return likedPopups;
     }
 }

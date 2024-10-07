@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.edu.springboot.board.BoardDTO;
 import com.edu.springboot.popupboards.CommentDTO;
+import com.edu.springboot.popupboards.PopupBoardDTO;
 
 @Controller
 public class MypageController {
@@ -104,11 +105,29 @@ public class MypageController {
     }
 	
 	
-	//마이페이지 - 좋아요한 팝업 확인
-	@GetMapping("/mypage/likes.do")
-	public String mypageLikes() {
-		return "/mypages/mypage-likes";
-	}
+    // 마이페이지 - 내가 좋아요한 팝업 목록 확인
+    @GetMapping("/mypage/likes.do")
+    public String mypageLikes(
+            Principal principal,
+            Model model) {
+        
+        // 로그인 여부 확인
+        if (principal == null) {
+            return "redirect:/login.do";
+        }
+        
+        String userId = principal.getName();
+        
+        // 내가 좋아요한 팝업 목록 조회
+        List<PopupBoardDTO> likedPopups = mypageService.getLikedPopupsByMemberId(userId);
+        
+        // 모델에 데이터 추가
+        model.addAttribute("likedPopups", likedPopups);
+        
+        return "/mypages/mypage-likes";
+    }
+	
+	
 	//마이페이지 - 보유한 쿠폰 확인
 	@GetMapping("/mypage/myCoupon.do")
 	public String mypageCoupon() {

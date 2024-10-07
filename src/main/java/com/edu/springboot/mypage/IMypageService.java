@@ -27,4 +27,7 @@ public interface IMypageService {
     // 내가 작성한 리뷰 총 수 조회
     int countReviewsByWriter(String writer);
     
+    // 내가 좋아요한 팝업 목록 조회
+    List<PopupBoardDTO> getLikedPopupsByMemberId(String memberId);
+    
 }
