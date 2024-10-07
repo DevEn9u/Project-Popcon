@@ -97,9 +97,17 @@ body {
   flex-grow: 1;
 }
 .like_btn {
+  -webkit-mask-image: url('../images/imgMGJ/like_btn.svg');
+  -webkit-mask-size: cover;
+  -webkit-mask-repeat: no-repeat;
+  cursor: pointer;
   width: 30px;
   height: 30px;
   margin-left: 25px;
+}
+
+.like_btn.active {
+  filter: invert(34%) sepia(94%) saturate(7482%) hue-rotate(-1deg) brightness(95%) contrast(102%); /* 원하는 빨간색 필터 */
 }
 .pv_title_date {
   margin-bottom: 10px;
