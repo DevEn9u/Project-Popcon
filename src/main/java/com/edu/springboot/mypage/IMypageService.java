@@ -1,10 +1,12 @@
 // IMypageService.java
 package com.edu.springboot.mypage;
 
-import com.edu.springboot.booking.bookingDTO;
-import com.edu.springboot.popupboards.PopupBoardDTO;
-import com.edu.springboot.board.BoardDTO;
 import java.util.List;
+
+import com.edu.springboot.board.BoardDTO;
+import com.edu.springboot.booking.bookingDTO;
+import com.edu.springboot.popupboards.CommentDTO;
+import com.edu.springboot.popupboards.PopupBoardDTO;
 
 public interface IMypageService {
     // 예약한 팝업 정보 보기
@@ -18,4 +20,11 @@ public interface IMypageService {
     
     // 내가 작성한 게시글 총 수 조회
     int countPostsByWriter(String writer);
+    
+    // 내가 작성한 리뷰 목록 조회 (작성자 이름 포함)
+    List<CommentDTO> getReviewsByWriter(String writer, int offset, int limit);
+
+    // 내가 작성한 리뷰 총 수 조회
+    int countReviewsByWriter(String writer);
+    
 }

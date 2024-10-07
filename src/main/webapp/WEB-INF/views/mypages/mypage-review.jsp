@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <c:import url="../include/head.jsp" />
@@ -8,194 +10,129 @@
 <c:import url="../include/footer.jsp" var="common_footer" />
 <link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
 <body>
-<body>
-	<div id="skip_navi">
-		<a href="#container">본문 바로가기</a>
-	</div>
-	<div id="wrap">
-	${common_header }
-	      <main id="mp_container">
-        <div class="title_wrap">
-          <h1>마이페이지</h1>
-          <span></span>
-          <h2>내가 작성한 리뷰</h2>
-        </div>
-        <section class="my_page">
-          <div class="my_list">
-            <ul class="depth1">
-              <li class="list_title">
-                <a href="/mypage/mypage.do">마이페이지</a>
-              </li>
-              <ul class="depth2">
-                <li><a href="/mypage/myBooking.do">예약 확인</a></li>
-                <li><a href="/mypage/myPoint.do">포인트 내역</a></li>
-              </ul>
-            </ul>
-            <ul class="depth1">
-              <li class="list_title active">
-                <a href="/mypage/myPost.do">내가 작성한 글</a>
-              </li>
-              <ul class="depth2">
-                <li>
-                  <a href="/mypage/myPost.do">내가 작성한 게시글</a>
-                </li>
-                <li class="on">
-                  <a href="/mypage/myReview.do">내가 작성한 리뷰</a>
-                </li>
-              </ul>
-            </ul>
-            <ul class="depth1">
-              <li class="list_title"><a href="/mypage/likes.do">팝업</a></li>
-              <ul class="depth2">
-                <li><a href="/mypage/likes.do">좋아요 누른 팝업</a></li>
-                <li><a href="/mypage/myCoupon.do">구매한 쿠폰</a></li>
-              </ul>
-            </ul>
-          </div>
-          <div class="my_info_wrap">
-            <div class="my_info my_review">
-              <div class="box3">
-                <div class="review_wrap">
-                  <div class="top_txt">
-                    <p>최근 내가 작성한 REVIEW</p>
-                  </div>
-                  <div class="review_contents_wrap">
-                    <div class="review_block_wrap">
-                      <div class="popup_txt">
-                        <span class="pop_icon"></span>
-                        <div class="info_wrap">
-                          <strong
-                            >팝업명-한줄넘어가면 말줄임한줄넘어가면
-                            말줄임</strong
-                          >
-                          <div class="dayman_wrap">방문 날짜</div>
-                        </div>
-                      </div>
-                      <div class="review_block">
-                        <a href="/">
-                          <span class="img"></span>
-                          <p>
-                            리뷰 내용입니다. 사진을 메인으로 보이고 아래에
-                            리뷰에 작성한 내용을 블라블라 적어주세요 3줄이
-                            넘어갈 경우에는 말줄임 표시리뷰 내용입니다. 사진을
-                            메인으로 보이고 아래에 리뷰에 작성한 내용을 블라블라
-                            적어주세요 3줄이 넘어갈 경우에는 말줄임 표시
-                          </p>
-                        </a>
-                        <span>작성일 : 2024.10.10</span>
-                      </div>
-                    </div>
-                    <div class="review_block_wrap">
-                      <div class="popup_txt">
-                        <span class="pop_icon"></span>
-                        <div class="info_wrap">
-                          <strong
-                            >팝업명-한줄넘어가면 말줄임한줄넘어가면
-                            말줄임</strong
-                          >
-                          <div class="dayman_wrap">방문 날짜</div>
-                        </div>
-                      </div>
-                      <div class="review_block">
-                        <a href="/">
-                          <span class="img"></span>
-                          <p>
-                            리뷰 내용입니다. 사진을 메인으로 보이고 아래에
-                            리뷰에 작성한 내용을 블라블라 적어주세요 3줄이
-                            넘어갈 경우에는 말줄임 표시리뷰 내용입니다. 사진을
-                            메인으로 보이고 아래에 리뷰에 작성한 내용을 블라블라
-                            적어주세요 3줄이 넘어갈 경우에는 말줄임 표시
-                          </p>
-                        </a>
-                        <span>작성일 : 2024.10.10</span>
-                      </div>
-                    </div>
-                    <div class="review_block_wrap">
-                      <div class="popup_txt">
-                        <span class="pop_icon"></span>
-                        <div class="info_wrap">
-                          <strong
-                            >팝업명-한줄넘어가면 말줄임한줄넘어가면
-                            말줄임</strong
-                          >
-                          <div class="dayman_wrap">방문 날짜</div>
-                        </div>
-                      </div>
-                      <div class="review_block">
-                        <a href="/">
-                          <span class="img"></span>
-                          <p>
-                            리뷰 내용입니다. 사진을 메인으로 보이고 아래에
-                            리뷰에 작성한 내용을 블라블라 적어주세요 3줄이
-                            넘어갈 경우에는 말줄임 표시리뷰 내용입니다. 사진을
-                            메인으로 보이고 아래에 리뷰에 작성한 내용을 블라블라
-                            적어주세요 3줄이 넘어갈 경우에는 말줄임 표시
-                          </p>
-                        </a>
-                        <span>작성일 : 2024.10.10</span>
-                      </div>
-                    </div>
-                    <div class="review_block_wrap">
-                      <div class="popup_txt">
-                        <span class="pop_icon"></span>
-                        <div class="info_wrap">
-                          <strong
-                            >팝업명-한줄넘어가면 말줄임한줄넘어가면
-                            말줄임</strong
-                          >
-                          <div class="dayman_wrap">방문 날짜</div>
-                        </div>
-                      </div>
-                      <div class="review_block">
-                        <a href="/">
-                          <span class="img"></span>
-                          <p>
-                            리뷰 내용입니다. 사진을 메인으로 보이고 아래에
-                            리뷰에 작성한 내용을 블라블라 적어주세요 3줄이
-                            넘어갈 경우에는 말줄임 표시리뷰 내용입니다. 사진을
-                            메인으로 보이고 아래에 리뷰에 작성한 내용을 블라블라
-                            적어주세요 3줄이 넘어갈 경우에는 말줄임 표시
-                          </p>
-                        </a>
-                        <span>작성일 : 2024.10.10</span>
-                      </div>
-                    </div>
-                    <div class="review_block_wrap">
-                      <div class="popup_txt">
-                        <span class="pop_icon"></span>
-                        <div class="info_wrap">
-                          <strong
-                            >팝업명-한줄넘어가면 말줄임한줄넘어가면
-                            말줄임</strong
-                          >
-                          <div class="dayman_wrap">방문 날짜</div>
-                        </div>
-                      </div>
-                      <div class="review_block">
-                        <a href="/">
-                          <span class="img"></span>
-                          <p>
-                            리뷰 내용입니다. 사진을 메인으로 보이고 아래에
-                            리뷰에 작성한 내용을 블라블라 적어주세요 3줄이
-                            넘어갈 경우에는 말줄임 표시리뷰 내용입니다. 사진을
-                            메인으로 보이고 아래에 리뷰에 작성한 내용을 블라블라
-                            적어주세요 3줄이 넘어갈 경우에는 말줄임 표시
-                          </p>
-                        </a>
-                        <span>작성일 : 2024.10.10</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+    <div id="skip_navi">
+        <a href="#container">본문 바로가기</a>
+    </div>
+    <div id="wrap">
+        ${common_header }
+        <main id="mp_container">
+            <div class="title_wrap">
+                <h1>마이페이지</h1>
+                <span></span>
+                <h2>내가 작성한 리뷰</h2>
             </div>
-          </div>
-        </section>
-      </main>
-	  <footer id="footer">
-	    <div class="inner">
-	        ${common_footer}
-	    </div>
-	  </footer>
+            <section class="my_page">
+                <div class="my_list">
+                    <ul class="depth1">
+                        <li class="list_title">
+                            <a href="/mypage/mypage.do">마이페이지</a>
+                        </li>
+                        <ul class="depth2">
+                            <li><a href="/mypage/myBooking.do">예약 확인</a></li>
+                            <li><a href="/mypage/myPoint.do">포인트 내역</a></li>
+                        </ul>
+                    </ul>
+                    <ul class="depth1">
+                        <li class="list_title active">
+                            <a href="/mypage/myPost.do">내가 작성한 글</a>
+                        </li>
+                        <ul class="depth2">
+                            <li>
+                                <a href="/mypage/myPost.do">내가 작성한 게시글</a>
+                            </li>
+                            <li class="on">
+                                <a href="/mypage/myReview.do">내가 작성한 리뷰</a>
+                            </li>
+                        </ul>
+                    </ul>
+                    <ul class="depth1">
+                        <li class="list_title"><a href="/mypage/likes.do">팝업</a></li>
+                        <ul class="depth2">
+                            <li><a href="/mypage/likes.do">좋아요 누른 팝업</a></li>
+                            <li><a href="/mypage/myCoupon.do">구매한 쿠폰</a></li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="my_info_wrap">
+                    <div class="my_info my_review">
+                        <div class="box3">
+                            <div class="review_wrap">
+                                <div class="top_txt">
+                                    <p>최근 내가 작성한 REVIEW</p>
+                                </div>
+                                <div class="review_contents_wrap">
+                                    <c:forEach var="review" items="${reviews}" varStatus="status">
+                                        <div class="review_block_wrap">
+                                            <div class="popup_txt">
+                                                <span class="pop_icon"></span>
+                                                <div class="info_wrap">
+                                                    <strong>
+                                                        <c:choose>
+                                                            <c:when test="${review.popup_board_idx != null}">
+                                                                ${fn:escapeXml(review.comWriterName)}
+                                                            </c:when>
+                                                            <c:otherwise>알 수 없는 팝업</c:otherwise>
+                                                        </c:choose>
+                                                    </strong>
+                                                    <div class="dayman_wrap">
+                                                        <fmt:formatDate value="${review.com_postdate}" pattern="yyyy.MM.dd" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="review_block">
+                                                <a href="${pageContext.request.contextPath}/popupBoard/view.do?board_idx=${review.popup_board_idx}">
+                                                    <span class="img">
+                                                        <c:if test="${not empty review.com_img}">
+                                                            <img src="${pageContext.request.contextPath}/uploads/${review.com_img}" alt="리뷰 이미지" />
+                                                        </c:if>
+                                                    </span>
+                                                    <p>
+                                                        ${fn:escapeXml(review.com_contents)}
+                                                    </p>
+                                                </a>
+                                                <span>작성일 : <fmt:formatDate value="${review.com_postdate}" pattern="yyyy.MM.dd" /></span>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                    <c:if test="${empty reviews}">
+                                        <div class="review_block_wrap">
+                                            <div style="text-align: center; padding: 20px;">
+                                                작성한 리뷰가 없습니다.
+                                            </div>
+                                        </div>
+                                    </c:if>
+                                </div>
+                                <div class="pagenation_wrap">
+                                    <c:if test="${currentPage > 1}">
+                                        <a href="${pageContext.request.contextPath}/mypage/myReview.do?page=${currentPage - 1}&size=${pageSize}" class="prev">이전</a>
+                                    </c:if>
+                                    <div class="page_num">
+                                        <c:forEach begin="1" end="${totalPages}" var="i">
+                                            <c:choose>
+                                                <c:when test="${i == currentPage}">
+                                                    <a href="${pageContext.request.contextPath}/mypage/myReview.do?page=${i}&size=${pageSize}" class="on">${i}</a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a href="${pageContext.request.contextPath}/mypage/myReview.do?page=${i}&size=${pageSize}">${i}</a>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
+                                    </div>
+                                    <c:if test="${currentPage < totalPages}">
+                                        <a href="${pageContext.request.contextPath}/mypage/myReview.do?page=${currentPage + 1}&size=${pageSize}" class="next">다음</a>
+                                    </c:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer id="footer">
+            <div class="inner">
+                ${common_footer}
+            </div>
+        </footer>
+    </div>
 </body>
 </html>

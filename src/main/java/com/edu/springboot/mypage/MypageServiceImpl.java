@@ -1,13 +1,16 @@
 // MypageServiceImpl.java
 package com.edu.springboot.mypage;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import com.edu.springboot.booking.bookingDTO;
-import com.edu.springboot.popupboards.PopupBoardDTO;
-import com.edu.springboot.board.BoardDTO;
 import java.util.HashMap;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.edu.springboot.board.BoardDTO;
+import com.edu.springboot.booking.bookingDTO;
+import com.edu.springboot.popupboards.CommentDTO;
+import com.edu.springboot.popupboards.PopupBoardDTO;
 
 @Service
 public class MypageServiceImpl implements IMypageService {
@@ -37,5 +40,19 @@ public class MypageServiceImpl implements IMypageService {
     @Override
     public int countPostsByWriter(String writer) {
         return mypageMapper.countPostsByWriter(writer);
+    }
+    
+    @Override
+    public List<CommentDTO> getReviewsByWriter(String writer, int offset, int limit) {
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("writer", writer);
+        params.put("offset", offset);
+        params.put("limit", limit);
+        return mypageMapper.getReviewsByWriter(params);
+    }
+
+    @Override
+    public int countReviewsByWriter(String writer) {
+        return mypageMapper.countReviewsByWriter(writer);
     }
 }
