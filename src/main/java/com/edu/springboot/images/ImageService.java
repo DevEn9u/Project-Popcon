@@ -67,4 +67,7 @@ public class ImageService {
     public ImageDTO getImageById(String imageIdx) {
         return imageMapper.selectImageById(imageIdx);
     }
+    
+
+
 }

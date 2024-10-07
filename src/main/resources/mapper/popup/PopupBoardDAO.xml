@@ -15,6 +15,28 @@
         )
     </select>
     
+    <!-- 작성일 기준 최근 작성된 게시글 6개 조회 -->
+    <select id="selectTop6" resultType="com.edu.springboot.popupboards.PopupBoardDTO">
+        SELECT * FROM (
+            SELECT POPUP_BOARD.*, ROWNUM AS rnum 
+            FROM (
+                SELECT * FROM POPUP_BOARD
+                ORDER BY postdate DESC
+            ) POPUP_BOARD
+            WHERE ROWNUM &lt;= 6
+        )
+    </select>
+    
+    <!-- 무작위 글 6개 조회 -->
+	<select id="selectRandomPosts" resultType="com.edu.springboot.popupboards.PopupBoardDTO">
+	    SELECT * FROM (
+	        SELECT POPUP_BOARD.*
+	        FROM POPUP_BOARD
+	        ORDER BY DBMS_RANDOM.VALUE
+	    )
+	    WHERE ROWNUM &lt;= 6
+	</select>
+    
     <!-- 카테고리 검색 -->
 	<select id="selectByCategory" parameterType="String" resultType="com.edu.springboot.popupboards.PopupBoardDTO">
     	SELECT * FROM POPUP_BOARD WHERE category = #{category} ORDER BY postdate DESC

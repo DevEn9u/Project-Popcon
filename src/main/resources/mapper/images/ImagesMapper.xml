@@ -10,9 +10,7 @@
 	    INSERT INTO IMAGES (image_idx, image_url, image_type, associated_id, upload_date)
 	    VALUES (#{image_idx}, #{image_url}, #{image_type}, #{associated_id}, SYSDATE)
 	</insert>
-	
-
-    
+  
     <select id="selectImagesByAssociatedIdAndType" resultType="com.edu.springboot.images.ImageDTO">
         SELECT * FROM IMAGES
         WHERE associated_id = #{associated_id}
@@ -35,5 +33,12 @@
     </select>
     
     
-    
+    <select id="selectLatestPopupImages" resultType="com.edu.springboot.images.ImageDTO">
+    	SELECT * FROM IMAGES
+    	WHERE image_type = 'POPUP'
+    	ORDER BY upload_date DESC
+    	FETCH FIRST 4 ROWS ONLY
+	</select>
+
+
 </mapper>

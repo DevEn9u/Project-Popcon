@@ -13,6 +13,11 @@ public interface PopupBoardMapper {
     
     // IDX 기준 상위 8개의 글만 목록으로 보기 
     public List<PopupBoardDTO> selectTop8();
+    //6개보기
+    public List<PopupBoardDTO> selectTop6();
+
+    // 무작위로 6개 게시글 조회
+    public List<PopupBoardDTO> selectRandomPosts(); // 추가: 무작위 게시글 조회 메서드
     
     // 카테고리 기준으로 글 목록 보기
     List<PopupBoardDTO> selectByCategory(@Param("category") String category);
@@ -49,5 +54,6 @@ public interface PopupBoardMapper {
     
     //썸네일 지우기
     public void deleteThumbnail(String board_idx);
+    
 
 }
