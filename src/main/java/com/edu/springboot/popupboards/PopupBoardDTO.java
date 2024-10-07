@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 public class PopupBoardDTO {
-    private String board_idx;      // 게시글 일련번호
+    private String board_idx;      // likes 테이블에서 참조할 게시글 일련번호
     private String board_title;    // 제목
     private Date postdate;        // 작성 날짜
     private String start_date;     // 팝업 시작 날짜
@@ -25,6 +25,7 @@ public class PopupBoardDTO {
     private int likes_count;       // 좋아요 수
     private String open_days;      // 팝업 오픈 요일
     private String open_hours;     // 팝업 오픈 시간
+    private boolean liked;
     
     private List<ImageDTO> images;
 }

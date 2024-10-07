@@ -8,6 +8,36 @@
 <c:import url="../include/footer.jsp" var="common_footer" />
 <link rel="stylesheet" href="/css/popup_list.css?v=<?php echo time(); ?>">
 <body>
+<!-- 조아요 클릭시 빨개짐 -->
+<script>
+function toggleLike(board_idx) {
+    $.ajax({
+        type: "POST",
+        url: "${pageContext.request.contextPath}/popupBoard/like.do",
+        data: { board_id: board_idx },
+        success: function(response) {
+            const likeBtn = document.getElementById('likeBtn_' + board_idx); // 각 게시물의 likeBtn을 찾음
+            
+            // 클릭 시 반영할 이미지와 active 클래스를 결정
+            if (response === "liked") {
+                likeBtn.classList.add('active');
+                const img = likeBtn.querySelector('img');
+              
+            } else {
+                likeBtn.classList.remove('active');
+                const img = likeBtn.querySelector('img');
+               
+            }
+        },
+        error: function(err) {
+            alert('좋아요 처리 중 오류가 발생했습니다.');
+            console.error('Error:', err);
+        }
+    });
+}
+</script>
+
+
 ${common_header}
 <main id="popup_list_container">
 
@@ -37,29 +67,31 @@ ${common_header}
                 </ul>
             </nav>
 
-            <ul class="popup_wrap">
+             <ul class="popup_wrap">
     <c:forEach var="popup" items="${popupList}">
-        <li class="popup_banner">
-            <a href="/popupBoard/view/${popup.board_idx}">
-                <img src="${popup.thumb}" alt="Thumbnail" class="popup_thumbnail"/> <!-- Display the first uploaded image -->
-                <div class="txt_title">
-                    <h2>
-                        ${popup.board_title}
-                        <img src="../images/imgMGJ/like_btn.svg" class="pl_like_btn"/>
-                    </h2>
-                    
-                    <div class="popup_location">
-                        <img src="../images/imgMGJ/pin.svg" />
-                        <span class="location_span">${popup.popup_addr}</span>
-                    </div>
-                    <span class="popup_date">
-                        ${popup.postdate}
-                    </span>
+    <li class="popup_banner">
+        <a href="/popupBoard/view/${popup.board_idx}">
+            <img src="${popup.thumb}" alt="Thumbnail" class="popup_thumbnail"/>
+            <div class="txt_title">
+                <h2>
+                    ${popup.board_title}
+                    <button id="likeBtn_${popup.board_idx}" class="like_btn <c:if test="${popup.liked}">active</c:if>" 
+                        onclick="toggleLike('${popup.board_idx}'); event.preventDefault(); event.stopPropagation();"> <!-- event.preventDefault() 추가 -->
+                    </button>	
+                </h2>
+                <div class="popup_location">
+                    <img src="../images/imgMGJ/pin.svg" />
+                    <span class="location_span">${popup.popup_addr}</span>
                 </div>
-            </a>
-        </li>
-    </c:forEach>
+                <span class="popup_date">${popup.postdate}</span>
+            </div>
+        </a>
+    </li>
+</c:forEach>
+
+
 </ul>
+
         </div>
     </div>
 </main>

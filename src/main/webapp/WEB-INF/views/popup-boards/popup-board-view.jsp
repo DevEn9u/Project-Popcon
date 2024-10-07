@@ -9,6 +9,48 @@
 <link rel="stylesheet" href="/css/popup_view.css">
 <body>
 
+<!-- 조아요 클릭시 빨개짐 -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const likeBtn = document.getElementById('likeBtn');
+    
+    likeBtn.addEventListener('click', function() {
+      this.classList.toggle('active');
+
+      // 좋아요 버튼의 색상을 변경
+      const img = this.querySelector('img');
+      
+    });
+  });
+</script>
+
+<script>
+  function toggleLike(board_idx) {
+      $.ajax({
+          type: "POST",
+          url: "${pageContext.request.contextPath}/popupBoard/like.do",
+          data: { board_id: board_idx }, // 여기에서 board_idx 사용
+          success: function(response) {
+              const likeBtn = document.getElementById('likeBtn');
+              if (response === "liked") {
+                  likeBtn.classList.add('active');
+                  const img = likeBtn.querySelector('img');
+                 
+              } else {
+                  likeBtn.classList.remove('active');
+                  const img = likeBtn.querySelector('img');
+                  
+              }
+          },
+          error: function(err) {
+              alert('좋아요 처리 중 오류가 발생했습니다.');
+              console.error('Error:', err);
+          }
+      });
+  }
+</script>
+
+
 	<!-- 민경준 구글 맵 API 사용하였습니다 -->
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCA0TzsH1iRaVCQSJCc8BzZHmGKmpNJhKY&callback=initMap"
@@ -16,6 +58,7 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
+	
 	  function initMap() {
 	    var geocoder = new google.maps.Geocoder();
 	    var address = "${popup.popup_addr}";
@@ -225,9 +268,10 @@
 									onclick="goToBooking(${popup.board_idx});">예약하기</button>
 							</c:otherwise>
 						</c:choose>
-						<img
-							src="${pageContext.request.contextPath}/images/imgMGJ/like_btn.svg"
-							alt="좋아요" class="like_btn" />
+
+<button id="likeBtn" class="like_btn <c:if test="${isLiked}">active</c:if>" onclick="toggleLike('${popup.board_idx}');">
+    
+</button>	
 					</h2>
 					<div class="pv_title_date">${popup.start_date}~
 						${popup.end_date}</div>
