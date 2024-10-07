@@ -27,10 +27,4 @@ public class MainController {
 	public String home() {
 		return "home";
 	}
-	@GetMapping("/chat.do")
-	public String chat() {
-		return "forward:/chat/index.html";
-	}
-	
-
 }

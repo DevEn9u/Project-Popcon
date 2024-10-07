@@ -403,13 +403,22 @@
 		</div>
 		<script>
 		  const openChatWin = (roomId, userId) => {
+			  if(userId != "admin") {
+				  
 			    window.open(
-// 			      `/chat.do?roomId=${roomId}&userId=${userId}`,
-			      "/chat.do?roomId=" + roomId + "&userId=" + userId,
+			      "/chat/index.html#/chat?roomId=" + roomId + "&userId=" + userId,
 			      '',
-			      'width=500, height=800'
+			      'width=500, height=700'
 			    );
-			  };
+			  }
+			  else {
+				window.open(
+					"chat/index.html",
+					'',
+					'width=500, height=700'
+				);
+			  }
+		  };
 		  $('#openChat').on('click', function(e) {
 			  e.preventDefault();
 			  // Model에서 id 가져오기
@@ -418,23 +427,9 @@
 			  const roomId = "user-" + userId;
 			  console.log(roomId);
 			  openChatWin(roomId, userId);
-		  })
+		  });
 		</script>
 	</footer>
 	</div>
-	<script>
-	  document.getElementById('openChat').addEventListener('click', function(e) {
-		    e.preventDefault(); // 기본 클릭 이벤트 방지
-
-		    const roomId = 'user-'; // 기본 채팅방 이름
-		    const userId = prompt('대화명을 입력하세요:'); // 대화명 입력받기
-
-		    if (userId) {
-		      window.open(`/talk?roomId=${roomId}&userId=${userId}`, '', 'width=500, height=700');
-		    } else {
-		      alert('대화명을 입력해주세요.');
-		    }
-		  });
-	</script>
 </body>
 </html>
