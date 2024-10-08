@@ -29,9 +29,13 @@
               </ul>
             </ul>
           </div>
-          <div class="my_info_wrap">
-          	<div class="tit_wrap">
-	            <h2>관리자 ${user_name}님, 환영합니다.</h2>
+          <div class="my_info_wrap" style="text-align:center;">
+          	<div class="ad_tit_wrap">
+	            <h2 style="margin-left:0;">관리자 ${user_name}님, 환영합니다.</h2>
+	            <div class="ad_btn_wrap" style="text-align:center; display:inline-flex; gap:20px;">
+	            	<button class="btn" onclick="location.href='/adpage/popup.do';">팝업 게시판 관리</button>
+	            	<button class="btn" onclick="location.href='/adpage/free.do';">자유 게시판 관리</button>
+	            </div>
           	</div>
           </div>
         </section>

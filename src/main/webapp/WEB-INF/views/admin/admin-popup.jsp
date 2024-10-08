@@ -22,10 +22,10 @@
           <div class="my_list">
             <ul class="depth1">
               <li class="list_title on">
-                <a href="/adpage/main.do">게시물 관리</a>
+                <a href="/adpage/main.do" style="color: var(--txt-color-600)">게시물 관리</a>
               </li>
               <ul class="depth2">
-                <li><a href="/adpage/popup.do">팝업 게시판</a></li>
+                <li><a href="/adpage/popup.do" style="color: var(--point-color1);">팝업 게시판</a></li>
                 <li><a href="/adpage/free.do">자유 게시판</a></li>
               </ul>
             </ul>

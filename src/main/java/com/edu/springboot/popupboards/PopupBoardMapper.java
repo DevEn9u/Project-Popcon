@@ -19,6 +19,9 @@ public interface PopupBoardMapper {
     // 무작위로 6개 게시글 조회
     public List<PopupBoardDTO> selectRandomPosts(); // 추가: 무작위 게시글 조회 메서드
     
+    // 좋아요가 많은 순으로 게시글 목록 보기
+    public List<PopupBoardDTO> selectByLikes();
+    
     // 카테고리 기준으로 글 목록 보기
     List<PopupBoardDTO> selectByCategory(@Param("category") String category);
    
@@ -54,6 +57,10 @@ public interface PopupBoardMapper {
     
     //썸네일 지우기
     public void deleteThumbnail(String board_idx);
+    
+    // 좋아요 수 업데이트
+    void updateLikesCount(@Param("board_idx") String board_idx, @Param("likes_count") int likes_count);
+
     
 
 }
