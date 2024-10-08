@@ -802,7 +802,9 @@
   	font-size: 15px;
   	margin-top: 40px;
   }
-  
+  .main_popup_banner {
+    width: 50%;
+  }
   
   .season_slider .swiper-slide .img_wrap>img {
   	border-radius : 10px

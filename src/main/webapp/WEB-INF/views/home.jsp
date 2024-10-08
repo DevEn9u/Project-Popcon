@@ -5,10 +5,44 @@
 <html lang="ko">
 <head>
 <c:import url="./include/head.jsp" />
+<link rel="stylesheet"
+	href="/css/popup_list.css?v=<?php echo time(); ?>">
 </head>
 <c:import url="./include/header.jsp" var="common_header" />
 <c:import url="./include/footer.jsp" var="common_footer" />
 <body>
+	<!-- 조아요 클릭시 빨개짐 -->
+	<script>
+function toggleLike(board_idx) {
+    $.ajax({
+        type: "POST",
+        url: "${pageContext.request.contextPath}/popupBoard/like.do",
+        data: { board_id: board_idx },
+        success: function(response) {
+            const likeBtn = document.getElementById('likeBtn_' + board_idx); // 각 게시물의 likeBtn을 찾음
+            
+            // 클릭 시 반영할 이미지와 active 클래스를 결정
+            if (response === "liked") {
+                likeBtn.classList.add('active');
+                const img = likeBtn.querySelector('img');
+              
+            } else {
+                likeBtn.classList.remove('active');
+                const img = likeBtn.querySelector('img');
+               
+            }
+        },
+        error: function(err) {
+            if (err.status === 401 && err.responseText === "login_required") {
+                alert('로그인을 해 주십시오.');
+            } else {
+                alert('좋아요 처리 중 오류가 발생했습니다.');
+            }
+            console.error('Error:', err);
+        }
+    });
+}
+</script>
 	<div id="skip_navi">
 		<a href="#container">본문 바로가기</a>
 	</div>
@@ -25,7 +59,8 @@
 									<ul class="main_popup">
 										<li><a href="/popupBoard/view/${popup.board_idx}">
 												<div class="img_wrap">
-													<img src="${popup.thumb}" alt="${popup.board_title}">
+													<img src="${popup.thumb}" alt="${popup.board_title}"
+														class="main-fixed-size"">
 												</div>
 												<div class="txt_wrap">
 													<p class="slide_title">${popup.board_title}</p>
@@ -54,7 +89,10 @@
 							<c:forEach var="popup" items="${topPopups}">
 								<div class="swiper-slide">
 									<a class="image" href="/popupBoard/view/${popup.board_idx}">
-										<img src="${popup.thumb}" alt="${popup.board_title}">
+										<div class="img_wrap">
+											<img src="${popup.thumb}" alt="${popup.board_title}"
+												class="fixed-size" />
+										</div>
 									</a>
 								</div>
 							</c:forEach>
@@ -69,10 +107,13 @@
 					</h2>
 					<div class="swiper">
 						<div class="swiper-wrapper">
-							<c:forEach var="popup" items="${randomPosts}">
+							<c:forEach var="popup" items="${popularPosts}">
 								<div class="swiper-slide">
 									<a class="image" href="/popupBoard/view/${popup.board_idx}">
-										<img src="${popup.thumb}" alt="${popup.board_title}">
+										<div class="img_wrap">
+											<img src="${popup.thumb}" alt="${popup.board_title}"
+												class="fixed-size">
+										</div>
 									</a>
 								</div>
 							</c:forEach>
@@ -84,84 +125,34 @@
 				<div class="inner">
 					<div class="slider" id="date-slider"></div>
 					<span class="line"></span>
-					<div class="today_popup">
-						<div class="col1">
-							<a class="item" href="#"> <img
-								src="/images/main/mainslider2.jpg">
-								<ul class="txt_wrap">
-									<li class="popup_name"><p>롯데월드몰 Wonderful Wonderland</p></li>
-									<li class="popup_location"><img
-										src="/images/main/location.svg" alt="장소">
-										<p>서울특별시 송파구</p></li>
-									<p class="popup_date">24.05.11 - 24.09.27</p>
-								</ul>
-							</a> <a class="item" href="#"> <img
-								src="/images/main/mainslider2.jpg">
-								<ul class="txt_wrap">
-									<li class="popup_name"><p>롯데월드몰 Wonderful Wonderland</p></li>
-									<li class="popup_location"><img
-										src="/images/main/location.svg" alt="장소">
-										<p>서울특별시 송파구</p></li>
-									<p class="popup_date">24.05.11 - 24.09.27</p>
-								</ul>
-							</a> <a class="item" href="#"> <img
-								src="/images/main/mainslider2.jpg">
-								<ul class="txt_wrap">
-									<li class="popup_name"><p>롯데월드몰 Wonderful Wonderland</p></li>
-									<li class="popup_location"><img
-										src="/images/main/location.svg" alt="장소">
-										<p>서울특별시 송파구</p></li>
-									<p class="popup_date">24.05.11 - 24.09.27</p>
-								</ul>
-							</a> <a class="item" href="#"> <img
-								src="/images/main/mainslider2.jpg">
-								<ul class="txt_wrap">
-									<li class="popup_name"><p>롯데월드몰 Wonderful Wonderland</p></li>
-									<li class="popup_location"><img
-										src="/images/main/location.svg" alt="장소">
-										<p>서울특별시 송파구</p></li>
-									<p class="popup_date">24.05.11 - 24.09.27</p>
-								</ul>
-							</a>
-						</div>
-						<div class="col2">
-							<a class="item" href="#"> <img
-								src="/images/main/mainslider2.jpg">
-								<ul class="txt_wrap">
-									<li class="popup_name"><p>롯데월드몰 Wonderful Wonderland</p></li>
-									<li class="popup_location"><img
-										src="/images/main/location.svg" alt="장소">
-										<p>서울특별시 송파구</p></li>
-									<p class="popup_date">24.05.11 - 24.09.27</p>
-								</ul>
-							</a> <a class="item" href="#"> <img
-								src="/images/main/mainslider2.jpg">
-								<ul class="txt_wrap">
-									<li class="popup_location"><img
-										src="/images/main/location.svg" alt="장소">
-										<p>서울특별시 송파구</p></li>
-									<p class="popup_date">24.05.11 - 24.09.27</p>
-								</ul>
-							</a> <a class="item" href="#"> <img
-								src="/images/main/mainslider2.jpg">
-								<ul class="txt_wrap">
-									<li class="popup_name"><p>롯데월드몰 Wonderful Wonderland</p></li>
-									<li class="popup_location"><img
-										src="/images/main/location.svg" alt="장소">
-										<p>서울특별시 송파구</p></li>
-									<p class="popup_date">24.05.11 - 24.09.27</p>
-								</ul>
-							</a> <a class="item" href="#"> <img
-								src="/images/main/mainslider2.jpg">
-								<ul class="txt_wrap">
-									<li class="popup_name"><p>롯데월드몰 Wonderful Wonderland</p></li>
-									<li class="popup_location"><img
-										src="/images/main/location.svg" alt="장소">
-										<p>서울특별시 송파구</p></li>
-									<p class="popup_date">24.05.11 - 24.09.27</p>
-								</ul>
-							</a>
-						</div>
+					<div class="pl_main">
+						<ul class="popup_wrap">
+							<c:forEach var="popup" items="${popupList}">
+								<li class="popup_banner main_popup_banner"><a
+									href="/popupBoard/view/${popup.board_idx}"> <img
+										src="${popup.thumb}" alt="Thumbnail" class="popup_thumbnail" />
+										<div class="txt_title">
+											<h2>
+												${popup.board_title}
+												<button id="likeBtn_${popup.board_idx}"
+													class="like_btn <c:if test="${popup.liked}">active</c:if>"
+													onclick="toggleLike('${popup.board_idx}'); event.preventDefault(); event.stopPropagation();">
+													<!-- event.preventDefault() 추가 -->
+												</button>
+											</h2>
+											<div class="popup_location">
+												<img src="../images/imgMGJ/pin.svg" /> <span
+													class="location_span">${popup.popup_addr}</span>
+											</div>
+											<span class="popup_date">${popup.postdate}</span>
+										</div>
+								</a></li>
+							</c:forEach>
+
+
+						</ul>
+
+
 					</div>
 				</div>
 			</section>
@@ -172,84 +163,19 @@
 					</h2>
 					<div class="swiper">
 						<div class="swiper-wrapper">
-							<div class="swiper-slide">
-								<a class="image" href="#">
-									<div class="img_wrap">
-										<img src="/images/main/mainslider1.png">
-									</div>
-									<div class="txt_wrap">
-										<p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-										<p class="slide_content">
-											<img src="/images/main/location.svg">서울특별시 마포구
-										</p>
-									</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="image" href="#">
-									<div class="img_wrap">
-										<img src="/images/main/mainslider1.png">
-									</div>
-									<div class="txt_wrap">
-										<p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-										<p class="slide_content">
-											<img src="/images/main/location.svg">서울특별시 마포구
-										</p>
-									</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="image" href="#">
-									<div class="img_wrap">
-										<img src="/images/main/mainslider1.png">
-									</div>
-									<div class="txt_wrap">
-										<p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-										<p class="slide_content">
-											<img src="/images/main/location.svg">서울특별시 마포구
-										</p>
-									</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="image" href="#">
-									<div class="img_wrap">
-										<img src="/images/main/mainslider1.png">
-									</div>
-									<div class="txt_wrap">
-										<p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-										<p class="slide_content">
-											<img src="/images/main/location.svg">서울특별시 마포구
-										</p>
-									</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="image" href="#">
-									<div class="img_wrap">
-										<img src="/images/main/mainslider1.png">
-									</div>
-									<div class="txt_wrap">
-										<p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-										<p class="slide_content">
-											<img src="/images/main/location.svg">서울특별시 마포구
-										</p>
-									</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="image" href="#">
-									<div class="img_wrap">
-										<img src="/images/main/mainslider1.png">
-									</div>
-									<div class="txt_wrap">
-										<p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-										<p class="slide_content">
-											<img src="/images/main/location.svg">서울특별시 마포구
-										</p>
-									</div>
-								</a>
-							</div>
+							<c:forEach var="popup" items="${topPopups}">
+								<div class="swiper-slide">
+									<a class="image" href="/popupBoard/view/${popup.board_idx}">
+										<div class="img_wrap">
+											<img src="${popup.thumb}" alt="${popup.board_title}"
+												class="fixed-size">
+										</div>
+										<div class="txt_wrap">
+											<p class="slide_title">${popup.board_title}</p>
+										</div>
+									</a>
+								</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -261,66 +187,19 @@
 					</h2>
 					<div class="swiper">
 						<div class="swiper-wrapper">
-							<div class="swiper-slide">
-								<a class="image" href="#">
-									<div class="img_wrap">
-										<img src="/images/main/mainslider1.png">
-									</div>
-									<div class="txt_wrap">
-										<p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-									</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="image" href="#">
-									<div class="img_wrap">
-										<img src="/images/main/mainslider1.png">
-									</div>
-									<div class="txt_wrap">
-										<p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-									</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="image" href="#">
-									<div class="img_wrap">
-										<img src="/images/main/mainslider1.png">
-									</div>
-									<div class="txt_wrap">
-										<p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-									</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="image" href="#">
-									<div class="img_wrap">
-										<img src="/images/main/mainslider1.png">
-									</div>
-									<div class="txt_wrap">
-										<p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-									</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="image" href="#">
-									<div class="img_wrap">
-										<img src="/images/main/mainslider1.png">
-									</div>
-									<div class="txt_wrap">
-										<p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-									</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="image" href="#">
-									<div class="img_wrap">
-										<img src="/images/main/mainslider1.png">
-									</div>
-									<div class="txt_wrap">
-										<p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-									</div>
-								</a>
-							</div>
+							<c:forEach var="popup" items="${randomPosts}">
+								<div class="swiper-slide">
+									<a class="image" href="/popupBoard/view/${popup.board_idx}">
+										<div class="img_wrap">
+											<img src="${popup.thumb}" alt="${popup.board_title}"
+												class="fixed-size">
+										</div>
+										<div class="txt_wrap">
+											<p class="slide_title">${popup.board_title}</p>
+										</div>
+									</a>
+								</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
