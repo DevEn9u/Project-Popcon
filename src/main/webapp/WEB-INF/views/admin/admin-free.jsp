@@ -24,11 +24,11 @@
           <div class="my_list">
             <ul class="depth1">
               <li class="list_title on">
-                <a href="/adpage/main.do">게시물 관리</a>
+                <a href="/adpage/main.do" style="color: var(--txt-color-600);">게시물 관리</a>
               </li>
               <ul class="depth2">
                 <li><a href="/adpage/popup.do">팝업 게시판</a></li>
-                <li><a href="/adpage/free.do">자유 게시판</a></li>
+                <li><a href="/adpage/free.do" style="color: var(--point-color1);">자유 게시판</a></li>
               </ul>
             </ul>
           </div>
@@ -45,6 +45,7 @@
                   <th class="col3">이름</th>
                   <th class="col4">날짜</th>
                   <th class="col5">조회수</th>
+                  <th class="col6">삭제</th>
                 </tr>
               </thead>
 				<tbody>
@@ -57,6 +58,12 @@
 				                <fmt:formatDate value="${board.postdate}" pattern="yyyy.MM.dd" />
 				            </td>
 				            <td>${board.visitcount}</td>
+				            <td class="delete_td">
+    <button type="button" class="ad_delete_btn" 
+        onclick="if(confirm('정말 삭제하시겠습니까?')) { location.href='/adpage/freedelete.do?board_idx=${board.board_idx}'; }">
+        삭제하기
+    </button>
+</td>
 				        </tr>
 				    </c:forEach>
 				</tbody>

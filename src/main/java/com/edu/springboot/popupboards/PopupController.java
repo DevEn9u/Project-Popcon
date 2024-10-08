@@ -92,6 +92,12 @@ public class PopupController {
     	 // 게시글 ID로 데이터를 가져옴
         PopupBoardDTO popupBoard = popupBoardMapper.popupView(board_idx); 
         
+        // 로그인 여부 확인
+        if (principal == null) {
+            model.addAttribute("loginRequired", true); // 로그인 요구 플래그 설정
+            return "popup-boards/popup-board-list"; // 같은 뷰로 돌아가 로그인 요구 메시지 표시
+        }
+        
      // 좋아요 상태 조회
         String userId = principal.getName();
         LikeDTO existingLike = likeMapper.findLike(popupBoard.getBoard_idx(), userId);
@@ -601,18 +607,22 @@ public class PopupController {
     }
 
     @PostMapping("/popupBoard/like.do")
-    @ResponseBody // AJAX 요청에 대한 응답을 위한 어노테이션
+    @ResponseBody
     public ResponseEntity<String> likePost(@RequestParam("board_id") String board_id, Principal principal) {
+        if (principal == null) {
+            // 로그인이 되어 있지 않은 경우
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("login_required");
+        }
+
         String userId = principal.getName(); // 현재 로그인한 사용자의 ID
 
         // 좋아요 추가 또는 삭제 처리
         boolean isLiked = likeService.toggleLike(board_id, userId); // LikeService의 메서드 호출
-        
+
         if (isLiked) {
             return ResponseEntity.ok("liked"); // 좋아요가 추가되었음을 클라이언트에 응답
         } else {
             return ResponseEntity.ok("unliked"); // 좋아요가 삭제되었음을 클라이언트에 응답
         }
     }
-    
 }

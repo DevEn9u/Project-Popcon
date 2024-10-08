@@ -15,6 +15,35 @@
         )
     </select>
     
+    <!-- 작성일 기준 최근 작성된 게시글 6개 조회 -->
+    <select id="selectTop6" resultType="com.edu.springboot.popupboards.PopupBoardDTO">
+        SELECT * FROM (
+            SELECT POPUP_BOARD.*, ROWNUM AS rnum 
+            FROM (
+                SELECT * FROM POPUP_BOARD
+                ORDER BY postdate DESC
+            ) POPUP_BOARD
+            WHERE ROWNUM &lt;= 6
+        )
+    </select>
+    
+    <!-- 무작위 글 6개 조회 -->
+	<select id="selectRandomPosts" resultType="com.edu.springboot.popupboards.PopupBoardDTO">
+	    SELECT * FROM (
+	        SELECT POPUP_BOARD.*
+	        FROM POPUP_BOARD
+	        ORDER BY DBMS_RANDOM.VALUE
+	    )
+	    WHERE ROWNUM &lt;= 6
+	</select>
+	
+	<!-- 좋아요가 많은 순으로 게시글 목록 조회 -->
+	<select id="selectByLikes" resultType="com.edu.springboot.popupboards.PopupBoardDTO">
+	    SELECT * FROM POPUP_BOARD
+	    ORDER BY likes_count DESC
+	</select>
+	
+    
     <!-- 카테고리 검색 -->
 	<select id="selectByCategory" parameterType="String" resultType="com.edu.springboot.popupboards.PopupBoardDTO">
     	SELECT * FROM POPUP_BOARD WHERE category = #{category} ORDER BY postdate DESC
@@ -86,6 +115,14 @@
         SET thumb = NULL
         WHERE board_idx = #{board_idx}
     </update>
+	
+	    <!-- 좋아요 수 업데이트 -->
+    <update id="updateLikesCount">
+        UPDATE POPUP_BOARD
+        SET likes_count = #{likes_count}
+        WHERE board_idx = #{board_idx}
+    </update>
+    
 
 
 </mapper>

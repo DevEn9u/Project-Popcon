@@ -605,6 +605,25 @@
   background: #fff;
 }
 
+#footer .master_btn {
+	margin-top: 20px;
+    margin-left: 10px;
+	background: var(--point--color1);
+    background-size: 30px 30px;
+    display: flex;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.mbtn_tit {
+	color: var(--txt-color-500);
+	font-size:14px;
+	font-weight:600;
+}
+
 #footer .inner .scroll_btn {
   margin-left: 10px;
   background: var(--point--color1) url(/images/main/top_arrow.svg)no-repeat 50% 50%;
@@ -802,7 +821,9 @@
   	font-size: 15px;
   	margin-top: 40px;
   }
-  
+  .main_popup_banner {
+    width: 50%;
+  }
   
   .season_slider .swiper-slide .img_wrap>img {
   	border-radius : 10px
