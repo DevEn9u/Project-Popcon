@@ -209,6 +209,7 @@ body {
 
 /*관리자 페이지 서식 */
 .ad_pl_main {
+	width:80%;
 	margin-left:90px;
 }
 .pv_delete_btn {
@@ -221,6 +222,27 @@ body {
     width:30px;
 	height:30px;
 	margin-left: 25px;
+}
+.delete_td {
+	display:flex;
+	align-items: center;
+    justify-content: center; 
+}
+.ad_delete_btn {
+	-webkit-mask-image: url(../images/imgMGJ/delete_btn.svg);
+    -webkit-mask-size: cover;
+    -webkit-mask-repeat: no-repeat;
+    width:30px;
+	height:30px;
+}
+.team_list {
+	position: -webkit-sticky; /* 사파리 브라우저 지원을 위해 */
+	        position: sticky;
+	        top: 0; /* 스크롤이 시작될 때부터 고정됨 */
+	        z-index: 1000; /* 다른 요소 위에 표시되도록 설정 */
+	        background-color: white; /* 배경색 설정 */
+	        padding: 10px;
+	        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 고정 시 그림자 효과 추가 */
 }
 /* 메인페이지 */
 .fixed-size {

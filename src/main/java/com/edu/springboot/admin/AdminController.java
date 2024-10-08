@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.edu.springboot.board.BoardDTO;
 import com.edu.springboot.board.BoardService;
@@ -90,6 +91,26 @@ public class AdminController {
 
 	        return "admin/admin-free";
 	    }
+	    
+	    // 자유게시판 게시글 삭제
+	    @GetMapping("/adpage/freedelete.do")
+	    public String deleteFreeBoard(@RequestParam("board_idx") String board_idx, Principal principal,
+	            RedirectAttributes redirectAttributes) {
+
+	        String userId = principal.getName();
+	        BoardDTO board = boardService.getBoardById(board_idx);
+
+	        if (board == null) {
+	            redirectAttributes.addFlashAttribute("error", "존재하지 않는 게시글입니다.");
+	            return "redirect:/adpage/free.do";
+	        }
+
+	        // 게시글 삭제
+	        boardService.deleteBoard(board_idx);
+	        redirectAttributes.addFlashAttribute("message", "게시글이 삭제되었습니다.");
+	        return "redirect:/adpage/free.do";
+	    }
+
 
 	    
 	

@@ -215,6 +215,14 @@ function toggleLike(board_idx) {
 						<a class="qna_btn top_btn" href="#" id="openChat"><span
 							class="blind">질문</span></a>
 					</c:if>
+					
+					<!-- 관리자 계정일때만 보이는 관리자 페이지 진입버튼 추가 -->
+					<c:if
+					test="${memberDTO.authority == 'ROLE_ADMIN'}">
+						<a class="master_btn" href="/adpage/main.do">
+							<p class="mbtn_tit">관리자</p>
+						</a>
+					</c:if>
 				</section>
 			</div>
 			<script>

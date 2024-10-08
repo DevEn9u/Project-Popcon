@@ -41,6 +41,9 @@ public class MainController {
     private final ImageService imageService;
     private final LikeService likeService;
     private final LikeMapper likeMapper;
+    
+    @Autowired
+    private final IMemberService memberService;
 		
 	@GetMapping("/")
 	public String home(Model model, Principal principal) {
@@ -63,15 +66,23 @@ public class MainController {
 	 	// 로그인한 사용자 ID 가져오기
         String userId = principal != null ? principal.getName() : null;
         
+        // 사용자의 MemberDTO 정보를 가져오기
+        MemberDTO memberDTO = null;
+        if (userId != null) {
+            memberDTO = memberService.getMemberById(userId); // 사용자 ID를 사용하여 MemberDTO 조회
+        }
+        model.addAttribute("memberDTO", memberDTO); // memberDTO를 모델에 추가
+        
         // 각 게시물에 대해 좋아요 상태를 추가
         for (PopupBoardDTO popup : popupList) {
             LikeDTO existingLike = likeMapper.findLike(popup.getBoard_idx(), userId);
             boolean isLiked = existingLike != null;
             popup.setLiked(isLiked); // PopupBoardDTO에 isLiked 필드 추가 필요
         }
-        
+
 		return "home";
 	}
+	
 	@GetMapping("/chat.do")
 	public String chat() {
 		return "forward:/chat/index.html";
