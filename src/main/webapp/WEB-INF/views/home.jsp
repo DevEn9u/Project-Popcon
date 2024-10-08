@@ -15,7 +15,7 @@
 	<div id="wrap">
 	${common_header }
 
-	<!-- <main id="container">
+	<main id="container">
 	      <section class="main_slider">
 	        <div class="inner">
 	          <div class="swiper">
@@ -92,7 +92,7 @@
 	          </div>
 	        </div>
 	      </section>
-	      <section class="pick_slider">
+	      <!-- <section class="pick_slider">
 	        <div class="inner">
 	          <h2 class="tit">담당자 픽 팝업 <strong>10월</strong></h2>
 	          <div class="swiper">
@@ -389,8 +389,8 @@
 	            </div>
 	          </div>
 	        </div>
-	      </section>
-	</main> -->
+	      </section> -->
+	</main>
 	<footer id="footer">
 		<div class="inner">
 		    ${common_footer}
