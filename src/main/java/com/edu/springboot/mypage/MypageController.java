@@ -3,11 +3,6 @@ package com.edu.springboot.mypage;
 import java.security.Principal;
 import java.util.List;
 
-<<<<<<< HEAD
-import com.edu.springboot.popupboards.PopupBoardDTO;
-import com.edu.springboot.popupboards.PopupBoardMapper;
-=======
->>>>>>> branch 'main' of https://github.com/DevEn9u/Project-Popcon.git
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,18 +10,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.edu.springboot.board.BoardDTO;
+import com.edu.springboot.booking.bookingDTO;
 import com.edu.springboot.popupboards.CommentDTO;
 import com.edu.springboot.popupboards.PopupBoardDTO;
 
 @Controller
 public class MypageController {
 	
-	@Autowired
-<<<<<<< HEAD
+
     IMypageService page;
-=======
+
 	private IMypageService mypageService;
->>>>>>> branch 'main' of https://github.com/DevEn9u/Project-Popcon.git
+
 
     // 마이페이지 - 메인
     @GetMapping("/mypage/mypage.do")

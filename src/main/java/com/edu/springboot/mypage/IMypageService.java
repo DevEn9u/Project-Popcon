@@ -1,25 +1,22 @@
 // IMypageService.java
 package com.edu.springboot.mypage;
 
-<<<<<<< HEAD
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-=======
+
 import java.util.List;
->>>>>>> branch 'main' of https://github.com/DevEn9u/Project-Popcon.git
+
 
 import com.edu.springboot.board.BoardDTO;
 import com.edu.springboot.booking.bookingDTO;
 import com.edu.springboot.popupboards.CommentDTO;
 import com.edu.springboot.popupboards.PopupBoardDTO;
 
-<<<<<<< HEAD
 @Service
 @Transactional
 @Mapper
-=======
->>>>>>> branch 'main' of https://github.com/DevEn9u/Project-Popcon.git
 public interface IMypageService {
     // 예약한 팝업 정보 보기
     bookingDTO bookingInfo(String member_id);
