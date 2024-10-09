@@ -2,6 +2,7 @@ package com.edu.springboot.mypage;
 
 import java.security.Principal;
 
+import com.edu.springboot.popupboards.PopupBoardDTO;
 import com.edu.springboot.popupboards.PopupBoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,13 +27,21 @@ import org.springframework.ui.Model;
 public class MypageController {
 	
 	@Autowired
-	IMypageService page;
+    IMypageService page;
 
-	//마이페이지 - 메인
-	@GetMapping("/mypage/mypage.do")
-	public String mypageMain(Principal principal, Model model) {
-		return "/mypages/mypage-main";
-	}
+    // 마이페이지 - 메인
+    @GetMapping("/mypage/mypage.do")
+    public String mypageMain(Principal principal, Model model) {
+        String memberId = principal.getName();  // 로그인된 사용자의 ID를 가져옴
+        bookingDTO info = page.bookingInfo(memberId);  // 예약 정보
+        PopupBoardDTO title = page.bookingTitle(memberId);  // 팝업 제목
+
+        // 데이터를 모델에 추가
+        model.addAttribute("info", info);
+        model.addAttribute("title", title);
+
+        return "/mypages/mypage-main";
+    }
 	
 	//마이페이지 - 예약 확인
 	@GetMapping("/mypage/myBooking.do")

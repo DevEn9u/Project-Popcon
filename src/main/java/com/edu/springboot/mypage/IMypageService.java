@@ -1,10 +1,14 @@
 package com.edu.springboot.mypage;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.edu.springboot.booking.bookingDTO;
 import com.edu.springboot.popupboards.PopupBoardDTO;
 
+@Service
+@Transactional
 @Mapper
 public interface IMypageService {
 

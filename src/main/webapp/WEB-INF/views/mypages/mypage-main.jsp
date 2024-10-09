@@ -78,7 +78,7 @@
                 <div class="booking_wrap">
                   <ul class="booking_list">
                     <li>
-                      <strong>예약한 팝업명</strong>
+                      <strong>${title.board_title}</strong>
                       <div class="txt_wrap">
                         ${info.visit_date}
                         <span></span>${info.headcount}
