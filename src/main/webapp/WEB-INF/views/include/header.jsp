@@ -15,8 +15,8 @@
           <ul class="depth2">
             <li>
               <a href="#">플랫폼 소개</a>
-              <a href="#">조직도</a>
-              <a href="#">오시는 길</a>
+              <a href="/introduction/organization.do">조직도</a>
+              <a href="/introduction/location.do">오시는 길</a>
             </li>
           </ul>
         </li>

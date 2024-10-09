@@ -97,9 +97,17 @@ body {
   flex-grow: 1;
 }
 .like_btn {
+  -webkit-mask-image: url('../images/imgMGJ/like_btn.svg');
+  -webkit-mask-size: cover;
+  -webkit-mask-repeat: no-repeat;
+  cursor: pointer;
   width: 30px;
   height: 30px;
   margin-left: 25px;
+}
+
+.like_btn.active {
+  filter: invert(34%) sepia(94%) saturate(7482%) hue-rotate(-1deg) brightness(95%) contrast(102%); /* 원하는 빨간색 필터 */
 }
 .pv_title_date {
   margin-bottom: 10px;
@@ -142,44 +150,13 @@ body {
 
 .pv_booking_btn {
   margin-right: 0;
-  font-size: 16px;
-  font-weight: 600;
-  border: 1px solid white;
-  border-radius: 10px;
-  background-color: black;
-  color: white;
-  width: 88px;
-  height: 44px;
-  text-align: center;
-  line-height: 44px;
 }
 .pv_delete_btn {
   margin-right: 0;
-  font-size: 16px;
-  font-weight: 600;
-  border: 1px solid white;
-  border-radius: 10px;
-  background-color: black;
-  color: white;
-  width: 88px;
-  height: 44px;
-  text-align: center;
-  line-height: 44px;
 }
 .pv_edit_btn {
   margin-right: 0;
   margin-left:15px;
-  font-size: 16px;
-  font-weight: 600;
-  border: 1px solid white;
-  border-radius: 10px;
-  background-color: black;
-  color: white;
-  width: 88px;
-  height: 44px;
-  text-align: center;
-  line-height: 44px;
-	
 }
 .open_time {
   color: white;
@@ -271,16 +248,6 @@ body {
 }
 .pv_list_btn {
   margin-right: 0;
-  font-size: 16px;
-  font-weight: 600;
-  border: 1px solid white;
-  border-radius: 10px;
-  background-color: black;
-  color: white;
-  width: 88px;
-  height: 44px;
-  text-align: center;
-  line-height: 44px;
 }
 
 .comment_section {
@@ -303,7 +270,18 @@ body {
 .comment_section .comment_area {
     background: none;
     border: 1px solid var(--txt-color-600);
-    margin: 10px 0;
+    margin-top:10px;
+}
+.pop_comimg_head {
+	margin:10px 0;
+}
+.file_wrap {
+	margin-top:10px;
+	border: 1px solid #999;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    gap: 0 30px;
 }
 .comment_section .comment_btn {
     width: 100px;
@@ -318,8 +296,15 @@ body {
     margin-bottom: 10px;
 }
 
+.comment_list h3 {
+	font-size: 24px;
+    color: var(--point--color1);
+    margin-bottom: 10px;
+}
+
 .comment_wrap {
 	margin-top:10px;
+	margin-bottom:20px;
 	align-items: center;
 	display:flex;
 }
@@ -334,9 +319,11 @@ body {
 }
 .comment_content {
 	margin-top:10px;
+	margin-bottom:20px;
 	font-size:18px;
 }
 .edit_content {
+	margin-top:20px;
 	background-color:#121212;
 	border:1px solid var(--txt-color-600);
 }
@@ -346,6 +333,15 @@ body {
 .comment_upload {
 	background:none !important;
 }
+.comment_btn {
+	margin-right:10px;
+}
+.btn:hover {
+  background-color: var(--point--color1);
+  color: var(--txt-color-500);
+  transition: all 0.2s;
+}
+
 
 /* 태블릿 분기점 */
 @media (max-width: 1200px) {
@@ -403,9 +399,7 @@ body {
     font-size: 12px;
     align-items: center;
   }
-  .pv_copy_btn,
-  .pv_booking_btn,
-  .pv_list_btn {
+  .pv_copy_btn {
     font-size: 12px;
     width: 66px;
     height: 33px;

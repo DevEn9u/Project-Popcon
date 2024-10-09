@@ -1,33 +1,32 @@
 package com.edu.springboot.mypage;
 
 import java.security.Principal;
+import java.util.List;
 
+<<<<<<< HEAD
 import com.edu.springboot.popupboards.PopupBoardDTO;
 import com.edu.springboot.popupboards.PopupBoardMapper;
+=======
+>>>>>>> branch 'main' of https://github.com/DevEn9u/Project-Popcon.git
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.edu.springboot.booking.bookingDTO;
-import com.edu.springboot.member.IMemberService;
-import com.edu.springboot.member.MemberDTO;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.ui.Model;
+
+import com.edu.springboot.board.BoardDTO;
+import com.edu.springboot.popupboards.CommentDTO;
+import com.edu.springboot.popupboards.PopupBoardDTO;
 
 @Controller
 public class MypageController {
 	
 	@Autowired
+<<<<<<< HEAD
     IMypageService page;
+=======
+	private IMypageService mypageService;
+>>>>>>> branch 'main' of https://github.com/DevEn9u/Project-Popcon.git
 
     // 마이페이지 - 메인
     @GetMapping("/mypage/mypage.do")
@@ -55,21 +54,97 @@ public class MypageController {
 	public String mypagePoint() {
 		return "/mypages/mypage-point";
 	}
-	//마이페이지 - 내가 작성한 글 확인
-	@GetMapping("/mypage/myPost.do")
-	public String mypagePost() {
-		return "/mypages/mypage-post";
-	}
-	//마이페이지 - 내가쓴 리뷰 확인
-	@GetMapping("/mypage/myReview.do")
-	public String mypageReview() {
-		return "/mypages/mypage-review";
-	}
-	//마이페이지 - 좋아요한 팝업 확인
-	@GetMapping("/mypage/likes.do")
-	public String mypageLikes() {
-		return "/mypages/mypage-likes";
-	}
+	
+	
+	// 마이페이지 - 내가 작성한 글 확인
+    @GetMapping("/mypage/myPost.do")
+    public String mypagePost(
+            @RequestParam(value = "page", defaultValue = "1") int currentPage,
+            @RequestParam(value = "size", defaultValue = "10") int pageSize,
+            Principal principal,
+            Model model) {
+        
+        // 로그인 여부 확인
+        if (principal == null) {
+            return "redirect:/login.do";
+        }
+        
+        String userId = principal.getName();
+        
+        // 내가 작성한 게시글 총 수 조회
+        int totalPosts = mypageService.countPostsByWriter(userId);
+        int totalPages = (int) Math.ceil((double) totalPosts / pageSize);
+        
+        // 페이지 번호 유효성 검사
+        if (currentPage > totalPages && totalPages != 0) {
+            currentPage = totalPages;
+        }
+        if (currentPage < 1) {
+            currentPage = 1;
+        }
+        
+        // 페이징을 위한 offset 계산
+        int offset = (currentPage - 1) * pageSize;
+        
+        // 내가 작성한 게시글 목록 조회
+        List<BoardDTO> posts = mypageService.getPostsByWriter(userId, offset, pageSize);
+        
+        // 모델에 데이터 추가
+        model.addAttribute("posts", posts);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("pageSize", pageSize);
+        model.addAttribute("totalPages", totalPages);
+        
+        return "/mypages/mypage-post";
+    }
+	
+	
+    // 마이페이지 - 내가 작성한 리뷰 확인
+    @GetMapping("/mypage/myReview.do")
+    public String mypageReview(
+            Principal principal,
+            Model model) {
+        
+        // 로그인 여부 확인
+        if (principal == null) {
+            return "redirect:/login.do";
+        }
+        
+        String userId = principal.getName();
+        
+        // 내가 작성한 리뷰 목록 조회 (모든 리뷰)
+        List<CommentDTO> reviews = mypageService.getAllReviewsByWriter(userId);
+        
+        // 모델에 데이터 추가
+        model.addAttribute("reviews", reviews);
+        
+        return "/mypages/mypage-review";
+    }
+	
+	
+    // 마이페이지 - 내가 좋아요한 팝업 목록 확인
+    @GetMapping("/mypage/likes.do")
+    public String mypageLikes(
+            Principal principal,
+            Model model) {
+        
+        // 로그인 여부 확인
+        if (principal == null) {
+            return "redirect:/login.do";
+        }
+        
+        String userId = principal.getName();
+        
+        // 내가 좋아요한 팝업 목록 조회
+        List<PopupBoardDTO> likedPopups = mypageService.getLikedPopupsByMemberId(userId);
+        
+        // 모델에 데이터 추가
+        model.addAttribute("likedPopups", likedPopups);
+        
+        return "/mypages/mypage-likes";
+    }
+	
+	
 	//마이페이지 - 보유한 쿠폰 확인
 	@GetMapping("/mypage/myCoupon.do")
 	public String mypageCoupon() {

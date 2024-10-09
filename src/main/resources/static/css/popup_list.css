@@ -191,9 +191,70 @@ body {
   margin-right: 5px;
 }
 
-.pl_like_btn {
+.like_btn {
 	position: absolute;
 	right:0;
+	-webkit-mask-image: url(../images/imgMGJ/like_btn.svg);
+    -webkit-mask-size: cover;
+    -webkit-mask-repeat: no-repeat;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    margin-left: 25px;
+}
+.like_btn.active {
+  filter: invert(34%) sepia(94%) saturate(7482%) hue-rotate(-1deg) brightness(95%) contrast(102%); /* 원하는 빨간색 필터 */
+}
+
+
+/*관리자 페이지 서식 */
+.ad_pl_main {
+	width:80%;
+	margin-left:90px;
+}
+.pv_delete_btn {
+	position: absolute;
+	top:0;
+	right:0;
+	-webkit-mask-image: url(../images/imgMGJ/delete_btn.svg);
+    -webkit-mask-size: cover;
+    -webkit-mask-repeat: no-repeat;
+    width:30px;
+	height:30px;
+	margin-left: 25px;
+}
+.delete_td {
+	display:flex;
+	align-items: center;
+    justify-content: center; 
+}
+.ad_delete_btn {
+	-webkit-mask-image: url(../images/imgMGJ/delete_btn.svg);
+    -webkit-mask-size: cover;
+    -webkit-mask-repeat: no-repeat;
+    width:30px;
+	height:30px;
+}
+/* 메인페이지 */
+.fixed-size {
+    width: 250px;
+    height: 250px;
+    border-radius: 30px;
+    object-fit: cover; /* 이미지를 비율에 맞게 자르기 */
+}
+.main-fixed-size {
+	width: 625px;
+    height: 625px;
+    object-fit: cover;
+}
+.swiper-slide .txt_wrap {
+    position: absolute;
+    bottom: 40px;
+    left: 10px;
+}
+.swiper-slide .slide_title {
+    font-size: 20px;
+    font-weight: 700;
 }
 
 /* 태블릿 분기점 */
@@ -251,5 +312,16 @@ body {
   }
   .popup_location {
     font-size: 12px;
+  }
+  
+  .fixed-size {
+    width: 100px;
+    height: 100px;
+    border-radius: 30px;
+    object-fit: cover; /* 이미지를 비율에 맞게 자르기 */
+  }
+  .season_slider .swiper-slide .slide_title {
+        font-size: 12px;
+        margin-bottom: 8px;
   }
 }

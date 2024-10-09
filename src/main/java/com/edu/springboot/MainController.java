@@ -1,8 +1,15 @@
 package com.edu.springboot;
 
 import java.security.Principal;
+import java.util.List;
 
+import com.edu.springboot.popupboards.LikeDTO;
+import com.edu.springboot.popupboards.LikeMapper;
+import com.edu.springboot.popupboards.LikeService;
+import com.edu.springboot.popupboards.PopupBoardDTO;
 import com.edu.springboot.popupboards.PopupBoardMapper;
+import com.edu.springboot.popupboards.PopupBoardService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,272 +21,71 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.edu.springboot.member.IMemberService;
 import com.edu.springboot.member.MemberDTO;
+import com.edu.springboot.images.ImageDTO;
+import com.edu.springboot.images.ImageService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 
 @Controller
+@RequiredArgsConstructor
 public class MainController {
 	
-//    @Autowired
-//    private PopupBoardMapper popupBoardMapper;
-	
+    @Autowired
+    private final PopupBoardService popupBoardService;
+    private final PopupBoardMapper popupBoardMapper;
+    private final ImageService imageService;
+    private final LikeService likeService;
+    private final LikeMapper likeMapper;
+    
+    @Autowired
+    private final IMemberService memberService;
+		
 	@GetMapping("/")
-	public String home() {
+	public String home(Model model, Principal principal) {
+		
+	    
+	    List<PopupBoardDTO> topPopups = popupBoardService.selectTop6(); // 상위 6개 게시글 추가
+	    model.addAttribute("topPopups", topPopups); // JSP로 데이터 전송
+	    
+	    List<PopupBoardDTO> randomPosts = popupBoardService.selectRandomPosts(); // 무작위 6개 게시글 추가
+	    model.addAttribute("randomPosts", randomPosts); // JSP로 데이터 전송
+	    
+	    List<PopupBoardDTO> popupList;
+        popupList = popupBoardMapper.selectTop8(); // 상위 8개 게시물 조회
+        
+        List<PopupBoardDTO> popularPosts = popupBoardService.selectByLikes(); // 좋아요가 많은 순으로 게시글 조회
+        
+        model.addAttribute("popularPosts", popularPosts);
+	 	model.addAttribute("popupList", popupList);
+	 	
+	 	// 로그인한 사용자 ID 가져오기
+        String userId = principal != null ? principal.getName() : null;
+        
+        // 사용자의 MemberDTO 정보를 가져오기
+        MemberDTO memberDTO = null;
+        if (userId != null) {
+            memberDTO = memberService.getMemberById(userId); // 사용자 ID를 사용하여 MemberDTO 조회
+        }
+        model.addAttribute("memberDTO", memberDTO); // memberDTO를 모델에 추가
+        
+        // 각 게시물에 대해 좋아요 상태를 추가
+        for (PopupBoardDTO popup : popupList) {
+            LikeDTO existingLike = likeMapper.findLike(popup.getBoard_idx(), userId);
+            boolean isLiked = existingLike != null;
+            popup.setLiked(isLiked); // PopupBoardDTO에 isLiked 필드 추가 필요
+        }
+
 		return "home";
 	}
 	
-//	// 자유게시판 - 목록
-//	@GetMapping("freeBoard/list.do")
-//	public String freeBoardList() {
-//		return "/boards/free-board-list";
-//	}
-//	// 자유게시판 - 보기
-//	@GetMapping("/freeBoard/view.do")
-//	public String freeBoardView() {
-//		return "/boards/free-board-view";
-//	}
-//	// 자유게시판 - 쓰기
-//	@GetMapping("/freeBoard/write.do")
-//	public String freeBoardWrite() {
-//		return "/boards/free-board-write";
-//	}
-//	// 자유게시판 - 수정
-//	@GetMapping("/freeBoard/edit.do")
-//	public String freeBoardEdit() {
-//		return "/boards/free-board-edit";
-//	}
-//	// 자유게시판 - 삭제
-//	@GetMapping("/freeBoard/delete.do")
-//	public String freeBoardDelete() {
-//		return "redirect:/freeBoard/list.do";
-//	}
-//	
-//	// 공지 - 목록
-//	@GetMapping("/noticeBoard/list.do")
-//	public String noticeBoardList() {
-//		return "/boards/notice-board-list";
-//	}
-//	// 공지 - 보기
-//	@GetMapping("/noticeBoard/view.do")
-//	public String noticeBoardView() {
-//		return "/boards/notice-board-view";
-//	}
-//	// 공지 - 쓰기
-//	@GetMapping("/noticeBoard/write.do")
-//	public String noticeBoardWrite() {
-//		return "/boards/notice-board-write";
-//	}
-//	// 공지 - 수정
-//	@GetMapping("/noticeBoard/edit.do")
-//	public String noticeBoardEdit() {
-//		return "/boards/notice-board-edit";
-//	}
-//	// 공지 - 삭제
-//	@GetMapping("/noticeBoard/delete.do")
-//	public String noticeBoardDelete() {
-//		return "redirect:/noticeBoard/list.do";
-//	}
-//
-//	//팝업안내 - 메인
-//	@GetMapping("/popupBoard/list.do")
-//	public String popuplist() {
-//		return "/boards/popup-board-list";
-//	}
-//	
-//	//팝업안내 - 글 보기
-//	@GetMapping("/popupBoard/view.do")
-//	public String popupview() {
-//		return "/boards/popup-board-view";
-//	}
-//	
-//	//팝업안내 - 글 쓰기
-//	@GetMapping("/popupBoard/write.do")
-//	public String popupwrite() {
-//		return "/boards/popup-board-write";
-//	}
-//	//팝업안내 - 글 수정
-//	@GetMapping("/popupBoard/edit.do")
-//	public String popupedit() {
-//		return "/boards/popup-board-edit";
-//	}
-//	
-//	//팝업 예약 페이지
-//	@GetMapping("/popupBoard/booking.do")
-//	public String popupbooking() {
-//		return "/booking/booking";
-//	}
-//	//인원,수량 선택 페이지
-//	@GetMapping("/popupBoard/select.do")
-//	public String popupselect() {
-//		return "/booking/booking-select";
-//	}
-//	
-//	//마이페이지 - 메인
-//	@GetMapping("/mypage/mypage.do")
-//	public String mypageMain() {
-//		return "/mypages/mypage-main";
-//	}
-//	//마이페이지 - 예약 확인
-//	@GetMapping("/mypage/myBooking.do")
-//	public String mypageBooking() {
-//		return "/mypages/mypage-booking";
-//	}
-//	//마이페이지 - 포인트 확인
-//	@GetMapping("/mypage/myPoint.do")
-//	public String mypagePoint() {
-//		return "/mypages/mypage-point";
-//	}
-//	//마이페이지 - 내가 작성한 글 확인
-//	@GetMapping("/mypage/myPost.do")
-//	public String mypagePost() {
-//		return "/mypages/mypage-post";
-//	}
-//	//마이페이지 - 내가쓴 리뷰 확인
-//	@GetMapping("/mypage/myReview.do")
-//	public String mypageReview() {
-//		return "/mypages/mypage-review";
-//	}
-//	//마이페이지 - 좋아요한 팝업 확인
-//	@GetMapping("/mypage/likes.do")
-//	public String mypageLikes() {
-//		return "/mypages/mypage-likes";
-//	}
-//	//마이페이지 - 보유한 쿠폰 확인
-//	@GetMapping("/mypage/myCoupon.do")
-//	public String mypageCoupon() {
-//		return "/mypages/mypage-coupon";
-//	}
-//	
-	
-	
-	// 공지 - 목록
-//	@GetMapping("/noticeBoard/list.do")
-//	public String noticeBoardList() {
-//		return "/boards/notice-board-list";
-//	}
-
-//	// 공지 - 삭제
-//	@GetMapping("/noticeBoard/delete.do")
-//	public String noticeBoardDelete() {
-//		return "redirect:/noticeBoard/list.do";
-//	}
-//	// 공지 - 쓰기
-//	@GetMapping("/noticeBoard/write.do")
-//	public String noticeBoardWrite() {
-//		return "/boards/notice-board-write";
-//	}
-//	// 공지 - 수정
-//	@GetMapping("/noticeBoard/edit.do")
-//	public String noticeBoardEdit() {
-//		return "/boards/notice-board-edit";
-//	}
-//	// 공지 - 삭제
-//	@GetMapping("/noticeBoard/delete.do")
-//	public String noticeBoardDelete() {
-//		return "redirect:/noticeBoard/list.do";
-//	}
-
-	
-//	//팝업안내 - 목록
-//	@GetMapping("/popupBoard/list.do")
-//	public String popuplist(Model model) {
-//	    List<PopupBoardDTO> popupList = popupBoardMapper.selectTop8(); 
-//	    model.addAttribute("popupList", popupList);
-//	    return "popup-boards/popup-board-list"; 
-//	}
-	
-	
-
-//	@GetMapping("/popupBoard/list.do")
-//	public String popuplist(@RequestParam(name = "category", required = false) String category, Model model) {
-//	    List<PopupBoardDTO> popupList;
-//	    
-//	    if (category != null && !category.isEmpty()) {
-//	        popupList = popupBoardMapper.selectByCategory(category); // 선택한 카테고리 게시물 조회
-//	    } else {
-//	        popupList = popupBoardMapper.selectTop8(); // 기본적으로 상위 8개 게시물 조회
-//	    }
-//	    
-//	    model.addAttribute("popupList", popupList);
-//	    return "popup-boards/popup-board-list"; 
-//	}
-//
-//	//팝업안내 - 글 보기
-//	@GetMapping("/popupBoard/view.do")
-//	public String popupview() {
-//		return "/popup-boards/popup-board-view";
-//	}
-//	
-//	//팝업안내 - 글 쓰기
-//	@GetMapping("/popupBoard/write.do")
-//	public String popupwrite() {
-//		return "/popup-boards/popup-board-write";
-//	}
-//	//팝업안내 - 글 수정
-//	@GetMapping("/popupBoard/edit.do")
-//	public String popupedit() {
-//		return "/popup-boards/popup-board-edit";
-//	}
-	
-//	//팝업 예약 페이지
-//	@GetMapping("/popupBoard/booking.do")
-//	public String popupbooking() {
-//		return "/booking/booking";
-//	}
-//	//인원,수량 선택 페이지
-//	@GetMapping("/popupBoard/select.do")
-//	public String popupselect() {
-//		return "/booking/booking-select";
-//	}
-//	
-//	//마이페이지 - 메인
-//	@GetMapping("/mypage/mypage.do")
-//	public String mypageMain() {
-//		return "/mypages/mypage-main";
-//	}
-//	//마이페이지 - 예약 확인
-//	@GetMapping("/mypage/myBooking.do")
-//	public String mypageBooking() {
-//		return "/mypages/mypage-booking";
-//	}
-//	//마이페이지 - 포인트 확인
-//	@GetMapping("/mypage/myPoint.do")
-//	public String mypagePoint() {
-//		return "/mypages/mypage-point";
-//	}
-//	//마이페이지 - 내가 작성한 글 확인
-//	@GetMapping("/mypage/myPost.do")
-//	public String mypagePost() {
-//		return "/mypages/mypage-post";
-//	}
-//	//마이페이지 - 내가쓴 리뷰 확인
-//	@GetMapping("/mypage/myReview.do")
-//	public String mypageReview() {
-//		return "/mypages/mypage-review";
-//	}
-//	//마이페이지 - 좋아요한 팝업 확인
-//	@GetMapping("/mypage/likes.do")
-//	public String mypageLikes() {
-//		return "/mypages/mypage-likes";
-//	}
-//	//마이페이지 - 보유한 쿠폰 확인
-//	@GetMapping("/mypage/myCoupon.do")
-//	public String mypageCoupon() {
-//		return "/mypages/mypage-coupon";
-//	}
-
-	//팝업 예약 페이지
-//	@GetMapping("/popupBoard/booking.do")
-//	public String popupbooking() {
-//		return "/booking/booking";
-//	}
-//	//인원,수량 선택 페이지
-//	@GetMapping("/popupBoard/select.do")
-//	public String popupselect() {
-//		return "/booking/booking-select";
-//	}
+	@GetMapping("/chat.do")
+	public String chat() {
+		return "forward:/chat/index.html";
+	}
 
 }

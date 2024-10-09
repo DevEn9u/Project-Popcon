@@ -60,19 +60,19 @@ public class WebSecurityConfig {
 				.requestMatchers("/noticeBoard/edit.do").hasRole("ADMIN")
 				.requestMatchers("/noticeBoard/delete.do").hasRole("ADMIN")
 				.requestMatchers("/mypage/**").hasAnyRole("ADMIN", "CORP", "NORMAL")
+				.requestMatchers("/chat.do").hasAnyRole("ADMIN", "CORP", "NORMAL")
 				.anyRequest().permitAll()
 			);
 		http.formLogin((formLogin) -> formLogin
 				.loginPage("/login.do")
 				.loginProcessingUrl("/loginProc.do")
-				// 로그인 성공시 메인 페이지로 이동.
-//				.defaultSuccessUrl("/", true)
+				.defaultSuccessUrl("/", true)
 				/* 로그인할 때 아이디와 비밀번호의 파라미터는 input태그의 name
 				   속성과 동일하게 설정해줘야 로그인 process가 정상작동함. */
 				.usernameParameter("login_id")
 				.passwordParameter("login_pw")
 				.successHandler(new CustomAuthenticationSuccessHandler())
-				.failureHandler(new CustomAuthenticationFailureHandler())
+//				.failureHandler(new CustomAuthenticationFailureHandler())
 				.permitAll());
 
 		/* 로그인 정보 저장 */
@@ -97,7 +97,7 @@ public class WebSecurityConfig {
 		return http.build();
 	}
 	
-	@Bean
+//	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
 		configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000")); // 리액트 앱의 URL
@@ -156,4 +156,9 @@ public class WebSecurityConfig {
 //	public PasswordEncoder passwordEncoder() {
 //		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 //	}
+	
+	@Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }

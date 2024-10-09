@@ -1,11 +1,14 @@
 package com.edu.springboot.popupboards;
 
 import java.util.List;
-
 import org.apache.ibatis.annotations.Options;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.edu.springboot.board.CommentMapper;
+import com.edu.springboot.images.ImageDTO;
+import com.edu.springboot.images.ImageService;
 import com.edu.springboot.popupboards.CommentDTO; // 추가: 댓글 DTO
 
 @Service
@@ -13,9 +16,26 @@ public class PopupBoardService {
 
     @Autowired
     private PopupBoardMapper popupBoardMapper; // Mapper 주입
+    @Autowired
+    private ImageService imageService;
+    
+    @Autowired
+    private CommentMapper commentMapper; // 댓글 매퍼 추가
     
     public List<PopupBoardDTO> selectTop8() {
         return popupBoardMapper.selectTop8(); // 상위 8개의 게시글을 조회
+    }
+    
+    public List<PopupBoardDTO> selectTop6() {
+        return popupBoardMapper.selectTop6(); // 상위 6개의 게시글을 조회
+    }
+    
+    public List<PopupBoardDTO> selectRandomPosts() {
+        return popupBoardMapper.selectRandomPosts(); // 무작위로 6개의 게시글을 조회
+    }
+    
+    public List<PopupBoardDTO> selectByLikes() {
+        return popupBoardMapper.selectByLikes(); // 좋아요가 많은 순으로 게시글 조회
     }
     
     // 카테고리에 따라 게시물 조회 메소드 추가
@@ -34,6 +54,7 @@ public class PopupBoardService {
     	return popupBoardMapper.write(post);
     }
     
+    
     // 글삭제
     public void delete(String board_idx) {
         popupBoardMapper.delete(board_idx);
@@ -44,15 +65,29 @@ public class PopupBoardService {
         popupBoardMapper.edit(popupboardDTO); 
     }
     
-    // 댓글 작성
-    public int writeComment(CommentDTO comment) {
-        return popupBoardMapper.writeComment(comment); // 댓글 작성 메서드 호출
+ // 댓글 작성
+    @Transactional
+    public void writeComment(CommentDTO comment) {
+        commentMapper.popup_writeComment(comment); // 수정: commentMapper 사용
     }
+    
+    
 
     // 특정 팝업 게시글의 댓글 목록 조회
     public List<CommentDTO> getComments(String popup_board_idx) {
-        return popupBoardMapper.getComments(popup_board_idx); // 댓글 목록 조회 메서드 호출
+        List<CommentDTO> comments = popupBoardMapper.getComments(popup_board_idx);
+        
+        for (CommentDTO comment : comments) {
+            // 로그 출력: 각 댓글의 ID 확인
+            System.out.println("Comment ID: " + comment.getCom_idx());
+            
+            // 각 댓글에 대한 이미지 리스트를 가져옴
+            List<ImageDTO> images = imageService.getImages(comment.getCom_idx(), "COMMENT");
+            comment.setCom_img(images); // 댓글에 이미지를 설정
+        }
+        return comments; // comments를 반환
     }
+
     
     //댓글 삭제
     public void deleteComment(String com_idx) {

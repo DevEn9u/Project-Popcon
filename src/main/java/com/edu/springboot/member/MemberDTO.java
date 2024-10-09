@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class MemberDTO {
 
-	private String id;
+	private String id; //likes 테이블에서 참조할 사용자 ID
 	private String name;
 	private String email;
 	private String pass;
