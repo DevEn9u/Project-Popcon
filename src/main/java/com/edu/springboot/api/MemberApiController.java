@@ -60,7 +60,7 @@ public class MemberApiController {
                         .body(Map.of("message", "아이디 또는 비밀번호가 일치하지 않습니다."));
             }
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED) 
                     .body(Map.of("message", "아이디 또는 비밀번호가 일치하지 않습니다."));
         }
     }
