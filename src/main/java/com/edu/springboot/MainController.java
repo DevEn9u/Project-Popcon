@@ -87,6 +87,5 @@ public class MainController {
 	public String chat() {
 		return "forward:/chat/index.html";
 	}
-	
 
 }
