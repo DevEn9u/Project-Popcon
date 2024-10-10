@@ -1,33 +1,33 @@
-// IMypageService.java
+
 package com.edu.springboot.mypage;
 
 import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Mapper;
 
 import com.edu.springboot.board.BoardDTO;
 import com.edu.springboot.booking.bookingDTO;
 import com.edu.springboot.popupboards.CommentDTO;
 import com.edu.springboot.popupboards.PopupBoardDTO;
 
-public interface IMypageService {
+@Mapper
+public interface MypageMapper {
     // 예약한 팝업 정보 보기
-    bookingDTO bookingInfo(String member_id);
+    public bookingDTO bookingInfo(String member_id);
     
     // 예약한 팝업의 제목 가져오기
-    PopupBoardDTO bookingTitle(String board_idx);
+    public PopupBoardDTO bookingTitle(String board_idx);
     
     // 내가 작성한 게시글 목록 조회
-    List<BoardDTO> getPostsByWriter(String writer, int offset, int limit);
+    public List<BoardDTO> getPostsByWriter(Map<String, Object> params);
     
     // 내가 작성한 게시글 총 수 조회
-    int countPostsByWriter(String writer);
+    public int countPostsByWriter(String writer);
     
-    // 내가 작성한 리뷰 목록 조회 (작성자 이름 포함)
-    List<CommentDTO> getAllReviewsByWriter(String writer);
+    // 내가 작성한 리뷰 목록 조회 (모든 리뷰, 작성자 이름 및 팝업 제목 포함)
+    List<CommentDTO> getReviewsByWriterAll(String writer);
 
     // 내가 작성한 리뷰 총 수 조회
     int countReviewsByWriter(String writer);
-    
-    // 내가 좋아요한 팝업 목록 조회
-    List<PopupBoardDTO> getLikedPopupsByMemberId(String memberId);
-    
 }

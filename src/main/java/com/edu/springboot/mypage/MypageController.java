@@ -10,23 +10,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.edu.springboot.board.BoardDTO;
-import com.edu.springboot.booking.bookingDTO;
 import com.edu.springboot.popupboards.CommentDTO;
 import com.edu.springboot.popupboards.PopupBoardDTO;
 
 @Controller
 public class MypageController {
 	
+	@Autowired
 	private IMypageService mypageService;
 
-
-    // 마이페이지 - 메인
-    @GetMapping("/mypage/mypage.do")
-    public String mypageMain(Principal principal, Model model) {
-        String memberId = principal.getName();  // 로그인된 사용자의 ID를 가져옴
-
-        return "/mypages/mypage-main";
-    }
+	//마이페이지 - 메인
+	@GetMapping("/mypage/mypage.do")
+	public String mypageMain(Principal principal, Model model) {
+		return "/mypages/mypage-main";
+	}
 	
 	//마이페이지 - 예약 확인
 	@GetMapping("/mypage/myBooking.do")
