@@ -17,9 +17,6 @@ import com.edu.springboot.popupboards.PopupBoardDTO;
 @Controller
 public class MypageController {
 	
-
-    IMypageService page;
-
 	private IMypageService mypageService;
 
 
@@ -27,12 +24,6 @@ public class MypageController {
     @GetMapping("/mypage/mypage.do")
     public String mypageMain(Principal principal, Model model) {
         String memberId = principal.getName();  // 로그인된 사용자의 ID를 가져옴
-        bookingDTO info = page.bookingInfo(memberId);  // 예약 정보
-        PopupBoardDTO title = page.bookingTitle(memberId);  // 팝업 제목
-
-        // 데이터를 모델에 추가
-        model.addAttribute("info", info);
-        model.addAttribute("title", title);
 
         return "/mypages/mypage-main";
     }

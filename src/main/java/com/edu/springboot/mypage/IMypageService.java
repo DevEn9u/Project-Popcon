@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+import java.util.Map;
 
 import com.edu.springboot.board.BoardDTO;
 import com.edu.springboot.booking.bookingDTO;
@@ -27,9 +27,12 @@ public interface IMypageService {
     // 내가 작성한 게시글 목록 조회
     List<BoardDTO> getPostsByWriter(String writer, int offset, int limit);
     
+    // 내가 작성한 게시글 목록 조회
+    public List<BoardDTO> getPostsByWriter(Map<String, Object> params);
+    
     // 내가 작성한 게시글 총 수 조회
     int countPostsByWriter(String writer);
-    
+  
     // 내가 작성한 리뷰 목록 조회 (작성자 이름 포함)
     List<CommentDTO> getAllReviewsByWriter(String writer);
 

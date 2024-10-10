@@ -4,6 +4,7 @@ package com.edu.springboot.mypage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ import com.edu.springboot.popupboards.PopupBoardMapper;
 public class MypageServiceImpl implements IMypageService {
 
     @Autowired
-    private MypageMapper mypageMapper;
+    private IMypageService mypageMapper;
     @Autowired
     private ImageService imageService;
     @Autowired
@@ -56,7 +57,7 @@ public class MypageServiceImpl implements IMypageService {
     
     @Override
     public List<CommentDTO> getAllReviewsByWriter(String writer) {
-        List<CommentDTO> reviews = mypageMapper.getReviewsByWriterAll(writer);
+        List<CommentDTO> reviews = mypageMapper.getAllReviewsByWriter(writer);
         
         // 각 리뷰에 대한 이미지를 가져와 설정
         for (CommentDTO review : reviews) {
@@ -87,4 +88,9 @@ public class MypageServiceImpl implements IMypageService {
 
         return likedPopups;
     }
+
+	@Override
+	public List<BoardDTO> getPostsByWriter(Map<String, Object> params) {
+		return null;
+	}
 }
