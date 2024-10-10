@@ -443,7 +443,8 @@ function toggleLike(board_idx) {
 					</c:if>
 				</section>
 			</div>
-			<script>
+		</footer>
+		<script>
 		  const openChatWin = (roomId, userId) => {
 			  if(userId != "admin") {
 				  
@@ -471,7 +472,6 @@ function toggleLike(board_idx) {
 			  openChatWin(roomId, userId);
 		  });
 		</script>
-		</footer>
 	</div>
 </body>
 </html>

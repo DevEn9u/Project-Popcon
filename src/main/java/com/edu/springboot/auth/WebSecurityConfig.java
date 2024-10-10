@@ -156,4 +156,9 @@ public class WebSecurityConfig {
 //	public PasswordEncoder passwordEncoder() {
 //		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 //	}
+	
+	@Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
