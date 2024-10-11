@@ -179,7 +179,7 @@ function toggleLike(board_idx) {
 						</div>
 					</div>
 				</div>
-			</section>
+			</section> 
 			<section class="product_slider">
 				<div class="inner">
 					<h2 class="tit">
