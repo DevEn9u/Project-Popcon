@@ -37,7 +37,14 @@ public class BoardService {
     }
     
     public BoardDTO getBoardById(String boardIdx) {
-        return boardMapper.selectBoardById(boardIdx);
+        // 게시글 상세 정보 조회
+        BoardDTO board = boardMapper.selectBoardById(boardIdx);
+        if (board != null) {
+            // 관련 이미지 가져오기
+            List<ImageDTO> images = imageService.getImages(boardIdx, "BOARD");
+            board.setImages(images); // BoardDTO에 images 설정
+        }
+        return board;
     }
     
     public void updateVisitCount(String boardIdx) {
