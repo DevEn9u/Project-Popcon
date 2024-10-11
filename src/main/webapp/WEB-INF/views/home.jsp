@@ -182,7 +182,7 @@ function toggleLike(board_idx) {
 			</section> 
 			<section class="product_slider">
 				<div class="inner">
-					<h2 class="tit">
+					<h2 class="tit"> 
 						굿즈 만족도 100% <strong>10월</strong>
 					</h2>
 					<div class="swiper">
