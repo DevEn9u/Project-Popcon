@@ -30,10 +30,17 @@ public class MypageServiceImpl implements IMypageService {
     @Autowired
     private PopupBoardMapper popupBoardMapper; 
 
+//    @Override
+//    public bookingDTO bookingInfo(String member_id) {
+//        return mypageMapper.bookingInfo(member_id);
+//    }
+    
     @Override
-    public bookingDTO bookingInfo(String member_id) {
-        return mypageMapper.bookingInfo(member_id);
+    public List<bookingDTO> bookingInfo(String member_id) {
+        return mypageMapper.bookingInfo(member_id); // 이미 예약 정보가 리스트로 반환되도록 설정
     }
+    
+    
 
     @Override
     public PopupBoardDTO bookingTitle(String board_idx) {
@@ -86,5 +93,10 @@ public class MypageServiceImpl implements IMypageService {
         }
 
         return likedPopups;
+    }
+    
+    @Override
+    public void cancelBooking(int booking_num, String member_id) {
+        mypageMapper.updateBookingCancellation(booking_num, member_id); // 예약 취소 쿼리 호출
     }
 }
