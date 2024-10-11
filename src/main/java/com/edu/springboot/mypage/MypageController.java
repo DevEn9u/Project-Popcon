@@ -144,6 +144,7 @@ public class MypageController {
         List<bookingDTO> booking = mypageService.bookingInfo(member_id);
         model.addAttribute("booking", booking);
         model.addAttribute("cancelMessage", "취소되었습니다."); // 취소 메시지 추가
+        
 
         return "/mypages/mypage-booking"; // 예약 확인 페이지로 리다이렉트
     }
