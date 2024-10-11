@@ -13,6 +13,8 @@ public interface PopupBoardMapper {
     
     // IDX 기준 상위 8개의 글만 목록으로 보기 
     public List<PopupBoardDTO> selectTop8();
+    // 전체내용 보기
+    public List<PopupBoardDTO> selectAll();
     //6개보기
     public List<PopupBoardDTO> selectTop6();
 

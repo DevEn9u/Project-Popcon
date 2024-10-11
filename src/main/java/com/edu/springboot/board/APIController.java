@@ -30,7 +30,7 @@ public class APIController {
 	private IMemberService memberService;
 
 
-	 // 자유게시판 목록
+	// 자유게시판 목록
     @GetMapping("/api/freeBoard/list")
     public ResponseEntity<List<BoardDTO>> listBoards(@RequestParam(value = "page", defaultValue = "1") int page) {
         List<BoardDTO> boardList = boardService.getFreeBoardsWithPaging(page);

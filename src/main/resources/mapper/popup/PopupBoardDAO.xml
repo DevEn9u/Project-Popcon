@@ -15,6 +15,17 @@
         )
     </select>
     
+    <!-- API로 가져오기 위한 모든 게시글 조회 -->
+    <select id="selectAll" resultType="com.edu.springboot.popupboards.PopupBoardDTO">
+        SELECT * FROM (
+            SELECT POPUP_BOARD.*, ROWNUM AS rnum 
+            FROM (
+                SELECT * FROM POPUP_BOARD
+                ORDER BY postdate DESC
+            ) POPUP_BOARD
+        )
+    </select>
+    
     <!-- 작성일 기준 최근 작성된 게시글 6개 조회 -->
     <select id="selectTop6" resultType="com.edu.springboot.popupboards.PopupBoardDTO">
         SELECT * FROM (

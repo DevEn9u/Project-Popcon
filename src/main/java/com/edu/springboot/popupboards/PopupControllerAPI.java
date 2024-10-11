@@ -25,6 +25,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.edu.springboot.member.IMemberService;
 import com.edu.springboot.member.MemberDTO;
+import com.edu.springboot.board.BoardDTO;
+import com.edu.springboot.board.BoardMapper;
+import com.edu.springboot.board.BoardService;
 import com.edu.springboot.images.ImageDTO;
 import com.edu.springboot.images.ImageService;
 
@@ -37,15 +40,32 @@ public class PopupControllerAPI {
     
     @Autowired
     private final PopupBoardMapper popupBoardMapper;
+    @Autowired
+	private PopupBoardService popupBoardService;
+    @Autowired
+	private IMemberService memberService;
 
     
     // 플러터에서 이미지 가져오기 위해 활용
-    
     @GetMapping("/api/popupBoard/{board_idx}")
     public ResponseEntity<PopupBoardDTO> getPopupBoard(@PathVariable String board_idx) {
         PopupBoardDTO popupBoard = popupBoardMapper.popupView(board_idx);
         // 필요시 추가적인 정보 설정
         return ResponseEntity.ok(popupBoard);
+    }
+    
+    // 팝업게시판 목록
+    @GetMapping("/api/popupBoard/list")
+    public ResponseEntity<List<PopupBoardDTO>> listPopup() {
+        List<PopupBoardDTO> popupList = popupBoardService.selectAll();
+        // 각 게시글에 대해 작성자 이름 조회
+        for (PopupBoardDTO popupBoard : popupList) {
+            MemberDTO member = memberService.getMemberById(popupBoard.getWriter());
+            String writerName = (member != null) ? member.getName() : "알 수 없음";
+            popupBoard.setWriter(writerName);
+        }
+
+        return ResponseEntity.ok(popupList);
     }
     
 }
