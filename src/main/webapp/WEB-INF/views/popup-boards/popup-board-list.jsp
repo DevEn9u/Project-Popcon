@@ -92,14 +92,15 @@
 					<c:forEach var="popup" items="${popupList}">
 						<li class="popup_banner"><a
 							href="/popupBoard/view/${popup.board_idx}"> <img
-								src="${popup.thumb}" alt="Thumbnail" class="popup_thumbnail" />
+								src="${popup.thumb != null && popup.thumb != '' ? popup.thumb : '../images/noimage.jpg'}"
+								alt="${popup.board_title != null ? popup.board_title : '썸네일 없음'}"
+								class="popup_thumbnail" />
 								<div class="txt_title">
 									<h2>
 										${popup.board_title}
 										<button id="likeBtn_${popup.board_idx}"
 											class="like_btn <c:if test="${popup.liked}">active</c:if>"
 											onclick="toggleLike('${popup.board_idx}'); event.preventDefault(); event.stopPropagation();">
-											<!-- event.preventDefault() 추가 -->
 										</button>
 									</h2>
 									<div class="popup_location">
