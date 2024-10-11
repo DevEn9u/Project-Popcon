@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.edu.springboot.board.BoardDTO;
 import com.edu.springboot.booking.bookingDTO;
@@ -13,8 +14,11 @@ import com.edu.springboot.popupboards.PopupBoardDTO;
 
 @Mapper
 public interface MypageMapper {
-    // 예약한 팝업 정보 보기
-    public bookingDTO bookingInfo(String member_id);
+//    // 예약한 팝업 정보 보기
+//    public bookingDTO bookingInfo(String member_id);
+	
+	// 예약한 팝업 정보 보기 (리스트로 변경)
+    public List<bookingDTO> bookingInfo(String member_id);
     
     // 예약한 팝업의 제목 가져오기
     public PopupBoardDTO bookingTitle(String board_idx);
@@ -30,4 +34,7 @@ public interface MypageMapper {
 
     // 내가 작성한 리뷰 총 수 조회
     int countReviewsByWriter(String writer);
+    
+    // 예약 취소를 위한 메서드
+    void updateBookingCancellation(@Param("booking_num") int booking_num, @Param("member_id") String member_id);
 }

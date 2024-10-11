@@ -14,13 +14,17 @@
 	</select>
     
     <!-- 예약 정보 저장 -->
-    <insert id="booking">
+    <!-- <insert id="booking">
 	    INSERT INTO booking (booking_num, popup_idx, member_id, visit_date, booking_date, price, headcount, is_paid)
 	    VALUES
 	    (booking_num_seq(), #{popup_idx}, #{member_id}, #{visit_date}, sysdate, #{price}, #{headcount}, #{is_paid})
-	</insert>
+	</insert> -->
 	
+	<insert id="booking">
+    INSERT INTO booking (booking_num, popup_idx, member_id, visit_date, booking_date, price, headcount, is_paid, popup_title)
+    VALUES
+    (booking_num_seq(), #{popup_idx}, #{member_id}, #{visit_date}, sysdate, #{price}, #{headcount}, #{is_paid}, 
+     (SELECT board_title FROM popup_board WHERE board_idx = #{popup_idx}) )
+</insert>
 	
-	
-
 </mapper>

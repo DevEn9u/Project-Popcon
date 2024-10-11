@@ -1,5 +1,6 @@
 package com.edu.springboot.booking;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import lombok.Data;
@@ -16,4 +17,6 @@ public class bookingDTO {
     private int headcount;  // 인원
     private int is_paid;  // 결제 여부  
     private int is_canceled;  // 예약 취소 여부
+    private String popup_title; //팝업 제목
+   
 }

@@ -11,7 +11,7 @@
 	<select id="getNoticeBoards" resultType="com.edu.springboot.board.BoardDTO">
     	SELECT * FROM BOARD WHERE board_type = 'notice' ORDER BY postdate DESC
 	</select>
-	<select id="selectBoardById" resultType="com.edu.springboot.board.BoardDTO">
+	<select id="selectBoardById" parameterType="String" resultType="com.edu.springboot.board.BoardDTO">
 	    SELECT * FROM BOARD WHERE board_idx = #{board_idx}
 	</select>
 	<!-- 게시글 삽입 쿼리 -->
@@ -57,10 +57,10 @@
 	<select id="getNoticeBoardCount" resultType="int">
 	    SELECT COUNT(*) FROM BOARD WHERE board_type = 'notice'
 	</select>
-	<update id="updateVisitCount">
+	<update id="updateVisitCount" parameterType="String">
 	    UPDATE BOARD
 	    SET visitcount = visitcount + 1
-	    WHERE board_idx = #{boardIdx}
+	    WHERE board_idx = #{board_idx}
 	</update>
 
 

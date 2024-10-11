@@ -10,14 +10,16 @@ import com.edu.springboot.images.ImageDTO;
 import com.edu.springboot.images.ImageService;
 import com.edu.springboot.popupboards.CommentDTO;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class BoardService {
     
-    @Autowired
-    private BoardMapper boardMapper;
+	private final BoardMapper boardMapper;
     
-    @Autowired
-    private ImageService imageService;
+    
+    private final ImageService imageService;
     
     @Autowired
     private CommentMapper commentMapper; // 댓글 매퍼 추가

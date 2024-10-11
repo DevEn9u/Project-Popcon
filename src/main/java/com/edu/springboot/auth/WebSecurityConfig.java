@@ -117,7 +117,7 @@ public class WebSecurityConfig {
 	    DefaultHttpFirewall firewall = new DefaultHttpFirewall();
 	    firewall.setAllowUrlEncodedSlash(true);
 	    return firewall;
-	}
+	} 
 	
 	
 

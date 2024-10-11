@@ -291,6 +291,7 @@
   box-shadow: -10px 10px 10px 0 #1212125c;
 }
 .my_info .box2 .popup_wrap .popup_detail .top {
+  margin-bottom:10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -319,19 +320,25 @@
   display: block;
   width: 20px;
   height: 20px;
-  -webkit-mask: url(/images/mypage/cacel_btn.svg) no-repeat left top / 100%;
-  mask: url(/images/mypage/cacel_btn.svg) no-repeat left top / 100%;
+  -webkit-mask: url(/images/mypage/review_write.svg) no-repeat left top / 100%;
+  mask: url(/images/mypage/review_write.svg) no-repeat left top / 100%;
   background: #121212;
 }
 .my_info .box2 .popup_wrap .popup_detail .bottom span {
   display: block;
   width: 20px;
   height: 20px;
-  -webkit-mask: url(/images/mypage/review_write.svg) no-repeat left top / 100%;
-  mask: url(/images/mypage/review_write.svg) no-repeat left top / 100%;
+  -webkit-mask: url(/images/mypage/cacel_btn.svg) no-repeat left top / 100%;
+  mask: url(/images/mypage/cacel_btn.svg) no-repeat left top / 100%;
   background: #121212;
   margin-left: 20px;
   margin-right: 10px;
+}
+.mypage_cancel_btn {
+	display: flex;
+    border: none;
+    background: white;
+    color: #121212;
 }
 
 /* 마이페이지 포인트 */
