@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class APIController {
 
     private final BoardService boardService;
-    private final ImageService imageService;
+    private final ImageService imageService; 
     private final IMemberService memberService;
 
     // 자유게시판 목록
