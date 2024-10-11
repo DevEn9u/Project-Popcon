@@ -21,11 +21,15 @@ public class MypageController {
 	@Autowired
 	private IMypageService mypageService;
 
-	//마이페이지 - 메인
-	@GetMapping("/mypage/mypage.do")
-	public String mypageMain(Principal principal, Model model) {
-		return "/mypages/mypage-main";
-	}
+	 // 마이페이지 - 메인
+    @GetMapping("/mypage/mypage.do")
+    public String mypageMain(Principal principal, Model model) {
+        String memberId = principal.getName(); // 현재 로그인한 사용자 ID 가져오기
+        List<bookingDTO> booking = mypageService.bookingInfo(memberId); // 예약 정보 리스트 가져오기
+
+        model.addAttribute("booking", booking); // 모델에 예약 정보 리스트 추가
+        return "/mypages/mypage-main";
+    }
 	
 //	//마이페이지 - 예약 확인
 	@GetMapping("/mypage/myBooking.do")
