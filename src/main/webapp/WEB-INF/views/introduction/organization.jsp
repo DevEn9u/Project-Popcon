@@ -36,12 +36,6 @@
               <li class="list_title">
                 <a href="/introduction/team-member.do">팀원 소개</a>
               </li>
-              <ul class="depth2">
-                <li><a href="/mypage/myPost.do">강인구</a></li>
-                <li><a href="/mypage/myReview.do">박여은</a></li>
-                <li><a href="/mypage/myReview.do">민경준</a></li>
-                <li><a href="/mypage/myReview.do">육현희</a></li>
-              </ul>
             </ul>
           </div>
           <div class="my_info_wrap">
