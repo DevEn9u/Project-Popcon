@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.edu.springboot.images.ImageDTO;
+import com.edu.springboot.popupboards.CommentDTO;
 
 import lombok.Data;
 
@@ -21,4 +22,5 @@ public class BoardDTO {
     private List<ImageDTO> images; // 연관된 이미지 리스트
     
     private String writerName; // 작성자 이름
+    private List<CommentDTO> comments; // 댓글 리스트 추가
 }
