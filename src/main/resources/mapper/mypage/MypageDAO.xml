@@ -6,15 +6,16 @@
 
 <mapper namespace = "com.edu.springboot.mypage.MypageMapper">
 	
-	 <!-- 예약 정보 가져오기 -->
-<select id="bookingInfo" parameterType="String" resultType="com.edu.springboot.booking.bookingDTO">
-    SELECT b.booking_num, b.popup_idx, b.visit_date, b.price, b.headcount,
-           b.is_canceled,
-           p.board_title AS popup_title
-    FROM booking b
-    JOIN POPUP_BOARD p ON b.popup_idx = p.board_idx
-    WHERE b.member_id = #{member_id}
-</select>
+	 <!-- 예약 정보 가져오기. 빠른 날짜 순으로 정렬 -->
+	<select id="bookingInfo" parameterType="String" resultType="com.edu.springboot.booking.bookingDTO">
+	    SELECT b.booking_num, b.popup_idx, b.visit_date, b.price, b.headcount,
+	           b.is_canceled,
+	           p.board_title AS popup_title
+	    FROM booking b
+	    JOIN POPUP_BOARD p ON b.popup_idx = p.board_idx
+	    WHERE b.member_id = #{member_id}
+	    ORDER BY b.visit_date ASC
+	</select>
     
     <!-- 예약한 팝업의 제목 가져오기 -->
     <select id="bookingTitle" parameterType="String" resultType="com.edu.springboot.popupboards.PopupBoardDTO">

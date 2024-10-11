@@ -283,7 +283,10 @@
 
 				<div class="open_time_wrap">
 					<h2 class="open_time">운영 시간</h2>
-					<div class="weekdays">${popup.open_days}${popup.open_hours}</div>
+					<div class="weekdays_wrap" style="display:flex;">
+					<div class="weekdays">${popup.open_days}</div>
+					<div class="weekdays" style="margin-left:10px;">${popup.open_hours}</div>
+					</div>
 				</div>
 
 				<div class="content">
