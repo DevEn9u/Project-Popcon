@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="ko">
 <c:import url="../include/head.jsp" />
 <c:import url="../include/header.jsp" var="common_header" />
