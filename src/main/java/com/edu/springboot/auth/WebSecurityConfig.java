@@ -72,7 +72,6 @@ public class WebSecurityConfig {
 				.usernameParameter("login_id")
 				.passwordParameter("login_pw")
 				.successHandler(new CustomAuthenticationSuccessHandler())
-//				.failureHandler(new CustomAuthenticationFailureHandler())
 				.permitAll());
 
 		/* 로그인 정보 저장 */

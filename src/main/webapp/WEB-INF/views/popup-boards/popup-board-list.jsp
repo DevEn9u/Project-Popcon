@@ -10,13 +10,6 @@
 <link rel="stylesheet"
 	href="/css/popup_list.css?v=<?php echo time(); ?>">
 <body>
-	<!-- 비로그인 상태로 글 선택 시 로그인 페이지로 이동 -->
-	<c:if test="${loginRequired}">
-		<script>
-			alert('로그인을 해 주십시오.');
-			window.location.href = '/login.do';
-		</script>
-	</c:if>
 	<!-- 조아요 클릭시 빨개짐 -->
 	<script>
 		function toggleLike(board_idx) {

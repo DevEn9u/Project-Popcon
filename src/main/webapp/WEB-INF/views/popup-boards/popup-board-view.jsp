@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
-<!DOCTYPE html>
+
+<!DOCTYPE html> 
 <html lang="ko">
 <c:import url="../include/head.jsp" />
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
+<c:set var="isLoggedIn" value="${not empty pageContext.request.userPrincipal}" />
 <link rel="stylesheet" href="/css/popup_view.css">
 <body>
 
@@ -262,14 +264,20 @@
 
 							</c:when>
 							<c:otherwise>
-								<button class="btn pv_booking_btn"
-									onclick="goToBooking(${popup.board_idx});">예약하기</button>
+								<!-- "예약하기" 버튼을 로그인한 사용자에게만 표시 -->
+								<c:if test="${isLoggedIn}">
+									<button class="btn pv_booking_btn"
+										onclick="goToBooking(${popup.board_idx});">예약하기</button>
+								</c:if>
 							</c:otherwise>
 						</c:choose>
 
-						<button id="likeBtn"
-							class="like_btn <c:if test="${isLiked}">active</c:if>"
-							onclick="toggleLike('${popup.board_idx}');"></button>
+						<!-- "좋아요" 버튼을 로그인한 사용자에게만 표시 -->
+						<c:if test="${isLoggedIn}">
+							<button id="likeBtn"
+								class="like_btn <c:if test="${isLiked}">active</c:if>"
+								onclick="toggleLike('${popup.board_idx}');"></button>
+						</c:if>
 					</h2>
 					<div class="pv_title_date">${popup.start_date}~
 						${popup.end_date}</div>
@@ -281,9 +289,9 @@
 
 				<div class="open_time_wrap">
 					<h2 class="open_time">운영 시간</h2>
-					<div class="weekdays_wrap" style="display:flex;">
-					<div class="weekdays">${popup.open_days}</div>
-					<div class="weekdays" style="margin-left:10px;">${popup.open_hours}</div>
+					<div class="weekdays_wrap" style="display: flex;">
+						<div class="weekdays">${popup.open_days}</div>
+						<div class="weekdays" style="margin-left: 10px;">${popup.open_hours}</div>
 					</div>
 				</div>
 
@@ -311,32 +319,56 @@
 				</div>
 
 				<div class="pv_btn_wrap">
-					<button class="btn pv_booking_btn"
-						onclick="goToBooking(${popup.board_idx});">예약하기</button>
+					<c:choose>
+						<c:when
+							test="${popup.writer == pageContext.request.userPrincipal.name}">
+							<form id="deleteForm"
+								action="${pageContext.request.contextPath}/popupBoard/delete.do"
+								method="post">
+								<input type="hidden" name="board_idx" value="${popup.board_idx}" />
+								<button class="btn pv_delete_btn" type="button"
+									onclick="if(confirm('정말 삭제하시겠습니까?')) { document.getElementById('deleteForm').submit(); }">삭제하기</button>
+							</form>
+							<button type="button" class="btn pv_edit_btn"
+								style="margin-left: 0;"
+								onclick="location.href='${pageContext.request.contextPath}/popupBoard/edit.do?board_idx=${popup.board_idx}';">
+								수정하기</button>
+
+						</c:when>
+						<c:otherwise>
+							<!-- "예약하기" 버튼을 로그인한 사용자에게만 표시 -->
+							<c:if test="${isLoggedIn}">
+								<button class="btn pv_booking_btn"
+									onclick="goToBooking(${popup.board_idx});">예약하기</button>
+							</c:if>
+						</c:otherwise>
+					</c:choose>
 					<button class="btn pv_list_btn"
 						onclick="location.href='../list.do';">목록</button>
 				</div>
 				<div class="comment_section">
-					<h3>후기 작성하기</h3>
-					<form name="commentFrm" method="post" class="comment_form"
-						action="${pageContext.request.contextPath}/popupBoard/writeComment.do"
-						enctype="multipart/form-data">
-						<!-- 이 부분 추가 -->
-						<input type="hidden" name="popup_board_idx"
-							value="${popup.board_idx}" />
-						<textarea name="com_contents" rows="4" cols="50"
-							class="comment_area" placeholder="리뷰를 입력하세요"></textarea>
-						<br /> <input type="hidden" name="${_csrf.parameterName}"
-							value="${_csrf.token}" />
-						<!-- 파일 업로드 기능 -->
-						<div class="file_wrap">
-							<input type="text" class="file_name" readonly> <input
-								type="file" id="comment_upload" class="blind" name="imageFile"
-								multiple onchange="handleFileSelect(this)"> <label
-								for="comment_upload" class="comment_upload">파일선택</label>
-						</div>
-						<button type="submit" class="btn comment_btn">리뷰 작성</button>
-					</form>
+					<c:if test="${isLoggedIn}">
+						<h3>후기 작성하기</h3>
+						<form name="commentFrm" method="post" class="comment_form"
+							action="${pageContext.request.contextPath}/popupBoard/writeComment.do"
+							enctype="multipart/form-data">
+							<!-- 이 부분 추가 -->
+							<input type="hidden" name="popup_board_idx"
+								value="${popup.board_idx}" />
+							<textarea name="com_contents" rows="4" cols="50"
+								class="comment_area" placeholder="리뷰를 입력하세요"></textarea>
+							<br /> <input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />
+							<!-- 파일 업로드 기능 -->
+							<div class="file_wrap">
+								<input type="text" class="file_name" readonly> <input
+									type="file" id="comment_upload" class="blind" name="imageFile"
+									multiple onchange="handleFileSelect(this)"> <label
+									for="comment_upload" class="comment_upload">파일선택</label>
+							</div>
+							<button type="submit" class="btn comment_btn">리뷰 작성</button>
+						</form>
+					</c:if>
 				</div>
 
 				<!-- 후기목록 -->
@@ -361,7 +393,6 @@
 								<p>첨부된 이미지가 없습니다.</p>
 							</c:if>
 							<p class="comment_content">${comment.com_contents}</p>
-							<!-- 리뷰 수정/삭제 버튼 -->
 							<!-- 리뷰 수정/삭제 버튼 -->
 							<c:if
 								test="${comment.com_writer == pageContext.request.userPrincipal.name}">
