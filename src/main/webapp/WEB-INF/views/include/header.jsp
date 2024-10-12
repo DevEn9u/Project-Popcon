@@ -2,6 +2,30 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <header id="header">
+
+<script>
+  //태그 검색 기능
+  function performSearch() {
+    var searchKeyword = document.getElementById("searchInput").value;
+    if (searchKeyword.trim() !== "") {
+      var searchUrl = "/popupBoard/list.do?category=" + encodeURIComponent(searchKeyword);
+      window.location.href = searchUrl;
+    } else {
+      alert("검색어를 입력해주세요.");
+    }
+  }
+  //검색어 입력 필드에서 엔터 키 감지
+  window.onload = function() {
+	    var searchButton = document.querySelector(".search_btn");
+	    searchButton.addEventListener("click", performSearch);
+	    var searchInput = document.getElementById("searchInput");
+	    searchInput.addEventListener("keyup", function(event) {
+	      if (event.key === "Enter") {
+	        performSearch();
+	      }
+	    });
+	  }
+</script>
   <div class="inner">
     <h1 class="logo">
       <a href="/">
@@ -46,8 +70,8 @@
       </ul>
     </nav>
     <div class="search">
-      <input type="text" placeholder="검색어를 입력하세요" />
-      <button type="button" class="search_btn">
+      <input type="text" id="searchInput" placeholder="키워드를 입력해주세요" />
+      <button type="button" class="search_btn" onclick="performSearch()">
         <span class="blind">검색버튼</span>
       </button>
     </div>

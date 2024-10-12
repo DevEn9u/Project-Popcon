@@ -49,391 +49,172 @@ function toggleLike(board_idx) {
 	<div id="wrap">
 		${common_header }
 
-<<<<<<< HEAD
-	<main id="container">
-	      <section class="main_slider">
-	        <div class="inner">
-	          <div class="swiper">
-	            <div class="swiper-wrapper">
-	              <div class="swiper-slide">
-	                <ul class="main_popup">
-	                  <li>
-	                    <a href="#">
-	                      <div class="img_wrap">
-	                        <img src="/images/main/mainslider1.png">
-	                      </div>
-	                      <div class="txt_wrap">
-	                        <p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-	                        <p>24.09.24 - 09.28</p>
-	                        <p><img src="/images/main/location.svg">서울특별시 마포구</p>
-	                      </div>
-	                    </a>
-	                  </li>
-	                </ul>
-	              </div>
-	              <div class="swiper-slide">
-	                <ul class="main_popup">
-	                  <li>
-	                    <a href="#">
-	                      <div class="img_wrap">
-	                        <img src="/images/main/mainslider2.jpg">
-	                      </div>
-	                      <div class="txt_wrap">
-	                        <p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-	                        <p>24.09.24 - 09.28</p>
-	                        <p><img src="/images/main/location.svg">서울특별시 마포구</p>
-	                      </div>
-	                    </a>
-	                  </li>
-	                </ul>
-	              </div>
-	              <div class="swiper-slide">
-	                <ul class="main_popup">
-	                  <li>
-	                    <a href="#">
-	                      <div class="img_wrap">
-	                        <img src="/images/main/mainslider2.jpg" alt="팝업 홍보">
-	                        <img src="/images/main/slider_background.png" alt="배경">
-	                      </div>
-	                      <div class="txt_wrap">
-	                        <p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-	                        <p>24.09.24 - 09.28</p>
-	                        <p><img src="/images/main/location.svg">서울특별시 마포구</p>
-	                      </div>
-	                    </a>
-	                  </li>
-	                </ul>
-	              </div>
-	              <div class="swiper-slide">
-	                <ul class="main_popup">
-	                  <li>
-	                    <a href="#">
-	                      <div class="img_wrap">
-	                        <img src="/images/main/mainslider1.png">
-	                      </div>
-	                      <div class="txt_wrap">
-	                        <p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-	                        <p>24.09.24 - 09.28</p>
-	                        <p><img src="/images/main/location.svg">서울특별시 마포구</p>
-	                      </div>
-	                    </a>
-	                  </li>
-	                </ul>
-	              </div>
-	            </div>
-	            <div class="swiper-pagination pagination"></div>
-	            <div class="swiper-button-prev arrow_btn "></div>
-	            <div class="swiper-button-next arrow_btn"></div>
-	          </div>
-	        </div>
-	      </section>
-	      <!-- <section class="pick_slider">
-	        <div class="inner">
-	          <h2 class="tit">담당자 픽 팝업 <strong>10월</strong></h2>
-	          <div class="swiper">
-	            <div class="swiper-wrapper">
-	              <div class="swiper-slide">
-	                <a class="image" href="#"><img src="/images/main/mainslider2.jpg"></a>
-	              </div>
-	              <div class="swiper-slide">
-	                <a class="image" href="#"><img src="/images/main/mainslider2.jpg"></a>
-	              </div>
-	              <div class="swiper-slide">
-	                <a class="image" href="#"><img src="/images/main/mainslider2.jpg"></a>
-	              </div>
-	              <div class="swiper-slide">
-	                <a class="image" href="#"><img src="/images/main/mainslider2.jpg"></a>
-	              </div>
-	              <div class="swiper-slide">
-	                <a class="image" href="#"><img src="/images/main/mainslider2.jpg"></a>
-	              </div>
-	              <div class="swiper-slide">
-	                <a class="image" href="#"><img src="/images/main/mainslider2.jpg"></a>
-	              </div>
-	            </div>
-	          </div>
-	        </div>
-	      </section>
-	      <section class="popular_slider">
-	        <div class="inner">
-	          <h2 class="tit">인기 팝업 <strong>10월</strong></h2>
-	          <div class="swiper">
-	            <div class="swiper-wrapper">
-	              <div class="swiper-slide">
-	                <a class="image" href="./popupBoard/list.do"><img src="/images/main/mainslider1.png"></a>
-	              </div>
-	              <div class="swiper-slide">
-	                <a class="image" href="#"><img src="/images/main/mainslider1.png"></a>
-	              </div>
-	              <div class="swiper-slide">
-	                <a class="image" href="#"><img src="/images/main/mainslider1.png"></a>
-	              </div>
-	              <div class="swiper-slide">
-	                <a class="image" href="#"><img src="/images/main/mainslider1.png"></a>
-	              </div>
-	              <div class="swiper-slide">
-	                <a class="image" href="#"><img src="/images/main/mainslider1.png"></a>
-	              </div>
-	              <div class="swiper-slide">
-	                <a class="image" href="#"><img src="/images/main/mainslider1.png"></a>
-	              </div>
-	            </div>
-	          </div>
-	        </div>
-	      </section>
-	      <section class="day_slider">
-	        <div class="inner">
-	          <div class="slider" id="date-slider">
-	          </div>
-	          <span class="line"></span>
-	          <div class="today_popup">
-	            <div class="col1">
-	              <a class="item" href="#">
-	                <img src="/images/main/mainslider2.jpg">
-	                <ul class="txt_wrap">
-	                  <li class="popup_name"><p>롯데월드몰 Wonderful Wonderland</p></li>
-	                  <li class="popup_location">
-	                    <img src="/images/main/location.svg" alt="장소">
-	                    <p>서울특별시 송파구</p>
-	                  </li>
-	                  <p class="popup_date">24.05.11 - 24.09.27</p>
-	                </ul>
-	              </a>
-	              <a class="item" href="#">
-	                <img src="/images/main/mainslider2.jpg">
-	                <ul class="txt_wrap">
-	                  <li class="popup_name"><p>롯데월드몰 Wonderful Wonderland</p></li>
-	                  <li class="popup_location">
-	                    <img src="/images/main/location.svg" alt="장소">
-	                    <p>서울특별시 송파구</p>
-	                  </li>
-	                  <p class="popup_date">24.05.11 - 24.09.27</p>
-	                </ul>
-	              </a>
-	              <a class="item" href="#">
-	                <img src="/images/main/mainslider2.jpg">
-	                <ul class="txt_wrap">
-	                  <li class="popup_name"><p>롯데월드몰 Wonderful Wonderland</p></li>
-	                  <li class="popup_location">
-	                    <img src="/images/main/location.svg" alt="장소">
-	                    <p>서울특별시 송파구</p>
-	                  </li>
-	                  <p class="popup_date">24.05.11 - 24.09.27</p>
-	                </ul>
-	              </a>
-	              <a class="item" href="#">
-	                <img src="/images/main/mainslider2.jpg">
-	                <ul class="txt_wrap">
-	                  <li class="popup_name"><p>롯데월드몰 Wonderful Wonderland</p></li>
-	                  <li class="popup_location">
-	                    <img src="/images/main/location.svg" alt="장소">
-	                    <p>서울특별시 송파구</p>
-	                  </li>
-	                  <p class="popup_date">24.05.11 - 24.09.27</p>
-	                </ul>
-	              </a>
-	            </div>
-	            <div class="col2">
-	              <a class="item" href="#">
-	                <img src="/images/main/mainslider2.jpg">
-	                <ul class="txt_wrap">
-	                  <li class="popup_name"><p>롯데월드몰 Wonderful Wonderland</p></li>
-	                  <li class="popup_location">
-	                    <img src="/images/main/location.svg" alt="장소">
-	                    <p>서울특별시 송파구</p>
-	                  </li>
-	                  <p class="popup_date">24.05.11 - 24.09.27</p>
-	                </ul>
-	              </a>
-	              <a class="item" href="#">
-	                <img src="/images/main/mainslider2.jpg">
-	                <ul class="txt_wrap">
-	                  <li class="popup_location">
-	                    <img src="/images/main/location.svg" alt="장소">
-	                    <p>서울특별시 송파구</p>
-	                  </li>
-	                  <p class="popup_date">24.05.11 - 24.09.27</p>
-	                </ul>
-	              </a>
-	              <a class="item" href="#">
-	                <img src="/images/main/mainslider2.jpg">
-	                <ul class="txt_wrap">
-	                  <li class="popup_name"><p>롯데월드몰 Wonderful Wonderland</p></li>
-	                  <li class="popup_location">
-	                    <img src="/images/main/location.svg" alt="장소">
-	                    <p>서울특별시 송파구</p>
-	                  </li>
-	                  <p class="popup_date">24.05.11 - 24.09.27</p>
-	                </ul>
-	              </a>
-	              <a class="item" href="#">
-	                <img src="/images/main/mainslider2.jpg">
-	                <ul class="txt_wrap">
-	                  <li class="popup_name"><p>롯데월드몰 Wonderful Wonderland</p></li>
-	                  <li class="popup_location">
-	                    <img src="/images/main/location.svg" alt="장소">
-	                    <p>서울특별시 송파구</p>
-	                  </li>
-	                  <p class="popup_date">24.05.11 - 24.09.27</p>
-	                </ul>
-	              </a>
-	            </div>
-	          </div>
-	        </div>
-	      </section>
-	      <section class="season_slider">
-	        <div class="inner">
-	          <h2 class="tit">가을에 어울리는 팝업 <strong>10월</strong></h2>
-	          <div class="swiper">
-	            <div class="swiper-wrapper">
-	              <div class="swiper-slide">
-	                <a class="image" href="#">
-	                  <div class="img_wrap">
-	                    <img src="/images/main/mainslider1.png">
-	                  </div>
-	                  <div class="txt_wrap">
-	                    <p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-	                    <p class="slide_content"><img src="/images/main/location.svg">서울특별시 마포구</p>
-	                  </div>
-	                </a>
-	              </div>
-	              <div class="swiper-slide">
-	                <a class="image" href="#">
-	                  <div class="img_wrap">
-	                    <img src="/images/main/mainslider1.png">
-	                  </div>
-	                  <div class="txt_wrap">
-	                    <p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-	                    <p class="slide_content"><img src="/images/main/location.svg">서울특별시 마포구</p>
-	                  </div>
-	                </a>
-	              </div>
-	              <div class="swiper-slide">
-	                <a class="image" href="#">
-	                  <div class="img_wrap">
-	                    <img src="/images/main/mainslider1.png">
-	                  </div>
-	                  <div class="txt_wrap">
-	                    <p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-	                    <p class="slide_content"><img src="/images/main/location.svg">서울특별시 마포구</p>
-	                  </div>
-	                </a>
-	              </div>
-	              <div class="swiper-slide">
-	                <a class="image" href="#">
-	                  <div class="img_wrap">
-	                    <img src="/images/main/mainslider1.png">
-	                  </div>
-	                  <div class="txt_wrap">
-	                    <p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-	                    <p class="slide_content"><img src="/images/main/location.svg">서울특별시 마포구</p>
-	                  </div>
-	                </a>
-	              </div>
-	              <div class="swiper-slide">
-	                <a class="image" href="#">
-	                  <div class="img_wrap">
-	                    <img src="/images/main/mainslider1.png">
-	                  </div>
-	                  <div class="txt_wrap">
-	                    <p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-	                    <p class="slide_content"><img src="/images/main/location.svg">서울특별시 마포구</p>
-	                  </div>
-	                </a>
-	              </div>
-	              <div class="swiper-slide">
-	                <a class="image" href="#">
-	                  <div class="img_wrap">
-	                    <img src="/images/main/mainslider1.png">
-	                  </div>
-	                  <div class="txt_wrap">
-	                    <p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-	                    <p class="slide_content"><img src="/images/main/location.svg">서울특별시 마포구</p>
-	                  </div>
-	                </a>
-	              </div>
-	            </div>
-	          </div>
-	        </div>
-	      </section>
-	      <section class="product_slider">
-	        <div class="inner">
-	          <h2 class="tit">굿즈 만족도 100% <strong>10월</strong></h2>
-	          <div class="swiper">
-	            <div class="swiper-wrapper">
-	              <div class="swiper-slide">
-	                <a class="image" href="#">
-	                  <div class="img_wrap">
-	                    <img src="/images/main/mainslider1.png">
-	                  </div>
-	                  <div class="txt_wrap">
-	                    <p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-	                  </div>
-	                </a>
-	              </div>
-	              <div class="swiper-slide">
-	                <a class="image" href="#">
-	                  <div class="img_wrap">
-	                    <img src="/images/main/mainslider1.png">
-	                  </div>
-	                  <div class="txt_wrap">
-	                    <p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-	                  </div>
-	                </a>
-	              </div>
-	              <div class="swiper-slide">
-	                <a class="image" href="#">
-	                  <div class="img_wrap">
-	                    <img src="/images/main/mainslider1.png">
-	                  </div>
-	                  <div class="txt_wrap">
-	                    <p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-	                  </div>
-	                </a>
-	              </div>
-	              <div class="swiper-slide">
-	                <a class="image" href="#">
-	                  <div class="img_wrap">
-	                    <img src="/images/main/mainslider1.png">
-	                  </div>
-	                  <div class="txt_wrap">
-	                    <p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-	                  </div>
-	                </a>
-	              </div>
-	              <div class="swiper-slide">
-	                <a class="image" href="#">
-	                  <div class="img_wrap">
-	                    <img src="/images/main/mainslider1.png">
-	                  </div>
-	                  <div class="txt_wrap">
-	                    <p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-	                  </div>
-	                </a>
-	              </div>
-	              <div class="swiper-slide">
-	                <a class="image" href="#">
-	                  <div class="img_wrap">
-	                    <img src="/images/main/mainslider1.png">
-	                  </div>
-	                  <div class="txt_wrap">
-	                    <p class="slide_title">쓰담서울 시즌4 : 해피 쓰담 데이</p>
-	                  </div>
-	                </a>
-	              </div>
-	            </div>
-	          </div>
-	        </div>
-	      </section> -->
-	</main>
-	<footer id="footer">
-		<div class="inner">
-		    ${common_footer}
-			<section class="btn_wrap">
-			   <a class="scroll_btn top_btn" href="#"><span class="blind">아래로 이동</span></a>
-			   <c:if test="${not empty user_id }">
-				   <a class="qna_btn top_btn" href="#" id="openChat"><span class="blind">질문</span></a>
-			   </c:if>
+
+
+		<main id="container">
+			<section class="main_slider">
+				<div class="inner">
+					<div class="swiper">
+						<div class="swiper-wrapper">
+							<c:forEach var="popup" items="${topPopups}">
+								<div class="swiper-slide">
+									<ul class="main_popup">
+										<li><a href="/popupBoard/view/${popup.board_idx}">
+												<div class="img_wrap">
+													<img src="${popup.thumb}" alt="${popup.board_title}"
+														class="main-fixed-size"">
+												</div>
+												<div class="txt_wrap">
+													<p class="slide_title">${popup.board_title}</p>
+													<p>${popup.start_date}~${popup.end_date}</p>
+													<p>
+														<img src="/images/main/location.svg">${popup.popup_addr}</p>
+												</div>
+										</a></li>
+									</ul>
+								</div>
+							</c:forEach>
+						</div>
+						<div class="swiper-pagination pagination"></div>
+						<div class="swiper-button-prev arrow_btn"></div>
+						<div class="swiper-button-next arrow_btn"></div>
+					</div>
+				</div>
+			</section>
+			<section class="pick_slider">
+				<div class="inner">
+					<h2 class="tit">
+						담당자 픽 팝업 <strong>10월</strong>
+					</h2>
+					<div class="swiper">
+						<div class="swiper-wrapper">
+							<c:forEach var="popup" items="${topPopups}">
+								<div class="swiper-slide">
+									<a class="image" href="/popupBoard/view/${popup.board_idx}">
+										<div class="img_wrap">
+											<img src="${popup.thumb}" alt="${popup.board_title}"
+												class="fixed-size" />
+										</div>
+									</a>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="popular_slider">
+				<div class="inner">
+					<h2 class="tit">
+						인기 팝업 <strong>10월</strong>
+					</h2>
+					<div class="swiper">
+						<div class="swiper-wrapper">
+							<c:forEach var="popup" items="${popularPosts}">
+								<div class="swiper-slide">
+									<a class="image" href="/popupBoard/view/${popup.board_idx}">
+										<div class="img_wrap">
+											<img src="${popup.thumb}" alt="${popup.board_title}"
+												class="fixed-size">
+										</div>
+									</a>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="day_slider">
+				<div class="inner">
+					<div class="slider" id="date-slider"></div>
+					<span class="line"></span>
+					<div class="pl_main">
+						<ul class="popup_wrap">
+							<c:forEach var="popup" items="${popupList}">
+								<li class="popup_banner main_popup_banner"><a
+									href="/popupBoard/view/${popup.board_idx}"> <img
+										src="${popup.thumb}" alt="Thumbnail" class="popup_thumbnail" />
+										<div class="txt_title">
+											<h2>
+												${popup.board_title}
+												<button id="likeBtn_${popup.board_idx}"
+													class="like_btn <c:if test="${popup.liked}">active</c:if>"
+													onclick="toggleLike('${popup.board_idx}'); event.preventDefault(); event.stopPropagation();">
+													<!-- event.preventDefault() 추가 -->
+												</button>
+											</h2>
+											<div class="popup_location">
+												<img src="../images/imgMGJ/pin.svg" /> <span
+													class="location_span">${popup.popup_addr}</span>
+											</div>
+											<span class="popup_date">${popup.postdate}</span>
+										</div>
+								</a></li>
+							</c:forEach>
+
+
+						</ul>
+
+
+					</div>
+				</div>
+			</section>
+			<section class="season_slider">
+				<div class="inner">
+					<h2 class="tit">
+						가을에 어울리는 팝업 <strong>10월</strong>
+					</h2>
+					<div class="swiper">
+						<div class="swiper-wrapper">
+							<c:forEach var="popup" items="${topPopups}">
+								<div class="swiper-slide">
+									<a class="image" href="/popupBoard/view/${popup.board_idx}">
+										<div class="img_wrap">
+											<img src="${popup.thumb}" alt="${popup.board_title}"
+												class="fixed-size">
+										</div>
+										<div class="txt_wrap">
+											<p class="slide_title">${popup.board_title}</p>
+										</div>
+									</a>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
+			</section> 
+			<section class="product_slider">
+				<div class="inner">
+					<h2 class="tit"> 
+						굿즈 만족도 100% <strong>10월</strong>
+					</h2>
+					<div class="swiper">
+						<div class="swiper-wrapper">
+							<c:forEach var="popup" items="${randomPosts}">
+								<div class="swiper-slide">
+									<a class="image" href="/popupBoard/view/${popup.board_idx}">
+										<div class="img_wrap">
+											<img src="${popup.thumb}" alt="${popup.board_title}"
+												class="fixed-size">
+										</div>
+										<div class="txt_wrap">
+											<p class="slide_title">${popup.board_title}</p>
+										</div>
+									</a>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer id="footer">
+			<div class="inner">
+			    ${common_footer}
+				<section class="btn_wrap">
+				   <a class="scroll_btn top_btn" href="#"><span class="blind">아래로 이동</span></a>
+				   <c:if test="${not empty user_id }">
+					   <a class="qna_btn top_btn" href="#" id="openChat"><span class="blind">질문</span></a>
+				   </c:if>
 					<!-- 관리자 계정일때만 보이는 관리자 페이지 진입버튼 추가 -->
 					<c:if
 					test="${memberDTO.authority == 'ROLE_ADMIN'}">
@@ -446,7 +227,7 @@ function toggleLike(board_idx) {
 		</footer>
 		<script>
 		  const openChatWin = (roomId, userId) => {
-			  if(userId != "admin") {
+			  if(userId !== "admin") {
 				  
 			    window.open(
 			      "/chat/index.html#/chat?roomId=" + roomId + "&userId=" + userId,
@@ -466,8 +247,8 @@ function toggleLike(board_idx) {
 			  e.preventDefault();
 			  // Model에서 id 가져오기
 			  const userId = "${user_id}";
-			  // roomId는 'user-유저아이디'로 설정
-			  const roomId = "user-" + userId;
+			  // roomId는 'chat-유저아이디'로 설정
+			  const roomId = "chat-" + userId;
 			  console.log(roomId);
 			  openChatWin(roomId, userId);
 		  });

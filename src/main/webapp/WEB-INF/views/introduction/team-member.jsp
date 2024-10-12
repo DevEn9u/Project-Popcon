@@ -59,36 +59,36 @@
 						<h2>Hash Map</h2>
 					</div>
 					<div class="my_info">
-						<div class="my_mile box1" id="kang">
+						<div class="my_mile box1" id="kang" style="padding: 50px 50px; height:350px">
 							<div class="top1">
-								<img src="/images/mypage/more_arrow.svg" alt="강인구 사진" style="width:200px; height:200px; border:1px solid red;" />
+								<img src="/images/gang.jpg" alt="강인구 사진" style="width:200px; height:250px;" />
 								<div class="member_wrap" style="display:flex;">
 									<strong>팀장 강인구</strong>
 									<p class="member_name">각자 맡은 역할 작성</p>
 								</div>
 							</div>
 						</div>
-						<div class="my_mile box1" id="park">
+						<div class="my_mile box1" id="park" style="padding: 50px 50px; height:350px">
 							<div class="top1">
-								<img src="/images/mypage/more_arrow.svg" alt="박여은 사진" style="width:200px; height:200px; border:1px solid red;" />
+								<img src="/images/park.png" alt="박여은 사진" style="width:200px; height:250px;" />
 								<div class="member_wrap" style="display:flex;">
 									<strong>박여은</strong>
 									<p class="member_name">각자 맡은 역할 작성</p>
 								</div>
 							</div>
 						</div>
-						<div class="my_mile box1" id="min">
+						<div class="my_mile box1" id="min" style="padding: 50px 50px; height:350px">
 							<div class="top1">
-								<img src="/images/mypage/more_arrow.svg" alt="민경준 사진" style="width:200px; height:200px; border:1px solid red;" />
+								<img src="/images/min.jpg" alt="민경준 사진" style="width:200px; height:250px;" />
 								<div class="member_wrap" style="display:flex;">
 									<strong>민경준</strong>
 									<p class="member_name">각자 맡은 역할 작성</p>
 								</div>
 							</div>
 						</div>
-						<div class="my_mile box1" id="yuk">
+						<div class="my_mile box1" id="yuk" style="padding: 50px 50px; height:350px">
 							<div class="top1">
-								<img src="/images/mypage/more_arrow.svg" alt="육현희 사진" style="width:200px; height:200px; border:1px solid red;" />
+								<img src="/images/yuk.jpg" alt="육현희 사진" style="width:200px; height:250px;" />
 								<div class="member_wrap" style="display:flex;">
 									<strong>육현희</strong>
 									<p class="member_name">각자 맡은 역할 작성</p>

@@ -183,6 +183,7 @@
   right: 20px;
 }
 .my_info .my_recent .booking_wrap .booking_list li .txt_wrap {
+  margin-top:10px;
   font-size: 15px;
   font-weight: 700;
   display: flex;
@@ -291,6 +292,7 @@
   box-shadow: -10px 10px 10px 0 #1212125c;
 }
 .my_info .box2 .popup_wrap .popup_detail .top {
+  margin-bottom:10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -319,19 +321,25 @@
   display: block;
   width: 20px;
   height: 20px;
-  -webkit-mask: url(/images/mypage/cacel_btn.svg) no-repeat left top / 100%;
-  mask: url(/images/mypage/cacel_btn.svg) no-repeat left top / 100%;
+  -webkit-mask: url(/images/mypage/review_write.svg) no-repeat left top / 100%;
+  mask: url(/images/mypage/review_write.svg) no-repeat left top / 100%;
   background: #121212;
 }
 .my_info .box2 .popup_wrap .popup_detail .bottom span {
   display: block;
   width: 20px;
   height: 20px;
-  -webkit-mask: url(/images/mypage/review_write.svg) no-repeat left top / 100%;
-  mask: url(/images/mypage/review_write.svg) no-repeat left top / 100%;
+  -webkit-mask: url(/images/mypage/cacel_btn.svg) no-repeat left top / 100%;
+  mask: url(/images/mypage/cacel_btn.svg) no-repeat left top / 100%;
   background: #121212;
-  margin-left: 20px;
+  margin-left: 20px; 
   margin-right: 10px;
+}
+.mypage_cancel_btn {
+	display: flex;
+    border: none;
+    background: white;
+    color: #121212;
 }
 
 /* 마이페이지 포인트 */
@@ -790,6 +798,19 @@
 }
 
 /*팀소개 서식 끝 */
+
+/* 팝콘소식 - 오시는 길 서식 */
+.location_txt {
+	margin-left:100px;
+	display: flex;
+    justify-content: space-between;
+    background-color: #2c2c2c;
+    color: white;
+    max-width: 1241px;
+    line-height: 44px;
+}
+/* 오시는 길 서식 끝 */
+
 
 /* 화면 줄어들면 옆이 붙는 문제 해결용 */
 @media (max-width: 1300px) {

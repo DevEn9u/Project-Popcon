@@ -8,16 +8,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.edu.springboot.images.ImageDTO;
 import com.edu.springboot.images.ImageService;
+import com.edu.springboot.member.IMemberService;
+import com.edu.springboot.member.MemberDTO;
 import com.edu.springboot.popupboards.CommentDTO;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class BoardService {
     
-    @Autowired
-    private BoardMapper boardMapper;
+	private final BoardMapper boardMapper;
     
-    @Autowired
-    private ImageService imageService;
+	
+    private final IMemberService memberService; 
+    private final ImageService imageService;
     
     @Autowired
     private CommentMapper commentMapper; // 댓글 매퍼 추가
@@ -35,7 +40,24 @@ public class BoardService {
     }
     
     public BoardDTO getBoardById(String boardIdx) {
-        return boardMapper.selectBoardById(boardIdx);
+        // 게시글 상세 정보 조회
+        BoardDTO board = boardMapper.selectBoardById(boardIdx);
+        if (board != null) {
+            // 관련 이미지 가져오기
+            List<ImageDTO> images = imageService.getImages(boardIdx, "BOARD");
+            board.setImages(images); // BoardDTO에 images 설정
+
+            // 관련 댓글 가져오기
+            List<CommentDTO> comments = getComments(boardIdx);
+            // 각 댓글에 대해 작성자 이름 조회
+            for (CommentDTO comment : comments) {
+                MemberDTO coMember = memberService.getMemberById(comment.getCom_writer());
+                String comWriterName = (coMember != null) ? coMember.getName() : "알 수 없음";
+                comment.setComWriterName(comWriterName); // CommentDTO에 comWriterName 설정
+            }
+            board.setComments(comments); // BoardDTO에 comments 설정
+        }
+        return board;
     }
     
     public void updateVisitCount(String boardIdx) {

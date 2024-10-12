@@ -25,6 +25,9 @@ public class PopupBoardService {
     public List<PopupBoardDTO> selectTop8() {
         return popupBoardMapper.selectTop8(); // 상위 8개의 게시글을 조회
     }
+    public List<PopupBoardDTO> selectAll() {
+        return popupBoardMapper.selectAll(); // 전체 게시글 조회
+    }
     
     public List<PopupBoardDTO> selectTop6() {
         return popupBoardMapper.selectTop6(); // 상위 6개의 게시글을 조회

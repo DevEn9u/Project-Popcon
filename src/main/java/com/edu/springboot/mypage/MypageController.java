@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.edu.springboot.board.BoardDTO;
+import com.edu.springboot.booking.bookingDTO;
 import com.edu.springboot.popupboards.CommentDTO;
 import com.edu.springboot.popupboards.PopupBoardDTO;
 
@@ -19,18 +21,25 @@ public class MypageController {
 	@Autowired
 	private IMypageService mypageService;
 
-	//마이페이지 - 메인
-	@GetMapping("/mypage/mypage.do")
-	public String mypageMain(Principal principal, Model model) {
-		return "/mypages/mypage-main";
-	}
+	 // 마이페이지 - 메인
+    @GetMapping("/mypage/mypage.do")
+    public String mypageMain(Principal principal, Model model) {
+        String memberId = principal.getName(); // 현재 로그인한 사용자 ID 가져오기
+        List<bookingDTO> booking = mypageService.bookingInfo(memberId); // 예약 정보 리스트 가져오기
+
+        model.addAttribute("booking", booking); // 모델에 예약 정보 리스트 추가
+        return "/mypages/mypage-main";
+    }
 	
-	//마이페이지 - 예약 확인
+//	//마이페이지 - 예약 확인
 	@GetMapping("/mypage/myBooking.do")
-	public String mypageBooking() {
-		return "/mypages/mypage-booking";
+	public String mypageBooking(Principal principal, Model model) {
+	    String memberId = principal.getName(); // 현재 로그인한 사용자 ID 가져오기
+	    List<bookingDTO> booking = mypageService.bookingInfo(memberId); // 예약 정보 리스트 가져오기
+	    
+	    model.addAttribute("booking", booking); // 모델에 예약 정보 리스트 추가
+	    return "/mypages/mypage-booking";
 	}
-	
  
 	//마이페이지 - 포인트 확인
 	@GetMapping("/mypage/myPoint.do")
@@ -126,6 +135,24 @@ public class MypageController {
         
         return "/mypages/mypage-likes";
     }
+    
+    // 예약 취소
+    @PostMapping("/mypage/cancelBooking.do")
+    public String cancelBooking(@RequestParam("booking_num") int booking_num, Principal principal, Model model) {
+        String member_id = principal.getName(); // 현재 로그인한 사용자 ID 가져오기
+
+        // 예약 취소 처리
+        mypageService.cancelBooking(booking_num, member_id);
+
+        // 예약 정보 다시 가져오기
+        List<bookingDTO> booking = mypageService.bookingInfo(member_id);
+        model.addAttribute("booking", booking);
+        model.addAttribute("cancelMessage", "취소되었습니다."); // 취소 메시지 추가
+        
+
+        return "/mypages/mypage-booking"; // 예약 확인 페이지로 리다이렉트
+    }
+    
 	
 	
 	//마이페이지 - 보유한 쿠폰 확인
