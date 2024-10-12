@@ -22,7 +22,7 @@ public class PopupControllerAPI {
     @Autowired
     private final PopupBoardMapper popupBoardMapper;
     
-    @Autowired
+    @Autowired 
     private PopupBoardService popupBoardService;
     
     @Autowired
