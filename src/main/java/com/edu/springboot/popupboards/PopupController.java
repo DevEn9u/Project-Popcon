@@ -89,49 +89,49 @@ public class PopupController {
     // 팝업안내 - 글 보기
     @GetMapping("/popupBoard/view/{board_idx}")
     public String popupview(@PathVariable("board_idx") String board_idx, Model model, Principal principal) {
-    	 // 게시글 ID로 데이터를 가져옴
-        PopupBoardDTO popupBoard = popupBoardMapper.popupView(board_idx); 
-        
+        // 게시글 ID로 데이터를 가져옴
+        PopupBoardDTO popupBoard = popupBoardMapper.popupView(board_idx);
+
         // 로그인 여부 확인
-        if (principal == null) {
-            model.addAttribute("loginRequired", true); // 로그인 요구 플래그 설정
-            return "popup-boards/popup-board-list"; // 같은 뷰로 돌아가 로그인 요구 메시지 표시
+        String userId = null;
+        boolean isLiked = false;
+
+        if (principal != null) {
+            // 로그인한 사용자라면 사용자 ID를 가져옴
+            userId = principal.getName();
+            // 좋아요 상태 조회
+            LikeDTO existingLike = likeMapper.findLike(popupBoard.getBoard_idx(), userId);
+            isLiked = existingLike != null; // 좋아요 여부 확인
         }
-        
-     // 좋아요 상태 조회
-        String userId = principal.getName();
-        LikeDTO existingLike = likeMapper.findLike(popupBoard.getBoard_idx(), userId);
-        boolean isLiked = existingLike != null; // 좋아요 여부 확인
-        
+
         // 작성자 정보 조회
-        MemberDTO member = memberService.getMemberById(popupBoard.getWriter()); // 작성자 ID를 사용하여 MemberDTO 조회
+        MemberDTO member = memberService.getMemberById(popupBoard.getWriter());
         String writerName = (member != null) ? member.getName() : "알 수 없음";
         model.addAttribute("writerName", writerName);
-        
-        // 댓글 목록 가져오기 (서비스에서 가져온 댓글 리스트 사용)
-        List<CommentDTO> comments = popupBoardService.getComments(board_idx); // 서비스 메서드 호출로 변경
-        // 각 댓글에 대해 작성자 이름 조회
+
+        // 댓글 목록 가져오기
+        List<CommentDTO> comments = popupBoardService.getComments(board_idx);
         for (CommentDTO comment : comments) {
             MemberDTO coMember = memberService.getMemberById(comment.getCom_writer());
             String comWriterName = (coMember != null) ? coMember.getName() : "알 수 없음";
-            comment.setComWriterName(comWriterName); // CommentDTO에 comWriterName 필드 추가 필요
+            comment.setComWriterName(comWriterName);
         }
         model.addAttribute("comments", comments);
-        
+
         // 관련 이미지 가져오기
         List<ImageDTO> images = imageService.getImages(board_idx, "POPUP");
         model.addAttribute("images", images);
-       
-        
+
         // 모델에 데이터 추가
         model.addAttribute("popup", popupBoard);
         model.addAttribute("comments", comments);
-        model.addAttribute("member", member); // MemberDTO 추가
-        model.addAttribute("isLiked", isLiked); // 좋아요 여부 추가
-         
-        
-        return "/popup-boards/popup-board-view"; // 반환할 뷰 경로 확인
+        model.addAttribute("member", member);
+        model.addAttribute("isLiked", isLiked);
+        model.addAttribute("isLoggedIn", userId != null); // 로그인 여부 추가
+
+        return "/popup-boards/popup-board-view"; // 게시물 상세보기 뷰로 이동
     }
+
     
     // 팝업안내 - 글 쓰기 폼 보여주기
     @GetMapping("/popupBoard/write.do")
