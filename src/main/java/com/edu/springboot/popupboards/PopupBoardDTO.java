@@ -27,6 +27,8 @@ public class PopupBoardDTO {
     private String open_hours;     // 팝업 오픈 시간
     private boolean liked;
     
-    private List<ImageDTO> images;
+    private List<ImageDTO> images;      // 연관된 이미지 리스트
+    private List<CommentDTO> comments;  // 댓글 리스트 추가
+    private String writerName;          // 작성자 이름
 }
 
