@@ -110,9 +110,48 @@ public class AdminController {
 	        redirectAttributes.addFlashAttribute("message", "게시글이 삭제되었습니다.");
 	        return "redirect:/adpage/free.do";
 	    }
-
-
 	    
+	    
+	 // 관리자 페이지 - 유저 관리 
+	    @GetMapping("/adpage/user.do")
+	    public String userManagement(Model model) {
+	        return "admin/admin-user"; // 유저 관리 페이지로 이동
+	    }
+
+	    @GetMapping("/adpage/user/edit.do")
+	    public String editUser(@RequestParam("id") String id, Model model) {
+	        // 입력받은 ID로 유저 정보 가져오기
+	        MemberDTO member = memberService.getMemberById(id);
+
+	        if (member == null) {
+	            model.addAttribute("error", "해당 ID를 가진 유저가 존재하지 않습니다.");
+	            return "admin/admin-user"; // 오류가 있으면 다시 유저 관리 페이지로 돌아감
+	        }
+
+	        model.addAttribute("member", member); // 유저 정보를 JSP로 전달
+	        return "admin/admin-edit-user"; // 유저 정보를 수정할 페이지로 이동
+	    }
+
+	    // 유저 정보 업데이트
+	    @PostMapping("/adpage/updateUser.do")
+	    public String updateUser(@RequestParam("id") String id, @RequestParam("name") String name, RedirectAttributes redirectAttributes) {
+	        // 새로운 MemberDTO 객체 생성
+	        MemberDTO memberDTO = new MemberDTO();
+	        memberDTO.setId(id); // 유저 ID 설정
+	        memberDTO.setName(name); // 새로 입력된 이름
+
+	        // 유저 ID와 이름 업데이트
+	        int result = memberService.updateMemberName(memberDTO);
+
+	        if (result > 0) {
+	            redirectAttributes.addFlashAttribute("message", "유저 정보가 성공적으로 업데이트되었습니다.");
+	        } else {
+	            redirectAttributes.addFlashAttribute("error", "유저 정보 업데이트에 실패했습니다.");
+	        }
+
+	        return "redirect:/adpage/user.do"; // 업데이트 후 유저 관리 페이지로 돌아감
+	    }
+
 	
 
 }

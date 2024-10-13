@@ -22,4 +22,7 @@ public interface IMemberService {
 	public int editMemberInfo(MemberDTO memberDTO);
 	// 회원 정보 수정 - 비밀번호 수정
 	public int editMemberPass(MemberDTO memberDTO);
+	
+	// 회원 정보 수정 - ID와 이름 수정
+	public int updateMemberName(MemberDTO memberDTO);
 }
