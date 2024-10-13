@@ -60,7 +60,7 @@ public class MemberController {
 	    model.addAttribute("isChecked", isChecked);
 		return "members/login";
 	}
-	//////////////////////////////////////////////////////////////////
+
 	// 인증 코드 발송
 	@PostMapping("/sendVerificationCode.do")
 	@ResponseBody
@@ -217,7 +217,7 @@ public class MemberController {
 	public String registerCorpGet() {
 		return "/members/register-corp";
 	}
-	// 회원가입 - 기업회원
+	// 회원가입 - 기업회원 Post
 	@PostMapping("/register/corp.do")
 	public String registerCorpPost(RedirectAttributes redirectAttributes, HttpServletRequest req) {
 		String id = req.getParameter("id");
@@ -337,17 +337,5 @@ public class MemberController {
 			return "redirect:/member/edit-pass.do";
 		}
 	}
-
-	
-//	// 회원정보 수정 - 기업회원
-//	@GetMapping("/member/edit-corp.do")
-//	public String editCorpMemberGet() {
-//		return "/members/edit-corp";
-//	}
-//	@PostMapping("/member/edit-corp.do")
-//	public String editCorpMemberPost() {
-//		return "redirect:/";
-//	}
-	
 	
 }
