@@ -5,6 +5,7 @@
 <html lang="ko">
 <head>
 <c:import url="../include/head.jsp" />
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 
 <c:import url="../include/header.jsp" var="common_header" />
@@ -118,37 +119,54 @@
 		}
 	}
 
-	//날짜입력 시 - 자동추가. YYYY-MM-DD 형식으로 입력시킴
-	function dateRule(event) {
-		const input = event.target;
-		let value = input.value.replace(/[^0-9]/g, '');
-		if (value.length >= 4) {
-			value = value.substring(0, 4) + '-' + value.substring(4);
-		}
-		if (value.length >= 7) {
-			value = value.substring(0, 7) + '-' + value.substring(7);
-		}
-		if (value.length > 10) {
-			value = value.substring(0, 10);
-		}
-		input.value = value;
-	}
-
+	
 	function payRule(event) {
 		const input = event.target;
 		input.value = input.value.replace(/[^0-9]/g, '');
 	}
+	
+	document.addEventListener('DOMContentLoaded', function() {
+	    function formatDateInput(input) {
+	        let value = input.value.replace(/[^0-9]/g, ''); // 숫자 외 문자 제거
+	        let formattedValue = '';
 
-	window.onload = function() {
-		const startDateInput = document
-				.querySelector('input[name="start_date"]');
-		const endDateInput = document.querySelector('input[name="end_date"]');
-		const popupFeeInput = document.querySelector('input[name="popup_fee"]');
+	        if (value.length >= 4) {
+	            // 연도(YYYY) 입력 후 자동으로 '-' 추가
+	            formattedValue = value.substr(0, 4);
+	            if (value.length > 4) {
+	                // 월(MM) 입력 후 자동으로 '-' 추가
+	                formattedValue += '-' + value.substr(4, 2);
+	                if (value.length > 6) {
+	                    // 일(DD) 입력, 더 이상 자동 추가 없음
+	                    formattedValue += '-' + value.substr(6, 2);
+	                }
+	            }
+	        } else {
+	            // 아직 연도 4자리가 입력되지 않았으면 그대로 표시
+	            formattedValue = value;
+	        }
 
-		startDateInput.addEventListener('input', dateRule);
-		endDateInput.addEventListener('input', dateRule);
-		popupFeeInput.addEventListener('input', payRule);
-	}
+	        input.value = formattedValue;
+	    }
+
+	    // 날짜 입력 필드에 자동으로 '-' 추가
+	    const startDateInput = document.querySelector('input[name="start_date"]');
+	    const endDateInput = document.querySelector('input[name="end_date"]');
+
+	    if (startDateInput) {
+	        startDateInput.addEventListener('input', function() {
+	            formatDateInput(this);
+	        });
+	    }
+
+	    if (endDateInput) {
+	        endDateInput.addEventListener('input', function() {
+	            formatDateInput(this);
+	        });
+	    }
+	});
+
+
 
 	// 이미지 파일 선택 시 파일 이름 표시 및 유효성 검사
 	function handleFileSelect(input) {
@@ -203,6 +221,19 @@
 		document.querySelector(".thumb_name").value = fileNames.join(', ');
 	}
 </script>
+
+<script>
+//주소 입력 시 api 쓰기
+function openPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            document.querySelector('input[name="popup_addr"]').value = data.address;
+        }
+    }).open();
+}
+</script>
+
+
 <body>
 	<div id="skip_navi">
 		<a href="#container">본문 바로가기</a>
@@ -246,11 +277,16 @@
 										type="text" name="end_date" placeholder="종료: YYYY-MM-DD"
 										required></td>
 								</tr>
-								<tr>
-									<th>주소</th>
-									<td><input type="text" name="popup_addr"
-										placeholder="주소를 입력해 주세요" required></td>
-								</tr>
+<tr>
+    <th>주소</th>
+    <td>
+        <input type="text" name="popup_addr" id="main_addr" placeholder="주소를 입력해 주세요" style="width:30%;" required>
+        <button type="button" onclick="openPostcode()" class="btn">우편번호 검색</button>
+        <input type="text" name="popup_addr" id="detail_addr" placeholder="상세주소를 입력해 주세요" onblur="combineAddresses()">
+    </td>
+</tr>
+
+
 								<tr>
 									<th>카테고리</th>
 									<td><input type="text" name="category"

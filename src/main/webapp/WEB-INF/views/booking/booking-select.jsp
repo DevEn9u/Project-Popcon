@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -17,9 +18,9 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 </head>
 <script>
-	let basePrice = ${details.popup_fee};
+	let basePrice = ${details.popup_fee}; // 서버에서 가져온 가격
 </script>
-  <body>
+<body>
   	${common_header }
 	<main id="bs_container">
 	  <div class="bs_inner">
@@ -85,9 +86,11 @@
 		          </li>
 		          <li class="count_wrap">
 		            <p class="count_type">일반</p>
-		            <p class="count_pay">
-						<input type="hidden" name="basePrice" id="basePrice" value="${details.popup_fee}" readonly />
-						<input type="number" name="price"  id="price" value="${details.popup_fee}" readonly />원
+					<p class="count_pay">
+					    <input type="hidden" name="basePrice" id="basePrice" value="${details.popup_fee}" readonly />
+						<input type="hidden" name="price" id="price" value="${details.popup_fee}" readonly />
+					    <span id="priceDisplay"></span>원
+					    <!--<fmt:formatNumber value="${details.popup_fee}" type="number" pattern="#,##0" />-->
 					</p>
 		            <div class="pm_wrap">
 		              <button class="plus_btn" aria-label="Add one item">+</button>
@@ -112,5 +115,5 @@
 		    ${common_footer}
 		</div>
     </footer>
-  </body>
+</body>
 </html>

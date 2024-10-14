@@ -490,7 +490,6 @@ public class PopupController {
         commentDTO.setCom_writer(com_writer_id); // MemberDTO의 ID를 사용
         commentDTO.setCom_contents(com_contents);
         
-        //popupBoardMapper.writeComment(commentDTO);
         popupBoardService.writeComment(commentDTO);
         String com_idx = commentDTO.getCom_idx(); // 댓글 ID
         System.out.println("저장된 댓글 ID: " + commentDTO.getCom_idx());

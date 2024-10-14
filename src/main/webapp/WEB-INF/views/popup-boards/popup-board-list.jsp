@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -9,6 +10,7 @@
 <c:import url="../include/footer.jsp" var="common_footer" />
 <link rel="stylesheet"
 	href="/css/popup_list.css?v=<?php echo time(); ?>">
+<script src="/js/jquery-ui.min.js?v=<?php echo time(); ?"></script>
 <body>
 	<!-- 조아요 클릭시 빨개짐 -->
 	<script>
@@ -50,7 +52,6 @@
 
 	${common_header}
 	<main id="popup_list_container">
-
 		<div class="popup_list_inner">
 			<div class="popup_list_title_wrap">
 				<h2 class="popup_list_title">
@@ -83,11 +84,11 @@
 
 				<ul class="popup_wrap">
 					<c:forEach var="popup" items="${popupList}">
-						<li class="popup_banner"><a
-							href="/popupBoard/view/${popup.board_idx}"> <img
-								src="${popup.thumb != null && popup.thumb != '' ? popup.thumb : '../images/noimage.jpg'}"
-								alt="${popup.board_title != null ? popup.board_title : '썸네일 없음'}"
-								class="popup_thumbnail" />
+						<li class="popup_banner">
+							<a href="/popupBoard/view/${popup.board_idx}"> 
+								<div class="img_wrap">
+									<img src="${popup.thumb != null && popup.thumb != '' ? popup.thumb : '../images/noimage.jpg'}" alt="${popup.board_title != null ? popup.board_title : '썸네일 없음'}" class="popup_thumbnail" />
+								</div>
 								<div class="txt_title">
 									<h2>
 										${popup.board_title}
@@ -98,9 +99,9 @@
 									</h2>
 									<div class="popup_location">
 										<img src="../images/imgMGJ/pin.svg" /> <span
-											class="location_span">${popup.popup_addr}</span>
+											class="location_span">${fn:replace(popup.popup_addr, ',', ' ')} <!-- 주소와 상세주소 사이에 띄어쓰기넣음 --></span>
 									</div>
-									<span class="popup_date">${popup.postdate}</span>
+									<span class="popup_date" data-end-date="${popup.end_date}">${popup.postdate}</span>
 								</div>
 						</a></li>
 					</c:forEach>

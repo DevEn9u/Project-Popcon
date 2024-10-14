@@ -1,14 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<!DOCTYPE html> 
+
+<!DOCTYPE html>
 <html lang="ko">
 <c:import url="../include/head.jsp" />
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
-<c:set var="isLoggedIn" value="${not empty pageContext.request.userPrincipal}" />
+<c:set var="isLoggedIn"
+	value="${not empty pageContext.request.userPrincipal}" />
 <link rel="stylesheet" href="/css/popup_view.css">
+<script src="/js/ui-common.js?v=<?php echo time(); ?>"></script>
 <body>
 
 	<!-- 조아요 클릭시 빨개짐. -->
@@ -51,14 +55,7 @@
       });
   }
 </script>
-
-
-	<!-- 민경준 구글 맵 API 사용하였습니다 -->
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCA0TzsH1iRaVCQSJCc8BzZHmGKmpNJhKY&callback=initMap"
-		async defer></script>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
 	<script>
 	
 	  function initMap() {
@@ -81,6 +78,15 @@
 	      }
 	    });
 	  }
+	</script>
+
+	<!-- 민경준 구글 맵 API 사용하였습니다 -->
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCA0TzsH1iRaVCQSJCc8BzZHmGKmpNJhKY&callback=initMap"
+		async defer></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
 
 	  // 주소 복사 기능
 	  function copyToClipboard(text) {
@@ -90,8 +96,6 @@
 	      console.error('복사 실패:', err);
 	    });
 	  }
-  
-
 	</script>
 
 	<script>
@@ -179,6 +183,7 @@
 
 
 
+
 	${common_header}
 	<main id="popup_view_container">
 		<div class="popup_view_inner">
@@ -199,7 +204,7 @@
 											<p>${popup.start_date}~${popup.end_date}</p>
 											<p>
 												<img src="/images/main/location.svg" alt="location_pin"
-													class="loc_pin">${popup.popup_addr}</p>
+													class="loc_pin">${fn:replace(popup.popup_addr, ',', ' ')}</p>
 										</div>
 								</a></li>
 							</ul>
@@ -216,7 +221,7 @@
 											<p class="slide_title">${popup.board_title}</p>
 											<p>${popup.start_date}~${popup.end_date}</p>
 											<p>
-												<img src="/images/main/location.svg">${popup.popup_addr}</p>
+												<img src="/images/main/location.svg">${fn:replace(popup.popup_addr, ',', ' ')}</p>
 										</div>
 								</a></li>
 							</ul>
@@ -285,7 +290,7 @@
 						${popup.end_date}</div>
 					<span class="pv_title_location"> <img
 						src="${pageContext.request.contextPath}/images/imgMGJ/pin.svg" />
-						${popup.popup_addr}
+						${fn:replace(popup.popup_addr, ',', ' ')} <!-- 주소와 상세주소 사이에 띄어쓰기넣음 -->
 					</span>
 				</div>
 
@@ -299,8 +304,9 @@
 
 				<div class="content">
 					<h2 class="content_tit">팝업 스토어 소개</h2>
-					<div class="main_content">${popup.contents}</div>
+					<div class="main_content" style="white-space: pre-wrap;">${popup.contents}</div>
 				</div>
+
 
 				<div class="caution_wrap">
 					<h2 class="caution">안내 및 주의사항</h2>
@@ -314,9 +320,9 @@
 					<div id="map" style="width: 100%; height: 400px;"></div>
 					<!-- 구글 지도 표시 영역 -->
 					<div class="location_copy">
-						${popup.popup_addr}
-						<div class="pv_copy_btn"
-							onclick="copyToClipboard('${popup.popup_addr}')">주소 복사</div>
+						${fn:replace(popup.popup_addr, ',', ' ')}
+						<div class="btn" style="width:100px;" 
+							onclick="copyToClipboard('${fn:replace(popup.popup_addr, ',', ' ')}')">주소 복사</div>
 					</div>
 				</div>
 
@@ -354,7 +360,6 @@
 						<form name="commentFrm" method="post" class="comment_form"
 							action="${pageContext.request.contextPath}/popupBoard/writeComment.do"
 							enctype="multipart/form-data">
-							<!-- 이 부분 추가 -->
 							<input type="hidden" name="popup_board_idx"
 								value="${popup.board_idx}" />
 							<textarea name="com_contents" rows="4" cols="50"
@@ -387,7 +392,7 @@
 								<div class="comment_images">
 									<c:forEach var="image" items="${comment.com_img}">
 										<img src="${image.image_url}" alt="Image"
-											style="max-width: 100%; height: auto; margin-bottom: 10px;" />
+											style="max-width: 300px; max-height: 300px; margin-bottom: 10px;" />
 									</c:forEach>
 								</div>
 							</c:if>
@@ -420,10 +425,9 @@
 												<c:forEach var="image" items="${comment.com_img}">
 													<div>
 														<img src="${image.image_url}" alt="Image"
-															style="max-width: 100%; height: auto; margin-bottom: 10px;" />
-														<button type="button" class="btn comment_btn"
-															onclick="deleteImage('${image.image_idx}', '${comment.com_idx}');">이미지
-															삭제</button>
+															style="max-width:300px; max-height:300px; margin-bottom: 10px;" />
+														<a href="/popupBoard/view/${popup.board_idx}"
+															onclick="deleteImage('${image.image_idx}', '${comment.com_idx}');"><img src="${pageContext.request.contextPath}/images/imgMGJ/delete_btn.svg" style="filter: invert(34%) sepia(94%) saturate(7482%) hue-rotate(-1deg) brightness(95%) contrast(102%);" /></a>
 													</div>
 												</c:forEach>
 											</div>
