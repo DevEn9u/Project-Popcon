@@ -6,6 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class IntroController {
 	
+	
+	@GetMapping("/introduction/poopcon.do")
+	public String popcon() {
+		return "introduction/intro_popcon";
+	}
 	//팝콘소식 - 조직도(팀 소개)
 	@GetMapping("/introduction/organization.do")
 	public String organization() {

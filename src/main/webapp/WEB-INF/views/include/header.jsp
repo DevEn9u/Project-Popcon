@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <a href="#">팝콘 소식</a>	
           <ul class="depth2">
             <li>
-              <a href="#">플랫폼 소개</a>
+              <a href="/introduction/poopcon.do">플랫폼 소개</a>
               <a href="/introduction/organization.do">조직도</a>
               <a href="/introduction/location.do">오시는 길</a>
             </li>
