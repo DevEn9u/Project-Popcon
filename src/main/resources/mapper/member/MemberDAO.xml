@@ -61,4 +61,18 @@
 	    WHERE id = #{id}
 	</update>
 	
+
+    <resultMap id="memberResultMap" type="com.edu.springboot.member.MemberDTO">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="pass" column="pass"/>
+        <result property="authority" column="authority"/>
+        <result property="phone" column="phone"/>
+        <result property="point" column="point"/>
+        <result property="business_number" column="business_number"/>
+        <result property="enabled" column="enabled"/>
+        <result property="register_date" column="register_date"/>
+    </resultMap>
+	
  </mapper>
