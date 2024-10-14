@@ -10,7 +10,6 @@
 <c:import url="../include/footer.jsp" var="common_footer" />
 <link rel="stylesheet"
 	href="/css/popup_list.css?v=<?php echo time(); ?>">
-<script src="/js/jquery-ui.min.js?v=<?php echo time(); ?"></script>
 <body>
 	<!-- 조아요 클릭시 빨개짐 -->
 	<script>
