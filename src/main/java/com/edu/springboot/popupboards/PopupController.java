@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,6 +26,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.edu.springboot.member.IMemberService;
 import com.edu.springboot.member.MemberDTO;
+import com.edu.springboot.point.IPointService;
+import com.edu.springboot.point.PointDTO;
 import com.edu.springboot.images.ImageDTO;
 import com.edu.springboot.images.ImageService;
 
@@ -41,6 +44,8 @@ public class PopupController {
     private final ImageService imageService;
     private final LikeService likeService;
     private final LikeMapper likeMapper;
+    private final IPointService pointDAO;
+    
 
     @Autowired
     private IMemberService memberService; 
@@ -527,6 +532,16 @@ public class PopupController {
                 return "redirect:/popupBoard/view/" + popup_board_idx; 
             }
         }
+        // 리뷰(댓글) 작성시 포인트 추가
+        PointDTO pointDTO = new PointDTO();
+        MemberDTO memberDTO = new MemberDTO();
+        pointDTO.setP_user(com_writer_id);
+        pointDTO.setP_change(imageFile != null && !imageFile.isEmpty() ? 1000 : 500); // 이미지 유무에 따른 포인트
+        pointDTO.setP_change_date(new Date()); // 현재 시간
+
+        pointDAO.insertPoint(pointDTO); // 포인트 DAO 호출
+        pointDAO.updateMemberPoint(pointDTO);
+
         
         return "redirect:/popupBoard/view/" + popup_board_idx;
     }

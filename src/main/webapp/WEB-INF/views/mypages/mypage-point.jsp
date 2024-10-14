@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <c:import url="../include/head.jsp" />
@@ -56,81 +57,30 @@
                 <div class="point_wrap">
                   <div class="point_txt">
                     <p>보유 포인트</p>
-                    <strong>12,345</strong>
+                    <strong>${point }P</strong>
                   </div>
                   <div class="point_detail">
                     <h2>포인트 상세 내역</h2>
                     <div class="point_block_wrap">
-                      <div class="point_block">
+                      <c:forEach var="pointRecord" items="${pointDTO }">
+	                    <c:if test="${pointRecord.p_user eq user_id }">
+                       <div class="point_block">
                         <div class="left">
-                          <span>2024.10.10</span>
+                          <span> <fmt:formatDate value="${pointRecord.p_change_date}" pattern="yyyy년 MM월 dd일 HH:mm:ss" /></span>
                           <p>리뷰작성 포인트 적립</p>
                         </div>
-                        +10
-                      </div>
-                      <div class="point_block">
+                        	+<fmt:formatNumber value="${pointRecord.p_change}" />
+                      	</div> 
+	                    </c:if>
+                      </c:forEach>
+                       <div class="point_block">
                         <div class="left">
-                          <span>2024.10.10</span>
-                          <p>리뷰작성 포인트 적립</p>
+                          <span> <fmt:formatDate value="${memberDTO.register_date}" pattern="yyyy년 MM월 dd일 HH:mm:ss" /></span>
+                          <p>가입 축하 포인트 적립</p>
                         </div>
-                        +10
-                      </div>
-                      <div class="point_block use">
-                        <div class="left">
-                          <span>2024.10.10</span>
-                          <p>{상호명} {쿠폰명} 구매</p>
-                        </div>
-                        -10
-                      </div>
-                      <div class="point_block">
-                        <div class="left">
-                          <span>2024.10.10</span>
-                          <p>리뷰작성 포인트 적립</p>
-                        </div>
-                        +10
-                      </div>
-                      <div class="point_block use">
-                        <div class="left">
-                          <span>2024.10.10</span>
-                          <p>{상호명} {쿠폰명} 구매</p>
-                        </div>
-                        -10
-                      </div>
-                      <div class="point_block">
-                        <div class="left">
-                          <span>2024.10.10</span>
-                          <p>리뷰작성 포인트 적립</p>
-                        </div>
-                        +10
-                      </div>
-                      <div class="point_block use">
-                        <div class="left">
-                          <span>2024.10.10</span>
-                          <p>{상호명} {쿠폰명} 구매</p>
-                        </div>
-                        -10
-                      </div>
-                      <div class="point_block">
-                        <div class="left">
-                          <span>2024.10.10</span>
-                          <p>리뷰작성 포인트 적립</p>
-                        </div>
-                        +10
-                      </div>
-                      <div class="point_block use">
-                        <div class="left">
-                          <span>2024.10.10</span>
-                          <p>{상호명} {쿠폰명} 구매</p>
-                        </div>
-                        -10
-                      </div>
-                      <div class="point_block">
-                        <div class="left">
-                          <span>2024.10.10</span>
-                          <p>리뷰작성 포인트 적립</p>
-                        </div>
-                        +10
-                      </div>
+                        	+1,000
+                      	</div> 
+                     </div>
                     </div>
                   </div>
                 </div>

@@ -1,5 +1,7 @@
 package com.edu.springboot.member;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -14,4 +16,5 @@ public class MemberDTO {
 	private int point;
 	private String business_number;
 	private int enabled; 
+	private Date register_date;
 }
