@@ -143,7 +143,7 @@
 	        }
 
 	        input.value = formattedValue;
-	    }
+	    } 
 
 	    // 날짜 입력 필드에 자동으로 '-' 추가
 	    const startDateInput = document.querySelector('input[name="start_date"]');
