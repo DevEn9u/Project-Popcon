@@ -7,17 +7,17 @@
 	<c:import url="../include/head.jsp" />
 	<title>POPCON | 팝컨 - 로그인</title>
 	<link rel="stylesheet" href="/css/member.css">
-	<script src="/js/login-validate.js?v=<?php echo time(); ?"></script>
+	<script src="/js/login-validate.js"></script>
 </head>
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
 <script>
-	window.onload = function() {
-		const resultMsg = '<%= request.getAttribute("resultMsg") != null ? request.getAttribute("resultMsg") : "" %>';
-	    if (resultMsg) {
-	      alert(resultMsg);
-		}
-	};
+document.addEventListener('DOMContentLoaded', function() {
+    let resultMsg = '${resultMsg}';
+    if (resultMsg) {
+        alert(resultMsg);
+    }
+});
 </script>
 <body>
   <div id="skip_navi">
@@ -44,12 +44,11 @@
                   <input type="hidden" id="login_id" name="id" value="${user_id }" readonly="readonly">
                 </div>
                 <div class="row input_wrap2">
-                  <input type="password" name="pass" placeholder="비밀번호를 입력하세요.">
+                  <input type="password" name="pass" placeholder="비밀번호를 입력하세요." autocomplete="off">
                 </div>
-                <!-- 로그인 실패시 실패 메세지 띄우기 -->
-                <c:if test="${param.error != null }">
-                	<p class="login_err_msg">아이디 또는 비밀번호가 잘못되었습니다.</p>
-                </c:if>
+				<c:if test="${not empty resultMsg}">
+				    <p class="error_msg">${resultMsg}</p>
+				</c:if>
                 <button type="submit" class="check_btn login_btn">비밀번호 확인</button>
               </fieldset>
             </form>

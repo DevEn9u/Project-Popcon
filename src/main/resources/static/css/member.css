@@ -72,7 +72,8 @@
   font-size: 12px;
 }
 /* 로그인 실패시 메세지 */
-.login_area .login_err_msg {
+.login_area .login_err_msg, .login_area .error_msg {
+	margin-top: 10px;
 	color: var(--point--color2);
 	font-size: 14px;
 	font-weight: 700;
