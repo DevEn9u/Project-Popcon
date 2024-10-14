@@ -188,7 +188,7 @@ $(document).ready(function() {
         $(this).find('.weekday').text('TODAY');
       } else {
         $(this).find('.weekday').text(weekday); // 요일 표시
-      }
+      } 
 
       // filterPopups 함수 호출
       console.log('Clicked Date:', clickedDate); // 클릭된 날짜 로그 출력
