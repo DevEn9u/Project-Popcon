@@ -320,7 +320,7 @@
 					<!-- 구글 지도 표시 영역 -->
 					<div class="location_copy">
 						${fn:replace(popup.popup_addr, ',', ' ')}
-						<div class="btn" style="width:100px;"
+						<div class="btn" style="width:100px;" 
 							onclick="copyToClipboard('${fn:replace(popup.popup_addr, ',', ' ')}')">주소 복사</div>
 					</div>
 				</div>
