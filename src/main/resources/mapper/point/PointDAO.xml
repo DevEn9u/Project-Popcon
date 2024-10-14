@@ -20,4 +20,5 @@
 	<select id="getPointInfoById" parameterType="String" resultType="com.edu.springboot.point.PointDTO">
 		SELECT * FROM point WHERE p_user = #{p_user} ORDER BY p_change_date DESC
 	</select>
+	
 </mapper>

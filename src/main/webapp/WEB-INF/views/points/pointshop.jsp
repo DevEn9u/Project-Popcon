@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <c:import url="../include/head.jsp" />
-<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
-<link rel="stylesheet" href="/css/intro.css?v=<%= System.currentTimeMillis() %>" />
+<!--<link rel="stylesheet" href="../css/popup_list.css?v=<?php echo time(); ?>">-->
+<link rel="stylesheet" href="../css/pointshop.css?v=<?php echo time(); ?>">
 </head>
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
@@ -20,28 +22,42 @@
 		<main id="container">
 		    <div class="inner">
 		      <h2 class="tit">POINT SHOP</h2>
-		      <div clas="pl_main">
+		      <div class="pl_main">
 				<c:if
 					test="${memberDTO.authority == 'ROLE_ADMIN' || memberDTO.authority == 'ROLE_CORP'}">
-					<button class="pl_write_btn" onclick="location.href='./write.do';">게시물 작성하기</button>
+					<button class="pl_write_btn" onclick="location.href='./write.do';">쿠폰 등록</button>
 				</c:if>
-				<ul class="popup_wrap">
-					<c:forEach var="popup" items="${popupList}">
-						<li class="popup_banner">
-							<a href="/popupBoard/view/${popup.board_idx}"> 
+				<ul class="cupon_wrap">
+						<li class="cupon_banner">
 								<div class="img_wrap">
-									<img src="${popup.thumb != null && popup.thumb != '' ? popup.thumb : '../images/noimage.jpg'}" alt="${popup.board_title != null ? popup.board_title : '썸네일 없음'}" class="popup_thumbnail" />
+									<img src="" alt="이미지" />
 								</div>
-								<div class="txt_title">
-									<h2>${popup.board_title}</h2>
-									<div class="popup_location">
-										<img src="../images/imgMGJ/pin.svg" /> <span class="location_span">${fn:replace(popup.popup_addr, ',', ' ')} <!-- 주소와 상세주소 사이에 띄어쓰기넣음 --></span>
+								<div class="cupon_detail">
+									<div class="cupon_tit">
+										<p>쿠폰 이름</p>
+										<button class="buy_btn"><img src="../images/buy_btn.svg" /></button>
 									</div>
-									<button class="buy_btn">구매하기</span>
+									<div class="popup_location">
+										<span>한줄 설명</span>
+									</div>
+									<span class="cupon_price">500 POINTS </span>
 								</div>
-							</a>
 						</li>
-					</c:forEach>
+						<li class="cupon_banner">
+								<div class="img_wrap">
+									<img src="" alt="이미지" />
+								</div>
+								<div class="cupon_detail">
+									<div class="cupon_tit">
+										<p>쿠폰 이름</p>
+										<button class="buy_btn"><img src="../images/buy_btn.svg" /></button>
+									</div>
+									<div class="popup_location">
+										<span>한줄 설명</span>
+									</div>
+									<span class="cupon_price">500 POINTS </span>
+								</div>
+						</li>
 				</ul>
 			  </div>
 		    </div>
