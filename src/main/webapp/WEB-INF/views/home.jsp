@@ -43,6 +43,24 @@ function toggleLike(board_idx) {
     });
 }
 </script>
+
+<script>
+    function scrollToSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        if (section) {
+            const sectionPosition = section.getBoundingClientRect().top + window.scrollY; // 요소의 Y 위치
+            const windowHeight = window.innerHeight; // 화면 높이
+            const targetPosition = sectionPosition - (windowHeight / 2) + (section.clientHeight / 2); // 중앙 위치 조정
+
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth' // 부드러운 스크롤
+            });
+        }
+    }
+</script>
+
+
 	<div id="skip_navi">
 		<a href="#container">본문 바로가기</a>
 	</div>
@@ -81,7 +99,7 @@ function toggleLike(board_idx) {
 					</div>
 				</div>
 			</section>
-			<section class="pick_slider">
+			<section class="pick_slider" id="pick_slider">
 				<div class="inner">
 					<h2 class="tit">
 						담당자 픽 팝업 <strong>10월</strong>
@@ -102,7 +120,7 @@ function toggleLike(board_idx) {
 					</div>
 				</div>
 			</section>
-			<section class="popular_slider">
+			<section class="popular_slider" id="popular_slider">
 				<div class="inner">
 					<h2 class="tit">
 						인기 팝업 <strong>10월</strong>
@@ -123,7 +141,7 @@ function toggleLike(board_idx) {
 					</div>
 				</div>
 			</section>
-			<section class="day_slider">
+			<section class="day_slider" id="day_slider">
 				<div class="inner">
 					<div class="slider" id="date-slider"></div>
 					<span class="line"></span>
