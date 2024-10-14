@@ -31,7 +31,7 @@ public class APIController {
 
     @GetMapping("/api/freeBoard/list")
     public ResponseEntity<List<BoardDTO>> listBoards(@RequestParam(value = "page", defaultValue = "1") int page) {
-        List<BoardDTO> boardList = boardService.getFreeBoardsWithPaging(page);
+        List<BoardDTO> boardList = boardService.getFreeBoards();
         // 각 게시글에 대해 작성자 이름 조회 (이미 BoardService에서 처리됨)
         return ResponseEntity.ok(boardList);
     }
