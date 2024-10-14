@@ -54,7 +54,7 @@
 		<div class="popup_list_inner">
 			<div class="popup_list_title_wrap">
 				<h2 class="popup_list_title">
-					<a href="./list.do">팝업안내</a>
+					<a href="./list.do">팝업 컨테이너</a>
 				</h2>
 			</div>
 			<div class="pl_main">

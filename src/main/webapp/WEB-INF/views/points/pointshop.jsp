@@ -35,7 +35,7 @@
 								<div class="txt_title">
 									<h2>${popup.board_title}</h2>
 									<div class="popup_location">
-										<img src="../images/imgMGJ/pin.svg" /> <span class="location_span">${fn:replace(popup.popup_addr, ',', ' ')} <!-- 주소와 상세주소 사이에 띄어쓰기넣음 --></span>
+										<img src="../images/imgMGJ/pin.svg" /> <span class="location_span"><!-- 주소와 상세주소 사이에 띄어쓰기넣음 --></span>
 									</div>
 									<button class="buy_btn">구매하기</span>
 								</div>
