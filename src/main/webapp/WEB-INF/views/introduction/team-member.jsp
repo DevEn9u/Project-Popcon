@@ -6,6 +6,7 @@
 <head>
 	<c:import url="../include/head.jsp" />
 	<link rel="stylesheet" href="/css/mypage.css?v=<%= System.currentTimeMillis() %>" />
+	<link rel="stylesheet" href="/css/intro.css?v=<%= System.currentTimeMillis() %>" />
 </head>
 <body>
 	<c:import url="../include/header.jsp" var="common_header" />
