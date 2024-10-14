@@ -1,6 +1,7 @@
 package com.edu.springboot.booking;
 
 import java.sql.Date;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -30,7 +31,13 @@ public class BookingController {
     @GetMapping("/popupBoard/booking/{board_idx}")
     public String getBookingDetails(@PathVariable("board_idx") String board_idx, Model model, HttpSession session) {
         PopupBoardDTO PopupDetails = book.PopupDetails(board_idx);
+        
+        // 가격을 3자리마다 컴마를 찍어 포맷팅
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        String formattedFee = numberFormat.format(PopupDetails.getPopup_fee());
+        
         model.addAttribute("details", PopupDetails);
+        model.addAttribute("formattedFee", formattedFee);  // 포맷팅된 가격 전달
         
         // 세션에 board_idx 저장
         session.setAttribute("board_idx", board_idx);

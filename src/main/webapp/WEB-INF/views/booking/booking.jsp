@@ -30,7 +30,7 @@
 	          <h2 class="bm_main_tit">예매</h2>
 	          <div class="booking_box">
 	            <h2 class="box_tit">${details.board_title}</h2>
-	            <h3 class="box_pay">${details.popup_fee}원</h3>
+	            <h3 class="box_pay">${formattedFee}원</h3>
 	            <span class="box_date">이용 기간: ${details.start_date} ~ ${details.end_date}</span>
 				<button class="bm_booking_btn" onclick="location.href = `/popupBoard/select/${board_idx}`">예매하기</button>
 	          </div>

@@ -90,18 +90,8 @@ public class BoardService {
     public List<BoardDTO> getFreeBoardsWithPaging(int page) {
         int limit = 10; // 한 페이지에 보여줄 게시글 수
         int offset = (page - 1) * limit; // 시작 위치
-        List<BoardDTO> boards = boardMapper.getFreeBoardsWithPaging(offset, limit);
-
-        // 각 게시글의 writerName 설정
-        for (BoardDTO board : boards) {
-            MemberDTO member = memberService.getMemberById(board.getWriter());
-            String writerName = (member != null) ? member.getName() : "알 수 없음";
-            board.setWriterName(writerName);
-        }
-
-        return boards;
+        return boardMapper.getFreeBoardsWithPaging(offset, limit);
     }
-
     public List<BoardDTO> getNoticeBoardsWithPaging(int page) {
         int limit = 10; // 한 페이지에 보여줄 게시글 수
         int offset = (page - 1) * limit; // 시작 위치
