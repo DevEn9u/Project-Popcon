@@ -191,7 +191,6 @@ $(document).ready(function() {
       } 
 
       // filterPopups 함수 호출
-      console.log('Clicked Date:', clickedDate); // 클릭된 날짜 로그 출력
       filterPopups(clickedDate);
     });
 
@@ -215,7 +214,6 @@ $(document).ready(function() {
 
 // filterPopups 함수는 이전과 동일
 function filterPopups(selectedDate) {
-  console.log('Selected Date:', selectedDate); // 선택된 날짜 출력
 
   // 선택된 날짜의 시간 설정: 00:00:00
   selectedDate.setHours(0, 0, 0, 0); // 시간 초기화
@@ -226,7 +224,6 @@ function filterPopups(selectedDate) {
     // popupEndDate의 시간 설정: 00:00:00
     popupEndDate.setHours(0, 0, 0, 0); // 시간 초기화
 
-    console.log('Popup End Date:', popupEndDate); // 각 팝업의 end_date 출력
 
     // 선택된 날짜와 같거나 이후의 날짜만 표시
     if (popupEndDate >= selectedDate) {
@@ -238,7 +235,6 @@ function filterPopups(selectedDate) {
 }
 
 function filterPopups(selectedDate) {
-  console.log('Selected Date:', selectedDate); // 선택된 날짜 출력
 
   // 선택된 날짜의 시간 설정: 00:00:00
   selectedDate.setHours(0, 0, 0, 0); // 시간 초기화
@@ -252,7 +248,6 @@ function filterPopups(selectedDate) {
     // popupEndDate의 시간 설정: 00:00:00
     popupEndDate.setHours(0, 0, 0, 0); // 시간 초기화
 
-    console.log('Popup End Date:', popupEndDate); // 각 팝업의 end_date 출력
 
     // 선택된 날짜와 같거나 이후의 날짜만 배열에 추가
     if (popupEndDate >= selectedDate) {

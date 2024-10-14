@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <nav class="gnb_wrap">
       <ul class="gnb">
         <li class="depth1">
-          <a href="#">팝콘 소식</a>	
+          <a href="/introduction/poopcon.do">팝콘 소식</a>	
           <ul class="depth2">
             <li>
               <a href="/introduction/poopcon.do">플랫폼 소개</a>
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
           </ul>
         </li>
         <li class="depth1">
-          <a href="/popupBoard/list.do">팝업 안내</a>
+          <a href="/popupBoard/list.do">팝업 컨테이너</a>
           <ul class="depth2">
             <li>
               <a href="/popupBoard/list.do">전체 팝업</a>
