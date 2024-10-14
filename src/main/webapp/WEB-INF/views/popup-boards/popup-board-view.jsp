@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<!DOCTYPE html> 
+
+<!DOCTYPE html>
 <html lang="ko">
 <c:import url="../include/head.jsp" />
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
-<c:set var="isLoggedIn" value="${not empty pageContext.request.userPrincipal}" />
+<c:set var="isLoggedIn"
+	value="${not empty pageContext.request.userPrincipal}" />
 <link rel="stylesheet" href="/css/popup_view.css">
 <body>
 
@@ -179,6 +182,7 @@
 
 
 
+
 	${common_header}
 	<main id="popup_view_container">
 		<div class="popup_view_inner">
@@ -285,7 +289,7 @@
 						${popup.end_date}</div>
 					<span class="pv_title_location"> <img
 						src="${pageContext.request.contextPath}/images/imgMGJ/pin.svg" />
-						${popup.popup_addr}
+						${fn:replace(popup.popup_addr, ',', ' ')} <!-- 주소와 상세주소 사이에 띄어쓰기넣음 -->
 					</span>
 				</div>
 
@@ -299,8 +303,9 @@
 
 				<div class="content">
 					<h2 class="content_tit">팝업 스토어 소개</h2>
-					<div class="main_content">${popup.contents}</div>
+					<div class="main_content" style="white-space: pre-wrap;">${popup.contents}</div>
 				</div>
+
 
 				<div class="caution_wrap">
 					<h2 class="caution">안내 및 주의사항</h2>
