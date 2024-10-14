@@ -7,9 +7,8 @@
 <html lang="ko">
 <head>
 <c:import url="../include/head.jsp" />
-<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
-<link rel="stylesheet"
-	href="/css/popup_list.css?v=<?php echo time(); ?>">
+	<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
+	<link rel="stylesheet" href="/css/popup_list.css?v=<?php echo time(); ?>">
 </head>
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />

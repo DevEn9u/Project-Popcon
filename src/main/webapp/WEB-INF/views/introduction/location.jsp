@@ -5,23 +5,14 @@
 <html lang="ko">
 <head>
 <c:import url="../include/head.jsp" />
-<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
-<link rel="stylesheet" href="/css/intro.css?v=<%= System.currentTimeMillis() %>" />
+	<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
+	<link rel="stylesheet" href="/css/intro.css?v=<%= System.currentTimeMillis() %>" />
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCA0TzsH1iRaVCQSJCc8BzZHmGKmpNJhKY&callback=initMap"
+		async defer></script>
 </head>
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
-<script>
-	window.onload = function() {
-		const resultMsg = '<%=request.getAttribute("resultMsg") != null ? request.getAttribute("resultMsg") : ""%>
-	';
-		if (resultMsg) {
-			alert(resultMsg);
-		}
-	};
-</script>
-<script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCA0TzsH1iRaVCQSJCc8BzZHmGKmpNJhKY&callback=initMap"
-	async defer></script>
 <script>
 	function initMap() {
 		// 지오코더 생성
