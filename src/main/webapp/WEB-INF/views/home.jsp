@@ -5,7 +5,7 @@
 <html lang="ko">
 <head>
 <c:import url="./include/head.jsp" />
-<script src="/js/ui-common.js?v=<?php echo time(); ?>"></script>
+<script src="/js/today-popup.js?v=<?php echo time(); ?>"></script>
 <link rel="stylesheet"
 	href="/css/popup_list.css?v=<?php echo time(); ?>">
 </head>
