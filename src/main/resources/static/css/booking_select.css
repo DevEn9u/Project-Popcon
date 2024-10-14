@@ -216,6 +216,9 @@ body {
   text-align: end;
   padding: 0;
 }
+.count_pay span {
+	margin-left: 30px;
+}
 
 .pm_wrap {
   position: absolute;

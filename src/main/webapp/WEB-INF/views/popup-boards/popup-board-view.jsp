@@ -93,8 +93,6 @@
 	      console.error('복사 실패:', err);
 	    });
 	  }
-  
-
 	</script>
 
 	<script>
