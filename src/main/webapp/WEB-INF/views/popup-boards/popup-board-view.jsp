@@ -54,14 +54,7 @@
       });
   }
 </script>
-
-
-	<!-- 민경준 구글 맵 API 사용하였습니다 -->
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCA0TzsH1iRaVCQSJCc8BzZHmGKmpNJhKY&callback=initMap"
-		async defer></script>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
 	<script>
 	
 	  function initMap() {
@@ -84,6 +77,15 @@
 	      }
 	    });
 	  }
+	</script>
+
+	<!-- 민경준 구글 맵 API 사용하였습니다 -->
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCA0TzsH1iRaVCQSJCc8BzZHmGKmpNJhKY&callback=initMap"
+		async defer></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
 
 	  // 주소 복사 기능
 	  function copyToClipboard(text) {
@@ -201,7 +203,7 @@
 											<p>${popup.start_date}~${popup.end_date}</p>
 											<p>
 												<img src="/images/main/location.svg" alt="location_pin"
-													class="loc_pin">${popup.popup_addr}</p>
+													class="loc_pin">${fn:replace(popup.popup_addr, ',', ' ')}</p>
 										</div>
 								</a></li>
 							</ul>
@@ -218,7 +220,7 @@
 											<p class="slide_title">${popup.board_title}</p>
 											<p>${popup.start_date}~${popup.end_date}</p>
 											<p>
-												<img src="/images/main/location.svg">${popup.popup_addr}</p>
+												<img src="/images/main/location.svg">${fn:replace(popup.popup_addr, ',', ' ')}</p>
 										</div>
 								</a></li>
 							</ul>
@@ -317,9 +319,9 @@
 					<div id="map" style="width: 100%; height: 400px;"></div>
 					<!-- 구글 지도 표시 영역 -->
 					<div class="location_copy">
-						${popup.popup_addr}
-						<div class="pv_copy_btn"
-							onclick="copyToClipboard('${popup.popup_addr}')">주소 복사</div>
+						${fn:replace(popup.popup_addr, ',', ' ')}
+						<div class="btn" style="width:100px;"
+							onclick="copyToClipboard('${fn:replace(popup.popup_addr, ',', ' ')}')">주소 복사</div>
 					</div>
 				</div>
 
@@ -357,7 +359,6 @@
 						<form name="commentFrm" method="post" class="comment_form"
 							action="${pageContext.request.contextPath}/popupBoard/writeComment.do"
 							enctype="multipart/form-data">
-							<!-- 이 부분 추가 -->
 							<input type="hidden" name="popup_board_idx"
 								value="${popup.board_idx}" />
 							<textarea name="com_contents" rows="4" cols="50"
@@ -390,7 +391,7 @@
 								<div class="comment_images">
 									<c:forEach var="image" items="${comment.com_img}">
 										<img src="${image.image_url}" alt="Image"
-											style="max-width: 100%; height: auto; margin-bottom: 10px;" />
+											style="max-width: 300px; max-height: 300px; margin-bottom: 10px;" />
 									</c:forEach>
 								</div>
 							</c:if>
@@ -423,10 +424,9 @@
 												<c:forEach var="image" items="${comment.com_img}">
 													<div>
 														<img src="${image.image_url}" alt="Image"
-															style="max-width: 100%; height: auto; margin-bottom: 10px;" />
-														<button type="button" class="btn comment_btn"
-															onclick="deleteImage('${image.image_idx}', '${comment.com_idx}');">이미지
-															삭제</button>
+															style="max-width:300px; max-height:300px; margin-bottom: 10px;" />
+														<a href="/popupBoard/view/${popup.board_idx}"
+															onclick="deleteImage('${image.image_idx}', '${comment.com_idx}');"><img src="${pageContext.request.contextPath}/images/imgMGJ/delete_btn.svg" style="filter: invert(34%) sepia(94%) saturate(7482%) hue-rotate(-1deg) brightness(95%) contrast(102%);" /></a>
 													</div>
 												</c:forEach>
 											</div>
