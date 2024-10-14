@@ -61,11 +61,11 @@
 					<div class="my_info">
 						<div class="my_mile box1">
 							<div class="top">
-								<strong>나의 마일리지</strong> <a href="/mypage/myPoint.do"><p>
+								<strong>포인트</strong> <a href="/mypage/myPoint.do"><p>
 										자세히 보기<span></span>
 									</p></a>
 							</div>
-							<h3>20 포인트</h3>
+							<h3>${point }P</h3>
 						</div>
 						<div class="my_recent box1">
 							<div class="top">

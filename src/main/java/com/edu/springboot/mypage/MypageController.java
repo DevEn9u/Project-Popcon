@@ -1,7 +1,9 @@
 package com.edu.springboot.mypage;
 
 import java.security.Principal;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.edu.springboot.board.BoardDTO;
 import com.edu.springboot.booking.bookingDTO;
+import com.edu.springboot.member.IMemberService;
+import com.edu.springboot.member.MemberDTO;
+import com.edu.springboot.point.IPointService;
+import com.edu.springboot.point.PointDTO;
 import com.edu.springboot.popupboards.CommentDTO;
 import com.edu.springboot.popupboards.PopupBoardDTO;
 
@@ -20,14 +26,24 @@ public class MypageController {
 	
 	@Autowired
 	private IMypageService mypageService;
+	@Autowired
+	private IMemberService memberDAO;
+	@Autowired
+	private IPointService pointDAO;
 
 	 // 마이페이지 - 메인
     @GetMapping("/mypage/mypage.do")
-    public String mypageMain(Principal principal, Model model) {
-        String memberId = principal.getName(); // 현재 로그인한 사용자 ID 가져오기
+    public String mypageMain(Principal principal, Model model, MemberDTO memberDTO) {
+    	String memberId = principal.getName(); // 현재 로그인한 사용자 ID 가져오기
         List<bookingDTO> booking = mypageService.bookingInfo(memberId); // 예약 정보 리스트 가져오기
+        
+        memberDTO = memberDAO.getMemberById(memberId);
 
+        // 포인트에 콤마 추가
+        String point = NumberFormat.getInstance(Locale.US).format(memberDTO.getPoint());
+        
         model.addAttribute("booking", booking); // 모델에 예약 정보 리스트 추가
+        model.addAttribute("point", point); 
         return "/mypages/mypage-main";
     }
 	
@@ -43,7 +59,17 @@ public class MypageController {
  
 	//마이페이지 - 포인트 확인
 	@GetMapping("/mypage/myPoint.do")
-	public String mypagePoint() {
+	public String mypagePoint(Principal principal, Model model) {
+    	String memberId = principal.getName(); // 현재 로그인한 사용자 ID 가져오기
+		MemberDTO memberDTO = memberDAO.getMemberById(memberId);
+		List<PointDTO> pointDTO = pointDAO.getPointInfoById(memberId);
+		System.out.println("아아아아" + pointDTO);
+		
+		// 포인트에 콤마 추가
+        String point = NumberFormat.getInstance(Locale.US).format(memberDTO.getPoint());
+        model.addAttribute("point", point);
+        model.addAttribute("memberDTO", memberDTO);
+        model.addAttribute("pointDTO", pointDTO);
 		return "/mypages/mypage-point";
 	}
 	
