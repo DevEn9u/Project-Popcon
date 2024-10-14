@@ -10,7 +10,6 @@
 <c:import url="../include/footer.jsp" var="common_footer" />
 <link rel="stylesheet"
 	href="/css/popup_list.css?v=<?php echo time(); ?>">
-<script src="/js/jquery-ui.min.js?v=<?php echo time(); ?"></script>
 <body>
 	<!-- 조아요 클릭시 빨개짐 -->
 	<script>
@@ -55,7 +54,7 @@
 		<div class="popup_list_inner">
 			<div class="popup_list_title_wrap">
 				<h2 class="popup_list_title">
-					<a href="./list.do">팝업안내</a>
+					<a href="./list.do">팝업 컨테이너</a>
 				</h2>
 			</div>
 			<div class="pl_main">
@@ -63,7 +62,7 @@
 					test="${memberDTO.authority == 'ROLE_ADMIN' || memberDTO.authority == 'ROLE_CORP'}">
 					<!-- 	          <a href="./write.do" class="write_btn">게시물 작성하기</a> -->
 					<button class="pl_write_btn" onclick="location.href='./write.do';">게시물
-						작성하기</button>
+						작성하기</button>`
 				</c:if>
 
 				<nav class="kategorie_wrap">

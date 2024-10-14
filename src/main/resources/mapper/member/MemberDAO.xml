@@ -18,13 +18,13 @@
 	<!-- 회원가입 -->
 	<!-- 일반 회원 -->
 	<insert id="registerNormal">
-		INSERT INTO member (id, name, email, pass, authority, phone, point)
+		INSERT INTO member (id, name, email, pass, authority, phone)
 		VALUES
-			(#{id}, #{name}, #{email}, #{pass}, 'ROLE_NORMAL', #{phone}, 1000)
+			(#{id}, #{name}, #{email}, #{pass}, 'ROLE_NORMAL', #{phone})
 	</insert>
 	<!-- 기업 회원 -->
 	<insert id="registerCorp">
-		INSERT INTO member (id, name, email, pass, authority, phone,  business_number)
+		INSERT INTO member (id, name, email, pass, authority, phone, business_number)
 		VALUES
 			(#{id}, #{name}, #{email}, #{pass}, 'ROLE_CORP', #{phone}, #{business_number} )
 	</insert>
@@ -60,9 +60,12 @@
 	    SET name = #{name}
 	    WHERE id = #{id}
 	</update>
-	
 
-    <resultMap id="memberResultMap" type="com.edu.springboot.member.MemberDTO">
+	<!-- 관리자 페이지 모든 회원 가져오기 -->
+	<select id="getAllMembers" resultType="com.edu.springboot.member.MemberDTO">
+    	SELECT * FROM member
+	</select>
+	<resultMap id="memberResultMap" type="com.edu.springboot.member.MemberDTO">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="email" column="email"/>

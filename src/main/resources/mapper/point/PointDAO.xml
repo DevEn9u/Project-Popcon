@@ -18,6 +18,7 @@
 
 	<!-- 포인트 적립 내역 가져오기 -->
 	<select id="getPointInfoById" parameterType="String" resultType="com.edu.springboot.point.PointDTO">
-		SELECT * FROM point WHERE p_user = #{p_user}
+		SELECT * FROM point WHERE p_user = #{p_user} ORDER BY p_change_date DESC
 	</select>
+	
 </mapper>

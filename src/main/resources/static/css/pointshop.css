@@ -1,0 +1,95 @@
+:root {
+  --point--color1: #fce8c3;
+  --point--color2: #f0002e;
+  --txt-color-400: #767676;
+  --txt-color-500: #121212;
+  --txt-color-600: #fff;
+}
+
+#container {
+	margin-top: 80px;
+}
+.inner {
+	margin : 0 auto;
+	max-width: 1250px;
+}
+
+.inner .tit {
+	padding: 30px;
+	font-size: 50px;
+	font-weight: 700;
+	color: white;
+}
+
+
+.pl_main {
+  display: block;
+  padding: 30px;
+}
+
+.pl_write_btn {
+  background-color: #fce8c3;
+  color: black;
+  font-weight: 600;
+  border-radius: 10px;
+  width: 136px;
+  height: 44px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+}
+.cupon_wrap {
+	display: flex;
+	gap: 0 25px;
+}
+.cupon_wrap .cupon_banner {
+	width: 50%;
+	display: flex;
+}
+.cupon_banner .img_wrap {
+  width: 150px;
+  height: 150px;
+  margin-right: 25px;
+  overflow: hidden;
+  border: 1px solid red;
+}
+.cupon_banner .img_wrap img {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; 
+}
+.cupon_banner .cupon_detail {
+	width: 70%;
+	position: relative;
+}
+.cupon_banner .cupon_tit {
+	display: flex;
+	margin-bottom: 10px;
+	justify-content: space-between;
+}
+.cupon_banner .cupon_tit p {
+	display: flex;
+	font-size: 20px;
+	font-weight: 700;
+	align-items: center;
+}
+.cupon_banner .cupon_tit .buy_btn {
+	background-color: #fce8c3;
+	color: black;
+	border: 1px solid red;
+	padding: 8px;
+	border-radius: 50%;
+	
+}
+.cupon_banner .cupon_tit img {
+	width: 20px;
+	height: 20px;
+}
+.cupon_banner .cupon_detail .cupon_price {
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+	font-weight: 700;
+}
