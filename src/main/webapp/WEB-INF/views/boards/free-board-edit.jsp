@@ -112,7 +112,8 @@
 	                  <c:forEach var="image" items="${images}">
 	                    <div class="existing_image">
 	                      <img src="${pageContext.request.contextPath}${image.image_url}" alt="Image" />
-	                      <a href="deleteImage.do?image_idx=${image.image_idx}&board_idx=${dto.board_idx}" onclick="return confirm('이미지를 삭제하시겠습니까?');">삭제</a>
+	                      <a href="deleteImage.do?image_idx=${image.image_idx}&board_idx=${dto.board_idx}" onclick="return confirm('이미지를 삭제하시겠습니까?');">
+	                      <img src="${pageContext.request.contextPath}/images/imgMGJ/delete_btn.svg" style="filter: invert(34%) sepia(94%) saturate(7482%) hue-rotate(-1deg) brightness(95%) contrast(102%);" /></a>
 	                    </div>
 	                  </c:forEach>
                   </div>
