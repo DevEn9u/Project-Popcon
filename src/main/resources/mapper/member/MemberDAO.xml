@@ -18,13 +18,13 @@
 	<!-- 회원가입 -->
 	<!-- 일반 회원 -->
 	<insert id="registerNormal">
-		INSERT INTO member (id, name, email, pass, authority, phone)
+		INSERT INTO member (id, name, email, pass, authority, phone, point)
 		VALUES
-			(#{id}, #{name}, #{email}, #{pass}, 'ROLE_NORMAL', #{phone})
+			(#{id}, #{name}, #{email}, #{pass}, 'ROLE_NORMAL', #{phone}, 1000)
 	</insert>
 	<!-- 기업 회원 -->
 	<insert id="registerCorp">
-		INSERT INTO member (id, name, email, pass, authority, phone, business_number)
+		INSERT INTO member (id, name, email, pass, authority, phone,  business_number)
 		VALUES
 			(#{id}, #{name}, #{email}, #{pass}, 'ROLE_CORP', #{phone}, #{business_number} )
 	</insert>

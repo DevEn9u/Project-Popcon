@@ -363,7 +363,7 @@
   width: 1200px;
   height: 1px;
   background: var(--txt-color-400);
-  margin: 20px 0 50px 25px;
+  margin: 20px 0 25px 25px;
 }
 .day_slider .today_popup {
   display: flex;

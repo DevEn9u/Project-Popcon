@@ -143,7 +143,8 @@
 				                  <c:forEach var="image" items="${comment.com_img}">
 				                    <div class="image_item">
 				                      <img src="${image.image_url}" alt="Image" />
-				                      <a href="../freeBoard/deleteCommentImage.do?image_idx=${image.image_idx}&board_idx=${dto.board_idx}&com_idx=${comment.com_idx}" onclick="return confirm('이미지를 삭제하시겠습니까?');">삭제</a>
+				                      <a href="../freeBoard/deleteCommentImage.do?image_idx=${image.image_idx}&board_idx=${dto.board_idx}&com_idx=${comment.com_idx}" onclick="return confirm('이미지를 삭제하시겠습니까?');">
+				                      <img src="${pageContext.request.contextPath}/images/imgMGJ/delete_btn.svg" style="width:24px; height:24px; filter: invert(34%) sepia(94%) saturate(7482%) hue-rotate(-1deg) brightness(95%) contrast(102%);" /></a>
 				                    </div>
 				                  </c:forEach>
 				                </div>

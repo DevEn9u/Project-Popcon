@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.springboot.point.IPointService">
+    <!-- 댓글 작성시 포인트 적립 -->
+    <insert id="insertPoint" parameterType="com.edu.springboot.point.PointDTO">
+	    INSERT INTO point (p_user, p_change, p_change_date)
+	    VALUES (#{p_user}, #{p_change}, SYSDATE)
+	</insert>
+	
+	<!-- 적립된 포인트를 유저의 보유 포인트에 추가 -->
+    <update id="updateMemberPoint" parameterType="com.edu.springboot.point.PointDTO">
+	    UPDATE member
+	    SET point = point + #{p_change}
+	    WHERE id = #{p_user}
+	</update>
+
+	<!-- 포인트 적립 내역 가져오기 -->
+	<select id="getPointInfoById" parameterType="String" resultType="com.edu.springboot.point.PointDTO">
+		SELECT * FROM point WHERE p_user = #{p_user}
+	</select>
+</mapper>

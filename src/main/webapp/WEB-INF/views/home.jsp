@@ -5,6 +5,7 @@
 <html lang="ko">
 <head>
 <c:import url="./include/head.jsp" />
+<script src="/js/ui-common.js?v=<?php echo time(); ?>"></script>
 <link rel="stylesheet"
 	href="/css/popup_list.css?v=<?php echo time(); ?>">
 </head>
@@ -43,6 +44,24 @@ function toggleLike(board_idx) {
     });
 }
 </script>
+
+<script>
+    function scrollToSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        if (section) {
+            const sectionPosition = section.getBoundingClientRect().top + window.scrollY; // 요소의 Y 위치
+            const windowHeight = window.innerHeight; // 화면 높이
+            const targetPosition = sectionPosition - (windowHeight / 2) + (section.clientHeight / 2); // 중앙 위치 조정
+
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth' // 부드러운 스크롤
+            });
+        }
+    }
+</script>
+
+
 	<div id="skip_navi">
 		<a href="#container">본문 바로가기</a>
 	</div>
@@ -81,7 +100,7 @@ function toggleLike(board_idx) {
 					</div>
 				</div>
 			</section>
-			<section class="pick_slider">
+			<section class="pick_slider" id="pick_slider">
 				<div class="inner">
 					<h2 class="tit">
 						담당자 픽 팝업 <strong>10월</strong>
@@ -102,7 +121,7 @@ function toggleLike(board_idx) {
 					</div>
 				</div>
 			</section>
-			<section class="popular_slider">
+			<section class="popular_slider" id="popular_slider">
 				<div class="inner">
 					<h2 class="tit">
 						인기 팝업 <strong>10월</strong>
@@ -123,41 +142,37 @@ function toggleLike(board_idx) {
 					</div>
 				</div>
 			</section>
-			<section class="day_slider">
-				<div class="inner">
-					<div class="slider" id="date-slider"></div>
-					<span class="line"></span>
-					<div class="pl_main">
-						<ul class="popup_wrap">
-							<c:forEach var="popup" items="${popupList}">
-								<li class="popup_banner main_popup_banner"><a
-									href="/popupBoard/view/${popup.board_idx}"> <img
-										src="${popup.thumb}" alt="Thumbnail" class="popup_thumbnail" />
-										<div class="txt_title">
-											<h2>
-												${popup.board_title}
-												<button id="likeBtn_${popup.board_idx}"
-													class="like_btn <c:if test="${popup.liked}">active</c:if>"
-													onclick="toggleLike('${popup.board_idx}'); event.preventDefault(); event.stopPropagation();">
-													<!-- event.preventDefault() 추가 -->
-												</button>
-											</h2>
-											<div class="popup_location">
-												<img src="../images/imgMGJ/pin.svg" /> <span
-													class="location_span">${popup.popup_addr}</span>
-											</div>
-											<span class="popup_date">${popup.postdate}</span>
-										</div>
-								</a></li>
-							</c:forEach>
-
-
-						</ul>
-
-
-					</div>
-				</div>
+			<section class="day_slider" id="day_slider">
+			  <div class="inner">
+			    <div class="slider" id="date-slider"></div>
+			    <span class="line"></span>
+			    <div class="pl_main">
+			      <ul class="popup_wrap">
+			        <c:forEach var="popup" items="${popupList}">
+			          <li class="popup_banner main_popup_banner">
+			            <a href="/popupBoard/view/${popup.board_idx}">
+			              <div class="img_wrap">
+			                <img src="${popup.thumb}" alt="Thumbnail" class="popup_thumbnail" />
+			              </div>
+			              <div class="txt_title">
+			                <h2>
+			                  ${popup.board_title}
+			                  <button id="likeBtn_${popup.board_idx}" class="like_btn <c:if test="${popup.liked}">active</c:if>" onclick="toggleLike('${popup.board_idx}'); event.preventDefault(); event.stopPropagation();">
+			                  </button>
+			                </h2>
+			                <div class="popup_location">
+			                  <img src="../images/imgMGJ/pin.svg" /> <span class="location_span">${popup.popup_addr}</span>
+			                </div>
+			                <span class="popup_date" data-end-date="${popup.end_date}">${popup.end_date}</span>
+			              </div>
+			            </a>
+			          </li>
+			        </c:forEach>
+			      </ul>
+			    </div>
+			  </div>
 			</section>
+
 			<section class="season_slider">
 				<div class="inner">
 					<h2 class="tit">

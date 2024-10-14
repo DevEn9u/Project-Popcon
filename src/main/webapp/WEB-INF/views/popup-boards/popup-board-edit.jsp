@@ -324,7 +324,8 @@ function openPostcode() {
 														src="${pageContext.request.contextPath}${image.image_url}"
 														alt="Image" /> <a
 														href="deleteImage.do?image_idx=${image.image_idx}&board_idx=${popup.board_idx}"
-														onclick="return confirm('이미지를 삭제하시겠습니까?');">삭제</a>
+														onclick="return confirm('이미지를 삭제하시겠습니까?');">
+														<img src="${pageContext.request.contextPath}/images/imgMGJ/delete_btn.svg" style="filter: invert(34%) sepia(94%) saturate(7482%) hue-rotate(-1deg) brightness(95%) contrast(102%);" /></a>
 												</div>
 											</c:forEach></td>
 									</tr>
@@ -350,7 +351,8 @@ function openPostcode() {
 												<img src="${pageContext.request.contextPath}${popup.thumb}"
 													alt="Thumbnail" /> <a
 													href="deleteThumbnail.do?board_idx=${popup.board_idx}&thumb=${popup.thumb}"
-													onclick="return confirm('썸네일 이미지를 삭제하시겠습니까?');">삭제</a>
+													onclick="return confirm('썸네일 이미지를 삭제하시겠습니까?');">
+													<img src="${pageContext.request.contextPath}/images/imgMGJ/delete_btn.svg" style="filter: invert(34%) sepia(94%) saturate(7482%) hue-rotate(-1deg) brightness(95%) contrast(102%);" /></a></a>
 											</div>
 										</td>
 									</tr>
