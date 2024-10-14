@@ -12,6 +12,7 @@
 <c:set var="isLoggedIn"
 	value="${not empty pageContext.request.userPrincipal}" />
 <link rel="stylesheet" href="/css/popup_view.css">
+<script src="/js/ui-common.js?v=<?php echo time(); ?>"></script>
 <body>
 
 	<!-- 조아요 클릭시 빨개짐. -->

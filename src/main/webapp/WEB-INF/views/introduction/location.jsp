@@ -61,8 +61,7 @@
 			<section class="my_page">
 				<div class="my_list">
 					<ul class="depth1">
-						<li class="list_title on"><a href="/introduction/location.do">학원
-								위치</a></li>
+						<li class="list_title on"><a href="/introduction/location.do">오시는 길</a></li>
 					</ul>
 				</div>
 				<div class="map_wrap" style="width: 100%; overflow: hidden">
