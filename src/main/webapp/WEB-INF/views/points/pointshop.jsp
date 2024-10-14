@@ -21,7 +21,7 @@
 		${common_header }
 		<main id="container">
 		    <div class="inner">
-		      <h2 class="tit">POINT SHOP</h2>
+		      <h2 class="tit">CUPON SHOP</h2>
 		      <div class="pl_main">
 				<c:if
 					test="${memberDTO.authority == 'ROLE_ADMIN' || memberDTO.authority == 'ROLE_CORP'}">
