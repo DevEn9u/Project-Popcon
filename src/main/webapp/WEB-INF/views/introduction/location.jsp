@@ -68,7 +68,8 @@
 				<div class="map_wrap" style="width: 100%; overflow: hidden">
 					<div class="academy_location" id="map"></div>
 					<div class="location_txt">서울특별시 종로구 삼일대로17길 51
-					 5층 더조은컴퓨터아카데미 </div>
+					 5층 더조은컴퓨터아카데미 <br />
+					 1번출구에서 나온 뒤 직진</div>
 				</div>
 
 			</section>
