@@ -758,6 +758,20 @@
 }
 /* 마이페이지 쿠폰 끝 */
 
+/* 관리자 페이지 */
+.ad_tit_wrap {
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+}
+.ad_btn_wrap {
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width:50%;
+    justify-content: center;
+}
 
 
 /* 화면 줄어들면 옆이 붙는 문제 해결용 */

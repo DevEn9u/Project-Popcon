@@ -1,5 +1,7 @@
 package com.edu.springboot.member;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -23,6 +25,9 @@ public interface IMemberService {
 	// 회원 정보 수정 - 비밀번호 수정
 	public int editMemberPass(MemberDTO memberDTO);
 	
-	// 회원 정보 수정 - ID와 이름 수정
+	// 어드민 페이지 ID 수정
 	public int updateMemberName(MemberDTO memberDTO);
+	// 어드민 페이지 모든 회원 가져오기
+	public List<MemberDTO> getAllMembers();
+
 }
