@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <header id="header">
 
-<script>
+<script> 
   //태그 검색 기능
   function performSearch() {
     var searchKeyword = document.getElementById("searchInput").value;
