@@ -20,13 +20,16 @@
         <section class="my_page">
           <div class="my_list">
             <ul class="depth1">
-              <li class="list_title on">
-                <a href="/adpage/main.do">게시물 관리</a>
+              <li class="list_title">
+                <a href="/adpage/main.do" style="color: var(--txt-color-600);">게시물 관리</a>
               </li>
               <ul class="depth2">
                 <li><a href="/adpage/popup.do">팝업 게시판</a></li>
                 <li><a href="/adpage/free.do">자유 게시판</a></li>
               </ul>
+              <li class="list_title">
+                <a href="/adpage/user.do" style="color: var(--txt-color-600);">유저 관리</a>
+              </li>
             </ul>
           </div>
           <div class="my_info_wrap" style="text-align:center;">
@@ -35,6 +38,7 @@
 	            <div class="ad_btn_wrap" style="text-align:center; display:inline-flex; gap:20px;">
 	            	<button class="btn" onclick="location.href='/adpage/popup.do';">팝업 게시판 관리</button>
 	            	<button class="btn" onclick="location.href='/adpage/free.do';">자유 게시판 관리</button>
+	            	<button class="btn" onclick="location.href='/adpage/user.do';">유저 관리</button>
 	            </div>
           	</div>
           </div>

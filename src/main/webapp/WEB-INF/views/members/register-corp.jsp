@@ -5,12 +5,12 @@
 <html lang="ko">
 <head>
 	<c:import url="../include/head.jsp" />
+	<link rel="stylesheet" href="/css/member.css">
+	<script src="/js/form-validate.js"></script>
 	<title>POPCON | 팝컨 - 회원가입</title>
 </head>
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
-<link rel="stylesheet" href="/css/member.css">
-<script src="/js/form-validate.js"></script>
 
 <body>
   <div id="skip_navi">

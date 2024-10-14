@@ -54,4 +54,11 @@
 		UPDATE member SET pass = #{pass} WHERE id = #{id} 
 	</update>
 	
+	<!-- 관리자 페이지 - 회원 이름 변경 -->
+	<update id="updateMemberName" parameterType="com.edu.springboot.member.MemberDTO">
+	    UPDATE member
+	    SET name = #{name}
+	    WHERE id = #{id}
+	</update>
+	
  </mapper>

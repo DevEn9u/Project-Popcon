@@ -11,9 +11,14 @@
 	<select id="getNoticeBoards" resultType="com.edu.springboot.board.BoardDTO">
     	SELECT * FROM BOARD WHERE board_type = 'notice' ORDER BY postdate DESC
 	</select>
-	<select id="selectBoardById" parameterType="String" resultType="com.edu.springboot.board.BoardDTO">
-	    SELECT * FROM BOARD WHERE board_idx = #{board_idx}
-	</select>
+    <select id="selectBoardById" parameterType="String" resultType="com.edu.springboot.board.BoardDTO">
+        <![CDATA[
+        SELECT b.*, m.name AS writerName
+        FROM BOARD b
+        LEFT JOIN MEMBER m ON b.writer = m.id
+        WHERE b.board_idx = #{board_idx}
+        ]]>
+    </select>
 	<!-- 게시글 삽입 쿼리 -->
 	<insert id="insertBoard" parameterType="com.edu.springboot.board.BoardDTO">
 	    <!-- 시퀀스에서 다음 값 가져오기 -->
@@ -34,13 +39,14 @@
 	<delete id="deleteBoard" parameterType="String">
 	    DELETE FROM BOARD WHERE board_idx = #{board_idx}
 	</delete>
-	<select id="getFreeBoardsWithPaging" resultType="com.edu.springboot.board.BoardDTO">
-	    SELECT * FROM (
-	        SELECT ROWNUM AS rn, a.* FROM (
-	            SELECT * FROM BOARD WHERE board_type = 'free' ORDER BY postdate DESC
-	        ) a WHERE ROWNUM &lt;= #{offset} + #{limit}
-	    ) WHERE rn &gt; #{offset}
-	</select>
+    <select id="getFreeBoardsWithPaging" resultType="com.edu.springboot.board.BoardDTO">
+        SELECT b.*, m.name AS writerName
+        FROM (
+            SELECT * FROM BOARD WHERE board_type = 'free' ORDER BY postdate DESC
+        ) b
+        LEFT JOIN MEMBER m ON b.writer = m.id
+        WHERE ROWNUM &lt;= #{offset} + #{limit} AND ROWNUM &gt; #{offset}
+    </select>
 	
 	<select id="getNoticeBoardsWithPaging" resultType="com.edu.springboot.board.BoardDTO">
 	    SELECT * FROM (

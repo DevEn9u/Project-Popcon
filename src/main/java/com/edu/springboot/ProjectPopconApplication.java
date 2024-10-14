@@ -13,7 +13,7 @@ public class ProjectPopconApplication {
 		
 		String passwd =
 				PasswordEncoderFactories.createDelegatingPasswordEncoder()
-				.encode("1234");
+				.encode("qwer1234");
 		System.out.println(passwd);
 	}
 }

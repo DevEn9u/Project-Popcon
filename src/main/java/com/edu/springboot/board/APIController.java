@@ -28,17 +28,11 @@ public class APIController {
     private final ImageService imageService; 
     private final IMemberService memberService;
 
-    // 자유게시판 목록
+
     @GetMapping("/api/freeBoard/list")
     public ResponseEntity<List<BoardDTO>> listBoards(@RequestParam(value = "page", defaultValue = "1") int page) {
         List<BoardDTO> boardList = boardService.getFreeBoardsWithPaging(page);
-        // 각 게시글에 대해 작성자 이름 조회
-        for (BoardDTO board : boardList) {
-            MemberDTO member = memberService.getMemberById(board.getWriter());
-            String writerName = (member != null) ? member.getName() : "알 수 없음";
-            board.setWriterName(writerName);
-        }
-
+        // 각 게시글에 대해 작성자 이름 조회 (이미 BoardService에서 처리됨)
         return ResponseEntity.ok(boardList);
     }
 
@@ -79,16 +73,11 @@ public class APIController {
             response.addCookie(newCookie);
         }
 
-        // 게시글 상세 정보 가져오기
+        // 게시글 상세 정보 가져오기 (이미 댓글 포함)
         BoardDTO board = boardService.getBoardById(boardIdx);
         if (board == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-
-        // 작성자 이름 조회
-        MemberDTO member = memberService.getMemberById(board.getWriter());
-        String writerName = (member != null) ? member.getName() : "알 수 없음";
-        board.setWriterName(writerName);
 
         return ResponseEntity.ok(board);
     }

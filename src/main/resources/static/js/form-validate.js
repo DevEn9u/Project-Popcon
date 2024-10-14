@@ -4,17 +4,19 @@ function validateForm(form) {
 	let email = $('.input_email').val().trim();
 	let phone = $('.input_phone').val().trim();
 
-
-	let business = $('.input_business').val().trim();
+//	let business = $('.input_business').val().trim();
+	let business = $('.input_business').length ? $('.input_business').val().trim() : null;
 	// 회원가입 폼 내용 검증
 	if (!isFieldValid(form.id, "아이디를 입력하세요.") || 
 	       !isFieldValid(form.pass, "비밀번호를 입력하세요.") || 
 	       !isFieldValid(form.pass2, "비밀번호 확인을 위해 같은 비밀번호를 입력하세요.") || 
 	       !isFieldValid(form.name, "이름을 입력하세요.") || 
 	       !isFieldValid(form.email, "이메일을 입력하세요.") || 
-	       !isFieldValid(form.phone, "전화번호를 입력하세요.") ||
-		   (business && !isFieldValid(form.business_number, "사업자번호를 입력하세요."))) {
+	       !isFieldValid(form.phone, "전화번호를 입력하세요.")) {
 	      	 return false;
+	}
+	if (business !== null && !isFieldValid(form.business_number, "사업자번호를 입력하세요.")) {
+		return false;
 	}
 	
 	if (form.idDuplication.value != "idChecked") {
@@ -54,7 +56,7 @@ function validateForm(form) {
       return false;
   	}
 		
-  	if (!isValidBusiness(business)) {
+  	if (business && !isValidBusiness(business)) {
       alert("사업자 번호 10자리를 입력해주세요.\n예시]111-12-56789");
 	  $('.input_business').focus();
       return false;

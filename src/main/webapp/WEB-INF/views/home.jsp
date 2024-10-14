@@ -49,6 +49,8 @@ function toggleLike(board_idx) {
 	<div id="wrap">
 		${common_header }
 
+
+
 		<main id="container">
 			<section class="main_slider">
 				<div class="inner">
@@ -207,36 +209,50 @@ function toggleLike(board_idx) {
 		</main>
 		<footer id="footer">
 			<div class="inner">
-				${common_footer}
+			    ${common_footer}
 				<section class="btn_wrap">
-					<a class="scroll_btn top_btn" href="#"><span class="blind">아래로
-							이동</span></a>
-					<c:if test="${not empty user_id }">
-						<a class="qna_btn top_btn" href="#" id="openChat"><span
-							class="blind">질문</span></a>
+				   <a class="scroll_btn top_btn" href="#"><span class="blind">아래로 이동</span></a>
+				   <c:if test="${not empty user_id }">
+					   <a class="qna_btn top_btn" href="#" id="openChat"><span class="blind">질문</span></a>
+				   </c:if>
+					<!-- 관리자 계정일때만 보이는 관리자 페이지 진입버튼 추가 -->
+					<c:if
+					test="${memberDTO.authority == 'ROLE_ADMIN'}">
+						<a class="master_btn" href="/adpage/main.do">
+							<p class="mbtn_tit">관리자</p>
+						</a>
 					</c:if>
 				</section>
 			</div>
-			<script>
+		</footer>
+		<script>
 		  const openChatWin = (roomId, userId) => {
+			  if(userId !== "admin") {
+				  
 			    window.open(
-// 			      `/chat.do?roomId=${roomId}&userId=${userId}`,
-			      "/chat.do?roomId=" + roomId + "&userId=" + userId,
+			      "/chat/index.html#/chat?roomId=" + roomId + "&userId=" + userId,
 			      '',
-			      'width=500, height=800'
+			      'width=500, height=700'
 			    );
-			  };
+			  }
+			  else {
+				window.open(
+					"chat/index.html",
+					'',
+					'width=500, height=700'
+				);
+			  }
+		  };
 		  $('#openChat').on('click', function(e) {
 			  e.preventDefault();
 			  // Model에서 id 가져오기
 			  const userId = "${user_id}";
-			  // roomId는 'user-유저아이디'로 설정
-			  const roomId = "user-" + userId;
+			  // roomId는 'chat-유저아이디'로 설정
+			  const roomId = "chat-" + userId;
 			  console.log(roomId);
 			  openChatWin(roomId, userId);
-		  })
+		  });
 		</script>
-		</footer>
 	</div>
 </body>
 </html>

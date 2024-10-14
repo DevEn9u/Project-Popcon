@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.edu.springboot.images.ImageDTO;
 import com.edu.springboot.images.ImageService;
+import com.edu.springboot.member.IMemberService;
+import com.edu.springboot.member.MemberDTO;
 import com.edu.springboot.popupboards.CommentDTO;
 
 import lombok.RequiredArgsConstructor;
@@ -18,7 +20,8 @@ public class BoardService {
     
 	private final BoardMapper boardMapper;
     
-    
+	
+    private final IMemberService memberService; 
     private final ImageService imageService;
     
     @Autowired
@@ -43,6 +46,16 @@ public class BoardService {
             // 관련 이미지 가져오기
             List<ImageDTO> images = imageService.getImages(boardIdx, "BOARD");
             board.setImages(images); // BoardDTO에 images 설정
+
+            // 관련 댓글 가져오기
+            List<CommentDTO> comments = getComments(boardIdx);
+            // 각 댓글에 대해 작성자 이름 조회
+            for (CommentDTO comment : comments) {
+                MemberDTO coMember = memberService.getMemberById(comment.getCom_writer());
+                String comWriterName = (coMember != null) ? coMember.getName() : "알 수 없음";
+                comment.setComWriterName(comWriterName); // CommentDTO에 comWriterName 설정
+            }
+            board.setComments(comments); // BoardDTO에 comments 설정
         }
         return board;
     }
@@ -77,7 +90,16 @@ public class BoardService {
     public List<BoardDTO> getFreeBoardsWithPaging(int page) {
         int limit = 10; // 한 페이지에 보여줄 게시글 수
         int offset = (page - 1) * limit; // 시작 위치
-        return boardMapper.getFreeBoardsWithPaging(offset, limit);
+        List<BoardDTO> boards = boardMapper.getFreeBoardsWithPaging(offset, limit);
+
+        // 각 게시글의 writerName 설정
+        for (BoardDTO board : boards) {
+            MemberDTO member = memberService.getMemberById(board.getWriter());
+            String writerName = (member != null) ? member.getName() : "알 수 없음";
+            board.setWriterName(writerName);
+        }
+
+        return boards;
     }
 
     public List<BoardDTO> getNoticeBoardsWithPaging(int page) {
