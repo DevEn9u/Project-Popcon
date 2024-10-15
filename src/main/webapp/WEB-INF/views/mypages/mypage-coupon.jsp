@@ -47,8 +47,9 @@
               <ul class="depth2">
                 <li>
                   <a href="/mypage/likes.do">좋아요 누른 팝업</a>
+				  
                 </li>
-                <li class="on"><a href="/mypage/myCoupon.do">구매한 쿠폰</a></li>
+                <li class="on"><a href="/mypage/myCoupon.do">보유한 쿠폰</a></li>
               </ul>
             </ul>
           </div>
