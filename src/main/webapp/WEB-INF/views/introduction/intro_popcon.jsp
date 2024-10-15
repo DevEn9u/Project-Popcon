@@ -18,14 +18,17 @@
 	<div id="wrap">
 		${common_header }
 		<main id="mp_container">
-			<h1>POPCON이란?</h1>
-			<section class="my_page">
-				<div class="my_list">
-					<ul class="depth1">
-						<li class="list_title on"><a href="/introduction/poopcon.do">POPCON이란?</a></li>
-					</ul>
+			<section class="intorduction">
+				<h1 class="one_sentence">더 다양하고<br/>즐거운 경험을<br/>선사하기 위하여</h1>
+				<div class="img_wrap">
+					<img src="" alt="소개이미지" />
 				</div>
-
+				<div class="txt_wrap">
+					<p>POPCON은 팝업스토어 Container의 줄임말로, </p>
+					<p>팝업스토어 정보확인과 예약이 가능한 페이지 입니다. </p>
+					<p>다양한 팝업과 함께 주변 상점들을 합리적인 가격으로 이용할 수 있도록 하며, </p>
+					<p>사용자들의 문화 생활을 적극 지원하고자 합니다. </p>
+				</div>
 			</section>
 		</main>
 		<footer id="footer">
