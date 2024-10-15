@@ -776,7 +776,7 @@
   
   .ad_btn_wrap .member_name {
 	display: block;
-	width:150px;
+	width:100px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
