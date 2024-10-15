@@ -29,8 +29,8 @@
 								style="color: var(--point-color1);">팝업 게시판</a></li>
 							<li><a href="/adpage/free.do">자유 게시판</a></li>
 						</ul>
-						<li class="list_title"><a href="/adpage/user.do">유저 관리</a>
-						</li>
+						<li class="list_title"><a href="/adpage/user.do">유저 관리</a></li>
+						<li class="list_title"><a href="/adpage/chat.do">문의 채팅방 목록</a></li>
 					</ul>
 				</div>
 				<div class="pl_main ad_pl_main">
@@ -55,8 +55,8 @@
 						<c:forEach var="popup" items="${popupList}">
 							<li class="popup_banner"><a
 								href="/popupBoard/view/${popup.board_idx}"> <img
-									src="${popup.thumb}" alt="Thumbnail" class="popup_thumbnail" />
-									<div class="txt_title">
+									src="${popup.thumb}" alt="Thumbnail" class="popup_thumbnail" style="max-width:100px; max-height:100px;" />
+									<div class="txt_title" style="margin-left: 10px;">
 										<h2>
 											${popup.board_title}
 											<form id="deleteForm_${popup.board_idx}"

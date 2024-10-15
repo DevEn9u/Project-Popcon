@@ -31,6 +31,7 @@
 								style="color: var(--point-color1);">자유 게시판</a></li>
 						</ul>
 						<li class="list_title"><a href="/adpage/user.do">유저 관리</a>
+						<li class="list_title"><a href="/adpage/chat.do">문의 채팅방 목록</a></li>
 						</li>
 					</ul>
 				</div>
