@@ -13,7 +13,7 @@
         if (confirm("게시물을 다시 쓰시겠습니까?")) {
             let form = document.writeFrm;
             form.reset();
-        } else {
+        } else { 
             return false;
         }
     }
