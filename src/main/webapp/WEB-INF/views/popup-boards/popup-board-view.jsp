@@ -54,7 +54,7 @@
       });
   }
 </script>
-	
+
 	<script>
 	
 	  function initMap() {
@@ -78,6 +78,13 @@
 	    });
 	  }
 	</script>
+
+	<!-- 예약 안한 사용자가 댓글을 남기면 alert 메세지 출력 -->
+	<c:if test="${not empty error}">
+		<script>
+        alert("${error}");
+    </script>
+	</c:if>
 
 	<!-- 민경준 구글 맵 API 사용하였습니다 -->
 	<script
@@ -320,8 +327,9 @@
 					<!-- 구글 지도 표시 영역 -->
 					<div class="location_copy">
 						${fn:replace(popup.popup_addr, ',', ' ')}
-						<div class="btn" style="width:100px;" 
-							onclick="copyToClipboard('${fn:replace(popup.popup_addr, ',', ' ')}')">주소 복사</div>
+						<div class="btn" style="width: 100px;"
+							onclick="copyToClipboard('${fn:replace(popup.popup_addr, ',', ' ')}')">주소
+							복사</div>
 					</div>
 				</div>
 
@@ -424,9 +432,11 @@
 												<c:forEach var="image" items="${comment.com_img}">
 													<div>
 														<img src="${image.image_url}" alt="Image"
-															style="max-width:300px; max-height:300px; margin-bottom: 10px;" />
+															style="max-width: 300px; max-height: 300px; margin-bottom: 10px;" />
 														<a href="/popupBoard/view/${popup.board_idx}"
-															onclick="deleteImage('${image.image_idx}', '${comment.com_idx}');"><img src="${pageContext.request.contextPath}/images/imgMGJ/delete_btn.svg" style="filter: invert(34%) sepia(94%) saturate(7482%) hue-rotate(-1deg) brightness(95%) contrast(102%);" /></a>
+															onclick="deleteImage('${image.image_idx}', '${comment.com_idx}');"><img
+															src="${pageContext.request.contextPath}/images/imgMGJ/delete_btn.svg"
+															style="filter: invert(34%) sepia(94%) saturate(7482%) hue-rotate(-1deg) brightness(95%) contrast(102%);" /></a>
 													</div>
 												</c:forEach>
 											</div>
