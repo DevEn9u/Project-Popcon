@@ -16,28 +16,32 @@
 	<div id="wrap">
 		${common_header }
 		<main id="mp_container">
-			<h1>관리자 페이지 - 유저 관리</h1>
+			<div class="title_wrap">
+				<h1>관리자 페이지</h1>
+				<span></span>
+				<h2>유저 관리</h2>
+			</div>
 			<section class="my_page">
 				<div class="my_list">
 					<ul class="depth1">
-						<li class="list_title"><a href="/adpage/main.do">게시물
-								관리</a></li>
+						<li class="list_title"><a href="/adpage/main.do">게시물 관리</a></li>
 						<ul class="depth2">
 							<li><a href="/adpage/popup.do">팝업 게시판</a></li>
 							<li><a href="/adpage/free.do">자유 게시판</a></li>
 						</ul>
-						<li class="list_title on" ><a href="/adpage/main.do">유저 관리</a>
-						<li class="list_title"><a href="/adpage/chat.do">문의 채팅방 목록</a></li>
+						<li class="list_title on"><a href="/adpage/main.do">유저
+								관리</a>
+						<li class="list_title"><a href="/adpage/chat.do">문의 채팅방</a></li>
 						</li>
 					</ul>
 				</div>
 				<div class="my_info_wrap" style="text-align: center;">
 					<div class="ad_tit_wrap">
-						<h2 style="margin-left: 0;">정보를 수정할 유저의 아이디를 입력하세요</h2>
+						<h2 class="admin_userid" style="margin-left: 0;">정보를 수정할 유저의
+							아이디를 입력하세요</h2>
 						<div class="row input_wrap2">
 							<form action="/adpage/user/edit.do" method="get">
-								<input type="text" name="id" placeholder="아이디를 입력하세요."
-									 required>
+								<input type="text" name="id" placeholder="아이디를 입력하세요." required>
 								<div class="btn_wrap" style="margin-top: 30px;">
 									<button type="submit" class="btn">입력</button>
 								</div>

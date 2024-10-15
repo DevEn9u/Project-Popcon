@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <c:import url="../include/head.jsp" />
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 
 <c:import url="../include/header.jsp" var="common_header" />
@@ -99,6 +101,7 @@
 			openDays.focus();
 			return false;
 		}
+		
 		if (!openHours.value.trim()) {
 			alert("오픈 시간을 입력해 주세요.");
 			openHours.focus();
@@ -175,7 +178,6 @@
 	});
 
 
-
 	// 이미지 파일 선택 시 파일 이름 표시 및 유효성 검사
 	function handleFileSelect(input) {
 		const files = input.files;
@@ -241,6 +243,34 @@ function openPostcode() {
 }
 </script>
 
+<script>
+// 요일 저장
+function updateOpenDays() {
+    const checkboxes = document.querySelectorAll('input[name="week"]:checked');
+    const openDaysArray = Array.from(checkboxes).map(checkbox => checkbox.value);
+    const openDays = openDaysArray.join(', '); // 체크된 요일 값을 가져와서 ','로 연결
+    
+    // 마지막 요일 뒤에 , 제거
+    const formattedOpenDays = openDays.endsWith(', ') ? openDays.slice(0, -2) : openDays;
+
+    document.getElementById('open_days').value = formattedOpenDays; // hidden input에 저장
+}
+</script>
+
+<script>
+function updateOpenHours() {
+    const startHour = document.getElementById('start_hour').value;
+    const endHour = document.getElementById('end_hour').value;
+
+    // 시간 포맷팅
+    const formattedStartHour = startHour.padStart(2, '0') + ':00'; // 예: '5' -> '05:00'
+    const formattedEndHour = endHour.padStart(2, '0') + ':00'; // 예: '17' -> '17:00'
+
+    // 오픈 시간을 '시작 시간 ~ 종료 시간' 형식으로 설정
+    document.getElementById('open_hours').value = formattedStartHour + ' ~ ' + formattedEndHour;
+}
+</script>
+
 
 <body>
 	<div id="skip_navi">
@@ -285,14 +315,15 @@ function openPostcode() {
 										type="text" name="end_date" placeholder="종료: YYYY-MM-DD"
 										required></td>
 								</tr>
-<tr>
-    <th>주소</th>
-    <td>
-        <input type="text" name="popup_addr" id="main_addr" placeholder="주소를 입력해 주세요" style="width:30%;" required>
-        <button type="button" onclick="openPostcode()" class="btn">우편번호 검색</button>
-        <input type="text" name="popup_addr" id="detail_addr" placeholder="상세주소를 입력해 주세요" onblur="combineAddresses()">
-    </td>
-</tr>
+								<tr>
+									<th>주소</th>
+									<td><input type="text" name="popup_addr" id="main_addr"
+										placeholder="주소를 입력해 주세요" style="width: 30%;" required>
+										<button type="button" onclick="openPostcode()" class="btn">우편번호
+											검색</button> <input type="text" name="popup_addr" id="detail_addr"
+										placeholder="상세주소를 입력해 주세요" onblur="combineAddresses()">
+									</td>
+								</tr>
 
 
 								<tr>
@@ -304,21 +335,45 @@ function openPostcode() {
 									<th>오픈 요일</th>
 									<td>
 										<form id="popupOpendays">
-											<input type="checkbox" id="mon" name="week" value="MON" /><label for="mon">월</label>
-											<input type="checkbox" id="tue" name="week" value="TUE" /><label for="tue">화</label>
-											<input type="checkbox" id="wed" name="week" value="WED" /><label for="wed">수</label>
-											<input type="checkbox" id="thur" name="week" value="THUR" /><label for="thur">목</label>
-											<input type="checkbox" id="fri" name="week" value="FRI" /><label for="fri">금</label>
-											<input type="checkbox" id="sat" name="week" value="SAT" /><label for="sat">토</label>
-											<input type="checkbox" id="sun" name="week" value="SUN" /><label for="sun">일</label>
-									    </form>
+											<input type="checkbox" id="mon" name="week" value="MON"
+												onchange="updateOpenDays()" /><label for="mon">월</label> <input
+												type="checkbox" id="tue" name="week" value="TUE"
+												onchange="updateOpenDays()" /><label for="tue">화</label> <input
+												type="checkbox" id="wed" name="week" value="WED"
+												onchange="updateOpenDays()" /><label for="wed">수</label> <input
+												type="checkbox" id="thur" name="week" value="THUR"
+												onchange="updateOpenDays()" /><label for="thur">목</label> <input
+												type="checkbox" id="fri" name="week" value="FRI"
+												onchange="updateOpenDays()" /><label for="fri">금</label> <input
+												type="checkbox" id="sat" name="week" value="SAT"
+												onchange="updateOpenDays()" /><label for="sat">토</label> <input
+												type="checkbox" id="sun" name="week" value="SUN"
+												onchange="updateOpenDays()" /><label for="sun">일</label>
+										</form> <input type="hidden" name="open_days" id="open_days" />
 									</td>
 								</tr>
 								<tr>
 									<th>오픈 시간</th>
-									<td><input type="text" name="open_hours"
-										placeholder="예: 11:00 ~ 17:00" required></td>
+									<td><select name="start_hour" id="start_hour"
+										onchange="updateOpenHours()"
+										style="width: 50px; text-align: center; color: black;">
+											<c:forEach var="hour" begin="0" end="23">
+												<option value="${hour}">
+													<fmt:formatNumber value="${hour}" pattern="00" />:00
+												</option>
+											</c:forEach>
+									</select> ~ <select name="end_hour" id="end_hour"
+										onchange="updateOpenHours()"
+										style="width: 50px; text-align: center; color: black;">
+											<c:forEach var="hour" begin="0" end="23">
+												<option value="${hour}">
+													<fmt:formatNumber value="${hour}" pattern="00" />:00
+												</option>
+											</c:forEach>
+									</select> <input type="hidden" name="open_hours" id="open_hours" /></td>
 								</tr>
+
+
 								<tr>
 									<th>첨부파일</th>
 									<td class="td_flex">
@@ -332,7 +387,7 @@ function openPostcode() {
 											확장자 파일만 올릴 수 있습니다.</p>
 									</td>
 								</tr>
-								<src
+
 								<tr>
 									<th>썸네일 이미지</th>
 									<td class="td_flex">
@@ -348,7 +403,8 @@ function openPostcode() {
 								</tr>
 							</table>
 							<div class="btn_wrap">
-								<button type="submit" class="btn board_btn" onclick="submitForm()">등록</button>
+								<button type="submit" class="btn board_btn"
+									onclick="submitForm()">등록</button>
 								<button type="button" class="btn board_btn cancel_btn"
 									onclick="checkReset();">다시쓰기</button>
 								<button type="button" onclick="location.href='./list.do';"

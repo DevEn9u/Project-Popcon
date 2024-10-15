@@ -17,7 +17,7 @@
 	<div id="wrap">
 		${common_header }
 		<main id="mp_container">
-			<h1>마이페이지</h1>
+			<h1 style="margin-top:80px;">마이페이지</h1>
 			<section class="my_page">
 				<div class="my_list">
 					<ul class="depth1">

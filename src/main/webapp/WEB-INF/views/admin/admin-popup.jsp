@@ -19,7 +19,11 @@
 	<div id="wrap">
 		${common_header }
 		<main id="mp_container">
-			<h1>관리자 페이지</h1>
+			<div class="title_wrap">
+				<h1>관리자 페이지</h1>
+				<span></span>
+				<h2>팝업 컨테이너 관리</h2>
+			</div>
 			<section class="my_page">
 				<div class="my_list">
 					<ul class="depth1">
@@ -31,33 +35,17 @@
 							<li><a href="/adpage/free.do">자유 게시판</a></li>
 						</ul>
 						<li class="list_title"><a href="/adpage/user.do">유저 관리</a></li>
-						<li class="list_title"><a href="/adpage/chat.do">문의 채팅방 목록</a></li>
+						<li class="list_title"><a href="/adpage/chat.do">문의 채팅방</a></li>
 					</ul>
 				</div>
 				<div class="pl_main ad_pl_main">
-
-					<nav class="kategorie_wrap">
-						<ul class="pl_kategorie">
-							<p class="keyword">키워드</p>
-							<li class="digital_btn"><a href="./list.do">전체보기</a></li>
-							<li class="char_btn"><a href="./list.do?category=캐릭터">캐릭터</a></li>
-							<li class="fassion_btn"><a href="./list.do?category=패션/뷰티">패션/뷰티</a></li>
-							<li><a href="./list.do?category=식품">식품</a></li>
-							<li class="health_btn"><a href="./list.do?category=헬스/스포츠">헬스/스포츠</a></li>
-							<li><a href="./list.do?category=게임">게임</a></li>
-							<li><a href="./list.do?category=공공">공공</a></li>
-							<li><a href="./list.do?category=전시">전시</a></li>
-							<li class="digital_btn"><a href="./list.do?category=가전/디지털">가전/디지털</a></li>
-							<li class="char_btn"><a href="./list.do?category=아이돌">아이돌</a></li>
-						</ul>
-					</nav>
-
 					<ul class="popup_wrap">
 						<c:forEach var="popup" items="${popupList}">
 							<li class="popup_banner"><a
 								href="/popupBoard/view/${popup.board_idx}"> <img
-									src="${popup.thumb}" alt="Thumbnail" class="popup_thumbnail" style="max-width:100px; max-height:100px;" />
-									<div class="txt_title" style="margin-left: 10px;"> 
+									src="${popup.thumb}" alt="Thumbnail" class="popup_thumbnail"
+									style="max-width: 100px; max-height: 100px;" />
+									<div class="txt_title" style="margin-left: 10px;">
 										<h2>
 											${popup.board_title}
 											<form id="deleteForm_${popup.board_idx}"
