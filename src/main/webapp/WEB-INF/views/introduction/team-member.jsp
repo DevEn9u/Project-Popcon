@@ -54,7 +54,7 @@
 					<div class="my_info">
 						<div class="my_mile box1" id="kang" style="padding: 50px 50px; height:350px">
 							<div class="top1">
-								<img src="/images/gang.jpg" alt="강인구 사진" style="width:200px; height:250px;" />
+								<img src="/images/kang.jpg" alt="강인구 사진" style="width:200px; height:250px;" />
 								<div class="member_wrap" style="display:flex;">
 									<strong>팀장 강인구</strong>
 									<p class="member_name">각자 맡은 역할 작성</p>

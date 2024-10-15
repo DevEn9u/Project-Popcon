@@ -88,13 +88,13 @@
 		for (let i = 0; i < files.length; i++) {
 			const file = files[i];
 			if (!allowedTypes.includes(file.type)) {
-				alert('허용되지 않은 썸네일 파일 형식입니다: ' + file.name);
+				alert('허용되지 않은 이미지 파일 형식입니다: ' + file.name);
 				input.value = '';
 				document.querySelector(".thumb_name").value = ''; // Clear the file name display
 				return;
 			}
 			if (file.size > maxSize) {
-				alert('썸네일 파일 크기는 10MB 이하이어야 합니다: ' + file.name);
+				alert('이미지 파일 크기는 10MB 이하이어야 합니다: ' + file.name);
 				input.value = '';
 				document.querySelector(".thumb_name").value = ''; // Clear the file name display
 				return;
@@ -124,24 +124,24 @@
 					<h3>쿠폰 등록</h3>
 					<div class="board_write">
 						<form name="writeFrm" method="post" enctype="multipart/form-data"
-							action="/popupBoard/write.do"
+							action="/point/write.do"
 							onsubmit="return validateForm(this)">
 							<table>
 								<caption class="nohead">쿠폰 등록</caption>
 								<tr>
 									<th>쿠폰 이름</th>
 									<td><input type="text" name="board_title"
-										placeholder="쿠폰 이름을 입력해주세요" required></td>
+										placeholder="쿠폰 이름을 입력해주세요"></td>
 								</tr>
 								<tr>
 									<th>간략한 설명</th>
 									<td><textarea cols="30" rows="20" name="contents"
-											placeholder="간략한 설명을 입력해 주세요." required></textarea></td>
+											placeholder="간략한 설명을 입력해 주세요."></textarea></td>
 								</tr>
 								<tr>
 									<th>가격</th>
 									<td><input type="text" name="popup_fee"
-										placeholder="숫자만 입력해 주세요" required></td>
+										placeholder="숫자만 입력해 주세요"></td>
 								</tr>
 								<tr>
 									<th>쿠폰 이미지</th>

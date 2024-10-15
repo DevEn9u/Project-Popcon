@@ -7,8 +7,7 @@
 <html lang="ko">
 <head>
 <c:import url="../include/head.jsp" />
-<!--<link rel="stylesheet" href="../css/popup_list.css?v=<?php echo time(); ?>">-->
-<link rel="stylesheet" href="../css/pointshop.css?v=<?php echo time(); ?>">
+<link rel="stylesheet" href="../css/coupon.css?v=<?php echo time(); ?>">
 </head>
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
@@ -21,41 +20,41 @@
 		${common_header }
 		<main id="container">
 		    <div class="inner">
-		      <h2 class="tit">CUPON SHOP</h2>
+		      <h2 class="tit">COUPON</h2>
 				<c:if
 					test="${memberDTO.authority == 'ROLE_ADMIN' || memberDTO.authority == 'ROLE_CORP'}">
 					<button class="pl_write_btn" onclick="location.href='./write.do';">쿠폰 등록</button>
 				</c:if>
 		      <div class="pl_main">
-				<ul class="cupon_wrap">
-					<li class="cupon_banner">
+				<ul class="coupon_wrap">
+					<li class="coupon_banner">
 							<div class="img_wrap">
-								<img src="" alt="이미지" />
+								<img src="/images/푸루_눈치.jpg" alt="이미지" />
 							</div>
-							<div class="cupon_detail">
-								<div class="cupon_tit">
+							<div class="coupon_detail">
+								<div class="coupon_tit">
 									<p>쿠폰 이름</p>
-									<button class="buy_btn"><img src="../images/buy_btn_white.svg" /></button>
+									<button class="buy_btn" onclick="location.href='./buy.do'"><img src="../images/buy_btn_white.svg" /></button>
 								</div>
 								<div class="popup_location">
 									<span>한줄 설명</span>
 								</div>
-								<span class="cupon_price">500 POINTS </span>
+								<span class="coupon_price">500 POINTS </span>
 							</div>
 					</li>
-						<li class="cupon_banner">
+						<li class="coupon_banner">
 								<div class="img_wrap">
 									<img src="" alt="이미지" />
 								</div>
-								<div class="cupon_detail">
-									<div class="cupon_tit">
+								<div class="coupon_detail">
+									<div class="coupon_tit">
 										<p>쿠폰 이름</p>
-										<button class="buy_btn"><img src="../images/buy_btn_white.svg" /></button>
+										<button class="buy_btn" onclick="location.href='./buyCoupon.do'"><img src="../images/buy_btn_white.svg" /></button>
 									</div>
 									<div class="popup_location">
 										<span>한줄 설명</span>
 									</div>
-									<span class="cupon_price">500 POINTS </span>
+									<span class="coupon_price">500 POINTS </span>
 								</div>
 						</li>
 				</ul>
