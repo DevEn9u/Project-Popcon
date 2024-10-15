@@ -40,6 +40,7 @@
 						<li class="list_title"><a href="/mypage/likes.do">팝업</a></li>
 						<ul class="depth2">
 							<li><a href="/mypage/likes.do">좋아요 누른 팝업</a></li>
+							<li><a href="/mypage/myCoupon.do">보유한 쿠폰</a></li>
 						</ul>
 					</ul>
 				</div>
@@ -78,6 +79,12 @@
 											<p>총 ${booking.price}원</p></li>
 									</ul>
 								</c:forEach>
+								<c:if test="${empty booking}">
+									<div class="likes_block_wrap">
+										<div style="text-align: center; padding: 20px;">예약한
+											팝업이 없습니다.</div>
+									</div>
+								</c:if>
 							</div>
 						</div>
 					</div>

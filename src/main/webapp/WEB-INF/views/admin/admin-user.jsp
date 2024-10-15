@@ -26,7 +26,8 @@
 							<li><a href="/adpage/popup.do">팝업 게시판</a></li>
 							<li><a href="/adpage/free.do">자유 게시판</a></li>
 						</ul>
-						<li class="list_title on"><a href="/adpage/main.do">유저 관리</a>
+						<li class="list_title on" ><a href="/adpage/main.do">유저 관리</a>
+						<li class="list_title"><a href="/adpage/chat.do">문의 채팅방 목록</a></li>
 						</li>
 					</ul>
 				</div>
@@ -36,7 +37,7 @@
 						<div class="row input_wrap2">
 							<form action="/adpage/user/edit.do" method="get">
 								<input type="text" name="id" placeholder="아이디를 입력하세요."
-									style="width: 50%;" required>
+									 required>
 								<div class="btn_wrap" style="margin-top: 30px;">
 									<button type="submit" class="btn">입력</button>
 								</div>
