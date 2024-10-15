@@ -14,9 +14,7 @@ import com.edu.springboot.popupboards.PopupBoardDTO;
 
 @Mapper
 public interface MypageMapper {
-//    // 예약한 팝업 정보 보기
-//    public bookingDTO bookingInfo(String member_id);
-	
+
 	// 예약한 팝업 정보 보기 (리스트로 변경)
     public List<bookingDTO> bookingInfo(String member_id);
     
