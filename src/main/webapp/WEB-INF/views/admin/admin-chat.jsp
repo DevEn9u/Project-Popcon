@@ -30,7 +30,7 @@
                             <a href="/adpage/user.do" style="color: var(--txt-color-600);">유저 관리</a>
                         </li>
                         <li class="list_title">
-                            <a href="/adpage/main.do" style="color: var(--txt-color-600);">문의 채팅방 목록</a>
+                            <a href="/adpage/chat.do" style="color: var(--point-color1);">문의 채팅방 목록</a>
                         </li>
                     </ul>
                 </div>
