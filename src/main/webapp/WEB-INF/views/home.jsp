@@ -83,7 +83,7 @@ function toggleLike(board_idx) {
 												<div class="img_wrap"
 													style="max-width: 625px; max-height: 625px;">
 													<img src="${popup.thumb}" alt="${popup.board_title}"
-														class="main-fixed-size"
+														class="main-fixed-size" 
 														style="max-width: 625px; max-height: 625px;">
 												</div>
 												<div class="txt_wrap">
