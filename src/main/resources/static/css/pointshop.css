@@ -12,6 +12,7 @@
 .inner {
 	margin : 0 auto;
 	max-width: 1250px;
+	position: relative;
 }
 
 .inner .tit {
@@ -25,6 +26,7 @@
 .pl_main {
   display: block;
   padding: 30px;
+  margin-top: 60px;
 }
 
 .pl_write_btn {
@@ -39,6 +41,9 @@
   justify-content: center;
   align-items: center;
   margin-left: auto;
+  position: absolute;
+  right: 30px;
+  top: 100px;
 }
 .cupon_wrap {
 	display: flex;

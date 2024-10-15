@@ -22,31 +22,27 @@
 		<main id="container">
 		    <div class="inner">
 		      <h2 class="tit">CUPON SHOP</h2>
-		      <div class="pl_main">
 				<c:if
 					test="${memberDTO.authority == 'ROLE_ADMIN' || memberDTO.authority == 'ROLE_CORP'}">
 					<button class="pl_write_btn" onclick="location.href='./write.do';">쿠폰 등록</button>
 				</c:if>
+		      <div class="pl_main">
 				<ul class="cupon_wrap">
-						<li class="cupon_banner">
-								<div class="img_wrap">
-									<img src="" alt="이미지" />
+					<li class="cupon_banner">
+							<div class="img_wrap">
+								<img src="" alt="이미지" />
+							</div>
+							<div class="cupon_detail">
+								<div class="cupon_tit">
+									<p>쿠폰 이름</p>
+									<button class="buy_btn"><img src="../images/buy_btn_white.svg" /></button>
 								</div>
-								<div class="txt_title">
-									<h2>${popup.board_title}</h2>
-									<div class="popup_location">
-										<img src="../images/imgMGJ/pin.svg" /> <span class="location_span"><!-- 주소와 상세주소 사이에 띄어쓰기넣음 --></span>
-								<div class="cupon_detail">
-									<div class="cupon_tit">
-										<p>쿠폰 이름</p>
-										<button class="buy_btn"><img src="../images/buy_btn_white.svg" /></button>
-									</div>
-									<div class="popup_location">
-										<span>한줄 설명</span>
-									</div>
-									<span class="cupon_price">500 POINTS </span>
+								<div class="popup_location">
+									<span>한줄 설명</span>
 								</div>
-						</li>
+								<span class="cupon_price">500 POINTS </span>
+							</div>
+					</li>
 						<li class="cupon_banner">
 								<div class="img_wrap">
 									<img src="" alt="이미지" />
