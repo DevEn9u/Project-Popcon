@@ -7,8 +7,9 @@
 <html lang="ko">
 <head>
 <c:import url="../include/head.jsp" />
-	<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
-	<link rel="stylesheet" href="/css/popup_list.css?v=<?php echo time(); ?>">
+<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
+<link rel="stylesheet"
+	href="/css/popup_list.css?v=<?php echo time(); ?>">
 </head>
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
@@ -18,8 +19,12 @@
 	</div>
 	<div id="wrap">
 		${common_header }
-		<main id="mp_container">
-			<h1>관리자 페이지</h1>
+		<main id="mp_container" class="ad_free_container">
+			<div class="title_wrap">
+				<h1>관리자 페이지</h1>
+				<span></span>
+				<h2>자유게시판 관리</h2>
+			</div>
 			<section class="my_page">
 				<div class="my_list">
 					<ul class="depth1">
@@ -31,7 +36,7 @@
 								style="color: var(--point-color1);">자유 게시판</a></li>
 						</ul>
 						<li class="list_title"><a href="/adpage/user.do">유저 관리</a>
-						<li class="list_title"><a href="/adpage/chat.do">문의 채팅방 목록</a></li>
+						<li class="list_title"><a href="/adpage/chat.do">문의 채팅방</a></li>
 						</li>
 					</ul>
 				</div>

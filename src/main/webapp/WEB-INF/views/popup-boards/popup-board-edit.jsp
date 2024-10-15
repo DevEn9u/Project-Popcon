@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <c:import url="../include/head.jsp" />
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 
 <c:import url="../include/header.jsp" var="common_header" />
@@ -122,44 +124,45 @@
 	}
 
 	document.addEventListener('DOMContentLoaded', function() {
-	    function formatDateInput(input) {
-	        let value = input.value.replace(/[^0-9]/g, ''); // 숫자 외 문자 제거
-	        let formattedValue = '';
+		function formatDateInput(input) {
+			let value = input.value.replace(/[^0-9]/g, ''); // 숫자 외 문자 제거
+			let formattedValue = '';
 
-	        if (value.length >= 4) {
-	            // 연도(YYYY) 입력 후 자동으로 '-' 추가
-	            formattedValue = value.substr(0, 4);
-	            if (value.length > 4) {
-	                // 월(MM) 입력 후 자동으로 '-' 추가
-	                formattedValue += '-' + value.substr(4, 2);
-	                if (value.length > 6) {
-	                    // 일(DD) 입력, 더 이상 자동 추가 없음
-	                    formattedValue += '-' + value.substr(6, 2);
-	                }
-	            }
-	        } else {
-	            // 아직 연도 4자리가 입력되지 않았으면 그대로 표시
-	            formattedValue = value;
-	        }
+			if (value.length >= 4) {
+				// 연도(YYYY) 입력 후 자동으로 '-' 추가
+				formattedValue = value.substr(0, 4);
+				if (value.length > 4) {
+					// 월(MM) 입력 후 자동으로 '-' 추가
+					formattedValue += '-' + value.substr(4, 2);
+					if (value.length > 6) {
+						// 일(DD) 입력, 더 이상 자동 추가 없음
+						formattedValue += '-' + value.substr(6, 2);
+					}
+				}
+			} else {
+				// 아직 연도 4자리가 입력되지 않았으면 그대로 표시
+				formattedValue = value;
+			}
 
-	        input.value = formattedValue;
-	    } 
+			input.value = formattedValue;
+		}
 
-	    // 날짜 입력 필드에 자동으로 '-' 추가
-	    const startDateInput = document.querySelector('input[name="start_date"]');
-	    const endDateInput = document.querySelector('input[name="end_date"]');
+		// 날짜 입력 필드에 자동으로 '-' 추가
+		const startDateInput = document
+				.querySelector('input[name="start_date"]');
+		const endDateInput = document.querySelector('input[name="end_date"]');
 
-	    if (startDateInput) {
-	        startDateInput.addEventListener('input', function() {
-	            formatDateInput(this);
-	        });
-	    }
+		if (startDateInput) {
+			startDateInput.addEventListener('input', function() {
+				formatDateInput(this);
+			});
+		}
 
-	    if (endDateInput) {
-	        endDateInput.addEventListener('input', function() {
-	            formatDateInput(this);
-	        });
-	    }
+		if (endDateInput) {
+			endDateInput.addEventListener('input', function() {
+				formatDateInput(this);
+			});
+		}
 	});
 
 	// 이미지 파일 선택 시 파일 이름 표시 및 유효성 검사
@@ -217,13 +220,45 @@
 </script>
 
 <script>
-//주소 입력 시 api 쓰기
-function openPostcode() {
-    new daum.Postcode({
-        oncomplete: function(data) {
-            document.querySelector('input[name="popup_addr"]').value = data.address;
-        }
-    }).open();
+	//주소 입력 시 api 쓰기
+	function openPostcode() {
+		new daum.Postcode(
+				{
+					oncomplete : function(data) {
+						document.querySelector('input[name="popup_addr"]').value = data.address;
+					}
+				}).open();
+	}
+</script>
+
+<script>
+function updateOpenHours() {
+    const startHour = document.getElementById('start_hour').value;
+    const endHour = document.getElementById('end_hour').value;
+
+    // 시간 포맷팅
+    const formattedStartHour = startHour.padStart(2, '0') + ':00'; // 예: '5' -> '05:00'
+    const formattedEndHour = endHour.padStart(2, '0') + ':00'; // 예: '17' -> '17:00'
+
+    // 오픈 시간을 '시작 시간 ~ 종료 시간' 형식으로 설정
+    document.getElementById('open_hours').value = formattedStartHour + ' ~ ' + formattedEndHour;
+}
+</script>
+
+<script>
+function updateOpenDays() {
+    const checkboxes = document.querySelectorAll('input[name="week"]:checked');
+    const openDaysArray = Array.from(checkboxes).map(checkbox => checkbox.value);
+    
+    let formattedOpenDays = openDaysArray.join(', ');
+
+ // 마지막 요일 뒤에 , 제거
+ if (formattedOpenDays.endsWith(', ')) {
+     formattedOpenDays = formattedOpenDays.slice(0, -2);
+ }
+    
+
+    document.getElementById('open_days').value = formattedOpenDays; // hidden input에 저장
 }
 </script>
 <body>
@@ -276,14 +311,15 @@ function openPostcode() {
 										placeholder="종료: YYYY-MM-DD" value="${ popup.end_date }"
 										required></td>
 								</tr>
-<tr>
-    <th>주소</th>
-    <td>
-        <input type="text" name="popup_addr" id="main_addr" placeholder="주소를 입력해 주세요" style="width:30%;" required>
-        <button type="button" onclick="openPostcode()" class="btn">우편번호 검색</button>
-        <input type="text" name="popup_addr" id="detail_addr" placeholder="상세주소를 입력해 주세요" onblur="combineAddresses()">
-    </td>
-</tr>
+								<tr>
+									<th>주소</th>
+									<td><input type="text" name="popup_addr" id="main_addr"
+										placeholder="주소를 입력해 주세요" style="width: 30%;" required>
+										<button type="button" onclick="openPostcode()" class="btn">우편번호
+											검색</button> <input type="text" name="popup_addr" id="detail_addr"
+										placeholder="상세주소를 입력해 주세요" onblur="combineAddresses()">
+									</td>
+								</tr>
 								<tr>
 									<th>카테고리</th>
 									<td><input type="text" name="category"
@@ -292,15 +328,51 @@ function openPostcode() {
 								</tr>
 								<tr>
 									<th>오픈 요일</th>
-									<td><input type="text" name="open_days"
-										placeholder="오픈 요일을 입력해 주세요" value="${ popup.open_days }"
-										required></td>
+									<td>
+										<form id="popupOpendays">
+											<input type="checkbox" id="mon" name="week" value="MON"
+												<c:if test="${not empty popup.open_days && popup.open_days.contains('MON')}">checked="checked"</c:if>
+												onchange="updateOpenDays()" /> <label for="mon">월</label> <input
+												type="checkbox" id="tue" name="week" value="TUE"
+												<c:if test="${not empty popup.open_days && popup.open_days.contains('TUE')}">checked="checked"</c:if>
+												onchange="updateOpenDays()" /> <label for="tue">화</label> <input
+												type="checkbox" id="wed" name="week" value="WED"
+												<c:if test="${not empty popup.open_days && popup.open_days.contains('WED')}">checked="checked"</c:if>
+												onchange="updateOpenDays()" /> <label for="wed">수</label> <input
+												type="checkbox" id="thur" name="week" value="THUR"
+												<c:if test="${not empty popup.open_days && popup.open_days.contains('THUR')}">checked="checked"</c:if>
+												onchange="updateOpenDays()" /> <label for="thur">목</label>
+											<input type="checkbox" id="fri" name="week" value="FRI"
+												<c:if test="${not empty popup.open_days && popup.open_days.contains('FRI')}">checked="checked"</c:if>
+												onchange="updateOpenDays()" /> <label for="fri">금</label> <input
+												type="checkbox" id="sat" name="week" value="SAT"
+												<c:if test="${not empty popup.open_days && popup.open_days.contains('SAT')}">checked="checked"</c:if>
+												onchange="updateOpenDays()" /> <label for="sat">토</label> <input
+												type="checkbox" id="sun" name="week" value="SUN"
+												<c:if test="${not empty popup.open_days && popup.open_days.contains('SUN')}">checked="checked"</c:if>
+												onchange="updateOpenDays()" /> <label for="sun">일</label>
+										</form> <input type="hidden" name="open_days" id="open_days" />
+									</td>
 								</tr>
 								<tr>
 									<th>오픈 시간</th>
-									<td><input type="text" name="open_hours"
-										placeholder="오픈 시간을 입력해 주세요" value="${ popup.open_hours }"
-										required></td>
+									<td><select name="start_hour" id="start_hour"
+										onchange="updateOpenHours()"
+										style="width: 50px; text-align: center; color: black;">
+											<c:forEach var="hour" begin="0" end="23">
+												<option value="${hour}">
+													<fmt:formatNumber value="${hour}" pattern="00" />:00
+												</option>
+											</c:forEach>
+									</select> ~ <select name="end_hour" id="end_hour"
+										onchange="updateOpenHours()"
+										style="width: 50px; text-align: center; color: black;">
+											<c:forEach var="hour" begin="0" end="23">
+												<option value="${hour}">
+													<fmt:formatNumber value="${hour}" pattern="00" />:00
+												</option>
+											</c:forEach>
+									</select> <input type="hidden" name="open_hours" id="open_hours" /></td>
 								</tr>
 								<tr>
 									<th>첨부파일</th>
@@ -324,8 +396,9 @@ function openPostcode() {
 														src="${pageContext.request.contextPath}${image.image_url}"
 														alt="Image" /> <a
 														href="deleteImage.do?image_idx=${image.image_idx}&board_idx=${popup.board_idx}"
-														onclick="return confirm('이미지를 삭제하시겠습니까?');">
-														<img src="${pageContext.request.contextPath}/images/imgMGJ/delete_btn.svg" style="filter: invert(34%) sepia(94%) saturate(7482%) hue-rotate(-1deg) brightness(95%) contrast(102%);" /></a>
+														onclick="return confirm('이미지를 삭제하시겠습니까?');"> <img
+														src="${pageContext.request.contextPath}/images/imgMGJ/delete_btn.svg"
+														style="filter: invert(34%) sepia(94%) saturate(7482%) hue-rotate(-1deg) brightness(95%) contrast(102%);" /></a>
 												</div>
 											</c:forEach></td>
 									</tr>
@@ -351,8 +424,9 @@ function openPostcode() {
 												<img src="${pageContext.request.contextPath}${popup.thumb}"
 													alt="Thumbnail" /> <a
 													href="deleteThumbnail.do?board_idx=${popup.board_idx}&thumb=${popup.thumb}"
-													onclick="return confirm('썸네일 이미지를 삭제하시겠습니까?');">
-													<img src="${pageContext.request.contextPath}/images/imgMGJ/delete_btn.svg" style="filter: invert(34%) sepia(94%) saturate(7482%) hue-rotate(-1deg) brightness(95%) contrast(102%);" /></a></a>
+													onclick="return confirm('썸네일 이미지를 삭제하시겠습니까?');"> <img
+													src="${pageContext.request.contextPath}/images/imgMGJ/delete_btn.svg"
+													style="filter: invert(34%) sepia(94%) saturate(7482%) hue-rotate(-1deg) brightness(95%) contrast(102%);" /></a></a>
 											</div>
 										</td>
 									</tr>
