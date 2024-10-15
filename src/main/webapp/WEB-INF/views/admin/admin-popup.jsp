@@ -56,7 +56,7 @@
 							<li class="popup_banner"><a
 								href="/popupBoard/view/${popup.board_idx}"> <img
 									src="${popup.thumb}" alt="Thumbnail" class="popup_thumbnail" style="max-width:100px; max-height:100px;" />
-									<div class="txt_title" style="margin-left: 10px;">
+									<div class="txt_title" style="margin-left: 10px;"> 
 										<h2>
 											${popup.board_title}
 											<form id="deleteForm_${popup.board_idx}"
