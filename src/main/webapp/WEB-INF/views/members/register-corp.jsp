@@ -13,7 +13,7 @@
 <c:import url="../include/footer.jsp" var="common_footer" />
 
 <body>
-
+ 
 <script>
 	//이름 입력 시 20자까지만 허용
 		function validateForm(form) {
