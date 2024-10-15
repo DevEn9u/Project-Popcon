@@ -231,6 +231,12 @@ public class PopupController {
 
         // 3. 이미지 처리
         if (imageFiles != null && imageFiles.length > 0) {
+        	// 2개 이상의 이미지가 업로드되면 에러 메시지 설정
+            if (imageFiles.length > 2) {
+                redirectAttributes.addFlashAttribute("error", "이미지는 최대 2장까지만 업로드 가능합니다."); // 에러 메시지 추가
+                return "redirect:/popupBoard/write.do"; // 에러 시 리다이렉트
+            }
+            
             for (int i = 0; i < imageFiles.length; i++) {
                 MultipartFile file = imageFiles[i];
                 if (!file.isEmpty()) {

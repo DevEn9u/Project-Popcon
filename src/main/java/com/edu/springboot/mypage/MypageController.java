@@ -47,7 +47,7 @@ public class MypageController {
         return "/mypages/mypage-main";
     }
 	
-//	//마이페이지 - 예약 확인
+	//마이페이지 - 예약 확인
 	@GetMapping("/mypage/myBooking.do")
 	public String mypageBooking(Principal principal, Model model) {
 	    String memberId = principal.getName(); // 현재 로그인한 사용자 ID 가져오기
