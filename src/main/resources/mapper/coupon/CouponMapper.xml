@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.springboot.coupon.ICouponService">
+	<!-- 등록된 쿠폰 불러오기 -->
+	<select id="selectCouponList">
+		SELECT * FROM coupon_shop ORDER BY expiry_date DESC
+	</select>
+	<!-- 쿠폰 등록 -->
+	<insert id="insertCoupon" parameterType="com.edu.springboot.coupon.CouponShopDTO">
+		<!-- expiry_date는 시퀀스로 처리하므로 작성 하지 않음 -->
+	    INSERT INTO coupon_shop (coupon_idx, coupon_name, coupon_description, image_url, points)
+	    VALUES (coupon_idx_seq(), #{coupon_name}, #{coupon_description}, #{image_url}, #{points})
+	</insert>
+	<!-- 쿠폰 구매 -->
+<!-- 	<insert id="buyCoupon" parameterType="com.edu.springboot.coupon.CouponPurchasesDTO"> -->
+<!-- 	    INSERT INTO coupon_purchases (purchase_idx, coupon_name, coupon_description, image_url, points) -->
+<!-- 	    VALUES (coupon_idx_seq(), #{coupon_name}, #{coupon_description}, #{image_url}, #{points}) -->
+<!-- 	</insert> -->
+	
+
+</mapper>
