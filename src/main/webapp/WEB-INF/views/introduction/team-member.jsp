@@ -13,14 +13,6 @@
 	<c:import url="../include/footer.jsp" var="common_footer" />
 
 	<script>
-		window.onload = function() {
-			const resultMsg = '<%= request.getAttribute("resultMsg") != null ? request.getAttribute("resultMsg") : "" %>';
-			if (resultMsg) {
-				alert(resultMsg);
-			}
-		};
-	</script>
-	<script>
 		function scrollToMember(memberId) {
 			const memberElement = document.getElementById(memberId);
 			if (memberElement) {

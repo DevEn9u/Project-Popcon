@@ -151,6 +151,16 @@ public class AdminController {
 
 	        return "redirect:/adpage/user.do"; // 업데이트 후 유저 관리 페이지로 돌아감
 	    }
+	    
+	    
+		
+		@GetMapping("/adpage/chat.do")
+		public String adminChat(Model model) {
+		    List<MemberDTO> memberList = memberService.getAllMembers(); // 모든 멤버 정보를 가져오는 메서드
+		    model.addAttribute("memberList", memberList); // 멤버 목록을 모델에 추가
+		    return "/admin/admin-chat"; // JSP 페이지 이름
+		}
+		
 
 	
 
