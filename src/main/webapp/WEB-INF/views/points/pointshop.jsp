@@ -39,7 +39,7 @@
 								<div class="cupon_detail">
 									<div class="cupon_tit">
 										<p>쿠폰 이름</p>
-										<button class="buy_btn"><img src="../images/buy_btn.svg" /></button>
+										<button class="buy_btn"><img src="../images/buy_btn_white.svg" /></button>
 									</div>
 									<div class="popup_location">
 										<span>한줄 설명</span>
@@ -54,7 +54,7 @@
 								<div class="cupon_detail">
 									<div class="cupon_tit">
 										<p>쿠폰 이름</p>
-										<button class="buy_btn"><img src="../images/buy_btn.svg" /></button>
+										<button class="buy_btn"><img src="../images/buy_btn_white.svg" /></button>
 									</div>
 									<div class="popup_location">
 										<span>한줄 설명</span>

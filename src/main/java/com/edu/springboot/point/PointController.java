@@ -18,8 +18,8 @@ public class PointController {
 	@Autowired
     private IMemberService memberService; 
 	
-	@GetMapping("/point/pointshop.do")
-	public String popcon(Model model, Principal principal) {
+	@GetMapping("/point/cuponshop.do")
+	public String cuponShop(Model model, Principal principal) {
 		List<PopupBoardDTO> popupList;
 
 		// 로그인한 사용자 ID 가져오기
@@ -35,5 +35,11 @@ public class PointController {
 		
 		return "points/pointshop";
 	}
+	
+	@GetMapping("/point/write.do")
+    public String cuponWrite() {
+        return "points/cupon-write"; // 작성 폼으로 이동
+    }
+    
 
 }
