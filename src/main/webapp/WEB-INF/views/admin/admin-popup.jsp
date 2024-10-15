@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -71,7 +72,7 @@
 
 										<div class="popup_location">
 											<img src="../images/imgMGJ/pin.svg" /> <span
-												class="location_span">${popup.popup_addr}</span>
+												class="location_span">${fn:replace(popup.popup_addr, ',', ' ')}</span>
 										</div>
 										<span class="popup_date">${popup.postdate}</span>
 									</div>

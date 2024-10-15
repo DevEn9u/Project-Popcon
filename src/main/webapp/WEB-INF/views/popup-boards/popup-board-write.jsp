@@ -35,6 +35,14 @@
 		const openHours = document.querySelector('input[name="open_hours"]');
 		const thumbnailFile = document.querySelector('input[name="thumbFile"]');
 		const generalFile = document.querySelector('input[name="imageFile"]');
+		
+		// 이미지 파일 개수 체크 추가
+		const generalFiles = document.querySelector('input[name="imageFile"]');
+		if (generalFiles.files.length > 2) {
+			alert("사진은 2개까지만 첨부 가능합니다.");
+			generalFiles.focus();
+			return false;
+		}
 
 		if (!title.value.trim()) {
 			alert("제목을 입력해 주세요.");
