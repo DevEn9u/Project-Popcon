@@ -147,6 +147,7 @@
   text-align: left;
   line-height: 1.5;
   letter-spacing: -0.02em;
+  width: 105px;
 }
 
 #header .gnb .depth2>li>a:hover {
@@ -163,7 +164,7 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  display: block;
+  display: block; 
   width: 100%;
   height: 1px;
 }

@@ -76,12 +76,11 @@
 	align-items: center;
 }
 .cupon_banner .cupon_tit .buy_btn {
-	background-color: #fce8c3;
-	color: black;
+	background-color: var(--txt-color-500);
 	border: 1px solid red;
 	padding: 8px;
 	border-radius: 50%;
-	
+	margin-right: 10px;
 }
 .cupon_banner .cupon_tit img {
 	width: 20px;

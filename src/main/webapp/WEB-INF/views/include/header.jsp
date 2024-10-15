@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <ul class="depth2">
             <li>
               <a href="/freeBoard/list.do">자유 게시판</a>
-			  <a href="/point/pointshop.do">CUPON SHOP</a>
+			  <a href="/point/cuponshop.do">CUPON SHOP</a>
             </li>
           </ul>
         </li>
