@@ -581,7 +581,7 @@
 #footer .inner .btn_wrap {
   position: fixed;
   right: 100px;
-  bottom: 200px;
+  bottom: 100px;
   z-index: 100;
   gap: 20px 0;
 }
@@ -820,6 +820,7 @@
   }
   
   .day_slider .date-container {
+    margin-left: 5px;
     width: 35px;
     height: 35px;
     padding: 12px;
