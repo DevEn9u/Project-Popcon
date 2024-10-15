@@ -221,7 +221,7 @@ $(function () {
                 }, function (rsp) {  // 결제 콜백 함수
                     console.log("결제 응답:", rsp);  // 응답 로그 출력
                     if (rsp.success) {  // 결제 성공 시
-                        var msg = '결제가 완료되었습니다.';
+                        var msg = '예약이 완료되었습니다.';
                         var result = {
                             "membernum": headcount,  // 인원수
                             "price": price,  // 결제 금액
@@ -231,9 +231,13 @@ $(function () {
                         // 서버로 데이터 전송
                         $.ajax({
                             type: "POST",
-                            url: "/mypage/bookconfirm",  // URL
-                            contentType: "application/json; charset=utf-8",
-                            data: JSON.stringify(result),
+                            url: '/popupBoard/select/{board_idx}', // URL
+							data: {
+							    popup_idx: boardIdx,
+							    visit_date: visitDate,
+							    headcount: headcount,
+							    price: price
+							},
                             success: function () {
                                 alert(msg);
                                 // 결제 성공 후 이동할 페이지로 리디렉션

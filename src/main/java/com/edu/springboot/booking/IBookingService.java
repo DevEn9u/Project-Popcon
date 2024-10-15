@@ -1,5 +1,7 @@
 package com.edu.springboot.booking;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 import com.edu.springboot.popupboards.PopupBoardDTO;
 
@@ -11,5 +13,8 @@ public interface IBookingService {
 	public PopupBoardDTO PopupDetails(String board_idx);
 	// 예약하기
 	public int booking(bookingDTO dto);
+	
+	// 예약 여부 확인
+    public int checkIfUserBooked(Map<String, Object> paramMap);
 
 }
