@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,7 @@ import com.edu.springboot.point.IPointService;
 import com.edu.springboot.point.PointDTO;
 import com.edu.springboot.images.ImageDTO;
 import com.edu.springboot.images.ImageService;
+import com.edu.springboot.booking.IBookingService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -45,6 +48,7 @@ public class PopupController {
     private final LikeService likeService;
     private final LikeMapper likeMapper;
     private final IPointService pointDAO;
+    private final IBookingService bookingService; 
     
 
     @Autowired
@@ -483,7 +487,20 @@ public class PopupController {
         } else {
             System.out.println("imageFile: No file uploaded");
         }
+        
+        // 예약 여부 확인
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("popup_idx", popup_board_idx);
+        paramMap.put("member_id", com_writer_id);
+        
+        int bookingCount = bookingService.checkIfUserBooked(paramMap);
 
+        // 예약 여부 확인 후 alert 메시지 전달
+        if (bookingCount == 0) {
+            redirectAttributes.addFlashAttribute("error", "예약을 한 유저만 리뷰 작성이 가능합니다.");
+            return "redirect:/popupBoard/view/" + popup_board_idx;
+        }
+        
         // 댓글 DTO 생성 및 값 설정
         CommentDTO commentDTO = new CommentDTO();
         commentDTO.setPopup_board_idx(popup_board_idx);
