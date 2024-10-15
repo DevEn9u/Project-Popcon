@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -45,7 +46,7 @@ function toggleLike(board_idx) {
 }
 </script>
 
-<script>
+	<script>
     function scrollToSection(sectionId) {
         const section = document.getElementById(sectionId);
         if (section) {
@@ -79,15 +80,17 @@ function toggleLike(board_idx) {
 								<div class="swiper-slide">
 									<ul class="main_popup">
 										<li><a href="/popupBoard/view/${popup.board_idx}">
-												<div class="img_wrap">
+												<div class="img_wrap"
+													style="max-width: 625px; max-height: 625px;">
 													<img src="${popup.thumb}" alt="${popup.board_title}"
-														class="main-fixed-size"">
+														class="main-fixed-size" 
+														style="max-width: 625px; max-height: 625px;">
 												</div>
 												<div class="txt_wrap">
 													<p class="slide_title">${popup.board_title}</p>
 													<p>${popup.start_date}~${popup.end_date}</p>
 													<p>
-														<img src="/images/main/location.svg">${popup.popup_addr}</p>
+														<img src="/images/main/location.svg">${fn:replace(popup.popup_addr, ',', ' ')}</p>
 												</div>
 										</a></li>
 									</ul>
@@ -143,34 +146,37 @@ function toggleLike(board_idx) {
 				</div>
 			</section>
 			<section class="day_slider" id="day_slider">
-			  <div class="inner">
-			    <div class="slider" id="date-slider"></div>
-			    <span class="line"></span>
-			    <div class="pl_main">
-			      <ul class="popup_wrap">
-			        <c:forEach var="popup" items="${popupList}">
-			          <li class="popup_banner main_popup_banner">
-			            <a href="/popupBoard/view/${popup.board_idx}">
-			              <div class="img_wrap">
-			                <img src="${popup.thumb}" alt="Thumbnail" class="popup_thumbnail" />
-			              </div>
-			              <div class="txt_title">
-			                <h2>
-			                  ${popup.board_title}
-			                  <button id="likeBtn_${popup.board_idx}" class="like_btn <c:if test="${popup.liked}">active</c:if>" onclick="toggleLike('${popup.board_idx}'); event.preventDefault(); event.stopPropagation();">
-			                  </button>
-			                </h2>
-			                <div class="popup_location">
-			                  <img src="../images/imgMGJ/pin.svg" /> <span class="location_span">${popup.popup_addr}</span>
-			                </div>
-			                <span class="popup_date" data-end-date="${popup.end_date}">${popup.end_date}</span>
-			              </div>
-			            </a>
-			          </li>
-			        </c:forEach>
-			      </ul>
-			    </div>
-			  </div>
+				<div class="inner">
+					<div class="slider" id="date-slider"></div>
+					<span class="line"></span>
+					<div class="pl_main">
+						<ul class="popup_wrap">
+							<c:forEach var="popup" items="${popupList}">
+								<li class="popup_banner main_popup_banner"><a
+									href="/popupBoard/view/${popup.board_idx}">
+										<div class="img_wrap">
+											<img src="${popup.thumb}" alt="Thumbnail"
+												class="popup_thumbnail" />
+										</div>
+										<div class="txt_title">
+											<h2>
+												${popup.board_title}
+												<button id="likeBtn_${popup.board_idx}"
+													class="like_btn <c:if test="${popup.liked}">active</c:if>"
+													onclick="toggleLike('${popup.board_idx}'); event.preventDefault(); event.stopPropagation();">
+												</button>
+											</h2>
+											<div class="popup_location">
+												<img src="../images/imgMGJ/pin.svg" /> <span
+													class="location_span">${fn:replace(popup.popup_addr, ',', ' ')}</span>
+											</div>
+											<span class="popup_date" data-end-date="${popup.end_date}">${popup.end_date}</span>
+										</div>
+								</a></li>
+							</c:forEach>
+						</ul>
+					</div>
+				</div>
 			</section>
 
 			<section class="season_slider">
@@ -196,10 +202,10 @@ function toggleLike(board_idx) {
 						</div>
 					</div>
 				</div>
-			</section> 
+			</section>
 			<section class="product_slider">
 				<div class="inner">
-					<h2 class="tit"> 
+					<h2 class="tit">
 						굿즈 만족도 100% <strong>10월</strong>
 					</h2>
 					<div class="swiper">
@@ -224,15 +230,16 @@ function toggleLike(board_idx) {
 		</main>
 		<footer id="footer">
 			<div class="inner">
-			    ${common_footer}
+				${common_footer}
 				<section class="btn_wrap">
-				   <a class="scroll_btn top_btn" href="#"><span class="blind">아래로 이동</span></a>
-				   <c:if test="${not empty user_id }">
-					   <a class="qna_btn top_btn" href="#" id="openChat"><span class="blind">질문</span></a>
-				   </c:if>
+					<a class="scroll_btn top_btn" href="#"><span class="blind">아래로
+							이동</span></a>
+					<c:if test="${not empty user_id }">
+						<a class="qna_btn top_btn" href="#" id="openChat"><span
+							class="blind">질문</span></a>
+					</c:if>
 					<!-- 관리자 계정일때만 보이는 관리자 페이지 진입버튼 추가 -->
-					<c:if
-					test="${memberDTO.authority == 'ROLE_ADMIN'}">
+					<c:if test="${memberDTO.authority == 'ROLE_ADMIN'}">
 						<a class="master_btn" href="/adpage/main.do">
 							<p class="mbtn_tit">관리자</p>
 						</a>

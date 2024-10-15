@@ -35,6 +35,14 @@
 		const openHours = document.querySelector('input[name="open_hours"]');
 		const thumbnailFile = document.querySelector('input[name="thumbFile"]');
 		const generalFile = document.querySelector('input[name="imageFile"]');
+		
+		// 이미지 파일 개수 체크 추가
+		const generalFiles = document.querySelector('input[name="imageFile"]');
+		if (generalFiles.files.length > 2) {
+			alert("사진은 2개까지만 첨부 가능합니다.");
+			generalFiles.focus();
+			return false;
+		}
 
 		if (!title.value.trim()) {
 			alert("제목을 입력해 주세요.");
@@ -294,8 +302,17 @@ function openPostcode() {
 								</tr>
 								<tr>
 									<th>오픈 요일</th>
-									<td><input type="text" name="open_days"
-										placeholder="월 ~ 금 또는 월, 수, 금 형식으로 입력" required></td>
+									<td>
+										<form id="popupOpendays">
+											<input type="checkbox" id="mon" name="week" value="MON" /><label for="mon">월</label>
+											<input type="checkbox" id="tue" name="week" value="TUE" /><label for="tue">화</label>
+											<input type="checkbox" id="wed" name="week" value="WED" /><label for="wed">수</label>
+											<input type="checkbox" id="thur" name="week" value="THUR" /><label for="thur">목</label>
+											<input type="checkbox" id="fri" name="week" value="FRI" /><label for="fri">금</label>
+											<input type="checkbox" id="sat" name="week" value="SAT" /><label for="sat">토</label>
+											<input type="checkbox" id="sun" name="week" value="SUN" /><label for="sun">일</label>
+									    </form>
+									</td>
 								</tr>
 								<tr>
 									<th>오픈 시간</th>
@@ -315,6 +332,7 @@ function openPostcode() {
 											확장자 파일만 올릴 수 있습니다.</p>
 									</td>
 								</tr>
+								<src
 								<tr>
 									<th>썸네일 이미지</th>
 									<td class="td_flex">
@@ -330,13 +348,14 @@ function openPostcode() {
 								</tr>
 							</table>
 							<div class="btn_wrap">
-								<button type="submit" class="btn board_btn">등록</button>
+								<button type="submit" class="btn board_btn" onclick="submitForm()">등록</button>
 								<button type="button" class="btn board_btn cancel_btn"
 									onclick="checkReset();">다시쓰기</button>
 								<button type="button" onclick="location.href='./list.do';"
 									class="btn board_btn cancel_btn">목록</button>
 							</div>
 						</form>
+
 					</div>
 				</div>
 			</div>
