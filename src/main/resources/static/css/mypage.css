@@ -202,6 +202,7 @@
 
 /* 마이페이지 메인 외 공통 */
 .title_wrap {
+  margin-top:80px;
   display: flex;
   align-items: center;
 }
@@ -772,6 +773,15 @@
     width:50%;
     justify-content: center;
 }
+  
+  .ad_btn_wrap .member_name {
+	display: block;
+	width:100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+  }
 
 
 /* 화면 줄어들면 옆이 붙는 문제 해결용 */
@@ -1037,6 +1047,25 @@
 
   .my_info .box3 .post_detail .likes_list.coupon .likes_block {
     margin-bottom: 20px;
+  }
+  
+  .my_info_wrap .admin_userid {
+  	font-size: 16px;
+  	margin-bottom:20px;
+  }
+  
+  /* 관리자 - 유저관리 */
+  .ad_btn_wrap {
+  	width:80%;
+  }
+  
+  .ad_btn_wrap .member_name {
+	display: block;
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
   }
 }
 /* 모바일 분기 끝 */

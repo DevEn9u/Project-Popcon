@@ -7,7 +7,7 @@
 <html lang="ko">
 <head>
 <c:import url="../include/head.jsp" />
-<link rel="stylesheet" href="../css/coupon.css?v=<?php echo time(); ?>">
+	<link rel="stylesheet" href="../css/coupon.css?v=<?php echo time(); ?>">
 </head>
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
@@ -19,44 +19,37 @@
 	<div id="wrap">
 		${common_header }
 		<main id="container">
-		    <div class="inner">
-		      <h2 class="tit">COUPON</h2>
+	      <div class="tit_wrap">
+	      	<div class="inner">
+		      	<h2 class="tit_wrap">COUPON</h2>
 				<c:if
 					test="${memberDTO.authority == 'ROLE_ADMIN' || memberDTO.authority == 'ROLE_CORP'}">
 					<button class="pl_write_btn" onclick="location.href='./write.do';">쿠폰 등록</button>
 				</c:if>
-		      <div class="pl_main">
+	      	</div>
+	      </div>
+   		  <div class="pl_main">
+		    	<div class="inner">
 				<ul class="coupon_wrap">
+					<c:forEach var="coupon" items="${couponList}">
 					<li class="coupon_banner">
-							<div class="img_wrap">
-								<img src="/images/푸루_눈치.jpg" alt="이미지" />
+						<div class="img_wrap">
+							<img src="${coupon.image_url }" alt="이미지" />
+						</div>
+						<div class="coupon_detail">
+							<div class="coupon_tit">
+								<p>${coupon.coupon_name }</p>
+								<button class="buy_btn" onclick="location.href='./buy.do'"><img src="/images/coupon/buy_icon4.svg" /></button>
 							</div>
-							<div class="coupon_detail">
-								<div class="coupon_tit">
-									<p>쿠폰 이름</p>
-									<button class="buy_btn" onclick="location.href='./buy.do'"><img src="../images/buy_btn_white.svg" /></button>
-								</div>
-								<div class="popup_location">
-									<span>한줄 설명</span>
-								</div>
-								<span class="coupon_price">500 POINTS </span>
+							<div class="popup_location">
+								<span>${coupon.coupon_description }</span>
 							</div>
+							<!-- 가격은 세자리수마다 콤마를 찍는 포맷 만들어 변수 처리 -->
+							<fmt:formatNumber value="${coupon.points}" var="formattedPoints" />
+							<span class="coupon_price">${formattedPoints } Pts </span>
+						</div>
 					</li>
-						<li class="coupon_banner">
-								<div class="img_wrap">
-									<img src="" alt="이미지" />
-								</div>
-								<div class="coupon_detail">
-									<div class="coupon_tit">
-										<p>쿠폰 이름</p>
-										<button class="buy_btn" onclick="location.href='./buyCoupon.do'"><img src="../images/buy_btn_white.svg" /></button>
-									</div>
-									<div class="popup_location">
-										<span>한줄 설명</span>
-									</div>
-									<span class="coupon_price">500 POINTS </span>
-								</div>
-						</li>
+					</c:forEach>
 				</ul>
 			  </div>
 		    </div>

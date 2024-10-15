@@ -7,6 +7,27 @@
   background: #121212;
 }
 
+/* 플랫폼 소개 */
+#mp_container .intorduction {
+	margin-top: 150px;
+}
+#mp_container .intorduction h1 {
+	padding: 0px;
+	line-height: 70px;
+	margin-bottom: 30px;
+}
+
+#mp_container .intorduction .img_wrap {
+	max-width: 1250px;
+	height: 400px;
+	border: 1px solid #fff;
+	border-radius: 30px;
+	object-fit: cover;
+	margin-bottom: 40px;
+}
+#mp_container .intorduction .txt_wrap {
+	font-size: 18px;
+}
 
 /* 조직도(팀소개) 서식 */
 .teamname_intro {
@@ -96,10 +117,3 @@
 	font-size: 18px;
 }
 
-
-
-
-
-
-
-/* 오시는 길 서식 끝 */

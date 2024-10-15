@@ -124,23 +124,23 @@
 					<h3>쿠폰 등록</h3>
 					<div class="board_write">
 						<form name="writeFrm" method="post" enctype="multipart/form-data"
-							action="/point/write.do"
+							action="/coupon/write.do"
 							onsubmit="return validateForm(this)">
 							<table>
 								<caption class="nohead">쿠폰 등록</caption>
 								<tr>
 									<th>쿠폰 이름</th>
-									<td><input type="text" name="board_title"
+									<td><input type="text" name="coupon_name"
 										placeholder="쿠폰 이름을 입력해주세요"></td>
 								</tr>
 								<tr>
 									<th>간략한 설명</th>
-									<td><textarea cols="30" rows="20" name="contents"
+									<td><textarea cols="30" rows="20" name="coupon_description"
 											placeholder="간략한 설명을 입력해 주세요."></textarea></td>
 								</tr>
 								<tr>
 									<th>가격</th>
-									<td><input type="text" name="popup_fee"
+									<td><input type="number" name="points"
 										placeholder="숫자만 입력해 주세요"></td>
 								</tr>
 								<tr>
@@ -148,7 +148,7 @@
 									<td class="td_flex">
 										<div class="file_wrap">
 											<input type="text" class="thumb_name" readonly> <input
-												type="file" id="thumbUpload" class="blind" name="thumbFile"
+												type="file" id="thumbUpload" class="blind" name="imageFile"
 												onchange="handleThumbSelect(this)"> <label
 												for="thumbUpload">이미지 선택</label>
 										</div>

@@ -30,9 +30,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class MemberController {
-	// member dao 호출을 위해 자동 Bean 주입. 이 Interface를 통해 Mapper 호출
+	// member memberDAO 호출을 위해 자동 Bean 주입. 이 Interface를 통해 Mapper 호출
 	@Autowired
-	IMemberService dao;
+	private IMemberService memberDAO;
 	
 	@Autowired
 	private FindIdMail findIdMail;
@@ -74,7 +74,7 @@ public class MemberController {
 	    memberDTO.setEmail(email);
 
 	    // DB에서 이름과 이메일 확인
-	    int result = dao.isUserExists(memberDTO);
+	    int result = memberDAO.isUserExists(memberDTO);
 	    if (result <= 0) {
 	        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 	                             .body(Map.of("success", false, "message", "등록된 사용자 정보가 없습니다."));
@@ -107,10 +107,10 @@ public class MemberController {
 	    	MemberDTO memberDTO = new MemberDTO();
 	    	memberDTO.setName(name);
 	    	memberDTO.setEmail(email);
-	    	userId = dao.getMemberInfo(memberDTO);
+	    	userId = memberDAO.getMemberInfo(memberDTO);
 	    	// 디버깅
 //	    	System.out.println("*****" + isValid + "*******");
-//	    	System.out.println("아이디" + dao.getMemberInfo(memberDTO) + "이름 : " + name);
+//	    	System.out.println("아이디" + memberDAO.getMemberInfo(memberDTO) + "이름 : " + name);
 	    }
 	    return ResponseEntity.ok(Map.of("valid", isValid, "userId", userId));
 	}
@@ -155,7 +155,7 @@ public class MemberController {
 	        return resp;
 	    }
 	    
-		int count = dao.checkIdDuplicate(input_id);
+		int count = memberDAO.checkIdDuplicate(input_id);
 		if (count > 0) {
 			resp.put("isDuplicated", true);
 			resp.put("msg", "사용중인 아이디입니다. 다른 아이디를 입력해주세요.");
@@ -197,7 +197,7 @@ public class MemberController {
 		memberDTO.setEmail(email);
 		memberDTO.setPhone(phone);
 		
-		int result = dao.registerNormal(memberDTO);
+		int result = memberDAO.registerNormal(memberDTO);
 		System.out.println("회원가입 결과" + result);
 		
 		// 성공시 view에서 성공 메세지 알려주기
@@ -239,7 +239,7 @@ public class MemberController {
 		memberDTO.setPhone(phone);
 		memberDTO.setBusiness_number(business_number);
 		
-		int result = dao.registerCorp(memberDTO);
+		int result = memberDAO.registerCorp(memberDTO);
 		System.out.println("회원가입 결과" + result);
 		
 		// 성공시 view에서 성공 메세지 알려주기
@@ -266,7 +266,7 @@ public class MemberController {
 	    
 	    // DB에서 해당 사용자의 정보를 가져오기
 	    memberDTO.setId(id);
-	    MemberDTO dbMember = dao.getMemberById(id);
+	    MemberDTO dbMember = memberDAO.getMemberById(id);
 
 	    if (dbMember != null) {
 	        // 입력한 비밀번호와 DB의 비밀번호 비교
@@ -285,7 +285,7 @@ public class MemberController {
 	@GetMapping("/member/edit.do")
 	public String editMain(Principal principal, Model model) {
 		String user_id = principal.getName();
-		MemberDTO memberDTO = dao.getMemberById(user_id);
+		MemberDTO memberDTO = memberDAO.getMemberById(user_id);
 		model.addAttribute("memberDTO", memberDTO);
 		return "/members/edit-choose";
 	}
@@ -293,14 +293,14 @@ public class MemberController {
 	@GetMapping("/member/edit-info.do")
 	public String editNormalMemberInfoGet(Principal principal, Model model) {
 		String user_id = principal.getName();
-		MemberDTO memberDTO = dao.getMemberById(user_id);
+		MemberDTO memberDTO = memberDAO.getMemberById(user_id);
 		model.addAttribute("memberDTO", memberDTO);
 		return "/members/edit-info";
 	}
 	// 회원정보 수정 - 회원 정보 변경
 	@PostMapping("/member/edit-info.do")
 	public String editNormalMemberInfoPost(RedirectAttributes redirectAttributes, MemberDTO memberDTO) {
-		int result = dao.editMemberInfo(memberDTO);
+		int result = memberDAO.editMemberInfo(memberDTO);
 		if (result > 0) {
 			redirectAttributes.addFlashAttribute("resultMsg", "정보수정에 성공했습니다.");
 			return "redirect:/mypage/mypage.do";
@@ -315,7 +315,7 @@ public class MemberController {
 	@GetMapping("/member/edit-pass.do")
 	public String editNormalMemberPassGet(Principal principal, Model model) {
 		String user_id = principal.getName();
-		MemberDTO memberDTO = dao.getMemberById(user_id);
+		MemberDTO memberDTO = memberDAO.getMemberById(user_id);
 		model.addAttribute("memberDTO", memberDTO);
 		return "/members/edit-pass";
 	}
@@ -326,7 +326,7 @@ public class MemberController {
 		String encodedPass = new BCryptPasswordEncoder().encode(pass);
 		memberDTO.setPass(encodedPass);
 		
-		int result = dao.editMemberPass(memberDTO);
+		int result = memberDAO.editMemberPass(memberDTO);
 		System.out.println("정보수정 결과" + result + "*********" + memberDTO);
 		if (result > 0) {
 			redirectAttributes.addFlashAttribute("resultMsg", "비밀번호 변경에 성공했습니다.");
