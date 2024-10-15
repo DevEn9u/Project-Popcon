@@ -61,6 +61,7 @@ public class WebSecurityConfig {
                 .requestMatchers("/noticeBoard/write.do", "/noticeBoard/edit.do", "/noticeBoard/delete.do")
                     .hasRole("ADMIN")
                 .requestMatchers("/mypage/**", "/chat.do").hasAnyRole("ADMIN", "CORP", "NORMAL")
+                .requestMatchers("/api/bookings/**").authenticated()
                 .anyRequest().permitAll()
             )
             .formLogin(form -> form

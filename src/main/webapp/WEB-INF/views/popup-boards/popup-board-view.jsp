@@ -202,7 +202,7 @@
 										<div class="img_wrap">
 											<!-- 게시물 이미지 출력 -->
 											<c:forEach var="image" items="${images}">
-												<img src="${image.image_url}" alt="Image" />
+												<img src="${image.image_url}" alt="Image" style="max-width:625px; max-height:625px; object-fit: cover;"/>
 											</c:forEach>
 										</div>
 										<div class="txt_wrap">
@@ -326,7 +326,7 @@
 					<div id="map" style="width: 100%; height: 400px;"></div>
 					<!-- 구글 지도 표시 영역 -->
 					<div class="location_copy">
-						${fn:replace(popup.popup_addr, ',', ' ')}
+						<p style="margin-left:10px;">${fn:replace(popup.popup_addr, ',', ' ')}</p>
 						<div class="btn" style="width: 100px;"
 							onclick="copyToClipboard('${fn:replace(popup.popup_addr, ',', ' ')}')">주소
 							복사</div>
