@@ -62,7 +62,7 @@
 					test="${memberDTO.authority == 'ROLE_ADMIN' || memberDTO.authority == 'ROLE_CORP'}">
 					<!-- 	          <a href="./write.do" class="write_btn">게시물 작성하기</a> -->
 					<button class="pl_write_btn" onclick="location.href='./write.do';">게시물
-						작성하기</button>`
+						작성하기</button>
 				</c:if>
 
 				<nav class="kategorie_wrap">
