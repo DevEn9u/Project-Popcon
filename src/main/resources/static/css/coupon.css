@@ -45,53 +45,53 @@
   right: 30px;
   top: 100px;
 }
-.cupon_wrap {
+.coupon_wrap {
 	display: flex;
 	gap: 0 25px;
 }
-.cupon_wrap .cupon_banner {
+.coupon_wrap .coupon_banner {
 	width: 50%;
 	display: flex;
 }
-.cupon_banner .img_wrap {
+.coupon_banner .img_wrap {
   width: 150px;
   height: 150px;
   margin-right: 25px;
   overflow: hidden;
   border: 1px solid red;
 }
-.cupon_banner .img_wrap img {
+.coupon_banner .img_wrap img {
     width: 100%;
     height: 100%; 
     object-fit: cover; 
 }
-.cupon_banner .cupon_detail {
+.coupon_banner .coupon_detail {
 	width: 70%;
 	position: relative;
 }
-.cupon_banner .cupon_tit {
+.coupon_banner .coupon_tit {
 	display: flex;
 	margin-bottom: 10px;
 	justify-content: space-between;
 }
-.cupon_banner .cupon_tit p {
+.coupon_banner .coupon_tit p {
 	display: flex;
 	font-size: 20px;
 	font-weight: 700;
 	align-items: center;
 }
-.cupon_banner .cupon_tit .buy_btn {
+.coupon_banner .coupon_tit .buy_btn {
 	background-color: var(--txt-color-500);
 	border: 1px solid red;
 	padding: 8px;
 	border-radius: 50%;
 	margin-right: 10px;
 }
-.cupon_banner .cupon_tit img {
+.coupon_banner .coupon_tit img {
 	width: 20px;
 	height: 20px;
 }
-.cupon_banner .cupon_detail .cupon_price {
+.coupon_banner .coupon_detail .coupon_price {
 	position: absolute;
 	right: 10px;
 	bottom: 10px;

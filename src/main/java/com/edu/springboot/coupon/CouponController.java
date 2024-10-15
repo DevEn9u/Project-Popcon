@@ -1,4 +1,4 @@
-package com.edu.springboot.point;
+package com.edu.springboot.coupon;
 
 import java.security.Principal;
 import java.util.List;
@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.edu.springboot.member.IMemberService;
 import com.edu.springboot.member.MemberDTO;
@@ -14,18 +15,17 @@ import com.edu.springboot.popupboards.PopupBoardDTO;
 import com.edu.springboot.popupboards.PopupBoardMapper;
 
 @Controller
-public class PointController {
+public class CouponController {
 	@Autowired
     private IMemberService memberService; 
 	
 	// 쿠폰 메인
-	@GetMapping("/point/cuponshop.do")
-	public String cuponShop(Model model, Principal principal) {
+	@GetMapping("/coupon/main.do")
+	public String couponShop(Model model, Principal principal) {
 		List<PopupBoardDTO> popupList;
 
 		// 로그인한 사용자 ID 가져오기
         String userId = principal != null ? principal.getName() : null;
-  
         
         // ADMIN, CORP 계정에만 팝업게시판에 '게시물 작성하기' 버튼을 보여주기 위함.
         try {
@@ -34,19 +34,25 @@ public class PointController {
             model.addAttribute("memberDTO", memberDTO);     
         } catch (Exception e) {}
 		
-		return "points/pointshop";
+		return "coupon/coupon-main";
 	}
 	
 	// 쿠폰 생성(작성)
-	@GetMapping("/point/write.do")
-    public String cuponWrite() {
-        return "points/cupon-write"; // 작성 폼으로 이동
+	@GetMapping("/coupon/write.do")
+    public String couponWriteGet() {
+        return "coupon/coupon-write"; // 작성 폼으로 이동
     }
 	
+	@PostMapping("/coupon/write.do")
+	public String couponWritePost() {
+		
+		return "coupon/coupon-write"; // 작성 폼으로 이동
+	}
+	
 	// 쿠폰 구매
-	@GetMapping("/point/buy.do")
+	@GetMapping("/coupon/buy.do")
 	public String buyCoupon() {
-		return "points/cupon-write"; // 작성 폼으로 이동
+		return "coupon/coupon-write"; // 작성 폼으로 이동
 	}
     
 
