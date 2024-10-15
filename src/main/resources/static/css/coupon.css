@@ -19,7 +19,13 @@
 .tit_wrap h2{	
 	font-size: 48px;
 	font-weight: 700;
-	color: white;
+	color: var(--txt-color-600);
+	margin-bottom: 20px;
+}
+.tit_wrap .current_points {
+	font-size: 20px;
+	font-weight: 600;
+	color: var(--point--color1);
 }
 .tit_wrap .pl_write_btn {
     position: absolute;
@@ -35,7 +41,6 @@
 }
 
 .pl_main {
-  margin-top: 60px;
   padding: 120px 0;
 }
 .pl_main .inner {
@@ -89,9 +94,8 @@
     display: flex;
     align-items: center;
 }
-.coupon_banner .coupon_tit img {
-/* 	width: 20px; */
-/* 	height: 20px; */
+.coupon_banner .coupon_tit .buy_btn.disabled {
+	cursor: not-allowed;
 }
 .coupon_banner .coupon_detail .coupon_price {
 	position: absolute;

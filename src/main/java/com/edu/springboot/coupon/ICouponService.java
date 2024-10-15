@@ -10,4 +10,6 @@ public interface ICouponService {
 	public List<CouponShopDTO> selectCouponList();
 	// 쿠폰 생성(작성)
 	public int insertCoupon(CouponShopDTO couponShopDTO);
+	// 쿠폰 구매
+	public int insertCouponPurchase(CouponPurchasesDTO couponPurchasesDTO);
 }

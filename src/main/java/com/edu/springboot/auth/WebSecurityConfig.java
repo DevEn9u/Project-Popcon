@@ -58,7 +58,7 @@ public class WebSecurityConfig {
                 .requestMatchers("/popupBoard/write.do", "/popupBoard/edit.do", "/popupBoard/delete.do")
                     .hasAnyRole("ADMIN", "CORP")
                 .requestMatchers("/popupBoard/booking/**").hasAnyRole("ADMIN", "CORP", "NORMAL")
-                .requestMatchers("/noticeBoard/write.do", "/noticeBoard/edit.do", "/noticeBoard/delete.do")
+                .requestMatchers("/noticeBoard/write.do", "/noticeBoard/edit.do", "/noticeBoard/delete.do", "/coupon/write.do")
                     .hasRole("ADMIN")
                 .requestMatchers("/mypage/**", "/chat.do").hasAnyRole("ADMIN", "CORP", "NORMAL")
                 .requestMatchers("/api/bookings/**").authenticated()

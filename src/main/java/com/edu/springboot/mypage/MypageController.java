@@ -63,7 +63,8 @@ public class MypageController {
     	String memberId = principal.getName(); // 현재 로그인한 사용자 ID 가져오기
 		MemberDTO memberDTO = memberDAO.getMemberById(memberId);
 		List<PointDTO> pointDTO = pointDAO.getPointInfoById(memberId);
-		System.out.println("아아아아" + pointDTO);
+		// 디버깅
+//		System.out.println("디버깅" + pointDTO);
 		
 		// 포인트에 콤마 추가
         String point = NumberFormat.getInstance(Locale.US).format(memberDTO.getPoint());

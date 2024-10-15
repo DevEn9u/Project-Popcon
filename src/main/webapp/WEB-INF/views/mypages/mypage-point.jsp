@@ -64,13 +64,24 @@
                     <div class="point_block_wrap">
                       <c:forEach var="pointRecord" items="${pointDTO }">
 	                    <c:if test="${pointRecord.p_user eq user_id }">
-                       <div class="point_block">
-                        <div class="left">
-                          <span> <fmt:formatDate value="${pointRecord.p_change_date}" pattern="yyyy년 MM월 dd일 HH:mm:ss" /></span>
-                          <p>리뷰작성 포인트 적립</p>
-                        </div>
-                        	+<fmt:formatNumber value="${pointRecord.p_change}" />
-                      	</div> 
+	                       	<div class="point_block">
+		                       	<c:choose>
+		                       		<c:when test="${pointRecord.p_change > 0 }">
+			                        <div class="left">
+			                          <span><fmt:formatDate value="${pointRecord.p_change_date}" pattern="yyyy년 MM월 dd일 HH:mm:ss" /></span>
+			                          <p>포인트 적립 - 리뷰 작성</p>
+			                        </div>
+			                        	+<fmt:formatNumber value="${pointRecord.p_change}" />P
+		                       		</c:when>
+		                       		<c:when test="${pointRecord.p_change < 0 }">
+			                        <div class="left">
+			                          <span><fmt:formatDate value="${pointRecord.p_change_date}" pattern="yyyy년 MM월 dd일 HH:mm:ss" /></span>
+			                          <p>포인트 차감 - 쿠폰 구매</p>
+			                        </div>
+			                        	<fmt:formatNumber value="${pointRecord.p_change}" />P
+		                       		</c:when>
+		                       	</c:choose>
+	                      	</div> 
 	                    </c:if>
                       </c:forEach>
                        <div class="point_block">
@@ -78,7 +89,7 @@
                           <span> <fmt:formatDate value="${memberDTO.register_date}" pattern="yyyy년 MM월 dd일 HH:mm:ss" /></span>
                           <p>가입 축하 포인트 적립</p>
                         </div>
-                        	+1,000
+                        	+1,000P
                       	</div> 
                      </div>
                     </div>
