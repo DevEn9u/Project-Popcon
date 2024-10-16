@@ -44,7 +44,7 @@ public class CouponController {
     private String uploadDir;
 	
     // 이미지 파일 제약
-    private static final String[] ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".webp"};
+    private static final String[] ALLOWED_EXTENSIONS = {".jfif", ".jpg", ".jpeg", ".png", ".gif", ".webp"};
     private static final long MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 	
 	// 쿠폰 메인
@@ -52,9 +52,12 @@ public class CouponController {
 	public String couponShop(Model model, Principal principal) {
 		List<CouponShopDTO> couponList = couponService.selectCouponList();
 		// 디버깅
-//		System.out.println("쿠폰 테스트" + couponList);
+		System.out.println("쿠폰 테스트" + couponList);
 		// 로그인한 사용자 ID 가져오기
         String userId = principal != null ? principal.getName() : null;
+        if(userId == null) {
+        	model.addAttribute("couponList", couponList);
+        }
         
         try {
             MemberDTO memberDTO = memberService.getMemberById(userId);
@@ -67,10 +70,7 @@ public class CouponController {
             attributes.put("couponList", couponList);
 
             model.addAllAttributes(attributes);
-            
-//            model.addAttribute("point", point);
-//            model.addAttribute("memberDTO", memberDTO);
-//            model.addAttribute("couponList", couponList);
+           
         } catch (Exception e) {}
 		
 		return "coupon/coupon-main";
@@ -78,20 +78,15 @@ public class CouponController {
 	
 	// 쿠폰 생성(작성) 화면 불러오기
 	@GetMapping("/coupon/write.do")
-    public String couponWriteGet(Model model) {
-		
+    public String couponWriteGet() {
         return "coupon/coupon-write"; // 작성 폼으로 이동
     }
+	
 	// 쿠폰 생성(작성) 처리
 	@PostMapping("/coupon/write.do")
 	public String couponWritePost(@RequestParam("imageFile") MultipartFile imageFile,
             Principal principal, HttpServletRequest req, Model model, RedirectAttributes redirectAttributes) {
 		
-		// 관리자 로그인 여부 확인
-        if (principal.getName().equals("admin")) {
-            redirectAttributes.addFlashAttribute("error", "관리자만 접근이 가능합니다.");
-            return "redirect:/login.do"; // 로그인 페이지로 리다이렉트
-        }
         String coupon_name = req.getParameter("coupon_name");
         String coupon_description = req.getParameter("coupon_description");
         String pointsString = req.getParameter("points");

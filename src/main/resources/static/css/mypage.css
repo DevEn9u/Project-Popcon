@@ -747,15 +747,18 @@
 	font-weight: 700;
 	border-bottom: 1px solid var(--txt-color-600);
 }
-.coupon_list .coupon_contents .coupon .coupon_num {
+.coupon_list .coupon_contents .coupon .coupon_num,
+.coupon_list .coupon_contents .coupon .expiry_date {
 	color: var(--txt-color-400);
 	font-size: 14px;
 }
 .coupon_list .coupon_contents .coupon .coupon_desc {
 	font-size: 15px;
 }
-.coupon_list .coupon_contents .coupon .expiry_date {
+.coupon_list .coupon_contents .coupon .d_day {
+	color: var(--point--color2);
 	font-size: 15px;
+	margin-left: auto;
 }
 .coupon_list .img_wrap {
   width: 150px;

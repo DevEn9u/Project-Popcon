@@ -26,5 +26,6 @@
 		FROM coupon_purchases cp
 		JOIN coupon_shop cs ON cp.coupon_name = cs.coupon_name
 		WHERE cp.user_id = #{userId}
+		ORDER BY cs.expiry_date DESC
 	</select>
 </mapper>

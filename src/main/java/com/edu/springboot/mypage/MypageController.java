@@ -2,6 +2,7 @@ package com.edu.springboot.mypage;
 
 import java.security.Principal;
 import java.text.NumberFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -191,9 +192,10 @@ public class MypageController {
 	public String mypageCoupon(Principal principal, Model model) {
 		String userId = principal.getName();
 		List<CouponPurchasesDTO> couponList = couponService.getUserCoupons(userId);
+		Date today = new Date();
+//		System.out.println("유저아이디" + userId);
+//		System.out.println("쿠폰리스트" + couponList);
 		
-		System.out.println("유저아이디" + userId);
-		System.out.println("쿠폰리스트" + couponList);
 		model.addAttribute("couponList", couponList);
 		
 		return "/mypages/mypage-coupon";

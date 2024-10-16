@@ -30,7 +30,11 @@
 	      	<div class="inner">
 		      	<h2 class="tit_wrap">COUPON</h2>
 		      	<c:if test="${memberDTO.authority == 'ROLE_NORMAL' }">
-			      	<p class="current_points">보유 포인트 : ${currentPoints } P</p>
+			      	<p class="current_points">
+			      	<fmt:formatNumber value="${currentPoints}" var="formattedPoints" />
+			      		보유 포인트 :  ${formattedPoints }P
+			      	</p>
+			      	
 		      	</c:if>
 				<c:if
 					test="${memberDTO.authority == 'ROLE_ADMIN' || memberDTO.authority == 'ROLE_CORP'}">
@@ -56,12 +60,12 @@
 	                                <input type="hidden" name="paid_points" value="${coupon.points}" />
 	                                <input type="hidden" name="user_id" value="${user_id }" /> <!-- 현재 사용자 ID -->
 	                                <c:choose>
-	                                	<c:when test="${currentPoints > coupon.points }">
+	                                	<c:when test="${memberDTO.authority == 'ROLE_NORMAL' && currentPoints > coupon.points }">
 			                                <button type="submit" class="buy_btn">
 			                                    <img src="/images/coupon/buy_icon4.svg" />
 			                                </button>
 	                                	</c:when>
-	                                	<c:when test="${currentPoints < coupon.points }">
+	                                	<c:when test="${memberDTO.authority == 'ROLE_NORMAL' && currentPoints < coupon.points }">
 			                                <button type="submit" class="buy_btn disabled" disabled="disabled">
 			                                    <img src="/images/coupon/cant_buy_icon.svg" />
 			                                </button>

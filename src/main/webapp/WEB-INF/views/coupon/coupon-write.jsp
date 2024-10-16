@@ -4,14 +4,14 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<c:import url="../include/head.jsp" />
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<c:import url="../include/head.jsp" />
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<c:import url="../include/header.jsp" var="common_header" />
+	<c:import url="../include/footer.jsp" var="common_footer" />
+	<link rel="stylesheet" href="/css/board.css">
+	<script src="../js/file-upload.js"></script>
 </head>
 
-<c:import url="../include/header.jsp" var="common_header" />
-<c:import url="../include/footer.jsp" var="common_footer" />
-<link rel="stylesheet" href="/css/board.css">
-<script src="../js/file-upload.js"></script>
 <script>
 	function checkReset() {
 		if (confirm("게시물을 다시 쓰시겠습니까?")) {
