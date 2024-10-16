@@ -52,7 +52,7 @@
 						</div>
 						<div class="coupon_detail">
 							<div class="coupon_tit">
-								<p>${coupon.coupon_name }</p>
+								<p>${ coupon.coupon_name }</p>
 								<form action="./buy.do" method="post">
                                 	<!-- 구매 버튼 클릭시 전송할 parameter 필드 추가 -->
 	                                <input type="hidden" name="coupon_idx" value="${coupon.coupon_idx}" />
