@@ -3,6 +3,7 @@ package com.edu.springboot.coupon;
 import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -53,6 +54,10 @@ public class CouponController {
 		List<CouponShopDTO> couponList = couponService.selectCouponList();
 		// 디버깅
 		System.out.println("쿠폰 테스트" + couponList);
+		
+		String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+		System.out.println(today);
+		
 		// 로그인한 사용자 ID 가져오기
         String userId = principal != null ? principal.getName() : null;
         if(userId == null) {
@@ -68,6 +73,7 @@ public class CouponController {
             attributes.put("currentPoints", point);
             attributes.put("memberDTO", memberDTO);
             attributes.put("couponList", couponList);
+
 
             model.addAllAttributes(attributes);
            

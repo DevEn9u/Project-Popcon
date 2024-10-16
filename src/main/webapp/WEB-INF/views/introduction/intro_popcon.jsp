@@ -24,19 +24,19 @@
 					<img src="../images/introduction/intro_main.png" alt="소개이미지" />
 				</div>
 				<div class="txt_wrap">
-					<p>POPCON은 팝업스토어 Container의 줄임말로,</p>
-					<p>팝업스토어 정보확인과 예약이 가능한 페이지 입니다.</p>
-					<p>다양한 팝업과 함께 주변 상점들을 합리적인 가격으로 이용할 수 있도록 하며,</p>
+					<p>POPCON은 Popup Container의 줄임말로,</p>
+					<p>팝업스토어의 정보를 확인하고 예약이 가능한 팝업 스토어 전문 B2B2C 플랫폼입니다.</p>
+					<p>다양한 팝업스토어의 정보를 사용자에게 전달하며,</p>
 					<p>사용자들의 문화 생활을 적극 지원하고자 합니다.</p>
 				</div>
 			</section>
 			<section class="vision">
 				<h2 class="first">사용자와 함께 만들어 나가는 플랫폼</h2>
 				<div class="txt_wrap">
-					<p>리뷰를 통해 마일리지를 적립 받고</p>
+					<p>리뷰를 통해 포인트를 적립하고</p>
 					<p>차곡차곡 모아 쿠폰도 구매할 수 있는 곳</p>
 				</div>
-				<p class="sub_txt">사용자들이 이용할 수 있는 다양한 기능을 통해 활발한 플랫폼을 만들 예정입니다.</p>
+				<p class="sub_txt">사용자와 팝업스토어 비즈니스를 연결하고 사용자간 활발한 정보공유가 이루어지는 플랫폼을 만들겠습니다.</p>
 			</section>
 		</main>
 		<footer id="footer">
