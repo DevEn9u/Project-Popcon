@@ -36,14 +36,14 @@ body {
 }
 
 .popup_list_title {
-  font-size: 3vw;
-  font-weight: 600;
+  font-size: 48px;
+  font-weight: 700;
   color: white;
   margin: 0;
   margin-top: 5vh;
 }
 .popup_list_title_wrap h2 a {
-  font-size: 46px;
+  font-size: 48px;
 }
 
 .pl_main {
@@ -59,7 +59,7 @@ body {
   border-radius: 10px;
   width: 136px;
   height: 44px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -90,6 +90,8 @@ body {
   gap: 10px;
   font-size: 16px;
   font-weight: 600;
+  white-space: nowrap;
+  flex-wrap: wrap;
 }
 
 .pl_kategorie li {
@@ -121,7 +123,6 @@ body {
   flex-wrap: wrap;
   padding: 20px;
   list-style: none;
-  justify-content: space-around;
 }
 
 .popup_banner {
@@ -280,10 +281,6 @@ body {
     width: 120px;
     height: 120px;
   }
-  .pl_kategorie {
-    white-space: nowrap;
-  }
-
   .txt_title h2 {
     font-size: 14px;
   }
@@ -293,6 +290,12 @@ body {
 }
 
 @media (max-width: 767px) {
+  .pl_write_btn {
+  	width:100px;
+  	overflow: hidden;
+    white-space: pre-line;
+  
+  }
   .popup_list_title_wrap h2 a {
     font-size: 25px;
   }
@@ -300,14 +303,6 @@ body {
     margin-left: 10px;
     margin-right: 10px;
   }
-  .pl_kategorie {
-    white-space: nowrap;
-  }
-  .pl_kategorie {
-    display: flex;
-    flex-wrap: wrap; /* 자동 줄바꿈 허용 */
-  }
-
   .popup_banner {
   	width: 100%;
   }

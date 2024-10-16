@@ -104,7 +104,15 @@
 
 		document.querySelector(".thumb_name").value = fileNames.join(', ');
 	}
+	// 에러메세지 있을시 alert
+	document.addEventListener('DOMContentLoaded', function() {
+	    let resultMsg = '${resultMsg}';
+	    if (resultMsg) {
+	        alert(resultMsg);
+	    }
+	});
 </script>
+
 
 
 <body>

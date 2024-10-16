@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.edu.springboot.board.BoardDTO;
 import com.edu.springboot.booking.bookingDTO;
+import com.edu.springboot.coupon.CouponPurchasesDTO;
+import com.edu.springboot.coupon.ICouponService;
 import com.edu.springboot.member.IMemberService;
 import com.edu.springboot.member.MemberDTO;
 import com.edu.springboot.point.IPointService;
@@ -30,9 +32,11 @@ public class MypageController {
 	private IMemberService memberDAO;
 	@Autowired
 	private IPointService pointDAO;
+	@Autowired
+	private ICouponService couponService;
 
 	 // 마이페이지 - 메인
-    @GetMapping("/mypage/mypage.do")
+    @GetMapping("/mypage/main.do")
     public String mypageMain(Principal principal, Model model, MemberDTO memberDTO) {
     	String memberId = principal.getName(); // 현재 로그인한 사용자 ID 가져오기
         List<bookingDTO> booking = mypageService.bookingInfo(memberId); // 예약 정보 리스트 가져오기
@@ -63,7 +67,8 @@ public class MypageController {
     	String memberId = principal.getName(); // 현재 로그인한 사용자 ID 가져오기
 		MemberDTO memberDTO = memberDAO.getMemberById(memberId);
 		List<PointDTO> pointDTO = pointDAO.getPointInfoById(memberId);
-		System.out.println("아아아아" + pointDTO);
+		// 디버깅
+//		System.out.println("디버깅" + pointDTO);
 		
 		// 포인트에 콤마 추가
         String point = NumberFormat.getInstance(Locale.US).format(memberDTO.getPoint());
@@ -183,7 +188,14 @@ public class MypageController {
 	
 	//마이페이지 - 보유한 쿠폰 확인
 	@GetMapping("/mypage/myCoupon.do")
-	public String mypageCoupon() {
+	public String mypageCoupon(Principal principal, Model model) {
+		String userId = principal.getName();
+		List<CouponPurchasesDTO> couponList = couponService.getUserCoupons(userId);
+		
+		System.out.println("유저아이디" + userId);
+		System.out.println("쿠폰리스트" + couponList);
+		model.addAttribute("couponList", couponList);
+		
 		return "/mypages/mypage-coupon";
 	}
 

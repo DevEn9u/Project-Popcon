@@ -14,4 +14,6 @@ public interface IPointService {
 	public int updateMemberPoint(PointDTO pointDTO);
 	// 포인트 적립 내역
 	public List<PointDTO> getPointInfoById(String p_user);
+	// 유저의 보유 포인트 확인
+	public int getCurrentUserPoints(String user_id);
 }

@@ -3,7 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edu.springboot.coupon.ICouponService">
 	<!-- 등록된 쿠폰 불러오기 -->
-	<select id="selectCouponList">
+	<select id="selectCouponList" parameterType="com.edu.springboot.coupon.CouponShopDTO">
 		SELECT * FROM coupon_shop ORDER BY expiry_date DESC
 	</select>
 	<!-- 쿠폰 등록 -->
@@ -13,10 +13,18 @@
 	    VALUES (coupon_idx_seq(), #{coupon_name}, #{coupon_description}, #{image_url}, #{points})
 	</insert>
 	<!-- 쿠폰 구매 -->
-<!-- 	<insert id="buyCoupon" parameterType="com.edu.springboot.coupon.CouponPurchasesDTO"> -->
-<!-- 	    INSERT INTO coupon_purchases (purchase_idx, coupon_name, coupon_description, image_url, points) -->
-<!-- 	    VALUES (coupon_idx_seq(), #{coupon_name}, #{coupon_description}, #{image_url}, #{points}) -->
-<!-- 	</insert> -->
-	
-
+	<insert id="insertCouponPurchase" parameterType="com.edu.springboot.coupon.CouponPurchasesDTO">
+		<!-- purchase_date는 sysdate로 정하므로 작성하지 않음 -->
+	    INSERT INTO coupon_purchases (purchase_idx, coupon_idx, coupon_name, paid_points, user_id)
+	    VALUES (#{purchase_idx}, #{coupon_idx}, #{coupon_name}, #{paid_points}, #{user_id})
+	</insert>
+	<!-- 사용자 보유 쿠폰 불러오기 -->
+	<select id="getUserCoupons" parameterType="com.edu.springboot.coupon.CouponPurchasesDTO">
+		SELECT 
+			cp.user_id, cp.purchase_idx, cp.coupon_name, cp.purchase_date,
+			cs.coupon_description, cs.image_url, cs.expiry_date
+		FROM coupon_purchases cp
+		JOIN coupon_shop cs ON cp.coupon_name = cs.coupon_name
+		WHERE cp.user_id = #{userId}
+	</select>
 </mapper>
