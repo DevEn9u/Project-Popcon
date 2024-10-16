@@ -4,11 +4,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
-<c:import url="../include/head.jsp" />
-<c:import url="../include/header.jsp" var="common_header" />
-<c:import url="../include/mypage-list.jsp" var="mypage_list" />
-<c:import url="../include/footer.jsp" var="common_footer" />
-<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
+<head>
+	<c:import url="../include/head.jsp" />
+	<c:import url="../include/header.jsp" var="common_header" />
+	<c:import url="../include/mypage-list.jsp" var="mypage_list" />
+	<c:import url="../include/footer.jsp" var="common_footer" />
+	<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
+	<script src="/js/mypage.js"></script>
+</head>
 <body>
     <div id="skip_navi">
         <a href="#container">본문 바로가기</a>

@@ -10,6 +10,7 @@
 	<c:import url="../include/header.jsp" var="common_header" />
 	<c:import url="../include/mypage-list.jsp" var="mypage_list" />
 	<c:import url="../include/footer.jsp" var="common_footer" />
+	<script src="/js/mypage.js"></script>
 </head>
 <body>
 	<div id="skip_navi">

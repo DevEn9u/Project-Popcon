@@ -10,6 +10,7 @@
 	<c:import url="../include/mypage-list.jsp" var="mypage_list" />
 	<c:import url="../include/footer.jsp" var="common_footer" />
 	<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
+	<script src="/js/mypage.js"></script>
 </head>
 <body>
 	<div id="skip_navi">
@@ -17,11 +18,11 @@
 	</div>
 	<div id="wrap">
 	${common_header }
-	      <main id="mp_container">
+	   <main id="mp_container">
         <div class="title_wrap">
           <h1>마이페이지</h1>
           <span></span>
-          <h2>포인트 내역</h2>
+          <h2>포인트</h2>
         </div>
         <section class="my_page">
           ${mypage_list }
@@ -71,9 +72,9 @@
                 </div>
               </div>
             </div>
+	        </section>
+	      </main>
           </div>
-        </section>
-      </main>
 	  <footer id="footer">
 	    <div class="inner">
 	        ${common_footer}

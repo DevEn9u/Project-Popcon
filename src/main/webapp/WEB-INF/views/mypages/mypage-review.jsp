@@ -11,6 +11,7 @@
 	<c:import url="../include/mypage-list.jsp" var="mypage_list" />
 	<c:import url="../include/footer.jsp" var="common_footer" />
 	<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
+	<script src="/js/mypage.js"></script>
 </head>
 <body>
 	<div id="skip_navi">
