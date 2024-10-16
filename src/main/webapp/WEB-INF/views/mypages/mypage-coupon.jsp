@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -15,24 +16,28 @@
 <script>
 
 $(document).ready(function() {
-    // 현재 URL 가져오기
-    var currentUrl = window.location.href;
+	$('.d_day').each(function() {
+		// 쿠폰 만료기간을 String으로 만든 뒤 Date객체로 변환, millisecond 반환		
+		const expiryDateStr = $(this).data('expiry');
+		const expiryDate = new Date(expiryDateStr);
+		
+		const today = new Date();
 
-    // 메뉴 항목을 순회하며 활성화
-    $('.depth2 li').each(function() {
-        var link = $(this).find('a').attr('href');
-        if (link === currentUrl) {
-            $(this).addClass('on'); // 활성화 클래스 추가
-        }
-    });
-    
-    // 상위 메뉴도 활성화
-    $('.depth1 .list_title').each(function() {
-        var titlePage = $(this).data('page'); // data-page 속성 가져오기
-        if (currentUrl.includes(titlePage)) {
-            $(this).addClass('on');
-        }
-    });
+		// millisecond로 계산
+		const timeDiff = expiryDate - today;
+		// 하루 단위로 계산
+		const dDay = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+		
+		if (dDay === 0) {
+			$(this).text('D-Day');
+		}
+		if (dDay < 0) {
+			$(this).text('사용불가');
+		}
+		if (dDay > 0) {
+			$(this).text('D-' + dDay);
+		}
+	});
 });
 
 </script>
@@ -63,7 +68,7 @@ $(document).ready(function() {
 		               	<li class="coupon_num">쿠폰번호: ${coupon.purchase_idx }</li>
 		               	<li class="coupon_desc">${coupon.coupon_name }</li>
 		               	<li class="expiry_date"><fmt:formatDate value="${coupon.expiry_date }" pattern="YYYY. MM. dd " />까지</li>
-		               	<li class="d_day">D-30</li>
+		               	<li class="d_day" data-expiry="${fn:escapeXml(coupon.expiry_date.time)}"></li>
 		               </ul>
 	                </div>
 	            </div>
