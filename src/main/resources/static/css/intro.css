@@ -19,13 +19,46 @@
 
 #mp_container .intorduction .img_wrap {
 	max-width: 1250px;
-	height: 400px;
-	border: 1px solid #fff;
+	height: 550px;
 	border-radius: 30px;
-	object-fit: cover;
 	margin-bottom: 40px;
+	overflow: hidden;
 }
-#mp_container .intorduction .txt_wrap {
+#mp_container .intorduction .img_wrap img {
+	object-fit: cover;
+	opacity: 0.8;
+}
+#mp_container .txt_wrap {
+	font-size: 20px;
+	line-height: 30px;
+}
+
+#mp_container .vision {
+	text-align: center;
+}
+#mp_container h2 {
+	font-size: 36px;
+	font-weight: 700;
+	margin-top: 70px;
+	text-align: center;
+	margin-bottom: 30px;
+}
+#mp_container .vision .txt_wrap {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 200px;
+	font-weight: 700;
+	background: url(../images/introduction/intro_sub.jpg);
+	background-size: cover; 
+	background-position: center; 
+	background-color: rgba(0, 0, 0, 0.5); 
+	background-blend-mode: darken; 
+	font-size: 24px;
+	line-height: 45px;
+}
+#mp_container .vision .sub_txt {
+	margin-top: 20px;
 	font-size: 18px;
 }
 
@@ -117,3 +150,59 @@
 	font-size: 18px;
 }
 
+
+@media(max-width: 1200px) {
+	#mp_container .intorduction h1 {
+		margin-left: 0;
+		font-size: 40px;
+		line-height: 60px;
+	}
+	#mp_container .intorduction .img_wrap {
+		height: 400px;
+	}
+	#mp_container .txt_wrap {
+		font-size: 16px
+	}
+	
+	#mp_container h2 {
+		font-size: 30px;
+		margin-top: 50px
+	}
+	#mp_container .vision .txt_wrap {
+		font-size: 20px;
+		line-height: 35px;
+	}
+	#mp_container .vision .sub_txt {
+		font-size: 16px;
+	}
+}
+
+@media(max-width: 767px) {
+	#mp_container .intorduction {
+		margin-top: 100px;
+	}
+	#mp_container .intorduction h1 {
+		margin-left: 0;
+		font-size: 26px;
+		line-height: 40px;
+	}
+	#mp_container .intorduction .img_wrap {
+		height: 250px;
+	}
+	#mp_container .txt_wrap {
+		font-size: 12px;
+		line-height: 20px;
+	}
+	
+	#mp_container h2 {
+		font-size: 20px;
+		margin-top: 50px
+	}
+	#mp_container .vision .txt_wrap {
+		font-size: 16px;
+		line-height: 26px;
+	}
+	#mp_container .vision .sub_txt {
+		font-size: 12px;
+	}
+}

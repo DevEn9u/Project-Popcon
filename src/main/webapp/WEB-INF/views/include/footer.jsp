@@ -17,7 +17,7 @@
       <div class="footer_bottom">
         <div class="col1">
           <div class="company_wrap">
-            <p>(주)플로팅플래닛</p>
+            <p>POPUP CONTAINER</p>
             <p>주소 : 서울 종로구 삼일대로17길 51 스타골드빌딩 5층</p>
             <p>문의전화 : (02)333-4567</p>
             <p>이메일 : popcon@popcon.co.kr</p>
@@ -57,8 +57,6 @@
         </div>
       </div>
       <span class="copyright">Copyright 2024. Floating Planet Co.,Ltd. All rights reserved</span>
-      <div class="footer_logo">
-        <img src="/images/main/footer_awards.png" alt="">
-      </div>
+
     </section>
 <!-- </footer> -->
