@@ -261,6 +261,12 @@ body {
     font-size: 20px;
     font-weight: 700;
 }
+.pl_pltit {
+	width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 /* 태블릿 분기점 */
 @media (max-width: 1200px) {

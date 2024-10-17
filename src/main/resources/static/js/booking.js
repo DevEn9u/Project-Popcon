@@ -178,7 +178,7 @@ $(function () {
                     success: function() {
                         alert("예약이 완료되었습니다");
                         // 예약 성공 후 이동할 페이지로 리디렉션
-                        window.location.href = '/mypage/mypage.do';
+                        window.location.href = '/mypage/main.do';
                         console.log("예약 완료");
                     },
                     error: function() {
@@ -241,7 +241,7 @@ $(function () {
                             success: function () {
                                 alert(msg);
                                 // 결제 성공 후 이동할 페이지로 리디렉션
-                                window.location.href = '/mypage/mypage.do';
+                                window.location.href = '/mypage/main.do';
                             },
                             error: function () {
                                 alert("결제 후 예약 처리 중 오류가 발생했습니다.");
