@@ -32,5 +32,6 @@ public interface IMypageService {
     
  // 예약 취소
     void cancelBooking(int booking_num, String member_id); // 예약 번호와 회원 ID로 예약 취소
+    
 }
     

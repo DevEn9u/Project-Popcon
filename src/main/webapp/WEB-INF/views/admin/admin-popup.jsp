@@ -32,7 +32,7 @@
 						<ul class="depth2">
 							<li><a href="/adpage/popup.do"
 								style="color: var(--point-color1);">팝업 게시판</a></li>
-							<li><a href="/adpage/free.do">자유 게시판</a></li>
+							<li class="adpage_freeboard"><a href="/adpage/free.do">자유 게시판</a></li>
 						</ul>
 						<li class="list_title"><a href="/adpage/user.do">유저 관리</a></li>
 						<li class="list_title"><a href="/adpage/chat.do">문의 채팅방</a></li>
@@ -44,9 +44,9 @@
 							<li class="popup_banner"><a
 								href="/popupBoard/view/${popup.board_idx}"> <img
 									src="${popup.thumb}" alt="Thumbnail" class="popup_thumbnail"
-									style="max-width: 100px; max-height: 100px;" />
+									style="width: 100px; height: 100px;" />
 									<div class="txt_title" style="margin-left: 10px;">
-										<h2>
+										<h2 class="adpage_popup_tit">
 											${popup.board_title}
 											<form id="deleteForm_${popup.board_idx}"
 												action="/adpage/delete.do" method="post">
@@ -60,7 +60,7 @@
 
 										<div class="popup_location">
 											<img src="../images/imgMGJ/pin.svg" /> <span
-												class="location_span">${fn:replace(popup.popup_addr, ',', ' ')}</span>
+												class="location_span adpage_location_span">${fn:replace(popup.popup_addr, ',', ' ')}</span>
 										</div>
 										<span class="popup_date">${popup.postdate}</span>
 									</div>

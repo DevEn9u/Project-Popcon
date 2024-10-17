@@ -28,7 +28,7 @@
 							style="color: var(--txt-color-600);">게시물 관리</a></li>
 						<ul class="depth2">
 							<li><a href="/adpage/popup.do">팝업 게시판</a></li>
-							<li><a href="/adpage/free.do">자유 게시판</a></li>
+							<li class="adpage_freeboard"><a href="/adpage/free.do">자유 게시판</a></li>
 						</ul>
 						<li class="list_title"><a href="/adpage/user.do"
 							style="color: var(--txt-color-600);">유저 관리</a></li>

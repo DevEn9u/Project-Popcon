@@ -81,4 +81,12 @@
 	    AND member_id = #{member_id}
 	</update>
 	
+	<!-- 내가 작성한 팝업 게시물 목록 조회 -->
+<select id="getPopupPostsByWriter" parameterType="String" resultType="com.edu.springboot.popupboards.PopupBoardDTO">
+    SELECT board_idx, board_title, thumb, popup_addr, postdate 
+    FROM POPUP_BOARD
+    WHERE writer = #{writer}
+    ORDER BY postdate DESC
+</select>
+	
 </mapper>

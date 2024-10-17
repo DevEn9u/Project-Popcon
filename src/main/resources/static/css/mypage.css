@@ -74,7 +74,7 @@
 
 /* 마이페이지 메인 */
 .my_info_wrap {
-  width: 1044px;
+  width: 100%;
   height: 100%;
 }
 .my_info_wrap .tit_wrap {
@@ -89,6 +89,7 @@
   margin-bottom: 30px;
 }
 .my_info_wrap .tit_wrap .edit_btn {
+	margin-bottom: 10px;
 	font-size: 17px;
 	transition: all 0.2s;
 	border-radius: 5px;
@@ -825,13 +826,54 @@
     justify-content: center;
 }
   
-  .ad_btn_wrap .member_name {
+.ad_btn_wrap .member_name {
 	display: block;
 	width:100px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: center;
+}
+
+.adpage_popup_tit {
+	width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.popup_location .adpage_location_span {
+	display:block;
+	width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.adpage_freeboard {
+	margin-bottom:30px;
+}
+  
+  /*마이페이지-내가 쓴 글 보기: 기업유저 */
+  
+  .my_info_wrap h2 {
+  	color: var(--txt-color-500);
+  	font-size:20px;
+  	margin:0px;
+  	width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mp_location {
+  	color: var(--txt-color-500);
+  	font-weight:600;
+  }
+  .pl_main .mp_popup_date {
+  	color: var(--txt-color-500);
+  }
+  .pv_mp_delete_btn {
+      filter: invert(34%) sepia(94%) saturate(7482%) hue-rotate(-1deg)
+       brightness(95%) contrast(102%);
   }
 
 
@@ -850,7 +892,6 @@
   }
   #mp_container h1 {
     font-size: 46px;
-    margin-left: 100px;
   }
   .my_list {
     margin-right: 20px;
@@ -862,7 +903,7 @@
   .my_list .depth1 .list_title a {
     font-size: 25px;
   }
-  .my_list .depth2 li {
+  .my_list .depth1 .depth2 li {
     font-size: 15px;
     margin-bottom: 20px;
   }
@@ -924,6 +965,25 @@
   .coupon_list .coupon_contents {
   	width: 300px;
   }
+  
+  /*마이페이지 - 내글보기: 기업유저 */
+  
+  .my_info_wrap .mp_corp_h2 {
+  	margin:0px;
+  }
+  .popup_location .mp_location {
+  	display:block;
+    width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .pl_main .mp_popup_date {
+  	font-size:12px;
+  }
+  
+  
 }
 /* 태블릿 분기 끝 */
 
@@ -934,8 +994,11 @@
     margin-bottom: 60px;
   }
   #mp_container h1 {
-    font-size: 25px;
+  	padding:0px;
+  	display:flex;
+  	justify-content: center;
   }
+
   .my_list .depth1 .list_title {
     font-size: 20px;
     margin-bottom: 10px;
@@ -999,9 +1062,6 @@
   .title_wrap span {
     width: 25px;
     height: 25px;
-  }
-  .title_wrap h2 {
-    font-size: 15px;
   }
   .my_info .box2 .popup_wrap .popup_detail {
     margin-bottom: 30px;

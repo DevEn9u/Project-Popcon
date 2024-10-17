@@ -134,6 +134,13 @@
         WHERE board_idx = #{board_idx}
     </update>
     
+    <!-- 본인이 작성한 글 조회 -->
+    <select id="selectByWriter" parameterType="String" resultType="com.edu.springboot.popupboards.PopupBoardDTO">
+        SELECT * FROM POPUP_BOARD 
+        WHERE writer = #{writer}
+        ORDER BY postdate DESC
+    </select>
+    
 
 
 </mapper>
