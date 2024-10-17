@@ -39,10 +39,11 @@ body {
   align-items: center;
 }
 .bs_booking_img {
-  width: 1250px;
+  width: 100%;
   height: 450px;
   margin-top: 25px;
   border-radius: 30px;
+  object-fit:cover;
 }
 .bs_pin {
   margin-top: 5px;

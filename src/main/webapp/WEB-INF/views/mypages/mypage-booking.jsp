@@ -24,7 +24,7 @@
                 <span></span>
                 <h2>예약 확인</h2>
             </div>
-            <section class="my_page">
+            <section class="my_page my_page_booking">
                ${mypage_list }
                 <div class="my_info_wrap">
                     <div class="my_info">
