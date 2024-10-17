@@ -199,7 +199,7 @@
 						<div class="swiper-slide">
 							<ul class="main_popup">
 								<li><a href="#">
-										<div class="img_wrap">
+										<div class="img_wrap"> 
 											<!-- 게시물 이미지 출력 -->
 											<c:forEach var="image" items="${images}">
 												<img src="${image.image_url}" alt="Image" style="max-width:625px; max-height:625px; object-fit: cover;"/>
