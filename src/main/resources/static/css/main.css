@@ -239,7 +239,7 @@
 /* 화살표 모양 변경 */
 .main_slider .arrow_btn {
   width: 20px;
-  height: 24px;
+  height: 240px;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -761,6 +761,10 @@
     width: 30px;
     height: 30px;
     mask-size: 30px 30px;
+  }
+  
+  .main_slider .swiper-slide .txt_wrap {
+  	bottom: 30px;
   }
   
   .main_slider .swiper-slide {
