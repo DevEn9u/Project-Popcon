@@ -65,7 +65,7 @@
 			                                    <img src="/images/coupon/buy_icon4.svg" />
 			                                </button>
 	                                	</c:when>
-	                                	<c:when test="${memberDTO.authority == 'ROLE_NORMAL' && currentPoints < coupon.points }">
+	                                	<c:when test="${memberDTO.authority == 'ROLE_NORMAL' && currentPoints < coupon.points}">
 			                                <button type="submit" class="buy_btn disabled" disabled="disabled">
 			                                    <img src="/images/coupon/cant_buy_icon.svg" />
 			                                </button>
