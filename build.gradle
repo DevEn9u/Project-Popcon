@@ -80,3 +80,6 @@ tasks.withType(JavaCompile) {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+bootWar.enabled = false
+war.enabled = true
