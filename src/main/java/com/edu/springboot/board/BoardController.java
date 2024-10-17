@@ -184,10 +184,20 @@ public class BoardController {
                         continue;
                     }
                     try {
-                        // 파일 저장
+//                        // 파일 저장
+//                        String newFilename = UUID.randomUUID().toString() + fileExtension;
+//                        File dest = new File(uploadDir + "/" + newFilename);
+//                        file.transferTo(dest);
+//                        // 이미지 URL 설정 (웹 접근 가능한 경로)
+//                        String imageUrl = "/uploads/images/" + newFilename;
+                    	
+                    	
+                    	// 테스트 영역
                         String newFilename = UUID.randomUUID().toString() + fileExtension;
-                        File dest = new File(uploadDir + "/" + newFilename);
-                        file.transferTo(dest); 
+                        String destPath = uploadDir + newFilename; // 수정된 경로
+                        File dest = new File(destPath);
+                        file.transferTo(dest);
+
                         // 이미지 URL 설정 (웹 접근 가능한 경로)
                         String imageUrl = "/uploads/images/" + newFilename;
 
@@ -200,6 +210,7 @@ public class BoardController {
 
                     } catch (IOException e) {
                         e.printStackTrace();
+                        System.out.println("catch발생:" + "업로드경로" + uploadDir + "원본파일" + originalFilename + "확장자" + fileExtension);
                         redirectAttributes.addFlashAttribute("error", "파일 업로드 중 오류가 발생했습니다.");
                     }
                 }
