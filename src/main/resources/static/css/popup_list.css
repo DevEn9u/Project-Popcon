@@ -366,6 +366,11 @@ body {
   	width:20px;
   	height:20px;
   }
+  
+  /* 마이페이지 - 내 작성글 */
+  .my_page .my_list {
+  	bottom: 115%;
+  }
 }
 
 
