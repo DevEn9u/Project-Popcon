@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <div class="my_list">
     <ul class="depth1">
-        <li class="list_title" data-page="main">
+        <li class="list_title">
         	<a href="/mypage/main.do">마이페이지</a>
 	        <ul class="depth2">
     	        <li data-page="myBooking"><a href="/mypage/myBooking.do">예약 확인</a></li>
@@ -11,7 +11,7 @@
         </li>
     </ul>
     <ul class="depth1">
-        <li class="list_title" data-page="1234">
+        <li class="list_title">
         	<a href="/mypage/myPost.do">작성 게시물</a>
 	        <ul class="depth2">
 	            <li data-page="myPost"><a href="/mypage/myPost.do">내가 작성한 글</a></li>
@@ -20,7 +20,7 @@
         </li>
     </ul>
     <ul class="depth1">
-        <li class="list_title" data-page="likes">
+        <li class="list_title">
         	<a href="/mypage/likes.do">팝업</a>
 	        <ul class="depth2">
 	            <li data-page="likes"><a href="/mypage/likes.do">좋아요 누른 팝업</a></li>
