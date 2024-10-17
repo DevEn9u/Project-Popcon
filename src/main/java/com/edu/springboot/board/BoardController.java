@@ -187,7 +187,7 @@ public class BoardController {
                         // 파일 저장
                         String newFilename = UUID.randomUUID().toString() + fileExtension;
                         File dest = new File(uploadDir + "/" + newFilename);
-                        file.transferTo(dest);
+                        file.transferTo(dest); 
                         // 이미지 URL 설정 (웹 접근 가능한 경로)
                         String imageUrl = "/uploads/images/" + newFilename;
 

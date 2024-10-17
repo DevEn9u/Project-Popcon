@@ -99,4 +99,5 @@ public class MypageServiceImpl implements IMypageService {
     public void cancelBooking(int booking_num, String member_id) {
         mypageMapper.updateBookingCancellation(booking_num, member_id); // 예약 취소 쿼리 호출
     }
+    
 }

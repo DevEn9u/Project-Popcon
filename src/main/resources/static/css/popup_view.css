@@ -33,12 +33,10 @@ body {
 
 .swiper .img_wrap {
   display: flex;
-  width: 625px;
-  height: 625px;
 }
 
 .img_wrap img {
-  width: 625px;
+  width: 50%;
   height: 625px;
 }
 
@@ -133,7 +131,7 @@ body {
   opacity: 1;
   transition: all 0.2s;
 }
-.txt_wrap {
+.pv_txt_wrap {
   position: absolute;
   bottom: 50px;
   left: 20px;
@@ -365,8 +363,9 @@ body {
     margin-left: 10px;
     margin-right: 10px;
   }
-  .swiper {
-    width: 625px;
+
+  .img_wrap img {
+  	width:50%;
   }
   .pv_title_text {
     font-size: 16px;

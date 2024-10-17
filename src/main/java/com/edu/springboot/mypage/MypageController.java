@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.edu.springboot.board.BoardDTO;
+import com.edu.springboot.board.BoardService;
 import com.edu.springboot.booking.bookingDTO;
 import com.edu.springboot.coupon.CouponPurchasesDTO;
 import com.edu.springboot.coupon.ICouponService;
@@ -23,6 +24,7 @@ import com.edu.springboot.point.IPointService;
 import com.edu.springboot.point.PointDTO;
 import com.edu.springboot.popupboards.CommentDTO;
 import com.edu.springboot.popupboards.PopupBoardDTO;
+import com.edu.springboot.popupboards.PopupBoardMapper;
 
 @Controller
 public class MypageController {
@@ -35,7 +37,11 @@ public class MypageController {
 	private IPointService pointDAO;
 	@Autowired
 	private ICouponService couponService;
-
+	
+	@Autowired
+	private PopupBoardMapper popupBoardMapper;
+	private MemberDTO memberDTO;
+	
 	 // 마이페이지 - 메인
     @GetMapping("/mypage/main.do")
     public String mypageMain(Principal principal, Model model, MemberDTO memberDTO) {
@@ -81,46 +87,64 @@ public class MypageController {
 	
 	
 	// 마이페이지 - 내가 작성한 글 확인
-    @GetMapping("/mypage/myPost.do")
-    public String mypagePost(
-            @RequestParam(value = "page", defaultValue = "1") int currentPage,
-            @RequestParam(value = "size", defaultValue = "10") int pageSize,
-            Principal principal,
-            Model model) {
-        
-        // 로그인 여부 확인
-        if (principal == null) {
-            return "redirect:/login.do";
-        }
-        
-        String userId = principal.getName();
-        
-        // 내가 작성한 게시글 총 수 조회
-        int totalPosts = mypageService.countPostsByWriter(userId);
-        int totalPages = (int) Math.ceil((double) totalPosts / pageSize);
-        
-        // 페이지 번호 유효성 검사
-        if (currentPage > totalPages && totalPages != 0) {
-            currentPage = totalPages;
-        }
-        if (currentPage < 1) {
-            currentPage = 1;
-        }
-        
-        // 페이징을 위한 offset 계산
-        int offset = (currentPage - 1) * pageSize;
-        
-        // 내가 작성한 게시글 목록 조회
-        List<BoardDTO> posts = mypageService.getPostsByWriter(userId, offset, pageSize);
-        
-        // 모델에 데이터 추가
-        model.addAttribute("posts", posts);
-        model.addAttribute("currentPage", currentPage);
-        model.addAttribute("pageSize", pageSize);
-        model.addAttribute("totalPages", totalPages);
-        
-        return "/mypages/mypage-post";
-    }
+	@GetMapping("/mypage/myPost.do")
+	public String mypagePost(
+	        @RequestParam(value = "page", defaultValue = "1") int currentPage,
+	        @RequestParam(value = "size", defaultValue = "10") int pageSize,
+	        Principal principal,
+	        Model model) {
+	    
+	    // 로그인 여부 확인
+	    if (principal == null) {
+	        return "redirect:/login.do";
+	    }
+	    
+	    String userId = principal.getName();
+	    
+	    // 내가 작성한 게시글 총 수 조회
+	    int totalPosts = mypageService.countPostsByWriter(userId);
+	    int totalPages = (int) Math.ceil((double) totalPosts / pageSize);
+	    
+	    // 페이지 번호 유효성 검사
+	    if (currentPage > totalPages && totalPages != 0) {
+	        currentPage = totalPages;
+	    }
+	    if (currentPage < 1) {
+	        currentPage = 1;
+	    }
+	    
+	    // 페이징을 위한 offset 계산
+	    int offset = (currentPage - 1) * pageSize;
+	    
+	    // 내가 작성한 게시글 목록 조회
+	    List<BoardDTO> posts = mypageService.getPostsByWriter(userId, offset, pageSize);
+	    
+	    // 내가 작성한 팝업
+	    List<PopupBoardDTO> popupList = popupBoardMapper.selectByWriter(userId);
+	    
+	    model.addAttribute("popupList", popupList);
+	    
+	    // 회원 정보 가져오기
+	    MemberDTO memberDTO = memberDAO.getMemberById(userId);
+	    if (memberDTO == null) {
+	        // 예외 처리: 사용자 정보를 찾을 수 없을 경우
+	        model.addAttribute("errorMessage", "회원 정보를 찾을 수 없습니다.");
+	        return "/error"; // 에러 페이지로 리다이렉트
+	    }
+	    
+	    // 권한 확인
+	    String authority = memberDTO.getAuthority();
+	    
+	    // 모델에 데이터 추가
+	    model.addAttribute("posts", posts);
+	    model.addAttribute("currentPage", currentPage);
+	    model.addAttribute("pageSize", pageSize);
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("authority", authority);
+	    
+	    return "/mypages/mypage-post";
+	}
+
 	
 	
     // 마이페이지 - 내가 작성한 리뷰 확인

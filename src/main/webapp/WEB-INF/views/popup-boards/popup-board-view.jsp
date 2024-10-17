@@ -199,16 +199,16 @@
 						<div class="swiper-slide">
 							<ul class="main_popup">
 								<li><a href="#">
-										<div class="img_wrap">
+										<div class="img_wrap"> 
 											<!-- 게시물 이미지 출력 -->
 											<c:forEach var="image" items="${images}">
 												<img src="${image.image_url}" alt="Image" style="max-width:625px; max-height:625px; object-fit: cover;"/>
 											</c:forEach>
 										</div>
-										<div class="txt_wrap">
-											<p class="slide_title">${popup.board_title}</p>
-											<p>${popup.start_date}~${popup.end_date}</p>
-											<p>
+										<div class="pv_txt_wrap">
+											<p class="slide_title" style="margin-bottom:10px;">${popup.board_title}</p>
+											<p style="margin-bottom:10px;">${popup.start_date}~${popup.end_date}</p>
+											<p style="margin-bottom:10px;">
 												<img src="/images/main/location.svg" alt="location_pin"
 													class="loc_pin">${fn:replace(popup.popup_addr, ',', ' ')}</p>
 										</div>
