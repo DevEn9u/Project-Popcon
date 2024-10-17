@@ -126,5 +126,10 @@ public class PopupBoardService {
     public void deleteThumbnail(String board_idx) {
         popupBoardMapper.deleteThumbnail(board_idx); // Mapper 메서드 호출
     }
+    
+    //본인이 쓴글 조회
+    public List<PopupBoardDTO> getPostsByWriter(String writer) {
+        return popupBoardMapper.selectByWriter(writer);
+    }
 
 }

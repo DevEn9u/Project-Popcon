@@ -62,7 +62,9 @@ public interface PopupBoardMapper {
     
     // 좋아요 수 업데이트
     void updateLikesCount(@Param("board_idx") String board_idx, @Param("likes_count") int likes_count);
-
+    
+    //본인이 쓴글 조회
+    public List<PopupBoardDTO> selectByWriter(@Param("writer") String writer);
     
 
 }
