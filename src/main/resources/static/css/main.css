@@ -5,6 +5,7 @@
   --txt-color-400: #767676;
   --txt-color-500: #121212;
   --txt-color-600: #fff;
+  overflow-x: hidden;
 }
 
 /* 헤더 */

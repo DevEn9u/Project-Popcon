@@ -81,7 +81,7 @@
 	display: flex;
 	justify-content: space-between;
 }
-.my_info_wrap h2 {
+.my_info_wrap .mypage_uname {
   font-size: 45px;
   font-weight: 700;
   color: var(--txt-color-600) /**/;
@@ -591,6 +591,7 @@
   gap: 20px;
 }
 
+
 .my_info .box3 .review_wrap .review_contents_wrap .review_block_wrap {
   width: calc(50% - 20px); /* 부모의 50%에서 gap 고려 */
   flex-grow: 1; /* 비례적으로 커지도록 설정 */
@@ -1018,6 +1019,11 @@
     margin-left: 30px;
     margin-bottom: 10px;
   }
+  .my_info_wrap .mypage_uname {
+    font-size:20px;
+  	margin-left:30px;
+  	margin-bottom:10px;
+  }
   .my_info .box1 .top strong {
     font-size: 20px;
   }
@@ -1171,6 +1177,12 @@
   	font-size: 16px;
   	margin-bottom:20px;
   }
+  
+  .my_info_wrap .tit_wrap .edit_btn {
+  	width: 120px;
+    white-space: nowrap;
+  }
+  
   /* 쿠폰 */
   .coupon_page {
   	padding: 80px 0; 
