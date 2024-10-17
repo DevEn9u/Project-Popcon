@@ -194,9 +194,11 @@ public class CouponController {
 	        pointDTO.setP_change(-points);		// 구매이력 저장, 음수로 저장
 	        pointDTO.setP_change_date(new Date()); // 현재 날짜로 구매일 지정
 	        
-	        // PointDAO 호출하여 포인트 사용내역 저장, 유저의 보유 포인트 감소
+	        // PointDAO 호출하여 포인트 사용내역 저장, 유저의 보유 포인트 감소	        
+	        pointDAO.insertPoint(pointDTO);
 	        pointDAO.updateMemberPoint(pointDTO);
-	        
+	        System.out.println(pointDTO + "테스트");
+	        System.out.println(pointDTO.getP_change() + "테스트 가격");
 	        redirectAttributes.addFlashAttribute("resultMsg", "쿠폰을 구매하였습니다!");
 	    } else {
 	        redirectAttributes.addFlashAttribute("resultMsg", "쿠폰 구매에 실패하였습니다..");

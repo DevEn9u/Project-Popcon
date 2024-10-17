@@ -122,7 +122,7 @@ public class BookingController {
         int bookingResult = book.booking(dto);
 
         if (bookingResult > 0) {
-            return "redirect:/mypage/mypage.do";
+            return "redirect:/mypage/main.do";
         } else {
             return "Error: Booking failed";
         }
