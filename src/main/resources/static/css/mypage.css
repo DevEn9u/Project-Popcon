@@ -896,7 +896,6 @@
   }
   .my_list {
 	flex-direction: row;
-	justify-content: center;
   }
   .my_list .depth1 .list_title {
     font-size: 25px;
@@ -1006,14 +1005,7 @@
   	margin-top:200px;
   }
   
-  .my_page .my_list {
-      position: absolute;
-      bottom: 105%;
-      left: 35%;
-      justify-content: center;
-      text-align: center;
-      flex-direction: row;
-  }
+
   .my_page_booking .my_list {
   	bottom:115%;
   }

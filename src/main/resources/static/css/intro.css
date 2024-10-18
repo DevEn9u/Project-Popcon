@@ -14,6 +14,7 @@
 /* 플랫폼 소개 */
 .mypage .intro_wrap {
 	padding-left: 50px;
+	max-width: 1060px;
 }
 
 #mp_container h1{
@@ -70,7 +71,8 @@
 /* 조직도(팀소개) 서식 */
 .team_role .txt_wrap {
 	display: flex;
-	justify-content:space-evenly;
+	justify-content:center;
+	gap: 0 30px;
 	margin-bottom: 50px
 }
 .team_role .txt_box {
@@ -109,6 +111,10 @@
 }
 
 /* 팝콘소식 - 오시는 길 서식 */
+#mp_container .map_wrap{
+	width: 100%;
+	overflow: hidden;
+}
 .academy_location {
 	margin-left:100px;
 	width:100%;
@@ -172,7 +178,7 @@
 		margin-top: 100px;;
 	}
 	.mypage .intro_wrap {
-		padding-left: 0px;
+		padding-left: 20px;
 	}
 	#mp_container h1 {
 		margin-left: 0;
@@ -196,6 +202,81 @@
 	}
 	#mp_container .vision .sub_txt {
 		font-size: 16px;
+	}
+	
+	.team_role .txt_box {
+		width: 280px;
+		height: 400px;
+		padding: 20px;
+		
+	}
+	.team_role .txt_box .tit {
+		font-size: 24px;
+		line-height: 35px;
+		margin-bottom: 16px;
+	}
+	.team_role .txt_box p {
+		font-size: 14px;
+	}
+	.team_role .txt_box .team3 {
+		margin-top: 0;
+	}
+	.team_role .txt_box .team4 {
+		margin-top: 0;
+	}
+	
+	.team_role .txt_wrap {
+		gap: 0 20px;
+		margin-bottom: 30px;
+	}
+	.team_role .txt_wrap p {
+		line-height: 24px;
+	}
+	
+	
+
+	.academy_location {
+		margin-left: 0px;
+		height: 360px	
+	}
+	.location_txt {
+		margin-left: 0px;
+	}
+	.location_txt img {
+		width: 18px;
+		height: 26px;
+	}
+	.location_txt p {
+		font-size: 14px;
+		line-height: 25px;
+	}
+	
+	.loction_way {
+		margin-left: 0px;
+	}
+	.loction_way .way {
+		flex-direction: column;
+	}
+	.loction_way .way img {
+		width: 50px;
+		height: 50px;
+		margin-right: 20px;
+	}
+	.loction_way .way .bus {
+		padding: 10px;
+		align-items: center;
+	}
+	.loction_way .way .bus .txt {
+		padding: 0;
+		font-size: 14px;
+	}
+	.loction_way .way .subway {
+		padding: 10px;
+		align-items: center;
+	}
+	.loction_way .way .subway .txt {
+		padding: 0;
+		font-size: 14px;
 	}
 }
 
@@ -230,5 +311,29 @@
 	}
 	#mp_container .vision .sub_txt {
 		font-size: 10px;
+	}
+	
+	.academy_location {
+		height: 300px;
+	}
+	.location_txt {
+		padding: 20px 10px;
+	}
+	.location_txt p {
+		font-size: 12px;
+	}
+	.loction_way {
+		padding: 20px 10px;
+	}
+	.loction_way .way img{
+		margin-right: 10px;
+	}
+	.loction_way .way .bus .txt {
+		font-size: 12px;
+		line-height: 20px;
+	}
+	.loction_way .way .subway .txt {
+		font-size: 12px;
+		line-height: 20px;
 	}
 }
