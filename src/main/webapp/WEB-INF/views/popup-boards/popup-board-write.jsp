@@ -307,7 +307,7 @@ function updateOpenHours() {
 			</div>
 			<div class="contents">
 				<div class="inner">
-					<h3>게시글 작성</h3>
+					<h3>게시글 작성</h3> 
 					<div class="board_write">
 						<form name="writeFrm" method="post" enctype="multipart/form-data"
 							action="/popupBoard/write.do"
