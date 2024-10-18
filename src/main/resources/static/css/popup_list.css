@@ -23,24 +23,19 @@ body {
 
 
 #popup_list_container {
-  width: 100%;
-  max-width: 1920px;
+  max-width: 1250px;
   margin: 0 auto;
-  padding: 20px;
+  padding-top: 120px;
 }
 
 .popup_list_inner {
-  margin-top: 80px;
-  margin-left: 335px;
-  margin-right: 335px;
+	padding: 0 20px;
 }
 
 .popup_list_title {
   font-size: 48px;
   font-weight: 700;
   color: white;
-  margin: 0;
-  margin-top: 5vh;
 }
 .popup_list_title_wrap h2 a {
   font-size: 48px;
@@ -54,7 +49,6 @@ body {
 .pl_write_btn {
   background-color: #fce8c3;
   color: black;
-  font-size: 16px;
   font-weight: 600;
   border-radius: 10px;
   width: 136px;
@@ -121,26 +115,27 @@ body {
 .popup_wrap {
   display: flex;
   flex-wrap: wrap;
-  padding: 20px;
+  padding: 20px 0;
+  gap: 10px 20px;
   list-style: none;
 }
 
 .popup_banner {
-  width: 50%;
+  width: calc(50% - 20px);
   box-sizing: border-box;
-  padding: 10px;
+  padding: 0 10px;
   margin-bottom: 20px;
   position: relative;
 }
 
 .popup_banner a {
   display: flex;
+  justify-content: space-between;
 }
 
 .popup_banner .img_wrap {
   width: 150px;
   height: 150px;
-  margin-right: 25px;
   overflow: hidden;
 }
 .popup_banner .img_wrap img {
@@ -150,7 +145,7 @@ body {
 }
 
 .txt_title {
-  width: 70%;
+  width: calc(100% - 170px);
   display: flex;
   flex-direction: column;
   color: white;
@@ -270,20 +265,11 @@ body {
 
 /* 태블릿 분기점 */
 @media (max-width: 1200px) {
-  .popup_list_inner {
-    margin-left: 100px;
-    margin-right: 100px;
+.popup_banner .img_wrap {
+  width: 120px;
+  height: 120px;
   }
-  
-  .popup_banner {
-  	width: 45%;
-  	padding: 15px;
-  	margin-bottom: 25px;
-  }
-  .popup_banner .popup_img {
-    width: 120px;
-    height: 120px;
-  }
+
   .txt_title h2 {
     font-size: 14px;
   }
@@ -295,14 +281,19 @@ body {
 @media (max-width: 767px) {
   .pl_write_btn {
   	width:100px;
+  	font-size: 14px;
   	overflow: hidden;
-    white-space: pre-line;
+  }
   
+  .kategorie_wrap .pl_kategorie li {
+  	height: 20px;
   }
-  .popup_list_inner {
-    margin-left: 10px;
-    margin-right: 10px;
+  .kategorie_wrap .pl_kategorie li>a {
+  	font-size: 14px;
   }
+  .kategorie_wrap .pl_kategorie .keyword {
+  	display: none;
+  }	
   .popup_banner {
   	width: 100%;
   }
@@ -313,6 +304,9 @@ body {
   .popup_wrap {
     flex-wrap: nowrap;
     flex-direction: column;
+  }
+  .popup_wrap .txt_title {
+  	width: calc(100% - 140px);
   }
   .popup_banner {
     width: 100%;
