@@ -24,7 +24,7 @@
 				${intro_list }
 				<div class="intro_wrap">
 					<div class="introduction">
-						<h1 class="one_sentence">더 다양하고<br/>즐거운 경험을<br/>선사하기 위하여</h1>
+						<h1 class="one_sentence">더 다양하고 즐거운 경험을 선사하기 위하여</h1>
 						<div class="img_wrap">
 							<img src="../images/introduction/intro_main.png" alt="소개이미지" />
 						</div>

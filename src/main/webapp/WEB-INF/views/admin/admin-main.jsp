@@ -36,7 +36,7 @@
 				</div>
 				<div class="my_info_wrap" style="text-align: center;">
 					<div class="ad_tit_wrap">
-						<h2 style="margin-left: 0;">관리자 ${user_name}님, 환영합니다.</h2>
+						<h2 class="ad_main_tit">관리자 ${user_name}님, 환영합니다.</h2>
 						<div class="ad_btn_wrap"
 							style="text-align: center; display: inline-flex; gap: 20px;">
 							<button class="btn" onclick="location.href='/adpage/popup.do';">팝업

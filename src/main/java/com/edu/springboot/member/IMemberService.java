@@ -25,9 +25,15 @@ public interface IMemberService {
 	// 회원 정보 수정 - 비밀번호 수정
 	public int editMemberPass(MemberDTO memberDTO);
 	
+	// 로그인 시 탈퇴된 아이디인지 확인 
+	public int checkMemberEnabled(String id);
 	// 어드민 페이지 ID 수정
 	public int updateMemberName(MemberDTO memberDTO);
 	// 어드민 페이지 모든 회원 가져오기
 	public List<MemberDTO> getAllMembers();
+	// 어드민 페이지 - 강퇴
+	public int disableMemberAccount(String id);
+	// 어드민 페이지 - 수정
+	public int recoverMemberAccount(String id);
 
 }
