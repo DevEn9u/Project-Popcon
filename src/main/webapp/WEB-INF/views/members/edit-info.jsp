@@ -68,7 +68,7 @@
               </div>
               <div class="btn_wrap">
                 <button type="submit" class="btn register_btn">수정</button>
-                <button type="button" class="btn main_btn" onclick="location.href='/mypage/mypage.do'">취소</button>
+                <button type="button" class="btn main_btn" onclick="location.href='/mypage/main.do'">취소</button>
               </div>
 	      	</form>
           </div>
