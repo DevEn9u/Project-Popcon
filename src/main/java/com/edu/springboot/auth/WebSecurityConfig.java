@@ -53,6 +53,7 @@ public class WebSecurityConfig {
                 .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.INCLUDE).permitAll()
                 .requestMatchers("/api/members/login", "/api/members/register").permitAll() // JWT 인증 엔드포인트 허용
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/fonts/**").permitAll()
+                .requestMatchers("/", "/Project-Popcon/**").permitAll()
                 .requestMatchers("/freeBoard/write.do", "/freeBoard/edit.do", "/freeBoard/delete.do")
                     .hasAnyRole("ADMIN", "CORP", "NORMAL")
                 .requestMatchers("/popupBoard/write.do", "/popupBoard/edit.do", "/popupBoard/delete.do")
