@@ -232,6 +232,8 @@ function toggleLike(board_idx) {
 			<div class="inner">
 				${common_footer}
 				<section class="btn_wrap">
+				    <a class="popup_board_btn" href="/popupBoard/list.do"><span class="blind">팝업 이동</span></a>
+					<a class="free_btn" href="/freeBoard/list.do"><span class="blind">자게로 이동</span></a>
 					<a class="scroll_btn top_btn" href="#"><span class="blind">아래로
 							이동</span></a>
 					<c:if test="${not empty user_id }">
