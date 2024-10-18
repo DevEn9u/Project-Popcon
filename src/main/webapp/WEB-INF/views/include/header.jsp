@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <ul class="depth2">
             <li>
               <a href="/introduction/poopcon.do">플랫폼 소개</a>
-              <a href="/introduction/organization.do">조직도</a>
+              <a href="/introduction/organization.do">팀 소개</a>
               <a href="/introduction/location.do">오시는 길</a>
             </li>
           </ul>
