@@ -5,7 +5,6 @@
 <html lang="ko">
 <head>
 <c:import url="../include/head.jsp" />
-
 <link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
 <link rel="stylesheet" href="/css/intro.css?v=<%= System.currentTimeMillis() %>" />
 <script src="/js/mypage.js"></script>
