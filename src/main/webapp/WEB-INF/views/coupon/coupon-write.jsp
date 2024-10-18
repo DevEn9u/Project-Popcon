@@ -169,7 +169,7 @@
 								<button type="submit" class="btn board_btn">등록</button>
 								<button type="button" class="btn board_btn cancel_btn"
 									onclick="checkReset();">다시쓰기</button>
-								<button type="button" onclick="location.href='./list.do';"
+								<button type="button" onclick="location.href='./main.do';"
 									class="btn board_btn cancel_btn">목록</button>
 							</div>
 						</form>
