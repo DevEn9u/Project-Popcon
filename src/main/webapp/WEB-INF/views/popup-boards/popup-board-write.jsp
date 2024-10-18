@@ -332,7 +332,7 @@ function updateOpenHours() {
 								<tr>
 									<th>팝업일정</th>
 									<td><input type="text" name="start_date"
-										placeholder="시작 날짜" required> <input type="text"
+										placeholder="시작 날짜" class="pw_start_date" required> <input type="text"
 										name="end_date" placeholder="종료 날짜" required></td>
 								</tr>
 								<tr>

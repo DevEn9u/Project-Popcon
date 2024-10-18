@@ -931,3 +931,10 @@ caption.nohead {
   transform: translate(0, 0) rotate(0);
 }
 /********** 공통스타일 끝  **********/
+
+/* 팝업게시판 글쓰기 - 데이트피커 글씨 색. 
+아래 css 추가로 인해 다른 서식에서 문제 날 시 얘기해주세요 - 민경준 */
+.ui-datepicker-month, .ui-datepicker-year, .ui-datepicker-calendar {
+    color: var(--txt-color-500) !important;
+}
+

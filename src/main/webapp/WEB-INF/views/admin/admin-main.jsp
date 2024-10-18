@@ -26,7 +26,8 @@
 							style="color: var(--txt-color-600);">게시물 관리</a></li>
 						<ul class="depth2">
 							<li><a href="/adpage/popup.do">팝업 게시판</a></li>
-							<li class="adpage_freeboard"><a href="/adpage/free.do">자유 게시판</a></li>
+							<li class="adpage_freeboard"><a href="/adpage/free.do">자유
+									게시판</a></li>
 						</ul>
 						<li class="list_title"><a href="/adpage/user.do"
 							style="color: var(--txt-color-600);">유저 관리</a></li>
@@ -37,13 +38,14 @@
 				<div class="my_info_wrap" style="text-align: center;">
 					<div class="ad_tit_wrap">
 						<h2 class="ad_main_tit">관리자 ${user_name}님, 환영합니다.</h2>
-						<div class="ad_btn_wrap"
-							style="text-align: center; display: inline-flex; gap: 20px;">
+						<div class="ad_btn_wrap">
 							<button class="btn" onclick="location.href='/adpage/popup.do';">팝업
 								게시판 관리</button>
 							<button class="btn" onclick="location.href='/adpage/free.do';">자유
 								게시판 관리</button>
 							<button class="btn" onclick="location.href='/adpage/user.do';">유저
+								관리</button>
+							<button class="btn" onclick="location.href='/adpage/chat.do';">문의 채팅방
 								관리</button>
 						</div>
 					</div>

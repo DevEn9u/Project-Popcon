@@ -838,8 +838,11 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    width:50%;
+    width:40%;
     justify-content: center;
+}
+.ad_tit_wrap .ad_chat_btn_wrap {
+	width:50%;
 }
   
 .ad_btn_wrap .member_name {
