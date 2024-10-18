@@ -89,6 +89,7 @@
 	align-items: flex-start;
 }
 .view_con img {
+	width:100%;
 	max-width: 800px;
 	max-height: 600px;
 }

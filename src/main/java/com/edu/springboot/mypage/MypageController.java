@@ -75,7 +75,7 @@ public class MypageController {
 		MemberDTO memberDTO = memberDAO.getMemberById(memberId);
 		List<PointDTO> pointDTO = pointDAO.getPointInfoById(memberId);
 		// 디버깅
-		System.out.println("디버깅" + pointDTO);
+//		System.out.println("디버깅" + pointDTO);
 		
 		// 포인트에 콤마 추가
         String point = NumberFormat.getInstance(Locale.US).format(memberDTO.getPoint());

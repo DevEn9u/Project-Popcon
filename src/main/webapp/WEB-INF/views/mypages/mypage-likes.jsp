@@ -25,7 +25,7 @@
 				<span></span>
 				<h2>좋아요 누른 팝업</h2>
 			</div>
-			<section class="my_page">
+			<section class="my_page my_page_likes">
 				${mypage_list }
 				<div class="my_info_wrap">
 					<div class="my_info">

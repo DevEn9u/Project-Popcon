@@ -261,6 +261,12 @@ body {
     font-size: 20px;
     font-weight: 700;
 }
+.pl_pltit {
+	width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 /* 태블릿 분기점 */
 @media (max-width: 1200px) {
@@ -359,6 +365,11 @@ body {
   .ad_free_container .ad_delete_btn {
   	width:20px;
   	height:20px;
+  }
+  
+  /* 마이페이지 - 내 작성글 */
+  .my_page .my_list {
+  	bottom: 110%;
   }
 }
 

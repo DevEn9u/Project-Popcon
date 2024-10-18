@@ -37,7 +37,7 @@
 			      	
 		      	</c:if>
 				<c:if
-					test="${memberDTO.authority == 'ROLE_ADMIN' || memberDTO.authority == 'ROLE_CORP'}">
+					test="${memberDTO.authority == 'ROLE_ADMIN'}">
 					<button class="pl_write_btn" onclick="location.href='./write.do';">쿠폰 등록</button>
 				</c:if>
 	      	</div>
@@ -60,12 +60,12 @@
 	                                <input type="hidden" name="paid_points" value="${coupon.points}" />
 	                                <input type="hidden" name="user_id" value="${user_id }" /> <!-- 현재 사용자 ID -->
 	                                <c:choose>
-	                                	<c:when test="${memberDTO.authority == 'ROLE_NORMAL' && currentPoints > coupon.points }">
+	                                	<c:when test="${memberDTO.authority == 'ROLE_NORMAL' && currentPoints >= coupon.points }">
 			                                <button type="submit" class="buy_btn">
 			                                    <img src="/images/coupon/buy_icon4.svg" />
 			                                </button>
 	                                	</c:when>
-	                                	<c:when test="${memberDTO.authority == 'ROLE_NORMAL' && currentPoints < coupon.points }">
+	                                	<c:when test="${memberDTO.authority == 'ROLE_NORMAL' && currentPoints < coupon.points}">
 			                                <button type="submit" class="buy_btn disabled" disabled="disabled">
 			                                    <img src="/images/coupon/cant_buy_icon.svg" />
 			                                </button>

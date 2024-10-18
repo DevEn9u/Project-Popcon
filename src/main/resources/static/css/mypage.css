@@ -81,7 +81,7 @@
 	display: flex;
 	justify-content: space-between;
 }
-.my_info_wrap h2 {
+.my_info_wrap .mypage_uname {
   font-size: 45px;
   font-weight: 700;
   color: var(--txt-color-600) /**/;
@@ -220,7 +220,7 @@
   border-radius: 30px;
   width: 100%;
   max-width: 950px;
-  height: 1000px;
+  height: 100%;
   padding: 70px 55px;
   color: var(--txt-color-500);
 /*   transform: translateY(-40px); */
@@ -378,7 +378,7 @@
 }
 .my_info .box3 .point_wrap .point_detail .point_block_wrap {
   overflow: scroll;
-  height: 875px;
+  height: 100%;
 }
 .my_info .box3 .point_wrap .point_detail .point_block_wrap::-webkit-scrollbar {
   display: none;
@@ -586,10 +586,11 @@
   display: flex;
   flex-wrap: wrap;
   overflow-y: scroll;
-  height: 1100px;
+  height: 100%;
   width: 100%;
   gap: 20px;
 }
+
 
 .my_info .box3 .review_wrap .review_contents_wrap .review_block_wrap {
   width: calc(50% - 20px); /* 부모의 50%에서 gap 고려 */
@@ -669,7 +670,7 @@
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  height: 900px;
+  height: 100%;
   overflow: scroll;
   width: 100%;
   justify-content: center;
@@ -998,25 +999,59 @@
   	display:flex;
   	justify-content: center;
   }
+  
+  .my_page {
+  	position: relative;
+  	margin-top:200px;
+  }
+  
+  .my_page .my_list {
+      position: absolute;
+      bottom: 105%;
+      left: 35%;
+      justify-content: center;
+      text-align: center;
+      flex-direction: row;
+  }
+  .my_page_booking .my_list {
+  	bottom:115%;
+  }
+  .my_page_likes .my_list {
+  	bottom:108%;
+  }
 
   .my_list .depth1 .list_title {
+    width:150px;
     font-size: 20px;
     margin-bottom: 10px;
-  }
-  .my_list .depth1 .list_title a {
-    font-size: 20px;
   }
   .my_list .depth2 li {
     font-size: 13px;
-    margin-bottom: 10px;
+  }
+  
+  .my_list .depth1 .depth2 li {
+  	margin:0px;
+  	margin-bottom:5px;
   }
   .my_list .depth2 li a {
     font-size: 13px;
   }
+  .my_list .depth1 .depth2 li a {
+    font-weight: 600;
+    font-size: 16px;
+  	padding:0px;
+  }
+  
+  
   .my_info_wrap h2 {
     font-size: 20px;
     margin-left: 30px;
     margin-bottom: 10px;
+  }
+  .my_info_wrap .mypage_uname {
+    font-size:20px;
+  	margin-left:30px;
+  	margin-bottom:10px;
   }
   .my_info .box1 .top strong {
     font-size: 20px;
@@ -1134,7 +1169,9 @@
   }
   .my_info .box3 .review_wrap .review_contents_wrap .review_block {
     max-height: 350px;
+    min-height: 300px;
   }
+  
   .my_info .box3 .review_wrap .review_contents_wrap .review_block a {
     line-height: 1;
   }
@@ -1154,7 +1191,7 @@
   .my_info .box3 .post_detail .likes_block .img img {
     height: auto;
     object-fit: contain;
-  }
+  } 
   .my_info .box3 .post_detail .likes_block p {
     font-size: 18px;
     margin-bottom: 10px;
@@ -1171,12 +1208,29 @@
   	font-size: 16px;
   	margin-bottom:20px;
   }
+  
+  .my_info_wrap .tit_wrap .edit_btn {
+  	width: 120px;
+    white-space: nowrap;
+  }
+  
   /* 쿠폰 */
   .coupon_page {
-  	padding: 80px 0; 
+  	padding-bottom:80px;
+  	padding-top:160px;
+  }
+  
+  .coupon_page .my_list {
+  position: absolute;
+  bottom: 68%;
+  left: 35%;
+  justify-content: center;
+  text-align: center;
+  flex-direction: row;
+  
   }
   .my_list {
-  	display: none;
+  	display: flex;
   }
   .coupon_list {
   	justify-content: center;

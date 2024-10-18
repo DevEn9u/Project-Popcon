@@ -89,7 +89,7 @@
 									<img src="${popup.thumb != null && popup.thumb != '' ? popup.thumb : '../images/noimage.jpg'}" alt="${popup.board_title != null ? popup.board_title : '썸네일 없음'}" class="popup_thumbnail" />
 								</div>
 								<div class="txt_title">
-									<h2>
+									<h2 class ="pl_pltit">
 										${popup.board_title}
 										<button id="likeBtn_${popup.board_idx}"
 											class="like_btn <c:if test="${popup.liked}">active</c:if>"
