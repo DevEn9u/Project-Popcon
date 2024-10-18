@@ -596,6 +596,7 @@
 }
 
 #footer .top_btn {
+  margin-bottom:20px;
   display: flex;
   width: 60px;
   height: 60px;
@@ -604,9 +605,9 @@
   justify-content: center;
   align-items: center;
 }
-#footer .top_btn:hover {
+/*#footer .top_btn:hover {
   background: #fff;
-}
+}*/
 
 #footer .master_btn {
 	margin-top: 20px;
@@ -644,6 +645,11 @@
   background: var(--point--color1) url(/images/main/QnA.svg)no-repeat 50% 50%;
   background-size: 30px 30px;
 }
+
+.free_btn, .popup_board_btn {
+	display:none;
+}
+
 
 
 
@@ -875,4 +881,42 @@
 	right: 50px;
 	bottom: 100px;
   }
+  
+        /* 메인페이지 모바일 - 자게, 팝업게 버튼 */
+  
+  .free_btn, .popup_board_btn {
+  	margin-bottom:20px;
+    display: flex;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  	background-size:30px 30px;
+  	margin-left:10px;
+  	background:var(--point--color1);
+  }
+
+  .free_btn::after {
+  	
+  	-webkit-mask: url(/images/main/free_list.svg) no-repeat 50% 50% / 100%;
+  	mask:url(/images/main/free_list.svg) no-repeat 50% 50% / 100%;
+  	content:"";
+  	display:block;
+  	width:30px;
+  	height:30px;
+  	background:var(--txt-color-500);
+  }
+  
+ .popup_board_btn::after {
+  	-webkit-mask: url(/images/main/store.svg) no-repeat center center / 100%;
+  	mask:url(/images/main/store.svg) no-repeat center center / 100%;
+  	content:"";
+  	display:block;
+  	width:30px;
+  	height:30px;
+  	background:var(--txt-color-500);
+  }
+  
 } 
