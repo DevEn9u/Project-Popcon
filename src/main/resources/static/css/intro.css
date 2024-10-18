@@ -161,12 +161,19 @@
 
 
 @media(max-width: 1200px) {
-	#mp_container .intorduction h1 {
+	#mp_container .mypage {
+		padding: 30px;
+		margin-top: 100px;;
+	}
+	.mypage .intro_wrap {
+		padding-left: 0px;
+	}
+	#mp_container h1 {
 		margin-left: 0;
 		font-size: 40px;
 		line-height: 60px;
 	}
-	#mp_container .intorduction .img_wrap {
+	#mp_container .img_wrap {
 		height: 400px;
 	}
 	#mp_container .txt_wrap {
@@ -187,15 +194,19 @@
 }
 
 @media(max-width: 767px) {
+	#mp_container .mypage {
+		padding: 10px;
+	}
 	#mp_container .intorduction {
 		margin-top: 100px;
 	}
-	#mp_container .intorduction h1 { 
+	#mp_container h1 { 
 		margin-left: 0;
 		font-size: 26px;
 		line-height: 40px;
+		justify-content: normal;
 	}
-	#mp_container .intorduction .img_wrap {
+	#mp_container .img_wrap {
 		height: 250px;
 	}
 	#mp_container .txt_wrap {
@@ -212,6 +223,6 @@
 		line-height: 26px;
 	}
 	#mp_container .vision .sub_txt {
-		font-size: 12px;
+		font-size: 10px;
 	}
 }
