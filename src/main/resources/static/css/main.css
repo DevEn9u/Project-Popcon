@@ -177,12 +177,13 @@
   background: #121212;
   z-index: 30;
 }
+
 #header.on::after {
   height: 216px;
   transition: all 0.1s;
   box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.08);
   position: absolute;
-  top: 80px;
+  top: 79px;
   left: 0;
 }
 
