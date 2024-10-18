@@ -926,10 +926,7 @@
   #mp_container h1 {
     font-size: 46px;
   }
-  .my_list {
-	flex-direction: row;
-	justify-content: center;
-  }
+
   .my_list .depth1 .list_title {
     font-size: 25px;
     margin-bottom: 20px;
@@ -944,6 +941,7 @@
   .my_list .depth2 li a {
     font-size: 15px;
   }
+  
   .my_info_wrap h2 {
     font-size: 35px;
     margin-left: 50px;
@@ -951,6 +949,12 @@
   }
   .my_info_wrap .ad_edit_tit {
   	margin-left:0;
+  }
+  .my_info_wrap .mypage_uname {
+	margin-left: 45px;
+  }
+  .my_info {
+	margin-left: 45px;
   }
   .my_info .box1 .top strong {
     font-size: 30px;
@@ -1052,6 +1056,7 @@
   .my_page .edit_user_mylist {
   	bottom: 110%;
   }
+
   .my_page_booking .my_list {
   	bottom:115%;
   }
@@ -1069,7 +1074,7 @@
   
   .my_list .depth1 .depth2 li {
   	margin:0px;
-  	margin-bottom:5px;
+  	margin-bottom:10px;
   }
   .my_list .depth2 li a {
     font-size: 13px;

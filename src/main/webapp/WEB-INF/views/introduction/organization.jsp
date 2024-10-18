@@ -5,7 +5,6 @@
 <html lang="ko">
 <head>
 <c:import url="../include/head.jsp" />
-
 <link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
 <link rel="stylesheet" href="/css/intro.css?v=<%= System.currentTimeMillis() %>" />
 <script src="/js/mypage.js"></script>
@@ -25,18 +24,18 @@
 				${intro_list }
 				<div class="intro_wrap">
 					<div class="introduction">
-						<h1 class="one_sentence">자연스럽게 협력하고<br/>즐겁게 성장하는<br/>Hash Map</h1>
+						<h1 class="one_sentence">자연스럽게 협력하고 즐겁게 성장하는 HashMap</h1>
 						<div class="img_wrap">
-							<img src="../images/introduction/intro_team.jpg" alt="소개이미지" />
+							<img src="../images/introduction/intro_main.png" alt="소개이미지" />
 						</div>
 						<div class="txt_wrap">
-							<p>팀 Hash Map에는 성장을 즐기는 사람들이 모였습니다.</p>
+							<p>팀 HashMap에는 성장을 즐기는 사람들이 모였습니다.</p>
 							<p>개인의 의견을 거리낌 없이 제안하며 프로젝트를 진행하였고,</p>
 							<p>혼자서는 못하는 것들을 서로 도우며 함께 성장해 나가고 있습니다.</p>
 						</div>
 					</div>
 					<div class="team_role">
-						<h2 class="first">Hash Map은 한달간 이렇게 활동했습니다.</h2>
+						<h2 class="first">HashMap은 한달간 이렇게 활동했습니다.</h2>
 						<ul class="txt_wrap">
 							<li class="txt_box">
 								<p class="tit">기획부터 개발까지<br/>팀원 모두가 함께 했어요</p>

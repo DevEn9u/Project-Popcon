@@ -52,7 +52,7 @@
 		<main id="mp_container">
 			<section class="my_page">
 				${intro_list }
-				<div class="map_wrap" style="width: 100%; overflow: hidden">
+				<div class="map_wrap">
 					<div class="academy_location" id="map"></div>
 					<div class="location_txt">
 						<img src="../images/introduction/intro_location.png" alt="오시는길" />

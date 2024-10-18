@@ -74,7 +74,6 @@ public class WebSecurityConfig {
                 .passwordParameter("login_pw")
                 .successHandler(new CustomAuthenticationSuccessHandler())
                 .permitAll()
-                
             )
             .rememberMe(rememberMe -> rememberMe
                 .key(rememberMeKey)
