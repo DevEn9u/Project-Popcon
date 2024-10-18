@@ -10,9 +10,11 @@
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCA0TzsH1iRaVCQSJCc8BzZHmGKmpNJhKY&callback=initMap"
 		async defer></script>
+	<script src="/js/mypage.js"></script>
 </head>
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
+<c:import url="../include/introduction-list.jsp" var="intro_list" />
 <script>
 	function initMap() {
 		// 지오코더 생성
@@ -48,13 +50,8 @@
 	<div id="wrap">
 		${common_header }
 		<main id="mp_container">
-			<h1>오시는 길</h1>
 			<section class="my_page">
-				<div class="my_list">
-					<ul class="depth1">
-						<li class="list_title on"><a href="/introduction/location.do">오시는 길</a></li>
-					</ul>
-				</div>
+				${intro_list }
 				<div class="map_wrap" style="width: 100%; overflow: hidden">
 					<div class="academy_location" id="map"></div>
 					<div class="location_txt">

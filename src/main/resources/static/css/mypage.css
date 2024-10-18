@@ -33,7 +33,7 @@
 
 .my_list {
   width: 100%;
-  max-width: 206px;
+  max-width: 180px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -895,7 +895,8 @@
     font-size: 46px;
   }
   .my_list {
-    margin-right: 20px;
+	flex-direction: row;
+	justify-content: center;
   }
   .my_list .depth1 .list_title {
     font-size: 25px;
@@ -1021,7 +1022,6 @@
   }
 
   .my_list .depth1 .list_title {
-    width:150px;
     font-size: 20px;
     margin-bottom: 10px;
   }
@@ -1230,7 +1230,8 @@
   
   }
   .my_list {
-  	display: flex;
+  	justify-content: normal;
+	width: 60%;
   }
   .coupon_list {
   	justify-content: center;

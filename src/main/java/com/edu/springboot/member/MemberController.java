@@ -303,7 +303,7 @@ public class MemberController {
 		int result = memberDAO.editMemberInfo(memberDTO);
 		if (result > 0) {
 			redirectAttributes.addFlashAttribute("resultMsg", "정보수정에 성공했습니다.");
-			return "redirect:/mypage/mypage.do";
+			return "redirect:/mypage/main.do";
 		}
 		else {
 			// 실패메시지
