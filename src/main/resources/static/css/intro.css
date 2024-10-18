@@ -109,6 +109,12 @@
 }
 
 /* 팝콘소식 - 오시는 길 서식 */
+.academy_location {
+	margin-left:100px;
+	width:100%;
+	height:500px;
+}
+
 .location_txt {
 	margin-left:100px;
 	display: flex;
