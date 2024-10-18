@@ -813,6 +813,21 @@
 /* 마이페이지 쿠폰 끝 */
 
 /* 관리자 페이지 */
+  .my_info_wrap .ad_main_tit {
+  	color: var(--txt-color-600);
+  	margin-left:0;
+  	font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 40px;
+  }
+  .my_info_wrap .ad_chat_tit {
+    color: var(--txt-color-600);
+  	margin-left:0;
+  	font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 40px;
+  }
+
 .ad_tit_wrap {
 	display:flex;
 	flex-direction: column;
@@ -853,6 +868,22 @@
 .adpage_freeboard {
 	margin-bottom:30px;
 }
+
+.my_info_wrap .admin_userid {
+	color: var(--txt-color-600);
+	margin-bottom: 20px;
+    margin-left: 10px;
+    font-weight:600;
+}
+
+.my_info_wrap .ad_edit_tit {
+	color: var(--txt-color-600);
+    margin-bottom: 20px;
+    font-size:36px;
+    font-weight:600;
+}
+
+/* 관리자페이지 끝 */
   
   /*마이페이지-내가 쓴 글 보기: 기업유저 */
   
@@ -865,6 +896,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  
   .mp_location {
   	color: var(--txt-color-500);
   	font-weight:600;
@@ -916,6 +948,9 @@
     font-size: 35px;
     margin-left: 50px;
     margin-bottom: 20px;
+  }
+  .my_info_wrap .ad_edit_tit {
+  	margin-left:0;
   }
   .my_info .box1 .top strong {
     font-size: 30px;
@@ -1013,6 +1048,9 @@
       justify-content: center;
       text-align: center;
       flex-direction: row;
+  }
+  .my_page .edit_user_mylist {
+  	bottom: 110%;
   }
   .my_page_booking .my_list {
   	bottom:115%;
@@ -1205,6 +1243,7 @@
   }
   
   .my_info_wrap .admin_userid {
+  	color: var(--txt-color-600);
   	font-size: 16px;
   	margin-bottom:20px;
   }

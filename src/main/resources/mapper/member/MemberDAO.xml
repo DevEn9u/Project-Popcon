@@ -60,6 +60,19 @@
 	    SET name = #{name}
 	    WHERE id = #{id}
 	</update>
+	
+	<!-- 관리자 페이지 - 강퇴 -->
+	<update id="disableMemberAccount" parameterType="com.edu.springboot.member.MemberDTO">
+	    UPDATE member
+	    SET enabled = 0
+	    WHERE id = #{id}
+	</update>
+	
+	<update id="recoverMemberAccount" parameterType="com.edu.springboot.member.MemberDTO">
+	    UPDATE member
+	    SET enabled = 1
+	    WHERE id = #{id}
+	</update>
 
 	<!-- 관리자 페이지 모든 회원 가져오기 -->
 	<select id="getAllMembers" resultType="com.edu.springboot.member.MemberDTO">
@@ -77,5 +90,10 @@
         <result property="enabled" column="enabled"/>
         <result property="register_date" column="register_date"/>
     </resultMap>
+    
+    <!-- 로그인 시 탈퇴된 아디인지 확인 -->
+	<select id="checkMemberEnabled" parameterType="String" resultType="com.edu.springboot.member.MemberDTO">
+	    SELECT enabled FROM member WHERE id = #{id}
+	</select>
 	
  </mapper>

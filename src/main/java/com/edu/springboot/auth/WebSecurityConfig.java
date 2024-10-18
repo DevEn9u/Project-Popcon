@@ -30,6 +30,8 @@ import jakarta.servlet.DispatcherType;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+	
+	
 
     // 로그인 정보 저장을 위한 key
     @Value("${remember.me.key}")
@@ -72,6 +74,7 @@ public class WebSecurityConfig {
                 .passwordParameter("login_pw")
                 .successHandler(new CustomAuthenticationSuccessHandler())
                 .permitAll()
+                
             )
             .rememberMe(rememberMe -> rememberMe
                 .key(rememberMeKey)

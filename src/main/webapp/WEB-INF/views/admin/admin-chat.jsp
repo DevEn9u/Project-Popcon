@@ -38,7 +38,7 @@
 				</div>
 				<div class="my_info_wrap" style="text-align: center;">
 					<div class="ad_tit_wrap">
-						<h2 style="margin-left: 0;">문의 채팅방 목록</h2>
+						<h2 class="ad_chat_tit">문의 채팅방 목록</h2>
 						<div class="ad_btn_wrap"
 							style="text-align: center; display: inline-flex; gap: 20px;">
 							<c:forEach var="member" items="${memberList}">

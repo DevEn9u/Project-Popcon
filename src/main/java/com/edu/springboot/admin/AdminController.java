@@ -152,6 +152,34 @@ public class AdminController {
 	        return "redirect:/adpage/user.do"; // 업데이트 후 유저 관리 페이지로 돌아감
 	    }
 	    
+	    // 유저 강제 탈퇴
+	    @PostMapping("/adpage/user/delete.do")
+	    public String deleteUser(@RequestParam("id") String id, RedirectAttributes redirectAttributes) {
+	        int result = memberService.disableMemberAccount(id);
+
+	        if (result > 0) {
+	            redirectAttributes.addFlashAttribute("message", "유저가 강제 탈퇴되었습니다.");
+	        } else {
+	            redirectAttributes.addFlashAttribute("error", "유저 강제 탈퇴에 실패했습니다.");
+	        }
+
+	        return "redirect:/adpage/user.do";
+	    }
+
+	    // 유저 아이디 복구
+	    @PostMapping("/adpage/user/recover.do")
+	    public String recoverUser(@RequestParam("id") String id, RedirectAttributes redirectAttributes) {
+	        int result = memberService.recoverMemberAccount(id);
+
+	        if (result > 0) {
+	            redirectAttributes.addFlashAttribute("message", "유저가 복구되었습니다.");
+	        } else {
+	            redirectAttributes.addFlashAttribute("error", "유저 복구에 실패했습니다.");
+	        }
+	    	
+	    	return "redirect:/adpage/user.do";
+	    }
+	    
 	    
 		
 		@GetMapping("/adpage/chat.do")
