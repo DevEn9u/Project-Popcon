@@ -20,7 +20,8 @@
 #mp_container h1{
 	padding-left: 0px;
 	line-height: 70px;
-	margin-bottom: 30px;
+	margin-bottom: 60px;
+	text-align: center;
 }
 
 #mp_container .img_wrap {
@@ -173,6 +174,9 @@
 
 
 @media(max-width: 1200px) {
+	.my_list {
+		flex-direction: row;
+	}
 	#mp_container .mypage {
 		padding: 30px;
 		margin-top: 100px;;
@@ -188,6 +192,7 @@
 	#mp_container .img_wrap {
 		height: 400px;
 	}
+
 	#mp_container .txt_wrap {
 		font-size: 16px
 	}
@@ -232,7 +237,6 @@
 	.team_role .txt_wrap p {
 		line-height: 24px;
 	}
-	
 	
 
 	.academy_location {
@@ -280,6 +284,48 @@
 	}
 }
 
+/* 팀소개 부분 뭉개짐 방지 분기점 */
+@media(max-width: 900px){
+	#mp_container .img_wrap {
+		height: 290px;
+	}
+	#mp_container .txt_wrap {
+		flex-direction: column;
+	}
+	.team_role .txt_box {
+		width: 100%;
+		height: 220px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		position: relative;
+	}
+	.team_role .txt_box:nth-child(2) {
+		margin-top: 30px;
+	}
+	.team_role .txt_box2 {
+		height: 260px;
+	}
+	.team_role .txt_box img {
+		position: absolute;
+		right: 40px;
+	}
+	.team_role .txt_box .team1 {
+		width: 170px;
+		height: 170px;
+	}
+	.team_role .txt_box .team2 {
+		margin-top: 0px;
+	}
+	.team_role .txt_box .team3 {
+		height: 60%;
+	}
+	.team_role .txt_box .team4 {
+		width: 170px;
+		height: 170px;
+	}
+}
+
 @media(max-width: 767px) {
 	#mp_container .mypage {
 		padding: 10px;
@@ -311,6 +357,36 @@
 	}
 	#mp_container .vision .sub_txt {
 		font-size: 10px;
+	}
+	
+	.team_role .txt_box {
+		height: 180px;
+	}
+	.team_role .txt_box2 {
+		height: 200px;
+	}
+	.team_role .txt_box .tit {
+		font-size: 18px;
+		line-height: 25px;
+	}
+	.team_role .txt_wrap p {
+		font-size: 12px;
+		line-height: 18px;
+	}
+	.team_role .txt_box .team1 {
+		width: 140px;
+		height: 140px;
+	}
+	.team_role .txt_box .team2 {
+			width: 140px;
+			height: 140px;
+		}
+	.team_role .txt_box .team3 {
+		height: 50%;
+	}
+	.team_role .txt_box .team4 {
+		height: 130px;
+		width: 130px;
 	}
 	
 	.academy_location {
