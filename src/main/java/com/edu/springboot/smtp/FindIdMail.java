@@ -32,7 +32,7 @@ public class FindIdMail {
         message.setSubject("POPCON 아이디 찾기 이메일 인증"); // 제목
         
         String msg = "";
-        msg += "<div style='margin:100px;'>";
+        msg += "<div style='margin:100px; background-color: black;'>";
         msg += "<h1> 안녕하세요</h1>";
         msg += "<h1> 팝업 스토어 안내 사이트 POPCON 입니다.</h1>";
         msg += "<br>";
@@ -41,7 +41,7 @@ public class FindIdMail {
         msg += "<p>항상 팝콘을 이용해주셔서 감사합니다.<p>";
         msg += "<br>";
         msg += "<div align='center' style='border:1px solid black; font-family:verdana';>";
-        msg += "<h3 style='color:blue;'>아이디찾기 인증 코드입니다.</h3>";
+        msg += "<h3 style='color: white;'>아이디찾기 인증 코드입니다.</h3>";
         msg += "<div style='font-size:130%'>";
         msg += "CODE : <strong>" + verificationCode + "</strong><div><br/>"; // 메일에 인증번호 넣기
         msg += "</div>";
