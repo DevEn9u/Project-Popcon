@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<c:import url="../include/head.jsp" />
-<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
-<link rel="stylesheet" href="/css/intro.css?v=<%= System.currentTimeMillis() %>" />
-<script src="/js/mypage.js"></script>
+	<c:import url="../include/head.jsp" />
+	<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
+	<link rel="stylesheet" href="/css/intro.css?v=<%= System.currentTimeMillis() %>" />
+	<script src="/js/mypage.js"></script>
 </head>
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
@@ -80,8 +80,9 @@
 				</div>
 			</section>
 		</main>
-		<footer id="footer">
-			<div class="inner">${common_footer}</div>
-		</footer>
+	</div>
+	<footer id="footer">
+		<div class="inner">${common_footer}</div>
+	</footer>
 </body>
 </html>

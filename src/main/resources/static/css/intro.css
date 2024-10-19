@@ -343,16 +343,24 @@
 	.my_list .depth2 {
 		display: flex;
 		flex-direction: row;
+		gap: 0 10px;
 	}
 	.my_list .depth2>li {
-		border: 1px solid white;
+		padding: 5px 10px;
 	}
 	.my_list .depth2>li>a {
 		display: block;
+		line-height: 30px;
+	}
+	.my_list .depth2>li.on {
+		border-bottom: 1px solid white;
 	}
 	#mp_container .mypage {
 		display: block;
 		padding: 0;
+	}
+	#mp_container .intro_wrap {
+		padding-top: 40px;
 	}
 	#mp_container .intorduction {
 		margin-top: 100px;
@@ -414,6 +422,10 @@
 		width: 110px;
 	}
 	
+	
+	#mp_container .map_wrap {
+		padding-top: 40px;
+	}
 	.academy_location {
 		height: 300px;
 	}

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<c:import url="../include/head.jsp" />
+	<c:import url="../include/head.jsp" />
 	<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
 	<link rel="stylesheet" href="/css/intro.css?v=<%= System.currentTimeMillis() %>" />
 	<script
@@ -50,7 +50,7 @@
 	<div id="wrap">
 		${common_header }
 		<main id="mp_container">
-			<section class="my_page">
+			<section class="mypage">
 				${intro_list }
 				<div class="map_wrap">
 					<div class="academy_location" id="map"></div>
