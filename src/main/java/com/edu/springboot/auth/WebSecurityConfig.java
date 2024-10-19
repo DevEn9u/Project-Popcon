@@ -30,6 +30,8 @@ import jakarta.servlet.DispatcherType;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+	
+	
 
     // 로그인 정보 저장을 위한 key
     @Value("${remember.me.key}")
@@ -93,6 +95,17 @@ public class WebSecurityConfig {
         return http.build();
     }
 
+    // enabled가 0이면 로그인 안됨
+    @Autowired
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication()
+            .dataSource(dataSource)
+            .usersByUsernameQuery("SELECT id, pass, enabled FROM member WHERE id = ? AND enabled = 1")
+            .authoritiesByUsernameQuery("SELECT id, authority FROM member WHERE id = ?")
+            .passwordEncoder(new BCryptPasswordEncoder());
+    }
+    
+    
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();

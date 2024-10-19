@@ -33,7 +33,7 @@
 
 .my_list {
   width: 100%;
-  max-width: 206px;
+  max-width: 180px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -724,16 +724,17 @@
 }
 .coupon_page .coupon_section {
 	margin-top: 30px;
+	width: 100%;
 }
 .coupon_list_wrap {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	gap: 30px 0;
+	justify-content: space-around;
 }
 .coupon_list {
 	display: flex;
-	width: calc(50% - 30px);
 }
 .coupon_list .coupon_contents {
 	width: 250px;
@@ -774,8 +775,24 @@
     height: 100%; 
     object-fit: cover; 
 }
-
-
+.coupon_list_wrap .no_coupon_message {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px 0;
+}
+.coupon_list_wrap .no_coupon_message > p {
+	font-size: 24px;
+}
+.coupon_list_wrap .no_coupon_message .move_btn {
+	width: 150px;
+	text-align: center;
+    background: var(--point--color1);
+    color: var(--txt-color-500);
+    font-weight: 700;
+    padding: 10px 10px;
+    border-radius: 8px;
+}
 
 .my_info .box3 .coupon_wrap .post_detail p {
   display: flex;
@@ -813,6 +830,21 @@
 /* 마이페이지 쿠폰 끝 */
 
 /* 관리자 페이지 */
+  .my_info_wrap .ad_main_tit {
+  	color: var(--txt-color-600);
+  	margin-left:0;
+  	font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 40px;
+  }
+  .my_info_wrap .ad_chat_tit {
+    color: var(--txt-color-600);
+  	margin-left:0;
+  	font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 40px;
+  }
+
 .ad_tit_wrap {
 	display:flex;
 	flex-direction: column;
@@ -823,8 +855,11 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    width:50%;
+    width:40%;
     justify-content: center;
+}
+.ad_tit_wrap .ad_chat_btn_wrap {
+	width:50%;
 }
   
 .ad_btn_wrap .member_name {
@@ -853,6 +888,22 @@
 .adpage_freeboard {
 	margin-bottom:30px;
 }
+
+.my_info_wrap .admin_userid {
+	color: var(--txt-color-600);
+	margin-bottom: 20px;
+    margin-left: 10px;
+    font-weight:600;
+}
+
+.my_info_wrap .ad_edit_tit {
+	color: var(--txt-color-600);
+    margin-bottom: 20px;
+    font-size:36px;
+    font-weight:600;
+}
+
+/* 관리자페이지 끝 */
   
   /*마이페이지-내가 쓴 글 보기: 기업유저 */
   
@@ -865,6 +916,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  
   .mp_location {
   	color: var(--txt-color-500);
   	font-weight:600;
@@ -894,9 +946,7 @@
   #mp_container h1 {
     font-size: 46px;
   }
-  .my_list {
-    margin-right: 20px;
-  }
+
   .my_list .depth1 .list_title {
     font-size: 25px;
     margin-bottom: 20px;
@@ -911,10 +961,20 @@
   .my_list .depth2 li a {
     font-size: 15px;
   }
+  
   .my_info_wrap h2 {
     font-size: 35px;
     margin-left: 50px;
     margin-bottom: 20px;
+  }
+  .my_info_wrap .ad_edit_tit {
+  	margin-left:0;
+  }
+  .my_info_wrap .mypage_uname {
+	margin-left: 45px;
+  }
+  .my_info {
+	margin-left: 45px;
   }
   .my_info .box1 .top strong {
     font-size: 30px;
@@ -1013,6 +1073,10 @@
       text-align: center;
       flex-direction: row;
   }
+  .my_page .edit_user_mylist {
+  	bottom: 110%;
+  }
+
   .my_page_booking .my_list {
   	bottom:115%;
   }
@@ -1021,7 +1085,6 @@
   }
 
   .my_list .depth1 .list_title {
-    width:150px;
     font-size: 20px;
     margin-bottom: 10px;
   }
@@ -1031,7 +1094,7 @@
   
   .my_list .depth1 .depth2 li {
   	margin:0px;
-  	margin-bottom:5px;
+  	margin-bottom:10px;
   }
   .my_list .depth2 li a {
     font-size: 13px;
@@ -1205,6 +1268,7 @@
   }
   
   .my_info_wrap .admin_userid {
+  	color: var(--txt-color-600);
   	font-size: 16px;
   	margin-bottom:20px;
   }
@@ -1230,7 +1294,8 @@
   
   }
   .my_list {
-  	display: flex;
+  	justify-content: normal;
+	width: 60%;
   }
   .coupon_list {
   	justify-content: center;

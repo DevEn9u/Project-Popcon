@@ -19,6 +19,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let errorMsg = '${errorMsg}';
+    if (errorMsg) {
+        alert(errorMsg);  // errorMsg가 있을 때 alert을 띄운다.
+    }
+});
+</script>
 <body>
   <div id="skip_navi">
     <a href="#container">본문 바로가기</a>

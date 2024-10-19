@@ -9,11 +9,47 @@
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
 <link rel="stylesheet" href="/css/board.css">
 <script src="../js/file-upload.js"></script>
+<script>
+    $(function() {
+        // 시작 날짜 및 종료 날짜 입력 필드에 날짜 선택기 초기화
+        $('input[name="start_date"]').datepicker({
+            dateFormat: 'yy-mm-dd', // 형식을 YYYY-MM-DD로 설정
+            changeMonth: true,
+            changeYear: true
+        });
+
+        $('input[name="end_date"]').datepicker({
+            dateFormat: 'yy-mm-dd', // 형식을 YYYY-MM-DD로 설정
+            changeMonth: true,
+            changeYear: true
+        });
+    });
+</script>
+<script>
+//오픈요일 못 가져오는 문제 수정
+document.addEventListener('DOMContentLoaded', function() {
+    // 기존 open_days 값이 있으면 초기화
+    const openDaysInput = document.getElementById('open_days');
+    if (openDaysInput && openDaysInput.value) {
+        const openDaysArray = openDaysInput.value.split(', ');
+        openDaysArray.forEach(day => {
+            const checkbox = document.querySelector(`input[name="week"][value="${day}"]`);
+            if (checkbox) {
+                checkbox.checked = true;
+            }
+        });
+    }
+});
+</script>
 <script>
 	function checkReset() {
 		if (confirm("게시물을 다시 쓰시겠습니까?")) {
@@ -32,7 +68,6 @@
 		const endDate = document.querySelector('input[name="end_date"]');
 		const popupAddr = document.querySelector('input[name="popup_addr"]');
 		const category = document.querySelector('input[name="category"]');
-		const openDays = document.querySelector('input[name="open_days"]');
 		const openHours = document.querySelector('input[name="open_hours"]');
 
 		if (!title.value.trim()) {
@@ -85,11 +120,7 @@
 			category.focus();
 			return false;
 		}
-		if (!openDays.value.trim()) {
-			alert("오픈 요일을 입력해 주세요.");
-			openDays.focus();
-			return false;
-		}
+
 		if (!openHours.value.trim()) {
 			alert("오픈 시간을 입력해 주세요.");
 			openHours.focus();
@@ -306,10 +337,8 @@ function updateOpenDays() {
 								<tr>
 									<th>팝업일정</th>
 									<td><input type="text" name="start_date"
-										placeholder="시작: YYYY-MM-DD" value="${ popup.start_date }"
-										required> <input type="text" name="end_date"
-										placeholder="종료: YYYY-MM-DD" value="${ popup.end_date }"
-										required></td>
+										placeholder="시작 날짜" class="pw_start_date" value="${popup.start_date}" required> <input
+										type="text" name="end_date" placeholder="종료 날짜" value="${popup.end_date}" required></td>
 								</tr>
 								<tr>
 									<th>주소</th>
@@ -351,7 +380,8 @@ function updateOpenDays() {
 												type="checkbox" id="sun" name="week" value="SUN"
 												<c:if test="${not empty popup.open_days && popup.open_days.contains('SUN')}">checked="checked"</c:if>
 												onchange="updateOpenDays()" /> <label for="sun">일</label>
-										</form> <input type="hidden" name="open_days" id="open_days" />
+										</form> <input type="hidden" name="open_days" id="open_days"
+										value="${popup.open_days}" />
 									</td>
 								</tr>
 								<tr>
@@ -372,7 +402,7 @@ function updateOpenDays() {
 													<fmt:formatNumber value="${hour}" pattern="00" />:00
 												</option>
 											</c:forEach>
-									</select> <input type="hidden" name="open_hours" id="open_hours" /></td>
+									</select> <input type="hidden" name="open_hours" id="open_hours"  /></td>
 								</tr>
 								<tr>
 									<th>첨부파일</th>

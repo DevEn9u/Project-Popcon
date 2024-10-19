@@ -40,10 +40,12 @@ public class MemberController {
 	private String verificationCode; 	// 인증 코드
 	private String email;
 	
+	
 	// 로그인(Spring Security 커스텀 로그인 페이지)
 	@GetMapping("/login.do")
 	public String login(Model model, HttpServletRequest req) {
 		 Cookie[] cookies = req.getCookies();
+		 
 		 
 		 String savedId = null;
 		 boolean isChecked = false;
@@ -303,7 +305,7 @@ public class MemberController {
 		int result = memberDAO.editMemberInfo(memberDTO);
 		if (result > 0) {
 			redirectAttributes.addFlashAttribute("resultMsg", "정보수정에 성공했습니다.");
-			return "redirect:/mypage/mypage.do";
+			return "redirect:/mypage/main.do";
 		}
 		else {
 			// 실패메시지

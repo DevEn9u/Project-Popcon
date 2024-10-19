@@ -40,7 +40,7 @@ public class MypageController {
 	
 	@Autowired
 	private PopupBoardMapper popupBoardMapper;
-	private MemberDTO memberDTO;
+	private MemberDTO memberDTO; 
 	
 	 // 마이페이지 - 메인
     @GetMapping("/mypage/main.do")
