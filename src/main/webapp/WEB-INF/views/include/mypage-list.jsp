@@ -23,7 +23,7 @@
         <li class="list_title">
         	<a href="/mypage/likes.do">팝업</a>
 	        <ul class="depth2">
-	            <li data-page="likes"><a href="/mypage/likes.do">좋아요 누른 팝업</a></li>
+	            <li data-page="likes"><a href="/mypage/likes.do">관심 팝업</a></li>
 	            <li data-page="myCoupon"><a href="/mypage/myCoupon.do">쿠폰</a></li>
 	        </ul>
         </li>

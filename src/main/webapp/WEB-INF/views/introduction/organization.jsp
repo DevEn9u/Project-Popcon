@@ -24,14 +24,14 @@
 				${intro_list }
 				<div class="intro_wrap">
 					<div class="introduction">
-						<h1 class="one_sentence">개성있는 팀원들의 유쾌한 협업이 이루어지는 HashMap</h1>
+						<h1 class="one_sentence">개성있는 팀원들이 모인 HashMap</h1>
 						<div class="img_wrap">
 							<img src="../images/introduction/intro_main.png" alt="소개이미지" />
 						</div>
 						<div class="txt_wrap">
-							<p>팀 HashMap은 성장을 즐기는 사람들로 이루어져있습니다.</p>
-							<p>번뜩이는 아이디어로 프로젝트를 진행하였고,</p>
-							<p>존중과 협력으로 여정을 함께했습니다.</p>
+							<p>팀 HashMap은 아직 성장중입니다.</p>
+							<p>번뜩이는 아이디어를 녹여낸 프로젝트에서</p>
+							<p>협력의 의미를 이해하고 협업을 이뤄냈습니다.</p>
 						</div>
 					</div>
 					<div class="team_role">

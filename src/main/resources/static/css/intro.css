@@ -10,9 +10,6 @@
 	display: flex;
 	margin-top: 150px;
 }
-#mp_container .mypage .my_list {
-	height: auto;
-}
 
 /* 플랫폼 소개 */
 .mypage .intro_wrap {
@@ -20,7 +17,7 @@
 	max-width: 1060px;
 }
 
-#mp_container h1{
+#mp_container h1 {
 	padding-left: 0px;
 	line-height: 70px;
 	margin-bottom: 60px;

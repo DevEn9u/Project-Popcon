@@ -10,7 +10,8 @@
 	<select id="bookingInfo" parameterType="String" resultType="com.edu.springboot.booking.bookingDTO">
 	    SELECT b.booking_num, b.popup_idx, b.member_id, b.visit_date, b.booking_date, b.price, b.headcount,
 	           b.is_canceled,
-	           p.board_title AS popup_title
+	           p.board_title AS popup_title,
+	           p.contents AS popup_contents
 	    FROM booking b
 	    JOIN POPUP_BOARD p ON b.popup_idx = p.board_idx
 	    WHERE b.member_id = #{member_id}

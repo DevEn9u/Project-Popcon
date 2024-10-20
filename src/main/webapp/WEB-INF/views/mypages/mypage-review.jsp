@@ -31,9 +31,6 @@
 					<div class="my_info my_review">
 						<div class="box3">
 							<div class="review_wrap">
-								<div class="top_txt">
-									<p>최근 내가 작성한 REVIEW</p>
-								</div>
 								<div class="review_contents_wrap">
 									<c:forEach var="review" items="${reviews}" varStatus="status">
 										<div class="review_block_wrap">

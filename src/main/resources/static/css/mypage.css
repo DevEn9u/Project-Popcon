@@ -302,7 +302,8 @@
   align-items: center;
   justify-content: end;
   font-size: 15px;
-  margin-top: 30px;
+  margin-top: 15px;
+  gap: 0 10px;
 }
 .my_info .box2 .popup_wrap .popup_detail .bottom a {
   display: flex;
@@ -673,7 +674,7 @@
   height: 100%;
   overflow: scroll;
   width: 100%;
-  justify-content: center;
+  justify-content: space-between;
 }
 .my_info .box3 .post_detail .likes_list::-webkit-scrollbar {
   display: none;
@@ -725,13 +726,14 @@
 .coupon_page .coupon_section {
 	margin-top: 30px;
 	width: 100%;
+	padding: 0 20px;
 }
 .coupon_list_wrap {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	gap: 30px 0;
-	justify-content: space-around;
+	justify-content: space-between;
 }
 .coupon_list {
 	display: flex;

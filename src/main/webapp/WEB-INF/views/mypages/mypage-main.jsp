@@ -54,7 +54,7 @@
 													pattern="yyyy-MM-dd" />
 												<span></span>${booking.headcount}인
 											</div>
-											<p>총 ${booking.price}원</p></li>
+											<p>총 <fmt:formatNumber>${booking.price}</fmt:formatNumber>원</p></li>
 									</ul>
 								</c:forEach>
 								<c:if test="${empty booking}">

@@ -23,7 +23,7 @@
 			<div class="title_wrap">
 				<h1>마이페이지</h1>
 				<span></span>
-				<h2>좋아요 누른 팝업</h2>
+				<h2>관심 팝업</h2>
 			</div>
 			<section class="my_page my_page_likes">
 				${mypage_list }
@@ -31,9 +31,6 @@
 					<div class="my_info">
 						<div class="box3">
 							<div class="likes_wrap">
-								<div class="top_txt">
-									<p>좋아요 누른 팝업</p>
-								</div>
 								<div class="post_detail">
 									<p>최신순</p>
 									<div class="likes_list">
