@@ -46,7 +46,7 @@
 					<div class="ad_tit_wrap">
 						<h2 class="ad_edit_tit">유저 정보 수정</h2>
 						<form action="/adpage/updateUser.do" method="post">
-							<input type="hidden" name="id" value="${member.id}" /> <input
+							<span style="font-weight:600;">유저 이름: </span><input type="hidden" name="id" value="${member.id}" /> <input
 								type="text" id="name" name="name" value="${member.name}"
 								style="width: 50%;" required />
 							<div class="btn_wrap"
