@@ -76,7 +76,7 @@
                                     <div class="noimg_wrap" style="text-align:center">
                                         <img src="../images/noimage.jpg" alt="없음" style="text-align:center; width:150px; height:150px;" />
                                     </div>
-                                    <p style="text-align:center; font-weight:600; margin-top:20px;">최근 예약 내역이 없습니다</p>
+                                    <p style="text-align: center; font-weight:600; margin-top:20px;">최근 예약 내역이 없습니다</p>
                                 </c:otherwise>
                             </c:choose>
                         </div>
