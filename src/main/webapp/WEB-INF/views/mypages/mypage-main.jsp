@@ -92,13 +92,12 @@
 							</div>
 						</div>
 					</c:if>
-					<!-- 기업회원일 경우 쓴 팝업만 출현 -->
-					<div class="my_info_wrap">
-						<div class="my_info">
-							<div class="box3">
+					<!-- 기업회원 부분 -->
+					<c:if test="${authority == 'ROLE_CORP'}">
+						<div class="my_info_wrap">
+							<div class="my_info">
+								<div class="box3">
 
-								<!-- 기업회원 부분 -->
-								<c:if test="${authority == 'ROLE_CORP'}">
 									<div class="top_txt">
 										<p>최근 내가 작성한 게시글</p>
 									</div>
@@ -133,11 +132,11 @@
 											</c:forEach>
 										</ul>
 									</div>
-								</c:if>
 
+								</div>
 							</div>
 						</div>
-					</div>
+					</c:if>
 				</div>
 			</section>
 		</main>
