@@ -46,7 +46,8 @@
 	    DELETE FROM BOARD WHERE board_idx = #{board_idx}
 	</delete>
 	
-<!--	<select id="getFreeBoardsWithPaging" resultType="com.edu.springboot.board.BoardDTO">
+	<!-- 11.2 버전 전용 -->
+	<select id="getFreeBoardsWithPaging" resultType="com.edu.springboot.board.BoardDTO">
 	    SELECT * FROM (
 	        SELECT ROWNUM AS rn, a.* FROM (
 	            SELECT * FROM BOARD WHERE board_type = 'free' ORDER BY postdate DESC
@@ -60,9 +61,9 @@
 	            SELECT * FROM BOARD WHERE board_type = 'notice' ORDER BY postdate DESC
 	        ) a WHERE ROWNUM &lt;= #{offset} + #{limit}
 	    ) WHERE rn &gt; #{offset}
-	</select> 11.2 버전 호환을 위해 주석처리 -->
+	</select>
 	
-	<!-- 11.2 버전 전용 -->
+	<!-- 11.2 버전 호환 위해 수정처리
 	<select id="getFreeBoardsWithPaging" resultType="com.edu.springboot.board.BoardDTO">
 	    SELECT * FROM BOARD 
 	    WHERE board_type = 'free' 
@@ -76,7 +77,7 @@
 	    ORDER BY postdate DESC 
 	    OFFSET #{offset} ROWS 
 	    FETCH NEXT #{limit} ROWS ONLY
-	</select>
+	</select> -->
 		
 	
 	
