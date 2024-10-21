@@ -377,7 +377,7 @@
   width: 100%;
   background: var(--txt-color-600) /**/;
   border-radius: 30px;
-  padding: 20px 30px 60px;
+  padding: 30px 30px 60px;
   margin-top: 50px;
   box-shadow: -10px 10px 10px 0 #1212125c;
 }
@@ -1015,9 +1015,7 @@
   }
   .my_info .box3 {
 	width: 110%;
-  }
-  .my_info .box3 .point_wrap .point_txt p {
-    font-size: 30px;
+	padding: 30px;
   }
   .my_info .box3 .point_wrap strong {
     font-size: 46px;
@@ -1041,9 +1039,7 @@
   .my_info .box3 .post_detail .likes_block p {
     font-size: 16px;
   }
-  .my_info .box3 {
-	padding: 20px;
-  }
+
   .txt_title {
 	width: calc(100% - 135px);
   }
@@ -1236,9 +1232,10 @@
   .my_info .box3 .point_wrap .point_detail {
     margin-top: 20px;
     padding-bottom: 30px;
+	border-radius: 20px;
   }
   .my_info .box3 .point_wrap .point_detail h2 {
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 10px;
   }
   .my_info .box3 .point_wrap .point_detail .point_block {
@@ -1248,6 +1245,9 @@
   }
   .my_info .box3 .point_wrap .point_detail .point_block .left p {
     font-size: 13px;
+  }
+  .my_info .box3 .point_wrap .point_detail .point_block .left span {
+	font-size: 14px;
   }
   .my_info .box3 .top_txt p {
     font-size: 20px;
