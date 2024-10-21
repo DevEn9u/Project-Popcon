@@ -402,7 +402,10 @@ textarea {
 }
 
 @media (max-width: 767px) {
-  
+	.addr_btn {
+		font-size: 12px;
+		height: 30px;
+	}
   .inner_input {
   	width: 100%;
   }

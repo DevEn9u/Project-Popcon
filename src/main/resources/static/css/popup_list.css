@@ -265,9 +265,12 @@ body {
 
 /* 태블릿 분기점 */
 @media (max-width: 1200px) {
-.popup_banner .img_wrap {
-  width: 120px;
-  height: 120px;
+	.popup_list_title_wrap h2 a {
+		font-size: 40px;
+	}
+  .popup_banner .img_wrap {
+ 	width: 120px;
+  	height: 120px;
   }
 
   .txt_title h2 {
@@ -279,9 +282,12 @@ body {
 }
 
 @media (max-width: 767px) {
+	.popup_list_title_wrap h2 a {
+		font-size: 34px;
+	}
   .pl_write_btn {
   	width:100px;
-  	font-size: 14px;
+  	font-size: 12px;
   	overflow: hidden;
   }
   

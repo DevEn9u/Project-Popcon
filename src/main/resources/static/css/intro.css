@@ -22,6 +22,7 @@
 	line-height: 70px;
 	margin-bottom: 60px;
 	text-align: center;
+	margin-top: 0;
 }
 
 #mp_container .img_wrap {
@@ -35,9 +36,40 @@
 	object-fit: cover;
 	opacity: 0.0;
 }
-#mp_container .txt_wrap {
-	font-size: 20px;
-	line-height: 30px;
+
+#mp_container .intro_txt {
+	font-size: 28px;
+	line-height: 45px;
+	background: url(../images/introduction/intro_main.png);
+	min-width: 1000px;
+	width: 100%;
+	height: 550px;
+	background-size: cover; 
+	background-position: center; 
+	background-color: rgba(0, 0, 0, 0.5); 
+	background-blend-mode: darken; 
+	font-weight: 700;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+}
+#mp_container .team_txt {
+	font-size: 28px;
+	line-height: 45px;
+	background: url(../images/introduction/intro_team.png);
+	min-width: 1000px;
+	width: 100%;
+	height: 550px;
+	background-size: cover; 
+	background-position: center; 
+	background-color: rgba(0, 0, 0, 0.5); 
+	background-blend-mode: darken; 
+	font-weight: 700;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
 }
 
 #mp_container .vision {
@@ -62,7 +94,7 @@
 	background-color: rgba(0, 0, 0, 0.5); 
 	background-blend-mode: darken; 
 	font-size: 24px;
-	line-height: 45px;
+
 }
 #mp_container .vision .sub_txt {
 	margin-top: 20px;
@@ -188,13 +220,16 @@
 		margin-left: 0;
 		font-size: 40px;
 		line-height: 60px;
+		margin-bottom: 30px;
 	}
-	#mp_container .img_wrap {
+	#mp_container .intro_txt {
+		min-width: 700px;
 		height: 400px;
+		font-size: 24px;
 	}
-
-	#mp_container .txt_wrap {
-		font-size: 16px
+	#mp_container .team_txt {
+		min-width: 800px;
+		font-size: 24px;
 	}
 	
 	#mp_container h2 {
@@ -286,12 +321,11 @@
 
 /* 팀소개 부분 뭉개짐 방지 분기점 */
 @media(max-width: 900px){
-	#mp_container .img_wrap {
-		height: 290px;
+	#mp_container .team_txt {
+		min-width: 650px;
+
 	}
-	#mp_container .txt_wrap {
-		flex-direction: column;
-	}
+
 	.team_role .txt_box {
 		width: 100%;
 		height: 220px;
@@ -309,6 +343,9 @@
 	.team_role .txt_box img {
 		position: absolute;
 		right: 40px;
+	}
+	.team_role .txt_wrap {
+		flex-direction: column;
 	}
 	.team_role .txt_box .team1 {
 		width: 170px;
@@ -368,12 +405,17 @@
 		line-height: 40px;
 		justify-content: normal;
 	}
-	#mp_container .img_wrap {
-		height: 250px;
+
+	#mp_container .intro_txt {
+	   font-size: 18px;
+	   min-width: 500px;
 	}
-	#mp_container .txt_wrap {
-		font-size: 12px;
-		line-height: 20px;
+
+	#mp_container .team_txt {
+	   font-size: 18px;
+	   min-width: 200px;
+	   height: 200px;
+	   line-height: 30px;
 	}
 	
 	#mp_container h2 {
@@ -387,9 +429,10 @@
 	#mp_container .vision .sub_txt {
 		font-size: 10px;
 	}
-	
+
 	.team_role .txt_box {
 		height: 180px;
+		width: 100%;
 	}
 	.team_role .txt_box2 {
 		height: 200px;
@@ -418,7 +461,7 @@
 		height: 110px;
 		width: 110px;
 	}
-	
+
 	
 	#mp_container .map_wrap {
 		padding-top: 40px;

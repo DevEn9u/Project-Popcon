@@ -5,13 +5,6 @@
 :root {
   background-color: #121212;
 }
-
-body {
-  font-family: 'Pretendard', sans-serif;
-  margin: 0;
-  padding: 0;
-  max-width: 1920px;
-}
 /*컬러 변수 */
 :root {
   --point--color1: #fce8c3;
@@ -21,10 +14,11 @@ body {
   --txt-color-600: #fff;
 }
 
-#popup_view_container {
-	margin: 0 auto;
+#popup_view_container .popup_view_inner {
 	max-width:1250px;
+	margin:0 auto;
 }
+
 .swiper {
   margin-top: 92px;
   max-width: 1250px;

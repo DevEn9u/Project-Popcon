@@ -19,7 +19,7 @@
 	<div id="wrap">
 		${common_header }
 		<main id="mp_container">
-			<h1 style="margin-top:80px;">마이페이지</h1>
+			<h1>마이페이지</h1>
 			<section class="my_page">
 			${mypage_list }
 				<div class="my_info_wrap">
