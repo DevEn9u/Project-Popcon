@@ -229,7 +229,7 @@ function toggleLike(board_idx) {
 			</section>
 		</main>
 		<footer id="footer">
-			<div class="inner">
+			<div class="inner"> 
 				${common_footer}
 				<section class="btn_wrap">
 				    <a class="footer_btn popup_board_btn" href="/popupBoard/list.do"><span class="blind">팝업게시판</span></a>
@@ -242,8 +242,13 @@ function toggleLike(board_idx) {
 							이동</span></a>
 					<!-- 관리자 계정일때만 보이는 관리자 페이지 진입버튼 추가 -->
 					<c:if test="${memberDTO.authority == 'ROLE_ADMIN'}">
+<<<<<<< HEAD
 						<a class="footer_btn master_btn" href="/adpage/main.do">
 						관리자
+=======
+						<a class="master_btn" href="/adpage/main.do">
+							<p class="mbtn_tit blind">관리자</p>
+>>>>>>> branch 'main' of https://github.com/DevEn9u/Project-Popcon.git
 						</a>
 					</c:if>
 				</section>

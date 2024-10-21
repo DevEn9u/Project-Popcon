@@ -611,6 +611,8 @@
 /*     background-size: 30px 30px; */
     color: var(--txt-color-500);
     font-weight: 600;
+    background: var(--point--color1) url(/images/main/support.svg) no-repeat 50% 50%;
+    background-size: 30px 30px;
 }
 .mbtn_tit {
 	color: var(--txt-color-500);
@@ -723,7 +725,6 @@
   }
   .season_slider .swiper-slide .slide_title {
     font-size: 14px;
-    margin-bottom: 8px;
   }
 
   .product_slider {
@@ -841,18 +842,15 @@
     width: 50%;
   }
   
-  .season_slider .swiper-slide .img_wrap>img {
-  	border-radius : 10px
+  .season_slider .swiper-slide .img_wrap>img,
+  .product_slider .swiper-slide .img_wrap>img {
+  	border-radius : 10px;
   }
   
-  .product_slider .swiper-slide .img_wrap>img {
-  	border-radius : 10px
-  }
-
   #footer .footer_bottom {
     flex-direction: column;
     align-items: start;
-  }
+    }
   #footer .footer_bottom .col1 .company_wrap {
     line-height: 1.4;
   }

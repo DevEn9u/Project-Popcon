@@ -1310,7 +1310,7 @@
   height: 120px;
   }
   
-  /* 관리자 - 유저관리 */
+  /* 관리자 */
   .ad_btn_wrap {
   	width:80%;
   }
@@ -1322,6 +1322,13 @@
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: center;
+  }
+  
+  #mp_container .my_page .adpop_my_list {
+  	bottom:100%;
+  }
+   #mp_container .my_page .free_my_list {
+  	bottom:100%;
   }
 }
 /* 모바일 분기 끝 */
