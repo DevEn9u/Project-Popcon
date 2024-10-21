@@ -57,7 +57,7 @@
 	justify-content: space-between;
 }
 .coupon_wrap .coupon_banner {
-	width: calc(50% - 30px);
+	width: calc(50% - 20px);
 	display: flex;
 }
 .coupon_banner .img_wrap {
@@ -102,4 +102,60 @@
 	right: 10px;
 	bottom: 10px;
 	font-weight: 700;
+}
+
+
+/* 테블릿 분기점 */
+@media (max-width: 1200px) {
+	.pl_main {
+		padding: 80px 0;
+	}
+	.tit_wrap h2 {
+		font-size: 40px;
+	}
+	.tit_wrap .current_points {
+		font-size: 16px;
+	}
+	.coupon_banner .img_wrap {
+		width: 140px;
+		height: 140px;
+		margin-right: 18px
+	}
+	.coupon_banner .coupon_tit p {
+		font-size: 18px;
+	}
+}
+
+/* 모바일 분기점 */
+@media (max-width: 767px) {
+	.pl_main {
+		padding: 60px 0;
+	}
+	
+	.tit_wrap h2 {
+		font-size: 40px;
+	}
+	.coupon_wrap .coupon_banner {
+		width: calc(50% - 10px);
+	}
+	.tit_wrap .current_points {
+		font-size: 16px;
+	}
+	.coupon_banner .img_wrap {
+		width: 105px;
+		height: 105px;
+		margin-right: 10px
+	}
+	.coupon_banner .coupon_tit {
+		margin-bottom: 5px;
+	}
+	.coupon_banner .coupon_tit p {
+		font-size: 14px;
+	}
+	.coupon_banner .coupon_tit .buy_btn {
+		width: 80%;
+	}
+	.coupon_banner .coupon_detail .coupon_price {
+		font-size: 14px;
+	}
 }
