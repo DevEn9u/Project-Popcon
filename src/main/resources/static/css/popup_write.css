@@ -116,8 +116,7 @@ body {
   width:70%;
 }
 textarea {
-  background-color: white;
-  color: black;
+  color: #fff;
 }
 .write_input {
   outline: none;

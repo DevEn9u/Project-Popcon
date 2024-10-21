@@ -10,9 +10,9 @@
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/mypage-list.jsp" var="mypage_list" />
 <c:import url="../include/footer.jsp" var="common_footer" />
-<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
 <link rel="stylesheet"
 	href="/css/popup_list.css?v=<?php echo time(); ?>">
+<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
 
 <script src="/js/mypage.js"></script>
 </head>
@@ -107,20 +107,18 @@
         <ul class="popup_wrap">
             <c:forEach var="popup" items="${popupList}">
                 <li class="popup_banner"><a href="/popupBoard/view/${popup.board_idx}">
-                    <img src="${popup.thumb}" alt="Thumbnail" class="popup_thumbnail" style="max-width: 100px; max-height: 100px;" />
-                    <div class="txt_title" style="margin-left: 10px;">
-                        <h2 class="mp_corp_h2">
-                            ${popup.board_title}
+                    <div class="img_wrap">
+						<img src="${popup.thumb}" alt="Thumbnail" class="popup_thumbnail" />
+                    </div>
+					<div class="txt_title">
+                        <div class="mp_corp_h2">
+                            <p>${popup.board_title}<p>
                             <form id="deleteForm_${popup.board_idx}" action="/adpage/delete.do" method="post">
                                 <input type="hidden" name="board_idx" value="${popup.board_idx}" />
                                 <button class="pv_delete_btn pv_mp_delete_btn" type="button"
                                     onclick="event.stopPropagation(); event.preventDefault(); if(confirm('정말 삭제하시겠습니까?')) { document.getElementById('deleteForm_${popup.board_idx}').submit(); }">
                                     삭제하기</button>
                             </form>
-                        </h2>
-                        <div class="popup_location">
-                            <img src="../images/imgMGJ/pin.svg" /> 
-                            <span class="location_span mp_location">${fn:replace(popup.popup_addr, ',', ' ')}</span>
                         </div>
                         <span class="popup_date mp_popup_date">${popup.postdate}</span>
                     </div>

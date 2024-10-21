@@ -30,6 +30,7 @@
 .my_page {
   display: flex;
   margin-top: 100px;
+  gap: 0 50px
 }
 
 .my_list {
@@ -344,7 +345,7 @@
   border-radius: 30px;
   width: 100%;
   max-width: 950px;
-  padding: 50px 40px 65px;
+  padding: 25px;
   color: var(--txt-color-500);
 /*   transform: translateY(-40px); */
 }
@@ -426,7 +427,7 @@
   margin-bottom: 20px;
 }
 .my_info .box3 .top_txt p {
-  font-size: 35px;
+  font-size: 26px;
   font-weight: 700;
 }
 
@@ -524,6 +525,17 @@
 /* 페이지네이션 끝 */
 /* 마이페이지 포스트 끝 */
 
+/* 기업회원 작성 글 */
+.txt_title {
+	font-size: 20px;
+	font-weight: 700;
+	color: var(--txt-color-500);
+}
+.txt_title .mp_corp_h2 p {
+	white-space: nowrap;       /* 한 줄로 표시 */
+	overflow: hidden;          /* 넘치는 내용 숨김 */
+	text-overflow: ellipsis;   /* 넘치는 부분에 '...' 표시 */
+}
 /* 마이 페이지 리뷰 */
 .my_info .box3 .review_wrap .top_txt {
   margin-bottom: 30px;
@@ -1003,6 +1015,9 @@
   .my_info .box2 .popup_wrap .popup_detail .top strong {
     font-size: 20px;
   }
+  .my_info .box3 {
+	width: 110%;
+  }
   .my_info .box3 .point_wrap .point_txt p {
     font-size: 30px;
   }
@@ -1023,6 +1038,12 @@
   }
   .my_info .box3 .post_detail .likes_block p {
     font-size: 20px;
+  }
+  .my_info .box3 {
+	padding: 20px;
+  }
+  .txt_title {
+	width: calc(100% - 135px);
   }
   /* 태블릿 쿠폰 */
   .coupon_list {
@@ -1188,6 +1209,12 @@
   .my_info .box2 .popup_wrap .popup_detail .top strong {
     font-size: 15px;
   }
+  .my_info .box3 {
+	width: 115%;
+  }
+  .pv_delete_btn {
+	right: 0
+  }
   .my_info .box3 .point_wrap .point_txt {
     height: 80px;
   }
@@ -1214,7 +1241,7 @@
     font-size: 13px;
   }
   .my_info .box3 .top_txt p {
-    font-size: 25px;
+    font-size: 20px;
   }
   .my_info .box3 .post_wrap .post_detail {
     padding-bottom: 30px;
