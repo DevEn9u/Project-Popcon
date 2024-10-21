@@ -363,7 +363,7 @@
 }
 .day_slider .line {
   display: block;
-  width: 1200px;
+  max-width: 1200px;
   height: 1px;
   background: var(--txt-color-400);
   margin: 20px 0 25px 25px;
@@ -703,8 +703,8 @@
     margin-right: 10px;
   }
   .day_slider .line {
-    width: 1050px;
-    margin: 15px 0 40px 40px;
+    max-width: 1050px;
+    margin: 15px 15px 40px 15px;
   }
   .day_slider .today_popup .item .popup_name {
     font-size: 20px;
@@ -800,8 +800,8 @@
     font-size: 14px;
   }
   .day_slider .line {
-    width: 715px;
-    margin: 10px 0 20px 10px;
+    max-width: 715px;
+    margin: 10px 20px 10px;
   }
 
   .day_slider .today_popup .item>img {

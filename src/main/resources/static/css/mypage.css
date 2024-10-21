@@ -1075,7 +1075,6 @@
   }
   #mp_container h1 {
   	display:flex;
-  	justify-content: center;
 	font-size: 38px;
   }
   .title_wrap h2 {
