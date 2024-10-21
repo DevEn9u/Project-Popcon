@@ -215,7 +215,7 @@ body {
 .pv_delete_btn {
 	position: absolute;
 	top:0;
-	right:0;
+	right:-30px;
 	-webkit-mask-image: url(../images/imgMGJ/delete_btn.svg);
     -webkit-mask-size: cover;
     -webkit-mask-repeat: no-repeat;

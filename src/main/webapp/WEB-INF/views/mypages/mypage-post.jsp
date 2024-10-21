@@ -10,9 +10,9 @@
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/mypage-list.jsp" var="mypage_list" />
 <c:import url="../include/footer.jsp" var="common_footer" />
-<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
 <link rel="stylesheet"
 	href="/css/popup_list.css?v=<?php echo time(); ?>">
+<link rel="stylesheet" href="/css/mypage.css?v=<?php echo time(); ?>" />
 
 <script src="/js/mypage.js"></script>
 </head>
@@ -34,7 +34,6 @@
 				<div class="my_info_wrap">
 					<div class="my_info">
 						<div class="box3">
-
 
 							<div class="post_wrap">
 								<div class="post_detail">
