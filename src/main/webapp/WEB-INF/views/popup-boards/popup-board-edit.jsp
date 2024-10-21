@@ -69,6 +69,17 @@ document.addEventListener('DOMContentLoaded', function() {
 		const popupAddr = document.querySelector('input[name="popup_addr"]');
 		const category = document.querySelector('input[name="category"]');
 		const openHours = document.querySelector('input[name="open_hours"]');
+		
+		 // 이미지 파일 개수 체크 추가
+	    const generalFiles = document.querySelector('input[name="imageFile"]');
+	    const existingImages = document.querySelectorAll('.existing_image img').length; // 기존 이미지 개수
+	    const newImages = generalFiles.files.length; // 새로 선택한 이미지 개수
+	    
+	    if (existingImages + newImages > 2) {
+	        alert("사진은 최대 2개까지만 첨부 가능합니다.");
+	        generalFiles.focus();
+	        return false;
+	    }
 
 		if (!title.value.trim()) {
 			alert("제목을 입력해 주세요.");
@@ -359,26 +370,26 @@ function updateOpenDays() {
 									<th>오픈 요일</th>
 									<td>
 										<form id="popupOpendays">
-											<input type="checkbox" id="mon" name="week" value="MON"
-												<c:if test="${not empty popup.open_days && popup.open_days.contains('MON')}">checked="checked"</c:if>
+											<input type="checkbox" id="mon" name="week" value="월"
+												<c:if test="${not empty popup.open_days && popup.open_days.contains('월')}">checked="checked"</c:if>
 												onchange="updateOpenDays()" /> <label for="mon">월</label> <input
-												type="checkbox" id="tue" name="week" value="TUE"
-												<c:if test="${not empty popup.open_days && popup.open_days.contains('TUE')}">checked="checked"</c:if>
+												type="checkbox" id="tue" name="week" value="화"
+												<c:if test="${not empty popup.open_days && popup.open_days.contains('화')}">checked="checked"</c:if>
 												onchange="updateOpenDays()" /> <label for="tue">화</label> <input
-												type="checkbox" id="wed" name="week" value="WED"
-												<c:if test="${not empty popup.open_days && popup.open_days.contains('WED')}">checked="checked"</c:if>
+												type="checkbox" id="wed" name="week" value="수"
+												<c:if test="${not empty popup.open_days && popup.open_days.contains('수')}">checked="checked"</c:if>
 												onchange="updateOpenDays()" /> <label for="wed">수</label> <input
-												type="checkbox" id="thur" name="week" value="THUR"
-												<c:if test="${not empty popup.open_days && popup.open_days.contains('THUR')}">checked="checked"</c:if>
+												type="checkbox" id="thur" name="week" value="목"
+												<c:if test="${not empty popup.open_days && popup.open_days.contains('목')}">checked="checked"</c:if>
 												onchange="updateOpenDays()" /> <label for="thur">목</label>
-											<input type="checkbox" id="fri" name="week" value="FRI"
-												<c:if test="${not empty popup.open_days && popup.open_days.contains('FRI')}">checked="checked"</c:if>
+											<input type="checkbox" id="fri" name="week" value="금"
+												<c:if test="${not empty popup.open_days && popup.open_days.contains('금')}">checked="checked"</c:if>
 												onchange="updateOpenDays()" /> <label for="fri">금</label> <input
-												type="checkbox" id="sat" name="week" value="SAT"
-												<c:if test="${not empty popup.open_days && popup.open_days.contains('SAT')}">checked="checked"</c:if>
+												type="checkbox" id="sat" name="week" value="토"
+												<c:if test="${not empty popup.open_days && popup.open_days.contains('토')}">checked="checked"</c:if>
 												onchange="updateOpenDays()" /> <label for="sat">토</label> <input
-												type="checkbox" id="sun" name="week" value="SUN"
-												<c:if test="${not empty popup.open_days && popup.open_days.contains('SUN')}">checked="checked"</c:if>
+												type="checkbox" id="sun" name="week" value="일"
+												<c:if test="${not empty popup.open_days && popup.open_days.contains('일')}">checked="checked"</c:if>
 												onchange="updateOpenDays()" /> <label for="sun">일</label>
 										</form> <input type="hidden" name="open_days" id="open_days"
 										value="${popup.open_days}" />

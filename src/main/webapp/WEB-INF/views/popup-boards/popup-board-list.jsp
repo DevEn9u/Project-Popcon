@@ -98,7 +98,7 @@
 									</h2>
 									<div class="popup_location">
 										<img src="../images/imgMGJ/pin.svg" /> <span
-											class="location_span">${fn:replace(popup.popup_addr, ',', ' ')} <!-- 주소와 상세주소 사이에 띄어쓰기넣음 --></span>
+											class="location_span"> ${fn:substringBefore(popup.popup_addr, ',')}</span>
 									</div>
 									<span class="popup_date" data-end-date="${popup.end_date}">${popup.postdate}</span>
 								</div>
