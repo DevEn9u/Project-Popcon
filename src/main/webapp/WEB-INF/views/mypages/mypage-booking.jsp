@@ -47,10 +47,10 @@
                                             </div>
                                             <div class="popup_detail">
                                                 <div class="top">
-                                                    <strong>${booking.popup_title}</strong> ${booking.price}원
+                                                    <strong>${booking.popup_title}</strong> <fmt:formatNumber>${booking.price}</fmt:formatNumber>원
                                                 </div>
                                                 <p style="font-size: 12px;">
-                                                    상기 일정은 지역 사정에 따라 변경될 수 있습니다.<br /> 자세한 내용은 게시판에서 확인하세요.
+                                                    ${booking.popup_contents}
                                                 </p>
                                                 <div class="bottom">
                                                     <c:if test="${booking.is_canceled == 0}">
@@ -62,10 +62,7 @@
                                                         </form>
                                                     </c:if>
                                                     <c:if test="${booking.is_canceled == 1}">
-                                                        <p class="cancel_suc">이미 취소되었습니다</p>
-                                                    </c:if>
-                                                    <c:if test="${booking.is_canceled == 1}">
-                                                        <p style="margin-left: 20px;">취소 시 리뷰 작성이 불가능합니다</p>
+                                                        <p class="cancel_suc">취소되었습니다</p>
                                                     </c:if>
                                                     <c:if test="${booking.is_canceled == 0}">
                                                         <a href="/popupBoard/view/${booking.popup_idx}"><span></span>리뷰 작성</a>
@@ -79,7 +76,7 @@
                                     <div class="noimg_wrap" style="text-align:center">
                                         <img src="../images/noimage.jpg" alt="없음" style="text-align:center; width:150px; height:150px;" />
                                     </div>
-                                    <p style="text-align:center; font-weight:600; margin-top:20px;">최근 예약 내역이 없습니다</p>
+                                    <p style="text-align: center; font-weight:600; margin-top:20px;">최근 예약 내역이 없습니다</p>
                                 </c:otherwise>
                             </c:choose>
                         </div>

@@ -256,15 +256,16 @@ function toggleLike(board_idx) {
 			    window.open(
 			      "/chat/index.html#/chat?roomId=" + roomId + "&userId=" + userId,
 			      '',
-			      'width=500, height=700'
+			      'width=500, height=840'
 			    );
 			  }
 			  else {
-				window.open(
-					"chat/index.html",
-					'',
-					'width=500, height=700'
-				);
+				  location.href="/adpage/chat.do";
+// 				window.open(
+// 					"chat/index.html",
+// 					'',
+// 					'width=500, height=700'
+// 				);
 			  }
 		  };
 		  $('#openChat').on('click', function(e) {

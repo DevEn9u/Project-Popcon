@@ -8,12 +8,33 @@
 <c:import url="../include/head.jsp" />
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<c:import url="../include/head.jsp" />
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
 
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
 <link rel="stylesheet" href="/css/board.css">
 <script src="../js/file-upload.js"></script>
+<script>
+    $(function() {
+        // 시작 날짜 및 종료 날짜 입력 필드에 날짜 선택기 초기화
+        $('input[name="start_date"]').datepicker({
+            dateFormat: 'yy-mm-dd', // 형식을 YYYY-MM-DD로 설정
+            changeMonth: true,
+            changeYear: true
+        });
+
+        $('input[name="end_date"]').datepicker({
+            dateFormat: 'yy-mm-dd', // 형식을 YYYY-MM-DD로 설정
+            changeMonth: true,
+            changeYear: true
+        });
+    });
+</script>
 <script>
 	function checkReset() {
 		if (confirm("게시물을 다시 쓰시겠습니까?")) {
@@ -286,7 +307,7 @@ function updateOpenHours() {
 			</div>
 			<div class="contents">
 				<div class="inner">
-					<h3>게시글 작성</h3>
+					<h3>게시글 작성</h3> 
 					<div class="board_write">
 						<form name="writeFrm" method="post" enctype="multipart/form-data"
 							action="/popupBoard/write.do"
@@ -311,9 +332,8 @@ function updateOpenHours() {
 								<tr>
 									<th>팝업일정</th>
 									<td><input type="text" name="start_date"
-										placeholder="시작: YYYY-MM-DD" required> <input
-										type="text" name="end_date" placeholder="종료: YYYY-MM-DD"
-										required></td>
+										placeholder="시작 날짜" class="pw_start_date" required> <input type="text"
+										name="end_date" placeholder="종료 날짜" required></td>
 								</tr>
 								<tr>
 									<th>주소</th>

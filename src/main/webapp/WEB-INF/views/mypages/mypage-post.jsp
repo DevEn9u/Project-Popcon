@@ -37,10 +37,6 @@
 <!-- 일반회원, 어드민 부분 -->
 <c:if test="${authority != 'ROLE_CORP'}">
     <div class="post_wrap">
-        <div class="top_txt">
-            <p>최근 내가 작성한 게시글</p>
-        </div>
-        
         <div class="post_detail">
             <table class="post_table">
                 <thead>

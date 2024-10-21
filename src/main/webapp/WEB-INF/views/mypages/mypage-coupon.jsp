@@ -57,22 +57,32 @@ $(document).ready(function() {
           ${mypage_list }
           <div class="coupon_section">
             <div class="coupon_list_wrap">
-              <c:forEach var="coupon" items="${couponList }">
-	            <div class="coupon_list">
-	              	<div class="img_wrap">
-	              		<img src="${coupon.image_url }" alt="이미지" />
+              <c:choose>
+	              <c:when test="${not empty couponList }">
+		              <c:forEach var="coupon" items="${couponList }">
+			            <div class="coupon_list">
+			              	<div class="img_wrap">
+			              		<img src="${coupon.image_url }" alt="${coupon.coupon_name }" />
+			              	</div>
+			              	<div class="coupon_contents">
+				               <ul class="coupon">
+				               	<li class="coupon_name">${coupon.coupon_description }</li>
+				               	<li class="coupon_num">쿠폰번호: ${coupon.purchase_idx }</li>
+				               	<li class="coupon_desc">${coupon.coupon_name }</li>
+				               	<li class="expiry_date"><fmt:formatDate value="${coupon.expiry_date }" pattern="YYYY. MM. dd " />까지</li>
+				               	<li class="d_day" data-expiry="${fn:escapeXml(coupon.expiry_date.time)}"></li>
+				               </ul>
+			                </div>
+			            </div>
+		              </c:forEach>
+	              </c:when>
+	              <c:otherwise>
+	              	<div class="no_coupon_message">
+		              	<p>보유한 쿠폰이 없습니다.</p>
+		              	<a href="/coupon/main.do" class="move_btn">쿠폰 구매하러 가기</a>
 	              	</div>
-	              	<div class="coupon_contents">
-		               <ul class="coupon">
-		               	<li class="coupon_name">${coupon.coupon_description }</li>
-		               	<li class="coupon_num">쿠폰번호: ${coupon.purchase_idx }</li>
-		               	<li class="coupon_desc">${coupon.coupon_name }</li>
-		               	<li class="expiry_date"><fmt:formatDate value="${coupon.expiry_date }" pattern="YYYY. MM. dd " />까지</li>
-		               	<li class="d_day" data-expiry="${fn:escapeXml(coupon.expiry_date.time)}"></li>
-		               </ul>
-	                </div>
-	            </div>
-              </c:forEach>
+	              </c:otherwise>
+              </c:choose>
             </div>
           </div>
         </section>

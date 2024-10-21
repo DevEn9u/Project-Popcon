@@ -64,6 +64,12 @@ public class MypageController {
 	    String memberId = principal.getName(); // 현재 로그인한 사용자 ID 가져오기
 	    List<bookingDTO> booking = mypageService.bookingInfo(memberId); // 예약 정보 리스트 가져오기
 	    
+	    // 각 bookingDTO의 popup_contents 엔터 입력시 줄바꿈 처리
+	    for (bookingDTO dto : booking) {
+	        String formattedContents = dto.getPopup_contents().replace("\r\n", "<br />");
+	        dto.setPopup_contents(formattedContents);
+	    }
+	    
 	    model.addAttribute("booking", booking); // 모델에 예약 정보 리스트 추가
 	    return "/mypages/mypage-booking";
 	}

@@ -39,12 +39,12 @@
 .login_page .login_area {
   margin-top: 80px;
 }
-.login_area .input_wrap1 {
-  margin-bottom: 12px;
-}
-.login_area .input_wrap2 {
-  margin-bottom: 3px;
-}
+	.login_area .input_wrap1 {
+	  margin-bottom: 12px;
+	}
+	.login_area .input_wrap2 {
+	  margin-bottom: 3px;
+	}
 .login_area input[type="text"],
 .login_area input[type="password"] {
   width: 100%;
@@ -285,7 +285,14 @@
    border-radius: 30px;
    margin: 0px 0 10px 10px;
  }
-
+ .find_page .find_area .input_wrap1 {
+ 	display: flex;
+ 	flex-direction: column;
+ 	gap: 10px 0;
+ }
+  .find_page .find_area .input_wrap2 {
+  	margin: 12px 0;
+  }
  .find_page .find_area .send_btn {
    width: auto;
    line-height: 50px;
