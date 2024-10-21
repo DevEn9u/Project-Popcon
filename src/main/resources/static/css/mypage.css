@@ -22,6 +22,7 @@
   font-weight: 700;
   color: var(--txt-color-600);
   padding-left: 50px;
+  margin-top: 100px;
 }
 /* 기본 끝 */
 
@@ -1057,24 +1058,17 @@
     margin-bottom: 60px;
   }
   #mp_container h1 {
-  	padding:0px;
   	display:flex;
   	justify-content: center;
+	font-size: 38px;
   }
   
   .my_page {
   	position: relative;
-  	margin-top:200px;
+  	margin-top:60px;
   }
   
-  .my_page .my_list {
-      position: absolute;
-      bottom: 105%;
-      left: 35%;
-      justify-content: center;
-      text-align: center;
-      flex-direction: row;
-  }
+  
   .my_page .edit_user_mylist {
   	bottom: 110%;
   }
@@ -1087,8 +1081,10 @@
   }
 
   .my_list .depth1 .list_title {
-    font-size: 20px;
     margin-bottom: 10px;
+  }
+  .my_list .depth1 .list_title>a {
+	font-size: 20px;
   }
   .my_list .depth2 li {
     font-size: 13px;
@@ -1106,6 +1102,7 @@
     font-size: 16px;
   	padding:0px;
   }
+  
   
   
   .my_info_wrap h2 {
@@ -1297,7 +1294,7 @@
   }
   .my_list {
   	justify-content: normal;
-	width: 60%;
+	width: 20%;
   }
   .coupon_list {
   	justify-content: center;

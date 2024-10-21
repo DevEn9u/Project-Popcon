@@ -760,6 +760,9 @@
 
 /* 모바일 분기점 */
 @media (max-width: 767px) {
+  #header {
+	height: 80px;
+  }
   #header .inner .login_wrap {
     margin-left: 40px;
   }
