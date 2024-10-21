@@ -229,7 +229,7 @@ function toggleLike(board_idx) {
 			</section>
 		</main>
 		<footer id="footer">
-			<div class="inner">
+			<div class="inner"> 
 				${common_footer}
 				<section class="btn_wrap">
 				    <a class="popup_board_btn" href="/popupBoard/list.do"><span class="blind">팝업 이동</span></a>
