@@ -232,18 +232,18 @@ function toggleLike(board_idx) {
 			<div class="inner">
 				${common_footer}
 				<section class="btn_wrap">
-				    <a class="popup_board_btn" href="/popupBoard/list.do"><span class="blind">팝업 이동</span></a>
-					<a class="free_btn" href="/freeBoard/list.do"><span class="blind">자게로 이동</span></a>
-					<a class="scroll_btn top_btn" href="#"><span class="blind">아래로
-							이동</span></a>
+				    <a class="footer_btn popup_board_btn" href="/popupBoard/list.do"><span class="blind">팝업게시판</span></a>
+					<a class="footer_btn free_btn" href="/freeBoard/list.do"><span class="blind">자유게시판</span></a>
 					<c:if test="${not empty user_id }">
-						<a class="qna_btn top_btn" href="#" id="openChat"><span
+						<a class="footer_btn qna_btn top_btn" href="#" id="openChat"><span
 							class="blind">질문</span></a>
 					</c:if>
+					<a class="footer_btn scroll_btn top_btn" href="#"><span class="blind">아래로
+							이동</span></a>
 					<!-- 관리자 계정일때만 보이는 관리자 페이지 진입버튼 추가 -->
 					<c:if test="${memberDTO.authority == 'ROLE_ADMIN'}">
-						<a class="master_btn" href="/adpage/main.do">
-							<p class="mbtn_tit">관리자</p>
+						<a class="footer_btn master_btn" href="/adpage/main.do">
+						관리자
 						</a>
 					</c:if>
 				</section>
@@ -261,11 +261,6 @@ function toggleLike(board_idx) {
 			  }
 			  else {
 				  location.href="/adpage/chat.do";
-// 				window.open(
-// 					"chat/index.html",
-// 					'',
-// 					'width=500, height=700'
-// 				);
 			  }
 		  };
 		  $('#openChat').on('click', function(e) {
