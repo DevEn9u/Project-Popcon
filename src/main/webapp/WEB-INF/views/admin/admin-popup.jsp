@@ -25,7 +25,7 @@
 				<h2>팝업 컨테이너 관리</h2>
 			</div>
 			<section class="my_page">
-				<div class="my_list">
+				<div class="my_list adpop_my_list">
 					<ul class="depth1">
 						<li class="list_title on"><a href="/adpage/main.do"
 							style="color: var(--txt-color-600)">게시물 관리</a></li>
