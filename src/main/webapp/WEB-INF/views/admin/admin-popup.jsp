@@ -60,7 +60,7 @@
 
 										<div class="popup_location">
 											<img src="../images/imgMGJ/pin.svg" /> <span
-												class="location_span adpage_location_span">${fn:replace(popup.popup_addr, ',', ' ')}</span>
+												class="location_span adpage_location_span"> ${fn:substringBefore(popup.popup_addr, ',')}</span>
 										</div>
 										<span class="popup_date">${popup.postdate}</span>
 									</div>

@@ -355,19 +355,19 @@ function updateOpenHours() {
 									<th>오픈 요일</th>
 									<td>
 										<form id="popupOpendays">
-											<input type="checkbox" id="mon" name="week" value="MON"
+											<input type="checkbox" id="mon" name="week" value="월"
 												onchange="updateOpenDays()" /><label for="mon">월</label> <input
-												type="checkbox" id="tue" name="week" value="TUE"
+												type="checkbox" id="tue" name="week" value="화"
 												onchange="updateOpenDays()" /><label for="tue">화</label> <input
-												type="checkbox" id="wed" name="week" value="WED"
+												type="checkbox" id="wed" name="week" value="수"
 												onchange="updateOpenDays()" /><label for="wed">수</label> <input
-												type="checkbox" id="thur" name="week" value="THUR"
+												type="checkbox" id="thur" name="week" value="목"
 												onchange="updateOpenDays()" /><label for="thur">목</label> <input
-												type="checkbox" id="fri" name="week" value="FRI"
+												type="checkbox" id="fri" name="week" value="금"
 												onchange="updateOpenDays()" /><label for="fri">금</label> <input
-												type="checkbox" id="sat" name="week" value="SAT"
+												type="checkbox" id="sat" name="week" value="토"
 												onchange="updateOpenDays()" /><label for="sat">토</label> <input
-												type="checkbox" id="sun" name="week" value="SUN"
+												type="checkbox" id="sun" name="week" value="일"
 												onchange="updateOpenDays()" /><label for="sun">일</label>
 										</form> <input type="hidden" name="open_days" id="open_days" />
 									</td>
