@@ -41,7 +41,9 @@ $(function () {
 
         // String을 Date 타입으로 변환
         let startDate = new Date(startDateStr);
+		startDate.setHours(0, 0, 0, 0);  // 시간 부분을 제거
         let endDate = new Date(endDateStr);
+		endDate.setHours(23, 59, 59, 999);  // 시간 부분을 끝 시간으로 설정
 
         console.log(startDate, endDate);
         
@@ -65,6 +67,7 @@ $(function () {
             
             // 현재 날짜를 Date 객체로 변환
             let currentDate = new Date(nowYear, nowMonth, i);
+			currentDate.setHours(0, 0, 0, 0);  // 시간 부분을 제거
             
             // 현재 날짜가 startDate와 endDate 사이인지 확인
             if (currentDate >= startDate && currentDate <= endDate) {
