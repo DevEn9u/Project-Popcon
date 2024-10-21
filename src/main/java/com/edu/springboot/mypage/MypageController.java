@@ -52,9 +52,17 @@ public class MypageController {
 
         // 포인트에 콤마 추가
         String point = NumberFormat.getInstance(Locale.US).format(memberDTO.getPoint());
-        
+        // 권한 확인
+	    String authority = memberDTO.getAuthority();
+	    
+	    // 내가 작성한 팝업
+	    List<PopupBoardDTO> popupList = popupBoardMapper.selectByWriter(memberId);
+	    
+	    
+	    model.addAttribute("popupList", popupList);
         model.addAttribute("booking", booking); // 모델에 예약 정보 리스트 추가
         model.addAttribute("point", point); 
+	    model.addAttribute("authority", authority);
         return "/mypages/mypage-main";
     }
 	

@@ -377,7 +377,7 @@
   width: 100%;
   background: var(--txt-color-600) /**/;
   border-radius: 30px;
-  padding: 20px 30px 60px;
+  padding: 30px 30px 60px;
   margin-top: 50px;
   box-shadow: -10px 10px 10px 0 #1212125c;
 }
@@ -618,7 +618,6 @@
   display: block;
   background: var(--txt-color-600) /**/;
   border-radius: 30px;
-  padding: 40px 40px 50px;
   box-shadow: -10px 10px 10px 0 #1212125c;
   padding: 30px;
   width: 100%;
@@ -653,8 +652,8 @@
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
   margin-bottom: 25px;
+  font-weight: 700;
 }
 .my_info .box3 .review_wrap .review_contents_wrap .review_block span {
   font-size: 12px;
@@ -669,7 +668,7 @@
   height: 100%;
   background: var(--txt-color-600) /**/;
   border-radius: 30px;
-  padding: 40px 40px 50px;
+  padding: 30px;
   box-shadow: -10px 10px 10px 0 #1212125c;
 }
 
@@ -684,26 +683,26 @@
 
 .my_info .box3 .post_detail .likes_list {
   display: flex;
-  gap: 10px;
+  gap: 0 10px;
   flex-wrap: wrap;
   height: 100%;
   overflow: scroll;
-  width: 100%;
-  justify-content: space-between;
+  justify-content: center;
+}
+.my_info .box3 .post_detail .likes_list .likes_block {
+	width: calc(100% / 3 - 20px);
 }
 .my_info .box3 .post_detail .likes_list::-webkit-scrollbar {
   display: none;
 }
-.my_info .box3 .post_detail .likes_block {
-  width: calc(33%-10px);
-}
+
 /* 좋아요한 팝업 이미지 컨테이너 */
 .my_info .box3 .post_detail .likes_block .img {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 255px;
-    height: 275px;
+    height: 255px;
     margin-bottom: 10px;
     overflow: hidden; /* 이미지가 컨테이너를 넘지 않도록 숨김 */
 }
@@ -717,9 +716,8 @@
 }
 
 .my_info .box3 .post_detail .likes_block p {
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 700;
-  width: 255px;
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1029,12 +1027,14 @@
   }
   .my_info .box3 {
 	width: 110%;
-  }
-  .my_info .box3 .point_wrap .point_txt p {
-    font-size: 30px;
+	padding: 30px;
   }
   .my_info .box3 .point_wrap strong {
     font-size: 46px;
+  }
+  .my_info .box3 .post_detail .likes_block .img {
+	width: 200px;
+	height: 200px;
   }
   .my_info .box3 .point_wrap .point_detail h2 {
     font-size: 25px;
@@ -1049,11 +1049,9 @@
     font-size: 18px;
   }
   .my_info .box3 .post_detail .likes_block p {
-    font-size: 20px;
+    font-size: 16px;
   }
-  .my_info .box3 {
-	padding: 20px;
-  }
+
   .txt_title {
 	width: calc(100% - 135px);
   }
@@ -1095,8 +1093,15 @@
   .my_list {
   	width: 50%;
   }
-  
-  
+  .my_info .box3 .review_wrap .review_contents_wrap .review_block {
+	padding: 20px;
+  }
+  .my_info .box3 .review_wrap .review_contents_wrap .review_block .img {
+	height: 180px;
+  }
+  .my_info .box3 .popup_txt {
+	padding-left: 0;
+  }
 }
 /* 태블릿 분기 끝 */
 
@@ -1239,9 +1244,10 @@
   .my_info .box3 .point_wrap .point_detail {
     margin-top: 20px;
     padding-bottom: 30px;
+	border-radius: 20px;
   }
   .my_info .box3 .point_wrap .point_detail h2 {
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 10px;
   }
   .my_info .box3 .point_wrap .point_detail .point_block {
@@ -1251,6 +1257,9 @@
   }
   .my_info .box3 .point_wrap .point_detail .point_block .left p {
     font-size: 13px;
+  }
+  .my_info .box3 .point_wrap .point_detail .point_block .left span {
+	font-size: 14px;
   }
   .my_info .box3 .top_txt p {
     font-size: 20px;
@@ -1286,14 +1295,13 @@
   }
   .my_info .box3 .review_wrap .review_contents_wrap .review_block {
     max-height: 350px;
-    min-height: 300px;
   }
   
   .my_info .box3 .review_wrap .review_contents_wrap .review_block a {
     line-height: 1;
   }
   .my_info .box3 .review_wrap .review_contents_wrap .review_block .img {
-    height: 150px;
+    height: 100px;
   }
   .my_info .box3 .review_wrap .review_contents_wrap .review_block a p {
     font-size: 15px;
@@ -1301,16 +1309,12 @@
     -webkit-line-clamp: 2;
   }
   .my_info .box3 .post_detail .likes_block .img {
-    width: 100%;
-    height: auto;
+    width: 120px;
+    height: 120px;
   }
 
-  .my_info .box3 .post_detail .likes_block .img img {
-    height: auto;
-    object-fit: contain;
-  } 
   .my_info .box3 .post_detail .likes_block p {
-    font-size: 18px;
+    font-size: 14px;
     margin-bottom: 10px;
   }
   .my_info .box3 .post_detail .likes_list {
@@ -1323,7 +1327,7 @@
   
   .my_info_wrap .admin_userid {
   	color: var(--txt-color-600);
-  	font-size: 16px;
+  	font-size: 14px;
   	margin-bottom:20px;
   }
   

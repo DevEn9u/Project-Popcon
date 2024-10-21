@@ -39,7 +39,8 @@
 											<div class="likes_block">
 												<a
 													href="${pageContext.request.contextPath}/popupBoard/view/${popup.board_idx}">
-													<span class="img"> <c:choose>
+													<div class="img"> 
+														<c:choose>
 															<c:when test="${not empty popup.thumb}">
 																<img src="${popup.thumb}" alt="팝업 썸네일 이미지"
 																	loading="lazy" />
@@ -49,7 +50,7 @@
 																	loading="lazy" />
 															</c:otherwise>
 														</c:choose>
-												</span>
+													</div>
 													<p>${fn:escapeXml(popup.board_title)}</p>
 												</a>
 											</div>
