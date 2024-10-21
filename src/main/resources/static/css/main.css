@@ -610,10 +610,10 @@
 }*/
 
 #footer .master_btn {
+    background: var(--point--color1) url(/images/main/support.svg) no-repeat 50% 50%;
+    background-size: 30px 30px;
 	margin-top: 20px;
     margin-left: 10px;
-	background: var(--point--color1);
-    background-size: 30px 30px;
     display: flex;
     width: 60px;
     height: 60px;
