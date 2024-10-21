@@ -425,6 +425,7 @@ public class PopupController {
     // 글 삭제
     @PostMapping("/popupBoard/delete.do")
     public String delete(@RequestParam("board_idx") String board_idx) {
+    	
         popupBoardMapper.delete(board_idx);
         return "redirect:/popupBoard/list.do";
     }

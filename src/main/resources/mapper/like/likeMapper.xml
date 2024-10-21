@@ -12,7 +12,7 @@
         VALUES (#{likes_idx}, #{member_id}, #{board_id})
     </insert>
 
- <!-- 좋아요 확인 쿼리 -->
+ 	<!-- 좋아요 확인 쿼리 -->
     <select id="findLike" parameterType="com.edu.springboot.popupboards.LikeDTO" resultType="com.edu.springboot.popupboards.LikeDTO">
         SELECT * FROM LIKES
         WHERE board_id = #{board_id} AND member_id = #{member_id}
@@ -22,6 +22,11 @@
         DELETE FROM LIKES 
         WHERE likes_idx = #{likes_idx}
     </delete>
+    
+	    <!-- 게시글 ID로 좋아요 삭제 쿼리 -->
+	<delete id="deleteLikesByBoardId" parameterType="String">
+	    DELETE FROM LIKES WHERE board_id = #{board_id}
+	</delete>
     
     <!-- 좋아요 목록 조회 쿼리 -->
     <select id="findLikesByMemberId" parameterType="String" resultType="com.edu.springboot.popupboards.LikeDTO">

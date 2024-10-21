@@ -27,108 +27,76 @@
 				<h1>마이페이지</h1>
 				<span></span>
 				<h2>내가 작성한 글</h2>
+
 			</div>
 			<section class="my_page">
 				${mypage_list }
 				<div class="my_info_wrap">
 					<div class="my_info">
 						<div class="box3">
-						
-<!-- 일반회원, 어드민 부분 -->
-<c:if test="${authority != 'ROLE_CORP'}">
-    <div class="post_wrap">
-        <div class="post_detail">
-            <table class="post_table">
-                <thead>
-                    <tr>
-                        <th scope="col" class="tnum">번호</th>
-                        <th scope="col">제목</th>
-                        <th scope="col" class="bname">게시판</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="post" items="${posts}" varStatus="status">
-                        <tr>
-                            <td class="tnum">${(currentPage - 1) * pageSize + (status.index + 1)}</td>
-                            <td><a
-                                href="${pageContext.request.contextPath}/freeBoard/view.do?board_idx=${post.board_idx}">
-                                    ${fn:escapeXml(post.board_title)} </a></td>
-                            <td class="bname"><c:choose>
-                                    <c:when test="${post.board_type == 'free'}">자유</c:when>
-                                    <c:when test="${post.board_type == 'notice'}">공지</c:when>
-                                    <c:otherwise>${fn:escapeXml(post.board_type)}</c:otherwise>
-                                </c:choose></td>
-                        </tr>
-                    </c:forEach>
-                    <c:if test="${empty posts}">
-                        <tr>
-                            <td colspan="3" style="text-align: center;">작성한 게시글이 없습니다.</td>
-                        </tr>
-                    </c:if>
-                </tbody>
-            </table>
-            <div class="pagenation_wrap">
-                <c:if test="${currentPage > 1}">
-                    <a
-                        href="${pageContext.request.contextPath}/mypage/myPost.do?page=${currentPage - 1}&size=${pageSize}"
-                        class="prev"></a>
-                </c:if>
-                <div class="page_num">
-                    <c:forEach begin="1" end="${totalPages}" var="i">
-                        <c:choose>
-                            <c:when test="${i == currentPage}">
-                                <a
-                                    href="${pageContext.request.contextPath}/mypage/myPost.do?page=${i}&size=${pageSize}"
-                                    class="on">${i}</a>
-                            </c:when>
-                            <c:otherwise>
-                                <a
-                                    href="${pageContext.request.contextPath}/mypage/myPost.do?page=${i}&size=${pageSize}">${i}</a>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
-                </div>
-                <c:if test="${currentPage < totalPages}">
-                    <a
-                        href="${pageContext.request.contextPath}/mypage/myPost.do?page=${currentPage + 1}&size=${pageSize}"
-                        class="next"></a>
-                </c:if>
-            </div>
-        </div>
-    </div>
-</c:if>
 
-<!-- 기업회원 부분 -->
-<c:if test="${authority == 'ROLE_CORP'}">
-        <div class="top_txt">
-            <p>최근 내가 작성한 게시글</p>
-        </div>
-    <div class="pl_main">
-        <ul class="popup_wrap">
-            <c:forEach var="popup" items="${popupList}">
-                <li class="popup_banner"><a href="/popupBoard/view/${popup.board_idx}">
-                    <img src="${popup.thumb}" alt="Thumbnail" class="popup_thumbnail" style="max-width: 100px; max-height: 100px;" />
-                    <div class="txt_title" style="margin-left: 10px;">
-                        <h2 class="mp_corp_h2">
-                            ${popup.board_title}
-                            <form id="deleteForm_${popup.board_idx}" action="/adpage/delete.do" method="post">
-                                <input type="hidden" name="board_idx" value="${popup.board_idx}" />
-                                <button class="pv_delete_btn pv_mp_delete_btn" type="button"
-                                    onclick="event.stopPropagation(); event.preventDefault(); if(confirm('정말 삭제하시겠습니까?')) { document.getElementById('deleteForm_${popup.board_idx}').submit(); }">
-                                    삭제하기</button>
-                            </form>
-                        </h2>
-                        <div class="popup_location">
-                            <img src="../images/imgMGJ/pin.svg" /> 
-                            <span class="location_span mp_location">${fn:replace(popup.popup_addr, ',', ' ')}</span>
-                        </div>
-                        <span class="popup_date mp_popup_date">${popup.postdate}</span>
-                    </div>
-                </a></li>
-            </c:forEach>
-        </ul>
-    </div>
-</c:if>
+
+							<div class="post_wrap">
+								<div class="post_detail">
+									<table class="post_table">
+										<thead>
+											<tr>
+												<th scope="col" class="tnum">번호</th>
+												<th scope="col">제목</th>
+												<th scope="col" class="bname">게시판</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="post" items="${posts}" varStatus="status">
+												<tr>
+													<td class="tnum">${(currentPage - 1) * pageSize + (status.index + 1)}</td>
+													<td><a
+														href="${pageContext.request.contextPath}/freeBoard/view.do?board_idx=${post.board_idx}">
+															${fn:escapeXml(post.board_title)} </a></td>
+													<td class="bname"><c:choose>
+															<c:when test="${post.board_type == 'free'}">자유</c:when>
+															<c:when test="${post.board_type == 'notice'}">공지</c:when>
+															<c:otherwise>${fn:escapeXml(post.board_type)}</c:otherwise>
+														</c:choose></td>
+												</tr>
+											</c:forEach>
+											<c:if test="${empty posts}">
+												<tr>
+													<td colspan="3" style="text-align: center;">작성한 게시글이
+														없습니다.</td>
+												</tr>
+											</c:if>
+										</tbody>
+									</table>
+									<div class="pagenation_wrap">
+										<c:if test="${currentPage > 1}">
+											<a
+												href="${pageContext.request.contextPath}/mypage/myPost.do?page=${currentPage - 1}&size=${pageSize}"
+												class="prev"></a>
+										</c:if>
+										<div class="page_num">
+											<c:forEach begin="1" end="${totalPages}" var="i">
+												<c:choose>
+													<c:when test="${i == currentPage}">
+														<a
+															href="${pageContext.request.contextPath}/mypage/myPost.do?page=${i}&size=${pageSize}"
+															class="on">${i}</a>
+													</c:when>
+													<c:otherwise>
+														<a
+															href="${pageContext.request.contextPath}/mypage/myPost.do?page=${i}&size=${pageSize}">${i}</a>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</div>
+										<c:if test="${currentPage < totalPages}">
+											<a
+												href="${pageContext.request.contextPath}/mypage/myPost.do?page=${currentPage + 1}&size=${pageSize}"
+												class="next"></a>
+										</c:if>
+									</div>
+								</div>
+							</div>
 
 						</div>
 					</div>
