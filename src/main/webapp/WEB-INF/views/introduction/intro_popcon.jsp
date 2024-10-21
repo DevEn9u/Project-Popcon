@@ -24,15 +24,9 @@
 				${intro_list }
 				<div class="intro_wrap">
 					<div class="introduction">
-						<h1 class="one_sentence"></h1>
-						<div class="img_wrap">
-							<img src="../images/introduction/intro_main.png" alt="소개이미지" />
-						</div>
-						<div class="txt_wrap">
+						<div class="txt_wrap intro_txt">
 							<p>POPCON은 팝업스토어의 저장창고, Popup Container입니다.</p>
-							<p>다양한 팝업스토어의 정보를 사용자에게 전달하며,</p>
-							<p>사용자들 간의 정보 공유를 적극 장려합니다.</p>
-							<p>모든 팝업스토어의 정보를 확인하고, 사용자들이 예약할 수 있는 팝업스토어 전문 B2B2C 플랫폼을 지향합니다.</p>
+							<p>팝업스토어 전문 B2B2C 플랫폼을 지향합니다.</p>
 						</div>
 					</div>
 					<div class="vision">
