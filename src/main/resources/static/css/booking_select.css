@@ -390,7 +390,7 @@ body {
   #header .inner .mypage {
     width: 30px;
     height: 30px;
-    mask-size: 30px 30px;
+    mask-size: 30px 30px; 
   }
   
   .bs_booking_img {
