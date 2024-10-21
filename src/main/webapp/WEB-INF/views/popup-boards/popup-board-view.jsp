@@ -292,7 +292,7 @@
 								onclick="toggleLike('${popup.board_idx}');"></button>
 						</c:if>
 					</h2>
-					<div class="pv_title_date">${popup.start_date} ~ ${popup.end_date}</div>
+					<div class="pv_title_date">ㅠㄹ}</div>
 					<span class="pv_title_location"><img
 						src="${pageContext.request.contextPath}/images/imgMGJ/pin.svg" />
 						${fn:replace(popup.popup_addr, ',', ' ')} <!-- 주소와 상세주소 사이에 띄어쓰기넣음 -->
