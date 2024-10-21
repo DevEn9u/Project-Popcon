@@ -750,6 +750,9 @@
 	gap: 30px 0;
 	justify-content: space-between;
 }
+.coupon_list_wrap.no_coupon {
+	justify-content: center;
+}
 .coupon_list {
 	display: flex;
 }
@@ -766,6 +769,15 @@
 	padding: 5px 0;
 	font-weight: 700;
 	border-bottom: 1px solid var(--txt-color-600);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.coupon_list .coupon_contents .coupon .coupon_name .delete_btn {
+	color: var(--point--color2);
+	padding: 5px;
+	border: 1px solid var(--point--color2);
+	border-radius: 5px;
 }
 .coupon_list .coupon_contents .coupon .coupon_num,
 .coupon_list .coupon_contents .coupon .expiry_date {
@@ -776,7 +788,7 @@
 	font-size: 15px;
 }
 .coupon_list .coupon_contents .coupon .d_day {
-	color: var(--point--color2);
+	color: var(--point--color1);
 	font-size: 15px;
 	margin-left: auto;
 }
