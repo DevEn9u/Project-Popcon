@@ -745,6 +745,9 @@
 
 /* 모바일 분기점 */
 @media (max-width: 767px) {
+  #header {
+	height: 80px;
+  }
   #header .inner .login_wrap {
     margin-left: 40px;
     margin-right: 5px;
@@ -819,23 +822,23 @@
   
   .day_slider .date-container {
     margin-left: 5px;
-    width: 35px;
-    height: 35px;
-    padding: 12px;
+    width: 30px;
+    height: 30px;
+    padding: 10px;
     text-align: center;
   }
   
   .day_slider .date-container.active {
-    width: 55px;
-    height: 55px;
-    padding: 10px 5px 10px 5px;
+    width: 45px;
+    height: 45px;
+    padding: 5px 5px 10px 5px;
   }
   
   .day_slider .weekday {
-	font-size: 12px;
+	font-size: 10px;
   }
   .day_slider .date {
-	font-size: 10px;
+	font-size: 8px;
   }
   
   .main_popup_banner {
