@@ -101,7 +101,7 @@
 											class="location_span"> ${fn:substringBefore(popup.popup_addr, ',')}</span>
 									</div>
 									<span class="popup_date" data-end-date="${popup.end_date}">${popup.start_date} ~ ${popup.end_date}</span>
-								</div>
+							 	</div>
 						</a></li>
 					</c:forEach>
 				</ul>
