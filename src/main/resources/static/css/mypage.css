@@ -206,11 +206,13 @@
   -webkit-mask: url(/images/mypage/more_arrow.svg) no-repeat left top / 100%;
   mask: url(/images/mypage/more_arrow.svg) no-repeat left top / 100%;
   background: var(--txt-color-600) /**/;
+  margin-top: 100px;
 }
 .title_wrap h2 {
   font-size: 30px;
   font-weight: 700;
-  color: var(--txt-color-600) /**/;
+  color: var(--txt-color-600);
+  margin-top: 100px;
 }
 
 /* 마이페이지 부킹 */
@@ -990,7 +992,7 @@
     height: 40px;
   }
   .title_wrap h2 {
-    font-size: 25px;
+    font-size: 24px;
   }
   .my_info .box2 .popup_wrap .popup_detail p {
     font-size: 15px;
@@ -1027,7 +1029,7 @@
   	width: 100%;
   }
   .coupon_list .coupon_contents {
-  	width: 300px;
+  	width: 400px;
   }
   
   /*마이페이지 - 내글보기: 기업유저 */
@@ -1047,6 +1049,20 @@
   	font-size:12px;
   }
   
+  /* 쿠폰 */
+  .coupon_page {
+  	padding-bottom:80px;
+  	padding-top:80px;
+  	gap: 0 40px;
+  }
+
+  .coupon_page .my_list {
+  justify-content: center;
+  }
+  .my_list {
+  	width: 50%;
+  }
+  
   
 }
 /* 태블릿 분기 끝 */
@@ -1062,7 +1078,9 @@
   	justify-content: center;
 	font-size: 38px;
   }
-  
+  .title_wrap h2 {
+	font-size: 18px;
+  }
   .my_page {
   	position: relative;
   	margin-top:60px;
@@ -1102,8 +1120,7 @@
     font-size: 16px;
   	padding:0px;
   }
-  
-  
+ 
   
   .my_info_wrap h2 {
     font-size: 20px;
@@ -1280,27 +1297,20 @@
   /* 쿠폰 */
   .coupon_page {
   	padding-bottom:80px;
-  	padding-top:160px;
+  	padding-top:80px;
+	gap: 0 40px;
   }
   
   .coupon_page .my_list {
-  position: absolute;
-  bottom: 68%;
-  left: 35%;
   justify-content: center;
-  text-align: center;
-  flex-direction: row;
   
   }
   .my_list {
   	justify-content: normal;
-	width: 20%;
-  }
-  .coupon_list {
-  	justify-content: center;
+	width: 30%;
   }
   .coupon_list .coupon_contents {
-  	max-width: 200px;
+  	max-width: 270px;
   }
   .coupon_list .img_wrap {
   width: 120px;
