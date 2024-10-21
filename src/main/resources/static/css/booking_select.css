@@ -23,7 +23,7 @@ body {
 .bs_booking_tit {
 	margin-top: 80px;
 	max-width: 100%;
-	min-height: 610px;
+	height: 720px;
 	background-color: #efefef;
 	display: flex;
     flex-direction: column;
@@ -128,7 +128,6 @@ body {
 }
 
 .select_calendar .calendar_tit > th {
-    height: 70px;
     background: #767676;
     text-align: center;
     font-size: 25px;
@@ -158,6 +157,7 @@ body {
     background-color: #767676;
     font-size: 30px;
 	padding: 26px 10px;
+	margin-top: 10px;
 }
 
 .select_calendar .year_month {
@@ -292,6 +292,9 @@ body {
   #header .inner .login {
     margin-left: 0;
   }
+  .bs_booking_tit {
+	height: 600px;
+  }
   .bs_booking_img {
 	width: 900px;
 	height: 500px;
@@ -313,10 +316,16 @@ body {
   .booking_caution2 {
     font-size: 20px;
   }
+  .select_calendar .calendar_tit > th {
+	font-size: 20px;
+  }
 
   .select_date,
   .select_count {
     font-size: 26px;
+  }
+  .select_calendar input {
+	font-size: 20px;
   }
   .select_date img {
     width: 36px;
@@ -324,8 +333,21 @@ body {
   }
   
   .selected-date-container label {
-	font-size: 26px;
+	font-size: 24px;
   }
+  .select_calendar .calendar_day > th{
+  font-size: 16px;
+  }
+  .select_calendar tbody td {
+  font-size: 16px;
+  }
+
+  
+  .select_calendar input {
+	padding: 20px 10px;
+	margin-top: 0;
+  }
+  
   .select_count img {
     width: 36px;
     height: 36px;
@@ -341,6 +363,21 @@ body {
     font-size: 35px;
     width: 35px;
     height: 35px;
+	padding: 0 1px 1px 1px;
+	align-items: center;
+  }
+  .count_window input[type="number"] {
+	font-size: 20px;
+	width: 35px;
+	height: 35px;
+	display: flex;
+  }
+  .bs_booking_btn {
+	width: 50%;
+	height: 80px;
+	font-size: 20px;
+	border-radius: 20px;
+	margin: 80px 0 40px
   }
 }
 
@@ -355,39 +392,62 @@ body {
     height: 30px;
     mask-size: 30px 30px;
   }
-
-  #footer .footer_bottom {
-    flex-direction: column;
-    align-items: start;
+  
+  .bs_booking_img {
+	width: 600px;
+	height: 300px;
   }
-  #footer .footer_bottom .col1 .company_wrap {
-    line-height: 1.4;
-  }
-  #footer .footer_bottom .col2 {
-    margin: 10px 0;
-  }
-  #footer .footer_wrap .col2 .sns > li > a {
-    font-size: 12px;
+  .bs_booking_tit {
+	height: 385px;
   }
 
   .bs_location {
-    margin-left: 60px;
+	font-size: 16px;
   }
-  .bs_booking_main {
-    margin-left: 70px;
-    margin-right: 70px;
+  .bs_pin {
+	width: 16px;
+	height: 16px;
   }
+  .bs_location p {
+	font-size: 14px;
+  }
+  .popup_date {
+	margin-top: 6px;
+	margin-left: 20px;
+  }
+
   .booking_caution1,
   .booking_caution2 {
     font-size: 16px;
   }
+  
+  .select_calendar input {
+	font-size: 16px;
+	padding: 10px;
+	margin-top: 10px;
+  }
+  .select_calendar .calendar_tit > th {
+	font-size: 16px;
+  }
+  .select_calendar .calendar_day > th{
+	font-size: 12px;
+  }
+  .select_calendar tbody td {
+	font-size: 12px;
+  }
+  .selected-date-container label {
+	font-size: 20px;
+  }
+  
   .select_date,
   .select_count {
     font-size: 20px;
+	height: 50px;
   }
   .select_date img {
     width: 26px;
     height: 26px;
+	
   }
   .select_count img {
     width: 26px;
@@ -404,5 +464,18 @@ body {
     font-size: 24px;
     width: 26px;
     height: 26px;
+  }
+  .count_window input[type="number"] {
+	padding: 0;
+	font-size: 16px;
+	width: 26px;
+	height: 26px;
+  }
+  
+  .bs_booking_btn {
+	height: 60px;
+	font-size: 16px;
+	border-radius: 10px;
+	margin: 50px 0 40px
   }
 }
