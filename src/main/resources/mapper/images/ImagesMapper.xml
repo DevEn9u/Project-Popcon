@@ -33,12 +33,21 @@
     </select>
     
     
-    <select id="selectLatestPopupImages" resultType="com.edu.springboot.images.ImageDTO">
+    <!-- <select id="selectLatestPopupImages" resultType="com.edu.springboot.images.ImageDTO">
     	SELECT * FROM IMAGES
     	WHERE image_type = 'POPUP'
     	ORDER BY upload_date DESC
     	FETCH FIRST 4 ROWS ONLY
-	</select>
+	</select> -->
+	
+	<!-- 11.2c 버전 호환처리 -->
+	<select id="selectLatestPopupImages" resultType="com.edu.springboot.images.ImageDTO">
+        SELECT * FROM (
+            SELECT * FROM IMAGES
+            WHERE image_type = 'POPUP'
+            ORDER BY upload_date DESC
+        ) WHERE ROWNUM &lt;= 4
+    </select>
 
 
 </mapper>
