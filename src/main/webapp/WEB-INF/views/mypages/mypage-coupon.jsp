@@ -32,7 +32,8 @@ $(document).ready(function() {
 			$(this).text('D-Day');
 		}
 		if (dDay < 0) {
-			$(this).text('사용불가');
+			$(this).text('사용불가')
+			$(this).siblings('.coupon_name').append('<a href="/coupon/delete.do" class="delete_btn">삭제</a>');
 		}
 		if (dDay > 0) {
 			$(this).text('D-' + dDay);
@@ -56,7 +57,7 @@ $(document).ready(function() {
         <section class="coupon_page">
           ${mypage_list }
           <div class="coupon_section">
-            <div class="coupon_list_wrap">
+            <div class="coupon_list_wrap ${not empty couponList ? 'has_coupon' : 'no_coupon' }">
               <c:choose>
 	              <c:when test="${not empty couponList }">
 		              <c:forEach var="coupon" items="${couponList }">
@@ -66,9 +67,12 @@ $(document).ready(function() {
 			              	</div>
 			              	<div class="coupon_contents">
 				               <ul class="coupon">
-				               	<li class="coupon_name">${coupon.coupon_description }</li>
+				               	<li class="coupon_name">
+				               		${coupon.coupon_name }
+<%-- 				               		<c:if test=""></c:if> --%>
+				               	</li>
 				               	<li class="coupon_num">쿠폰번호: ${coupon.purchase_idx }</li>
-				               	<li class="coupon_desc">${coupon.coupon_name }</li>
+				               	<li class="coupon_desc">${coupon.coupon_description }</li>
 				               	<li class="expiry_date"><fmt:formatDate value="${coupon.expiry_date }" pattern="YYYY. MM. dd " />까지</li>
 				               	<li class="d_day" data-expiry="${fn:escapeXml(coupon.expiry_date.time)}"></li>
 				               </ul>
