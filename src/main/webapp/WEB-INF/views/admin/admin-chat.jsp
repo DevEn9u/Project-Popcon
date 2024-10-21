@@ -61,7 +61,7 @@
     // 채팅방 입장 함수
     const openChatWin = (roomId, userId) => {
         const chatUrl = "/chat/index.html#/chat?roomId=" + roomId + "&userId=" + userId;
-        window.open(chatUrl, '', 'width=500, height=700');
+        window.open(chatUrl, '', 'width=500, height=840');
     };
 
     // 채팅방 버튼 클릭 이벤트 바인딩
