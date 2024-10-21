@@ -207,7 +207,7 @@
 										</div>
 										<div class="pv_txt_wrap">
 											<p class="slide_title" style="margin-bottom:10px;">${popup.board_title}</p>
-											<p style="margin-bottom:10px;">${popup.start_date}~${popup.end_date}</p>
+											<p style="margin-bottom:10px;">${popup.start_date} ~ ${popup.end_date}</p>
 											<p style="margin-bottom:10px;">
 												<img src="/images/main/location.svg" alt="location_pin"
 													class="loc_pin">${fn:replace(popup.popup_addr, ',', ' ')}</p>
@@ -225,7 +225,7 @@
 										</div>
 										<div class="txt_wrap">
 											<p class="slide_title">${popup.board_title}</p>
-											<p>${popup.start_date}~${popup.end_date}</p>
+											<p>${popup.start_date} ~ ${popup.end_date}</p>
 											<p>
 												<img src="/images/main/location.svg">${fn:replace(popup.popup_addr, ',', ' ')}</p>
 										</div>
@@ -242,7 +242,7 @@
 										</div>
 										<div class="txt_wrap">
 											<p class="slide_title">${popup.board_title}</p>
-											<p>${popup.start_date}~${popup.end_date}</p>
+											<p>${popup.start_date} ~ ${popup.end_date}</p>
 											<p>
 												<img src="/images/main/location.svg">${popup.popup_addr}</p>
 										</div>
@@ -292,9 +292,8 @@
 								onclick="toggleLike('${popup.board_idx}');"></button>
 						</c:if>
 					</h2>
-					<div class="pv_title_date">${popup.start_date}~
-						${popup.end_date}</div>
-					<span class="pv_title_location"> <img
+					<div class="pv_title_date">${popup.start_date} ~ ${popup.end_date}</div>
+					<span class="pv_title_location"><img
 						src="${pageContext.request.contextPath}/images/imgMGJ/pin.svg" />
 						${fn:replace(popup.popup_addr, ',', ' ')} <!-- 주소와 상세주소 사이에 띄어쓰기넣음 -->
 					</span>

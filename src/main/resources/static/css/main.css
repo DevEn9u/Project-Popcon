@@ -712,7 +712,7 @@
   }
 
   .season_slider {
-    padding: 0 20px 0;
+    padding: 0 20px;
   }
   .season_slider .tit {
     font-size: 25px;
@@ -746,6 +746,7 @@
 @media (max-width: 767px) {
   #header .inner .login_wrap {
     margin-left: 40px;
+    margin-right: 5px;
   }
   #header .inner .login_btn,
   #header .inner .logout_btn,
