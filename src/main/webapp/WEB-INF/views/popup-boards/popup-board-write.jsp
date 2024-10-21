@@ -8,17 +8,17 @@
 <c:import url="../include/head.jsp" />
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<c:import url="../include/head.jsp" />
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="/css/board.css">
+<link rel="stylesheet" href="/css/popup_write.css">
+<script src="../js/file-upload.js"></script>
 </head>
 
 <c:import url="../include/header.jsp" var="common_header" />
 <c:import url="../include/footer.jsp" var="common_footer" />
-<link rel="stylesheet" href="/css/board.css">
-<script src="../js/file-upload.js"></script>
 <script>
     $(function() {
         // 시작 날짜 및 종료 날짜 입력 필드에 날짜 선택기 초기화
@@ -339,7 +339,7 @@ function updateOpenHours() {
 									<th>주소</th>
 									<td><input type="text" name="popup_addr" id="main_addr"
 										placeholder="주소를 입력해 주세요" style="width: 30%;" required>
-										<button type="button" onclick="openPostcode()" class="btn">우편번호
+										<button type="button" onclick="openPostcode()" class="btn addr_btn">우편번호
 											검색</button> <input type="text" name="popup_addr" id="detail_addr"
 										placeholder="상세주소를 입력해 주세요" onblur="combineAddresses()">
 									</td>

@@ -22,6 +22,7 @@
   font-weight: 700;
   color: var(--txt-color-600);
   padding-left: 50px;
+  margin-top: 100px;
 }
 /* 기본 끝 */
 
@@ -29,6 +30,7 @@
 .my_page {
   display: flex;
   margin-top: 100px;
+  gap: 0 50px
 }
 
 .my_list {
@@ -205,11 +207,13 @@
   -webkit-mask: url(/images/mypage/more_arrow.svg) no-repeat left top / 100%;
   mask: url(/images/mypage/more_arrow.svg) no-repeat left top / 100%;
   background: var(--txt-color-600) /**/;
+  margin-top: 100px;
 }
 .title_wrap h2 {
   font-size: 30px;
   font-weight: 700;
-  color: var(--txt-color-600) /**/;
+  color: var(--txt-color-600);
+  margin-top: 100px;
 }
 
 /* 마이페이지 부킹 */
@@ -341,7 +345,7 @@
   border-radius: 30px;
   width: 100%;
   max-width: 950px;
-  padding: 50px 40px 65px;
+  padding: 25px;
   color: var(--txt-color-500);
 /*   transform: translateY(-40px); */
 }
@@ -423,7 +427,7 @@
   margin-bottom: 20px;
 }
 .my_info .box3 .top_txt p {
-  font-size: 35px;
+  font-size: 26px;
   font-weight: 700;
 }
 
@@ -521,6 +525,17 @@
 /* 페이지네이션 끝 */
 /* 마이페이지 포스트 끝 */
 
+/* 기업회원 작성 글 */
+.txt_title {
+	font-size: 20px;
+	font-weight: 700;
+	color: var(--txt-color-500);
+}
+.txt_title .mp_corp_h2 p {
+	white-space: nowrap;       /* 한 줄로 표시 */
+	overflow: hidden;          /* 넘치는 내용 숨김 */
+	text-overflow: ellipsis;   /* 넘치는 부분에 '...' 표시 */
+}
 /* 마이 페이지 리뷰 */
 .my_info .box3 .review_wrap .top_txt {
   margin-bottom: 30px;
@@ -989,7 +1004,7 @@
     height: 40px;
   }
   .title_wrap h2 {
-    font-size: 25px;
+    font-size: 24px;
   }
   .my_info .box2 .popup_wrap .popup_detail p {
     font-size: 15px;
@@ -999,6 +1014,9 @@
   }
   .my_info .box2 .popup_wrap .popup_detail .top strong {
     font-size: 20px;
+  }
+  .my_info .box3 {
+	width: 110%;
   }
   .my_info .box3 .point_wrap .point_txt p {
     font-size: 30px;
@@ -1021,12 +1039,18 @@
   .my_info .box3 .post_detail .likes_block p {
     font-size: 20px;
   }
+  .my_info .box3 {
+	padding: 20px;
+  }
+  .txt_title {
+	width: calc(100% - 135px);
+  }
   /* 태블릿 쿠폰 */
   .coupon_list {
   	width: 100%;
   }
   .coupon_list .coupon_contents {
-  	width: 300px;
+  	width: 400px;
   }
   
   /*마이페이지 - 내글보기: 기업유저 */
@@ -1043,7 +1067,21 @@
   }
   
   .pl_main .mp_popup_date {
-  	font-size:12px;
+  	font-size:12px; 
+  }
+  
+  /* 쿠폰 */
+  .coupon_page {
+  	padding-bottom:80px;
+  	padding-top:80px;
+  	gap: 0 40px;
+  }
+
+  .coupon_page .my_list {
+  justify-content: center;
+  }
+  .my_list {
+  	width: 50%;
   }
   
   
@@ -1057,24 +1095,18 @@
     margin-bottom: 60px;
   }
   #mp_container h1 {
-  	padding:0px;
   	display:flex;
-  	justify-content: center;
+	font-size: 38px;
   }
-  
+  .title_wrap h2 {
+	font-size: 18px;
+  }
   .my_page {
   	position: relative;
-  	margin-top:200px;
+  	margin-top:60px;
   }
   
-  .my_page .my_list {
-      position: absolute;
-      bottom: 105%;
-      left: 35%;
-      justify-content: center;
-      text-align: center;
-      flex-direction: row;
-  }
+  
   .my_page .edit_user_mylist {
   	bottom: 110%;
   }
@@ -1087,8 +1119,10 @@
   }
 
   .my_list .depth1 .list_title {
-    font-size: 20px;
     margin-bottom: 10px;
+  }
+  .my_list .depth1 .list_title>a {
+	font-size: 20px;
   }
   .my_list .depth2 li {
     font-size: 13px;
@@ -1106,7 +1140,7 @@
     font-size: 16px;
   	padding:0px;
   }
-  
+ 
   
   .my_info_wrap h2 {
     font-size: 20px;
@@ -1175,6 +1209,12 @@
   .my_info .box2 .popup_wrap .popup_detail .top strong {
     font-size: 15px;
   }
+  .my_info .box3 {
+	width: 115%;
+  }
+  .pv_delete_btn {
+	right: 0
+  }
   .my_info .box3 .point_wrap .point_txt {
     height: 80px;
   }
@@ -1201,7 +1241,7 @@
     font-size: 13px;
   }
   .my_info .box3 .top_txt p {
-    font-size: 25px;
+    font-size: 20px;
   }
   .my_info .box3 .post_wrap .post_detail {
     padding-bottom: 30px;
@@ -1283,27 +1323,20 @@
   /* 쿠폰 */
   .coupon_page {
   	padding-bottom:80px;
-  	padding-top:160px;
+  	padding-top:80px;
+	gap: 0 40px;
   }
   
   .coupon_page .my_list {
-  position: absolute;
-  bottom: 68%;
-  left: 35%;
   justify-content: center;
-  text-align: center;
-  flex-direction: row;
   
   }
   .my_list {
   	justify-content: normal;
-	width: 60%;
-  }
-  .coupon_list {
-  	justify-content: center;
+	width: 30%;
   }
   .coupon_list .coupon_contents {
-  	max-width: 200px;
+  	max-width: 270px;
   }
   .coupon_list .img_wrap {
   width: 120px;
