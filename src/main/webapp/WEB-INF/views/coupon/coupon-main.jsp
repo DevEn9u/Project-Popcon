@@ -73,9 +73,7 @@
 	                                </c:choose>
                             	</form>
                             </div>
-							<div class="popup_location">
-								<span>${coupon.coupon_description }</span>
-							</div>
+							<span>${coupon.coupon_description }</span>
 							<!-- 가격은 세자리수마다 콤마를 찍는 포맷 만들어 변수 처리 -->
 							<fmt:formatNumber value="${coupon.points}" var="formattedPoints" />
 							<span class="coupon_price">${formattedPoints } P </span>
