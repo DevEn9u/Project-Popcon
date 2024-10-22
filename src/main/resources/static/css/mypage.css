@@ -683,14 +683,14 @@
 
 .my_info .box3 .post_detail .likes_list {
   display: flex;
-  gap: 0 10px;
+  gap: 0 30px;
   flex-wrap: wrap;
   height: 100%;
   overflow: scroll;
-  justify-content: center;
+  margin-left: 20px;
 }
 .my_info .box3 .post_detail .likes_list .likes_block {
-	width: calc(100% / 3 - 20px);
+	width: calc(100% / 3 - 30px);
 }
 .my_info .box3 .post_detail .likes_list::-webkit-scrollbar {
   display: none;
@@ -1321,6 +1321,7 @@
   }
   .my_info .box3 .post_detail .likes_list {
   	align-content: flex-start;
+	margin-left: 8px;
   }
 
   .my_info .box3 .post_detail .likes_list.coupon .likes_block {
