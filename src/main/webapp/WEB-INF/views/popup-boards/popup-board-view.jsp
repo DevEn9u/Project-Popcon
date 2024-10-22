@@ -199,16 +199,18 @@
 						<div class="swiper-slide">
 							<ul class="main_popup">
 								<li><a href="#">
-										<div class="img_wrap"> 
+										<div class="img_wrap">
 											<!-- 게시물 이미지 출력 -->
 											<c:forEach var="image" items="${images}">
-												<img src="${image.image_url}" alt="Image" style="max-width:625px; max-height:625px; object-fit: cover;"/>
+												<img src="${image.image_url}" alt="Image"
+													style="max-width: 625px; max-height: 625px; object-fit: cover;" />
 											</c:forEach>
 										</div>
 										<div class="pv_txt_wrap">
-											<p class="slide_title" style="margin-bottom:10px;">${popup.board_title}</p>
-											<p style="margin-bottom:10px;">${popup.start_date} ~ ${popup.end_date}</p>
-											<p style="margin-bottom:10px;">
+											<p class="slide_title" style="margin-bottom: 10px;">${popup.board_title}</p>
+											<p style="margin-bottom: 10px;">${popup.start_date}~
+												${popup.end_date}</p>
+											<p style="margin-bottom: 10px;">
 												<img src="/images/main/location.svg" alt="location_pin"
 													class="loc_pin">${fn:replace(popup.popup_addr, ',', ' ')}</p>
 										</div>
@@ -223,11 +225,13 @@
 												<img src="${image.image_url}" alt="Image" />
 											</c:forEach>
 										</div>
-										<div class="txt_wrap">
-											<p class="slide_title">${popup.board_title}</p>
-											<p>${popup.start_date} ~ ${popup.end_date}</p>
-											<p>
-												<img src="/images/main/location.svg">${fn:replace(popup.popup_addr, ',', ' ')}</p>
+										<div class="pv_txt_wrap">
+											<p class="slide_title" style="margin-bottom: 10px;">${popup.board_title}</p>
+											<p style="margin-bottom: 10px;">${popup.start_date}~
+												${popup.end_date}</p>
+											<p style="margin-bottom: 10px;">
+												<img src="/images/main/location.svg" alt="location_pin"
+													class="loc_pin">${fn:replace(popup.popup_addr, ',', ' ')}</p>
 										</div>
 								</a></li>
 							</ul>
@@ -240,11 +244,13 @@
 												<img src="${image.image_url}" alt="Image" />
 											</c:forEach>
 										</div>
-										<div class="txt_wrap">
-											<p class="slide_title">${popup.board_title}</p>
-											<p>${popup.start_date} ~ ${popup.end_date}</p>
-											<p>
-												<img src="/images/main/location.svg">${popup.popup_addr}</p>
+										<div class="pv_txt_wrap">
+											<p class="slide_title" style="margin-bottom: 10px;">${popup.board_title}</p>
+											<p style="margin-bottom: 10px;">${popup.start_date}~
+												${popup.end_date}</p>
+											<p style="margin-bottom: 10px;">
+												<img src="/images/main/location.svg" alt="location_pin"
+													class="loc_pin">${fn:replace(popup.popup_addr, ',', ' ')}</p>
 										</div>
 								</a></li>
 							</ul>
@@ -292,7 +298,8 @@
 								onclick="toggleLike('${popup.board_idx}');"></button>
 						</c:if>
 					</h2>
-					<div class="pv_title_date">${popup.start_date} ~ ${popup.end_date}</div>
+					<div class="pv_title_date">${popup.start_date}~
+						${popup.end_date}</div>
 					<span class="pv_title_location"><img
 						src="${pageContext.request.contextPath}/images/imgMGJ/pin.svg" />
 						${fn:replace(popup.popup_addr, ',', ' ')} <!-- 주소와 상세주소 사이에 띄어쓰기넣음 -->
@@ -325,7 +332,7 @@
 					<div id="map" style="width: 100%; height: 400px;"></div>
 					<!-- 구글 지도 표시 영역 -->
 					<div class="location_copy">
-						<p style="margin-left:10px;">${fn:replace(popup.popup_addr, ',', ' ')}</p>
+						<p style="margin-left: 10px;">${fn:replace(popup.popup_addr, ',', ' ')}</p>
 						<div class="btn" style="width: 100px;"
 							onclick="copyToClipboard('${fn:replace(popup.popup_addr, ',', ' ')}')">주소
 							복사</div>
