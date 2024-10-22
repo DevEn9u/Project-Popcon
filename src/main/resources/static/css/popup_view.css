@@ -327,10 +327,9 @@
 @media (max-width: 1200px) {
 
   #popup_view_container {
-    margin:none;
-    margin-left: 100px;
-    margin-right: 100px;
+    padding: 0 10px 0;
   }
+
   .pv_title_text {
     font-size: 20px;
   }
@@ -352,11 +351,7 @@
 }
 
 @media (max-width: 767px) {
-  #popup_view_container {
-    margin:none;
-    margin-left: 10px;
-    margin-right: 10px;
-  }
+	
 
   .img_wrap img {
   	width:50%;
