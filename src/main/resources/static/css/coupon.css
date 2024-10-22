@@ -11,12 +11,12 @@
 }
 
 .tit_wrap .inner {
-	max-width: 1320px;
+	max-width: 1250px;
 	margin: 0 auto;
 	padding: 0 20px;
 	position: relative;
 }
-.tit_wrap h2{	
+.tit_wrap h2{
 	font-size: 48px;
 	font-weight: 700;
 	color: var(--txt-color-600);
@@ -44,7 +44,7 @@
   padding: 120px 0;
 }
 .pl_main .inner {
-	max-width: 1320px;
+	max-width: 1250px;
 	margin: 0 auto;
 	padding: 0 20px;
 }
@@ -135,8 +135,17 @@
 	.tit_wrap h2 {
 		font-size: 40px;
 	}
+	.coupon_wrap {
+		gap: 20px 0;
+	}
 	.coupon_wrap .coupon_banner {
-		width: calc(50% - 10px);
+		width: 100%;
+	}
+	.coupon_banner .coupon_detail {
+		padding: 5px 0;
+	}
+	.coupon_banner .coupon_detail > span {
+		font-size: 12px;
 	}
 	.tit_wrap .current_points {
 		font-size: 16px;
