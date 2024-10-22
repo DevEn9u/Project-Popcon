@@ -115,8 +115,7 @@ function toggleLike(board_idx) {
 								<div class="swiper-slide">
 									<a class="image" href="/popupBoard/view/${popup.board_idx}">
 										<div class="img_wrap">
-											<img src="${popup.thumb}" alt="${popup.board_title}"
-												class="fixed-size" />
+											<img src="${popup.thumb}" alt="${popup.board_title}" class="fixed-size" />
 										</div>
 									</a>
 								</div>

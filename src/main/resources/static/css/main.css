@@ -27,7 +27,9 @@
   justify-content: space-between;
   position: relative;
 }
-
+#header .inner h1 {
+  margin-left: 12px;
+}
 #header .gnb_wrap {
   margin-left: 80px;
 }
@@ -55,17 +57,18 @@
 #header .inner .search {
   width: 395px;
   height: 40px;
-  padding: 0 10px;
-  display: flex;
-  align-items: center;
+  margin-left: 50px;
   border-radius: 20px;
   border: 1px solid #767676;
   background-color: #2c2c2c;
+  position: relative;
 }
 #header .inner input[type='text'] {
   border: none;
   background: none;
+  width: 330px;
   height: 40px;
+  position: absolute;
   left: 20px ;
 }
 #header .inner .search_btn {
@@ -73,6 +76,10 @@
   width: 22px;
   height: 22px;
   background: url(../images/main/header/search_btn.svg) no-repeat 50% 50%;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 #header .inner .login_wrap {
@@ -739,15 +746,16 @@
 @media (max-width: 767px) {
   #header .inner {
 	height: 60px;
-	gap: 0 10px;
   }
 
   #header .inner .search {
   	height: 35px;
   	width: 300px;
+  	margin-left: 20px;
   }
   #header .inner input[type='text'] {
 	padding: 0;
+	top: -3px;
 	font-size: 14px;
   }
   #header .inner .search_btn {
@@ -913,4 +921,7 @@
   	background:var(--txt-color-500);
   }
   
+  #footer .footer_top .txt_wrap .txt > li > a {
+	font-size: 10px;
+  }
 } 
