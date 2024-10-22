@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -33,7 +34,8 @@
 	        />
 	        <span class="bs_location">
 	          <img src="/images/imgMGJ/pin.svg" alt="pin" class="bs_pin" />
-	          ${details.popup_addr}
+	          <!-- ${details.popup_addr}  -->
+	           ${fn:substringBefore(details.popup_addr, ',')}
 	        </span>
 			<span class="bs_location popup_date">
 				<p class="startDate">${details.start_date}</p> <p>~</p> <p class="endDate">${details.end_date}</p>

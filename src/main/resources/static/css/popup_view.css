@@ -31,6 +31,7 @@
 
 .img_wrap img {
   width: 50%;
+  object-fit:cover;
   height: 625px;
 }
 

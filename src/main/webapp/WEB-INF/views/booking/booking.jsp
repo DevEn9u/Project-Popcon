@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <c:import url="../include/head.jsp" />
@@ -21,7 +22,7 @@
 	          />
 	          <div class ="bm_img_tit">${details.board_title}</div>
 	          <span class="bm_location">
-	            <img src="/images/imgMGJ/pin.svg" alt="" class="bm_pin" />${details.popup_addr}</span
+	            <img src="/images/imgMGJ/pin.svg" alt="" class="bm_pin" />${fn:substringBefore(details.popup_addr, ',')}</span
 	          >
 		  </div>
         </div>
