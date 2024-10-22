@@ -32,7 +32,7 @@ public class FindIdMail {
         message.setSubject("POPCON 아이디 찾기 이메일 인증"); // 제목
         
         String msg = "";
-        msg += "<div style='margin:100px;'>";
+        msg += "<div style='margin:100px; text-align: center;'>";
         msg += "<img src=\"https://i.ibb.co/56v664K/Logo.png\" alt=\"Logo\" border=\"0\" text-align=\"center\" >";
         msg += "<br>";
         msg += "<p>아래 인증번호를 아이디 찾기 인증번호에 입력해주세요.<p>";
