@@ -322,8 +322,8 @@ body {
   }
   
   .fixed-size {
-    width: 110px;
-    height: 110px;
+    width: 200px;
+    height: 200px;
     border-radius: 30px;
     object-fit: cover; /* 이미지를 비율에 맞게 자르기 */
   }
