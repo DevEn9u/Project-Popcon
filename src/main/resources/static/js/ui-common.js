@@ -24,25 +24,43 @@ $(function () {
   });
   
   // main slider
-  let mainPopup = new Swiper('.main_slider .swiper', {
-    slidesPerView: 2,
-    
-    pagination: {
-      el: '.swiper-pagination',
-    },
-    
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    
-  });
+  
 
   $(window)
     // 분기점에 따라 swiper 속성이 변함 
     // (데스크톱에선 4칸, 테블릿에선 5칸, 모바일에선 6칸)
     .on('resize', function () {
       let w = $(this).outerWidth();
+	  //main slider
+	  if(w>=768){
+		let mainPopup = new Swiper('.main_slider .swiper', {
+		    slidesPerView: 2,
+		    
+		    pagination: {
+		      el: '.swiper-pagination',
+		    },
+		    
+		    navigation: {
+		      nextEl: '.swiper-button-next',
+		      prevEl: '.swiper-button-prev',
+		    },
+		    
+		  });
+	  } else {
+		let mainPopup = new Swiper('.main_slider .swiper', {
+		    slidesPerView: 1,
+		    
+		    pagination: {
+		      el: '.swiper-pagination',
+		    },
+		    
+		    navigation: {
+		      nextEl: '.swiper-button-next',
+		      prevEl: '.swiper-button-prev',
+		    },
+		    
+		  });
+	  }
 
       // pick slider
       if(w>=768) {
@@ -55,7 +73,7 @@ $(function () {
         });
       } else {
         let pickPopup = new Swiper('.pick_slider .swiper', {
-          slidesPerView: 6,
+          slidesPerView: 2,
         });
       }
 
@@ -74,7 +92,7 @@ $(function () {
         });
       } else {
         let popularPopup = new Swiper('.popular_slider .swiper', {
-          slidesPerView: 6,
+          slidesPerView: 2,
         });
       }
       // season slider
@@ -88,7 +106,7 @@ $(function () {
         });
       } else {
         let seasonPopup = new Swiper('.season_slider .swiper', {
-          slidesPerView: 6,
+          slidesPerView: 2,
         });
       }
 
@@ -103,7 +121,7 @@ $(function () {
         });
       } else {
         let productPopup = new Swiper('.product_slider .swiper', {
-          slidesPerView: 6,
+          slidesPerView: 2,
         });
       }
     })

@@ -9,6 +9,7 @@
 <script src="/js/today-popup.js?v=<?php echo time(); ?>"></script>
 <link rel="stylesheet"
 	href="/css/popup_list.css?v=<?php echo time(); ?>">
+
 </head>
 <c:import url="./include/header.jsp" var="common_header" />
 <c:import url="./include/footer.jsp" var="common_footer" />
