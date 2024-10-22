@@ -1,6 +1,7 @@
 function validateForm(form) {
 	let id = $('.input_id').val().trim();
 	let password = $('.input_pass').val().trim();
+	let name = $('.input_name').val().trim();
 	let email = $('.input_email').val().trim();
 	let phone = $('.input_phone').val().trim();
 
@@ -44,6 +45,16 @@ function validateForm(form) {
 	   $('.input_pass').focus();
    	   return false;
   	}
+	if (!isValidName(name)) {
+		if(business !== null) {
+			alert("상호명은 20자 이내이어야 하며, 공백 및 특수문자를 포함할 수 없습니다.");
+		}
+		else {
+			alert("이름은 20자 이내이어야 하며, 공백 및 특수문자를 포함할 수 없습니다.");
+		}
+		$('.input_name').focus();
+		return false;
+	}
   	if (!isValidEmail(email)) {
       alert("유효하지 않은 이메일 주소입니다.");
 	  $('.input_email').focus();
@@ -152,6 +163,11 @@ function isValidId(id) {
 function isValidPass(password) {
     const regex = /^(?=.*[0-9])(?=.*[a-zA-Z])(.{8,})$/;
     return regex.test(password);
+}
+// 이름 유효성 검사
+function isValidName(name) {
+	const regex = /^[가-힣a-zA-Z]{1,20}$/;
+	return regex.test(name);
 }
 // 이메일 유효성 검사
 function isValidEmail(email) {
