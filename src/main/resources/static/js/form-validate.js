@@ -31,7 +31,6 @@ function validateForm(form) {
 			form.pass.focus();
 			return false;
 	}
-
 	// 아이디, 비밀번호, 이메일, 핸드폰번호, 사업자번호 유효성 검사
 	if (!isValidId(id)) {
 	 	alert("유효하지 않은 아이디입니다.\n특수문자를 제외한 6-12자 이내의 아이디를 입력해주세요.");
