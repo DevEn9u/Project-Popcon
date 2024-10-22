@@ -6,81 +6,75 @@ $(document).ready(function() {
   var today = new Date();
   var todayIndex = today.getDate() - today.getDate(); // 오늘 날짜의 인덱스 초기화
 
-  // 슬라이더에 15일간의 날짜를 추가
-  for (var i = 0; i < 15; i++) {
-    var futureDate = new Date(today);
-    futureDate.setDate(today.getDate() + i);
+  // 슬라이더를 생성하는 함수
+  function createDateSlider() {
+    $('#date-slider').empty(); // 기존 슬라이더 초기화
 
-    // 새로운 div 요소 생성 (요일과 날짜를 담을 컨테이너)
-    var $dateContainer = $('<div></div>').addClass('date-container');
-    var $weekdayDiv = $('<span></span>').addClass('weekday'); // 요일을 표시할 div
-    var $dateDiv = $('<p></p>').addClass('date').text(futureDate.getDate());
+    // 화면 너비에 따라 추가할 날짜 개수 결정 (max-width: 767px => 10개, 그 외 => 15개)
+    var numDates = window.innerWidth <= 767 ? 10 : 15;
 
-    // 클릭 이벤트 추가 (날짜 클릭 시 요일 표시)
-    $dateContainer.click(function() {
-      $('.date-container').removeClass('active');
-      $('.weekday').text(''); // 모든 요일 초기화
-      $(this).addClass('active'); 
+    // 슬라이더에 날짜 추가
+    for (var i = 0; i < numDates; i++) {
+      var futureDate = new Date(today);
+      futureDate.setDate(today.getDate() + i);
 
-      // 클릭한 날짜의 인덱스와 날짜 계산
-      var clickedIndex = $(this).index(); 
-      var clickedDate = new Date(today);
-      clickedDate.setDate(today.getDate() + clickedIndex);
+      // 새로운 div 요소 생성 (요일과 날짜를 담을 컨테이너)
+      var $dateContainer = $('<div></div>').addClass('date-container');
+      var $weekdayDiv = $('<span></span>').addClass('weekday'); // 요일을 표시할 div
+      var $dateDiv = $('<p></p>').addClass('date').text(futureDate.getDate());
 
-      // 요일 표시
-      var weekday = weekdays[clickedDate.getDay()];
-      if (clickedIndex === todayIndex) {
-        $(this).find('.weekday').text('TODAY');
-      } else {
-        $(this).find('.weekday').text(weekday); // 요일 표시
-      } 
+      // 클릭 이벤트 추가 (날짜 클릭 시 요일 표시)
+      $dateContainer.click(function() {
+        $('.date-container').removeClass('active');
+        $('.weekday').text(''); // 모든 요일 초기화
+        $(this).addClass('active');
 
-      // filterPopups 함수 호출
-      filterPopups(clickedDate);
-    });
+        // 클릭한 날짜의 인덱스와 날짜 계산
+        var clickedIndex = $(this).index();
+        var clickedDate = new Date(today);
+        clickedDate.setDate(today.getDate() + clickedIndex);
 
-    // 컨테이너에 요일과 날짜 div 추가
-    $dateContainer.append($weekdayDiv);
-    $dateContainer.append($dateDiv);
+        // 요일 표시
+        var weekday = weekdays[clickedDate.getDay()];
+        if (clickedIndex === todayIndex) {
+          $(this).find('.weekday').text('TODAY');
+        } else {
+          $(this).find('.weekday').text(weekday); // 요일 표시
+        }
 
-    // 슬라이더에 추가
-    $('#date-slider').append($dateContainer);
+        // filterPopups 함수 호출
+        filterPopups(clickedDate);
+      });
 
-    // 오늘 날짜에 active 클래스 추가
-    if (i === todayIndex) {
-      $dateContainer.addClass('active'); // 오늘 날짜에 active 클래스 적용
-      $weekdayDiv.text('TODAY');
+      // 컨테이너에 요일과 날짜 div 추가
+      $dateContainer.append($weekdayDiv);
+      $dateContainer.append($dateDiv);
+
+      // 슬라이더에 추가
+      $('#date-slider').append($dateContainer);
+
+      // 오늘 날짜에 active 클래스 추가
+      if (i === todayIndex) {
+        $dateContainer.addClass('active'); // 오늘 날짜에 active 클래스 적용
+        $weekdayDiv.text('TODAY');
+      }
     }
+
+    // 오늘 날짜로 자동 필터링 수행
+    filterPopups(today);
   }
 
-  // 오늘 날짜로 자동 필터링 수행
-  filterPopups(today);
+  // 화면 크기가 변경될 때 슬라이더를 다시 생성
+  $(window).resize(function() {
+    createDateSlider();
+  });
+
+  // 페이지 로드 시 슬라이더 생성
+  createDateSlider();
 });
 
 // filterPopups 함수는 이전과 동일
 function filterPopups(selectedDate) {
-
-  // 선택된 날짜의 시간 설정: 00:00:00
-  selectedDate.setHours(0, 0, 0, 0); // 시간 초기화
-
-  $('.popup_wrap li').each(function() {
-    var popupEndDate = new Date($(this).find('.popup_date').data('end-date')); // 데이터 속성에서 end_date 가져오기
-
-    // popupEndDate의 시간 설정: 00:00:00
-    popupEndDate.setHours(0, 0, 0, 0); // 시간 초기화
-
-
-    // 선택된 날짜와 같거나 이후의 날짜만 표시
-    if (popupEndDate >= selectedDate) {
-      $(this).show(); // 선택된 날짜 이후 또는 같은 날짜의 팝업 표시
-    } else {
-      $(this).hide(); // 선택된 날짜 이전의 팝업 숨김
-    }
-  });
-}
-
-function filterPopups(selectedDate) {
-
   // 선택된 날짜의 시간 설정: 00:00:00
   selectedDate.setHours(0, 0, 0, 0); // 시간 초기화
 
@@ -92,7 +86,6 @@ function filterPopups(selectedDate) {
 
     // popupEndDate의 시간 설정: 00:00:00
     popupEndDate.setHours(0, 0, 0, 0); // 시간 초기화
-
 
     // 선택된 날짜와 같거나 이후의 날짜만 배열에 추가
     if (popupEndDate >= selectedDate) {
