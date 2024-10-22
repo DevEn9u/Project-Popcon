@@ -190,9 +190,10 @@
 }
 
 /* 메인 슬라이더 */
-.main_slider .swiper {
+.main_slider .inner {
   max-width: 1250px;
-  margin: 40px 0;
+  margin: 40px auto 0;
+	
 }
 .main_slider .swiper-wrapper {
   display: flex;
@@ -456,14 +457,11 @@
 }
 
 .season_slider .swiper-slide .txt_wrap {
-  position: absolute;
-  bottom: 40px;
-  left: 10px;
+  bottom: 20px;
 }
 .season_slider .swiper-slide .slide_title {
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 20px;
 }
 .season_slider .swiper-slide .slide_content {
   font-size: 12px;
@@ -513,9 +511,7 @@
   opacity: 0;
 }
 .product_slider .swiper-slide .txt_wrap {
-  position: absolute;
-  bottom: 40px;
-  left: 10px;
+  bottom: 20px;
 }
 .product_slider .swiper-slide .slide_title {
   font-size: 20px;
@@ -733,8 +729,7 @@
     margin-right: 10px;
   }
   .product_slider .swiper-slide .slide_title {
-    font-size: 14px;
-    margin-bottom: 8px;
+    font-size: 12px;
   }
 }
 

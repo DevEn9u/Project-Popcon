@@ -328,8 +328,7 @@ body {
     object-fit: cover; /* 이미지를 비율에 맞게 자르기 */
   }
   .season_slider .swiper-slide .slide_title {
-        font-size: 12px;
-        margin-bottom: 8px;
+     font-size: 12px;
   }
   
   /* 관리자 팝업페이지 */
