@@ -13,20 +13,6 @@
 <c:import url="../include/footer.jsp" var="common_footer" />
 
 <body>
-
-	<script>
-	//이름 입력 시 20자까지만 허용
-		function validateForm(form) {
-			// 이름 입력값 검증
-			const nameInput = form.name.value;
-			if (nameInput.length > 20) {
-				alert("이름은 20자까지 입력 가능합니다.");
-				form.name.focus();
-				return false;
-			}
-			return true;
-		}
-	</script>
 	<div id="skip_navi">
 		<a href="#container">본문 바로가기</a>
 	</div>
