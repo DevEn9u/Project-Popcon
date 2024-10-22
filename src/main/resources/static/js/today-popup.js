@@ -11,7 +11,7 @@ $(document).ready(function() {
     $('#date-slider').empty(); // 기존 슬라이더 초기화
 
     // 화면 너비에 따라 추가할 날짜 개수 결정 (max-width: 767px => 10개, 그 외 => 15개)
-    var numDates = window.innerWidth <= 767 ? 10 : 15;
+    var numDates = window.innerWidth <= 767 ? 8 : 15;
 
     // 슬라이더에 날짜 추가
     for (var i = 0; i < numDates; i++) {

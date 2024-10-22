@@ -124,6 +124,8 @@ $(function () {
           slidesPerView: 2,
         });
       }
+	  
+
     })
     .trigger('resize');
 	
