@@ -94,14 +94,29 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 
-	  // 주소 복사 기능
+	  // 주소 복사 기능. AWS 배포 시 오류나는 문제 수정
 	  function copyToClipboard(text) {
-	    navigator.clipboard.writeText(text).then(function() {
-	      alert('주소가 복사되었습니다: ' + text);
-	    }, function(err) {
-	      console.error('복사 실패:', err);
-	    });
-	  }
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(function() {
+      alert('주소가 복사되었습니다: ' + text);
+    }).catch(function(err) {
+      console.error('복사 실패:', err);
+    });
+  } else {
+    // 클립보드 API가 지원되지 않는 경우의 대체 방법
+    var textArea = document.createElement("textarea");
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      alert('주소가 복사되었습니다: ' + text);
+    } catch (err) {
+      console.error('복사 실패:', err);
+    }
+    document.body.removeChild(textArea);
+  }
+}
 	</script>
 
 	<script>
