@@ -27,6 +27,24 @@
 
 <br/>
 
+## ⚙ 개발 환경
+
+<img width="1920" height="1000" alt="사용기술" src="https://github.com/user-attachments/assets/4e2af466-2a47-41c2-abcf-4dcd3c5a18d6" />
+
+### Frontend
+- HTML5, CSS3, JavaScript(ES6+), jQuery, AJAX, React
+
+### Backend
+- Java, Spring Boot, Spring Security, Servlet & JSP, MyBatis
+
+### Database
+- Oracle Database, Firebase Realtime Database
+
+### Deployment
+- AWS EC2, Apache Tomcat
+
+<br/>
+
 ## 🤝 팀원 구성 및 역할 분담
 
 ### 🛠 멤버 전원 공통 작업
@@ -81,24 +99,6 @@
   <img width="300" height="389" alt="캡쳐1" src="https://github.com/user-attachments/assets/3f86c046-c487-4ba2-ab96-102568148f08" />
   <img width="300" height="389" alt="캡쳐2" src="https://github.com/user-attachments/assets/b8efd6f4-6720-4048-8e47-28a258ede9a4" />
 </p>
-
-<br/>
-
-## ⚙ 개발 환경
-
-<img width="1920" height="1000" alt="사용기술" src="https://github.com/user-attachments/assets/4e2af466-2a47-41c2-abcf-4dcd3c5a18d6" />
-
-### Frontend
-- HTML5, CSS3, JavaScript(ES6+), jQuery, AJAX
-
-### Backend
-- Java, Spring Boot, Spring Security, Servlet & JSP, MyBatis
-
-### Database
-- Oracle Database
-
-### Deployment
-- AWS EC2, Apache Tomcat
 
 <br/>
 
@@ -179,6 +179,15 @@
 - 유저들과의 문의 채팅이 가능합니다.
 
 ---
+
+<br/>
+
+## 🔧 주요 이슈 및 개선 사항
+- Spring Security를 활용하여 비밀번호 암호화 구현
+- React를 활용해 채팅 UI를 구현하고, Firebase Realtime Database를 연동하여 관리자 문의 메시지 송수신 기능 구현
+- 후기 작성 및 좋아요 등록/취소 기능을 AJAX 기반 비동기 처리하여 새로고침 없이 동작하도록 개선
+- PortOne API를 이용하여 실제 결제 기능 구현 (자정에 자동으로 결제 취소)
+
 
 <br/>
 
