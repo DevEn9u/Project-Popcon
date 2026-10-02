@@ -144,10 +144,10 @@ $(function () {
 	    prevEl: '.swiper-button-prev',
 	  },
 
-	  scrollbar: {
+	 /* scrollbar: {
 	    el: '.swiper-scrollbar',
 	    draggable: true,
-	  },
+	  }, */
 	});
 	
 	// scroll_btn 클릭 시 이동
